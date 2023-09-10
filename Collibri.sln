@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collibri", "Collibri\Collibri.csproj", "{49711352-2B7A-4DEB-8607-9F3FA5D0F822}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collibri.Tests", "Collibri.Tests\Collibri.Tests.csproj", "{6D18782F-CC2C-4E91-BAEF-1B00299531D7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{87ADE80A-B370-4800-A80B-8672D1DC9E1D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C3A7122A-8B57-480D-84FB-58849776CDC0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{49711352-2B7A-4DEB-8607-9F3FA5D0F822}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49711352-2B7A-4DEB-8607-9F3FA5D0F822}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49711352-2B7A-4DEB-8607-9F3FA5D0F822}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49711352-2B7A-4DEB-8607-9F3FA5D0F822}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D18782F-CC2C-4E91-BAEF-1B00299531D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D18782F-CC2C-4E91-BAEF-1B00299531D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D18782F-CC2C-4E91-BAEF-1B00299531D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D18782F-CC2C-4E91-BAEF-1B00299531D7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{49711352-2B7A-4DEB-8607-9F3FA5D0F822} = {87ADE80A-B370-4800-A80B-8672D1DC9E1D}
+		{6D18782F-CC2C-4E91-BAEF-1B00299531D7} = {C3A7122A-8B57-480D-84FB-58849776CDC0}
+	EndGlobalSection
+EndGlobal
