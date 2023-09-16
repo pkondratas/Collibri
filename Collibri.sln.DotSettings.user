@@ -1,4 +1,11 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=3d93ca93_002D2b63_002D4844_002Da85a_002D2d1276577364/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from UnitTest1.cs" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;ProjectFile&gt;6D18782F-CC2C-4E91-BAEF-1B00299531D7/f:UnitTest1.cs&lt;/ProjectFile&gt;&#xD;
+  &lt;Or&gt;&#xD;
+    &lt;ProjectFile&gt;6D18782F-CC2C-4E91-BAEF-1B00299531D7/f:UnitTest1.cs&lt;/ProjectFile&gt;&#xD;
+    &lt;TestAncestor&gt;&#xD;
+      &lt;TestId&gt;xUnit::6D18782F-CC2C-4E91-BAEF-1B00299531D7::net7.0::Collibri.Tests.FileTest.FolderNameTest&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::6D18782F-CC2C-4E91-BAEF-1B00299531D7::net7.0::Collibri.Tests.FileTest.FileCreationDeletionTest&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::6D18782F-CC2C-4E91-BAEF-1B00299531D7::net7.0::Collibri.Tests.FileTest&lt;/TestId&gt;&#xD;
+    &lt;/TestAncestor&gt;&#xD;
+  &lt;/Or&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
