@@ -5,11 +5,16 @@ namespace Collibri;
 /// Creates new directory on instantiation.
 /// </summary>
 public class FileManager {
-	private readonly DirectoryInfo _managerDirectory;
+	private DirectoryInfo _managerDirectory;
 
-	public FileManager(string name) {
-		var projectPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
-		_managerDirectory = Directory.CreateDirectory(projectPath + "\\" + name);
+	public DirectoryInfo ManagerDirectory {
+		get {
+			return _managerDirectory;
+		}
+	}
+
+	public FileManager(DirectoryInfo directory) {
+		_managerDirectory = directory;
 	}
 
 	/// <summary>
@@ -31,27 +36,6 @@ public class FileManager {
 		}
 
 		return fileList;
-	}
-
-	/// <summary>
-	/// Method for getting the number of files in current directory.
-	/// </summary>
-	/// <returns>the number of files in current directory.</returns>
-	public int GetFileCount() {
-		var count = 0;
-		foreach (var file in _managerDirectory.GetFiles()) {
-			count++;
-		}
-
-		return count;
-	}
-
-	/// <summary>
-	/// Method for getting the full path of current directory.
-	/// </summary>
-	/// <returns>path of current directory.</returns>
-	public string GetDirectory() {
-		return _managerDirectory.FullName;
 	}
 
 	/// <summary>
@@ -80,14 +64,14 @@ public class FileManager {
 	/// Adds a file to the current FileManager directory.
 	/// </summary>
 	/// <param name="file">a file to add that is represented using the <c>File</c> class.</param>
-	public void AddFile(File file) {
-		var fileName = file.GetName() + file.GetExtension();
+	public void CreateFile(File file) {
+		var fileName = file.Name + file.Extension;
 		var fileNumber = 1;
 		while (NameExists(fileName)) {
-			fileName = file.GetName() + "_" + fileNumber++ + file.GetExtension();
+			fileName = file.Name + "_" + fileNumber++ + file.Extension;
 		}
 
-		System.IO.File.Copy(file.GetPath(), _managerDirectory.FullName + "\\" + fileName);
+		System.IO.File.Copy(file.Path, _managerDirectory.FullName + "\\" + fileName);
 		_managerDirectory.Refresh();
 	}
 
@@ -97,7 +81,7 @@ public class FileManager {
 	/// <param name="file">an object that represents a file using the <c>File</c> class.</param>
 	public void Delete(File file) {
 		if (System.IO.File.Exists(_managerDirectory.FullName)) {
-			System.IO.File.Delete(file.GetPath());
+			System.IO.File.Delete(file.Path);
 			_managerDirectory.Refresh();
 		}
 	}

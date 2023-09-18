@@ -7,6 +7,9 @@ namespace Collibri;
 /// Allowed image file extensions: .png
 /// </summary>
 public class ImageFile : File {
-	public ImageFile(string path) : base(path) { }
+	public ImageFile(string path) : base(path) {
+		if (_extension != ".png")
+			throw new ArgumentException();
+	}
 
 }

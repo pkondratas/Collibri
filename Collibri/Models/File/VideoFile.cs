@@ -7,6 +7,9 @@ namespace Collibri;
 /// Allowed video formats: .mp4
 /// </summary>
 public class VideoFile : File {
-	public VideoFile(string path) : base(path) { }
-	
+	public VideoFile(string path) : base(path) {
+		if (_extension != ".mp4")
+			throw new ArgumentException();
+	}
+
 }
