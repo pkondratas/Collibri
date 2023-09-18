@@ -15,23 +15,21 @@ namespace Collibri.Controllers
     public class DocumentController : ControllerBase
     {
         static List<Document> list = new List<Document>();
+
+        private readonly IDocumentRepository _documentRepository;
+
+        public DocumentController(IDocumentRepository documentRepository)
+        {
+            _documentRepository = documentRepository;
+        }
         
         [HttpPost]
-        public IActionResult PostText([FromBody]Document input, string roomName)
+        public IActionResult CreateDocument([FromBody]Document input, string roomName, string sectionName)
         {
-            Document document = new Document(input.ID, input.author, input.text);
+            Document document = new Document(input.Id, input.author, input.text);
             list.Add(document);
-            
-            string path = "C:\\Users\\Dovix\\Desktop\\docs\\" + input.author+ ".txt"; // zinoma cia tik pas mane
-            if (!(System.IO.File.Exists(path)))
-            {
-                  System.IO.File.WriteAllText(path, input.text);
-            }
-            else
-            {
-                path = "C:\\Users\\Dovix\\Desktop\\docs\\" + input.author+"_1"+ ".txt";
-                System.IO.File.WriteAllText(path, input.text);
-            }
+
+            var result = _documentRepository.SaveToFile(document, roomName, sectionName);
             
             return Ok();
             
