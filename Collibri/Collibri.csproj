@@ -27,7 +27,9 @@
 
 
     <ItemGroup>
-      <Folder Include="Data\Room\Section\Documents\" />
+      <Folder Include="Data\Room\Section1\Documents\" />
+      <Folder Include="Data\Room\Section2\Documents\" />
+      <Folder Include="Data\Room\Section3\Documents\" />
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
