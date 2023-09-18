@@ -3,20 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Collibri.Models.Documents;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Collibri.Controllers
 {
     
-    [Route("api/[controller]")]
+    [Route("/v1/rooms/{roomName}/sections/{sectionName}")] // tokiu ir tokiu adresu issaugos faila.
     [ApiController]
     public class DocumentController : ControllerBase
     {
         static List<Document> list = new List<Document>();
         
         [HttpPost]
-        public IActionResult PostText([FromBody]Document input)
+        public IActionResult PostText([FromBody]Document input, string roomName)
         {
             Document document = new Document(input.ID, input.author, input.text);
             list.Add(document);
@@ -44,22 +45,10 @@ namespace Collibri.Controllers
         
     }
     
-    public class Document 
-    {
-
-        public int ID { get; set; }
-        public string author { get; set; }
-
-        public string text { get; set; }
-
-        public Document(int ID, string author, string text)
-        {
-            this.author = author;
-            this.ID = ID;
-            this.text = text;
-        }
-
-        
-    }
+    
+    
+    
+    
+   
 
 }
