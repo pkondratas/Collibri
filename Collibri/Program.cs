@@ -1,4 +1,5 @@
 using Collibri.Models.Files;
+using Collibri.Models.Section;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IFileRepository, FileRepository>();
+builder.Services.AddScoped<ISectionRepository, SectionRepository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
