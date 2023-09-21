@@ -1,19 +1,32 @@
-namespace Collibri;
+namespace Collibri.Models.Files;
 
 /// <summary>
 /// Abstract class that stores basic information
 /// about a file (name, extension, file path).
 /// </summary>
-public abstract class File {
+public class File {
 	private protected string _name;
 	private protected string _extension;
 	private protected string _path;
 
-	public File(string path) {
+	public File(string path, IFormFile requestedFile) {
 		_path = path;
-		var fullName = path.Substring(path.LastIndexOf('\\') + 1).Split('.');
+		var fullName = requestedFile.FileName.Split(".");
 		_name = fullName[0];
 		_extension = "." + fullName[1];
+		
+		SaveFile(requestedFile);
+	}
+
+	private void SaveFile(IFormFile file) {
+		var name = _name + _extension;
+		var i = 1;
+		while (System.IO.File.Exists(_path + name)) {
+			name = _name + "_" + i++ + _extension;
+		}
+
+		var fileStream = System.IO.File.Create(_path + name);
+		file.CopyTo(fileStream);
 	}
 	
 	public string Name {
@@ -32,13 +45,5 @@ public abstract class File {
 		get {
 			return _path;
 		}
-	}
-	
-	/// <summary>
-	/// Moves the file from the current directory to a specified one.
-	/// </summary>
-	/// <param name="newPath">the path where the file will be moved.</param>
-	public void ChangeDirectory(string newPath) {
-		System.IO.File.Move(_path, newPath);
 	}
 }

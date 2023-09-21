@@ -1,4 +1,4 @@
-using Collibri.Models.File;
+using Collibri.Models.Files;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Collibri.Controllers;
@@ -6,15 +6,15 @@ namespace Collibri.Controllers;
 [ApiController]
 [Route("/v1/rooms/{roomName}/sections/{sectionName}")]
 public class FileController : ControllerBase {
-	private readonly IFileManagerRepository _fileManagerRepository;
+	private readonly IFileRepository _fileRepository;
 
-	public FileController(IFileManagerRepository fileManagerRepository) {
-		_fileManagerRepository = fileManagerRepository;
+	public FileController(IFileRepository fileRepository) {
+		_fileRepository = fileRepository;
 	}
 
 	[HttpPost("")]
-	public IActionResult CreateFileManager([FromBody] FileManager fileManager, string roomName, string sectionName) {
-		var result = _fileManagerRepository.CreateFileManager(fileManager, roomName, sectionName);
+	public IActionResult CreateFile([FromForm] IFormFile file) {
+		var result = _fileRepository.CreateFile(file);
 		return result == null ? Conflict() : Ok(result);
 	}
 }
