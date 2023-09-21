@@ -20,5 +20,11 @@ namespace Collibri.Controllers
             var result = _sectionRepository.CreateSection(section, roomName);
             return result == null ? Conflict() : Ok(result);
         }
+        
+        [HttpGet("")]
+        public IActionResult GetAllSections(string roomName)
+        {
+            return Ok(_sectionRepository.GetAllSections(roomName));
+        }
     }
 }

@@ -1,4 +1,5 @@
 using Collibri.Models.DataHandling;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace Collibri.Models.Sections
 {
@@ -25,6 +26,11 @@ namespace Collibri.Models.Sections
             _dataHandler.PostAllItems(sectionList, ModelType.Sections);
             
             return section;
+        }
+
+        public List<Section> GetAllSections(string roomName)
+        {
+            return _dataHandler.GetAllItems<Section>(ModelType.Sections);
         }
     }
 }

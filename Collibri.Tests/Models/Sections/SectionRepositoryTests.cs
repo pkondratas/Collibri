@@ -1,4 +1,3 @@
-using System.Collections.Specialized;
 using Collibri.Models.DataHandling;
 using Collibri.Models.Sections;
 
@@ -30,6 +29,23 @@ namespace Collibri.Tests.Models.Sections
             
             //Assert
             Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [ClassData(typeof(GetAllSectionsTestData))]
+        public void GetAllSection_Should_ReturnListOfSections(string roomName, List<Section> list)
+        {
+            //Assign
+            var dataHandler = new Mock<IDataHandler>();
+            var repository = new SectionRepository(dataHandler.Object);
+            dataHandler
+                .Setup(x => x.GetAllItems<Section>(ModelType.Sections)).Returns(list);
+            
+            //Act
+            var actual = repository.GetAllSections(roomName);
+            
+            //Assert
+            Assert.Equal(list, actual);
         }
     }
 }

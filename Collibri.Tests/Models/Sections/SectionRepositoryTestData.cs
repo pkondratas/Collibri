@@ -32,5 +32,20 @@ namespace Collibri.Tests.Models.Sections
             );
         }
     }
+
+    public class GetAllSectionsTestData : TheoryData<string, List<Section>>
+    {
+        public GetAllSectionsTestData()
+        {
+            Add("Room1", 
+                new List<Section>
+                {
+                    new Section(12345, 1, "Section1"),
+                    new Section(23456, 1, "Section2")        
+                }
+            );
+            Add("Room1", new List<Section>());
+        }
+    }
 }
 
