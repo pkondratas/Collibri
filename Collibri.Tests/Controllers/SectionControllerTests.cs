@@ -1,5 +1,5 @@
 using Collibri.Controllers;
-using Collibri.Models.Section;
+using Collibri.Models.Sections;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Collibri.Tests.Controllers
@@ -16,7 +16,8 @@ namespace Collibri.Tests.Controllers
             //Assign
             var repository = new Mock<ISectionRepository>();
             var controller = new SectionController(repository.Object);
-            repository.Setup(x => x.CreateSection(section, "roomName")).Returns(methodResult);
+            repository
+                .Setup(x => x.CreateSection(section, "roomName")).Returns(methodResult);
             
             //Act
             var actual = controller.CreateSection(section, "roomName") as ObjectResult;
