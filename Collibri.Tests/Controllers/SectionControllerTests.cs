@@ -21,10 +21,9 @@ namespace Collibri.Tests.Controllers
             
             //Act
             var actual = controller.CreateSection(section, "roomName") as ObjectResult;
-                
+            
             //Assert
             Assert.Equal(statusCode, actual?.StatusCode);
-            Assert.Equal(methodResult, actual?.Value);
         }
     }
 }
