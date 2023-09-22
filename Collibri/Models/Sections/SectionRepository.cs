@@ -16,8 +16,12 @@ namespace Collibri.Models.Sections
             List<Section> sectionList = _dataHandler.GetAllItems<Section>(ModelType.Sections);
             
             foreach (var sections in sectionList)
+            {
                 if (sections.RoomId.Equals(section.RoomId) && sections.SectionName.Equals(section.SectionName))
+                {
                     return null;
+                }
+            }
             
             section.SectionId = new Random().Next(1, int.MaxValue);
             sectionList.Add(section);
