@@ -1,3 +1,4 @@
+using System.Collections.Specialized;
 using Collibri.Models.DataHandling;
 using Microsoft.AspNetCore.Mvc.Formatters;
 
@@ -14,12 +15,15 @@ namespace Collibri.Models.Sections
         
         public Section? CreateSection(Section section, string roomName)
         {
-            List<Section> sectionList = _dataHandler.GetAllItems<Section>(ModelType.Sections);
+            var sectionList = _dataHandler.GetAllItems<Section>(ModelType.Sections);
             
             foreach (var sections in sectionList)
+            {
                 if (sections.RoomId.Equals(section.RoomId) && sections.SectionName.Equals(section.SectionName))
+                {
                     return null;
-            
+                }
+            }
             section.SectionId = new Random().Next(1, int.MaxValue);
             sectionList.Add(section);
             
@@ -28,9 +32,12 @@ namespace Collibri.Models.Sections
             return section;
         }
 
-        public List<Section> GetAllSections(string roomName)
+        public IEnumerable<Section> GetAllSections(int roomId, string roomName)
         {
-            return _dataHandler.GetAllItems<Section>(ModelType.Sections);
+            var sectionList = _dataHandler.GetAllItems<Section>(ModelType.Sections);
+            var queriedSection = sectionList.Where(section => section.RoomId == roomId);
+            
+            return queriedSection;
         }
     }
 }

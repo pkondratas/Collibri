@@ -22,9 +22,9 @@ namespace Collibri.Controllers
         }
         
         [HttpGet("")]
-        public IActionResult GetAllSections(string roomName)
+        public IActionResult GetAllSections([FromBody] int roomId, string roomName)
         {
-            return Ok(_sectionRepository.GetAllSections(roomName));
+            return Ok(_sectionRepository.GetAllSections(roomId, roomName));
         }
     }
 }

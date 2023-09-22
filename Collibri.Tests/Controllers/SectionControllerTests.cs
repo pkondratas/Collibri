@@ -28,16 +28,19 @@ namespace Collibri.Tests.Controllers
 
         [Theory]
         [ClassData(typeof(GetAllSectionsTestData))]
-        public void GetAllSections_Should_ReturnAllSections(string roomName, List<Section> list)
+        public void GetAllSections_Should_ReturnAllSections(
+            int roomId, 
+            string roomName, 
+            IEnumerable<Section> list)
         {
             //Assign
             var repository = new Mock<ISectionRepository>();
             var controller = new SectionController(repository.Object);
             repository
-                .Setup(x => x.GetAllSections(roomName)).Returns(list);
+                .Setup(x => x.GetAllSections(roomId, roomName)).Returns(list);
             
             //Act
-            var actual = controller.GetAllSections(roomName) as ObjectResult;
+            var actual = controller.GetAllSections(roomId, roomName) as ObjectResult;
             
             //Assert
             Assert.IsType<List<Section>>(actual.Value);

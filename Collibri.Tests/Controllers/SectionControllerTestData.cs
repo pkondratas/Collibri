@@ -13,19 +13,19 @@ namespace Collibri.Tests.Controllers
         }
     }
 
-    public class GetAllSectionsTestData : TheoryData<string, List<Section>>
+    public class GetAllSectionsTestData : TheoryData<int, string, IEnumerable<Section>>
     {
         public GetAllSectionsTestData()
         {
             //Correct input only
-            Add("Room1", 
+            Add(1, "Room1", 
                 new List<Section>
                 {
                     new Section(12345, 1, "Section1"),    
                     new Section(23456, 1, "Section2")    
-                }
+                }.AsEnumerable()
             );
-            Add("Room2", new List<Section>());
+            Add(1, "Room2", new List<Section>().AsEnumerable());
         }
     }
 }
