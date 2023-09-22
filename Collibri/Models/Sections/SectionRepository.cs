@@ -15,6 +15,8 @@ namespace Collibri.Models.Sections
         public Section? CreateSection(Section section, string roomName)
         {
             List<Section> sectionList = _dataHandler.GetAllItems<Section>(ModelType.Sections);
+
+           
             
             foreach (var sections in sectionList)
                 if (sections.RoomId.Equals(section.RoomId) && sections.SectionName.Equals(section.SectionName))

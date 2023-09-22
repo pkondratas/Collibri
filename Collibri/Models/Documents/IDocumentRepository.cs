@@ -4,7 +4,7 @@ namespace Collibri.Models.Documents;
 
 public interface IDocumentRepository
 {
-    public IActionResult SaveToFile(Document document, string roomName, string sectionName);
+    public Document? CreateDocument(Document document);
 
-
+    public List<Document> GetDocuments();
 }

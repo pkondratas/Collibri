@@ -1,37 +1,49 @@
+using Collibri.Models.DataHandling;
+using Collibri.Models.Documents;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Collibri.Models.Documents;
-
-public class DocumentRepository : IDocumentRepository
+namespace Collibri.Models.Documents
 {
-    private readonly DirectoryInfo _documentDirectory 
-        = new DirectoryInfo($@"{Directory.GetParent(Directory.GetCurrentDirectory())}\Collibri\Data");
-    public IActionResult SaveToFile(Document document, string roomName, string sectionName)
+
+    public class DocumentRepository : IDocumentRepository
     {
-        var documentPath = $@"{_documentDirectory.FullName}\{roomName}\{sectionName}";
-    
-        try
+        private readonly IDataHandler _dataHandler;
+
+        public DocumentRepository(IDataHandler dataHandler)
         {
-            if (!Directory.Exists(documentPath))
-                Directory.CreateDirectory(documentPath);
-            else
-                result = null;
+            _dataHandler = dataHandler;
         }
-        catch (IOException e)
+
+        public Document? CreateDocument(Document document)
         {
-            //reikalingas normalus exception handlingas(vienas is ateities tasku)
-            Console.WriteLine("Error: " + e.Message);
+            // var documentPath = $@"{_documentDirectory.FullName}\{roomName}\{sectionName}";
+
+            List<Document> documentList = _dataHandler.GetAllItems<Document>(ModelType.Documents);
+
+
+            foreach (Document documents in documentList)
+            {
+                if (documents.Text.Equals(document.Text) && documents.Title.Equals(document.Title) &&
+                    documents.ID.Equals(document.ID))
+                {
+                    return null;
+                }
+            }
+
+            document.ID = new Random().Next(1, int.MaxValue);
+            documentList.Add(document);
+
+            _dataHandler.PostAllItems(documentList, ModelType.Documents);
+
+
+            return document;
+
+
         }
-        
-        // string path = "C:\\Users\\Dovix\\Desktop\\docs\\" + input.author+ ".txt"; // zinoma cia tik pas mane
-        // if (!(System.IO.File.Exists(path)))
-        // {
-        //     System.IO.File.WriteAllText(path, input.text);
-        // }
-        // else
-        // {
-        //     path = "C:\\Users\\Dovix\\Desktop\\docs\\" + input.author+"_1"+ ".txt";
-        //     System.IO.File.WriteAllText(path, input.text);
-        // }
+
+        public List<Document> GetDocuments()
+        {
+            return _dataHandler.GetAllItems<Document>(ModelType.Documents);
+        }
     }
 }

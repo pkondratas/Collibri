@@ -3,35 +3,43 @@ namespace Collibri.Models.Documents;
 public class Document
 {
 
-    private int ID;
-    private string author;
-    private string text;
+    private int _id;
+    private string _title;
+    private string _text;
+    private int _sectionId;
 
-    public string ID
+    public int ID
     {
-        get { return ID; }
-        set { ID = value; }
+        get => _id;
+        set => _id = value;
     }
 
-    public string Author
+    public string Title
     {
-        get { return author; }
-        set { author = value; }
+        get => _title;
+        set => _title = value;
     }
     
     public string Text
     {
-        get { return text; }
-        set { text = value; }
+        get => _text;
+        set => _text = value;
+    }
+
+    public int SectionId
+    {
+        get => _sectionId;
+        set => _sectionId = value;
     }
     
     
     
-    public Document(int ID, string author, string text)
+    public Document(int id, string title, string text, int sectionId)
     {
-        this.author = author;
-        this.ID = ID;
-        this.text = text;
+        _title = title;
+        _id = id;
+        _text = text;
+        _sectionId = sectionId;
     }
 
         

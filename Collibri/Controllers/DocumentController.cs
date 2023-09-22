@@ -14,7 +14,7 @@ namespace Collibri.Controllers
     [ApiController]
     public class DocumentController : ControllerBase
     {
-        static List<Document> list = new List<Document>();
+        // static List<Document> list = new List<Document>();
 
         private readonly IDocumentRepository _documentRepository;
 
@@ -24,21 +24,20 @@ namespace Collibri.Controllers
         }
         
         [HttpPost]
-        public IActionResult CreateDocument([FromBody]Document input, string roomName, string sectionName)
+        public IActionResult CreateDocument([FromBody]Document input)
         {
-            Document document = new Document(input.Id, input.author, input.text);
-            list.Add(document);
+            // Document document = new Document(input.ID, input.author, input.text);
+            // list.Add(document);
 
-            var result = _documentRepository.SaveToFile(document, roomName, sectionName);
-            
-            return Ok();
+            var result = _documentRepository.CreateDocument(input);
+            return result == null? Conflict(): Ok(result);
             
         }
 
         [HttpGet]
-        public List<Document> GetList()
+        public IActionResult GetDocuments()
         {
-            return list;
+            return Ok(_documentRepository.GetDocuments());
         }
         
     }
