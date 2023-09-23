@@ -1,4 +1,4 @@
-using Collibri.Models.Section;
+using Collibri.Models.Sections;
 
 namespace Collibri.Tests.Controllers
 {
@@ -6,8 +6,10 @@ namespace Collibri.Tests.Controllers
     {
         public CreateSectionTestData()
         {
-            Add(new Section("NewSectionName"), new Section("NewSectionName"), 200);
-            Add(new Section("NewSectionName"), null, null);
+            //Correct input
+            Add(new Section(0, 1, "NewSectionName"), new Section(123, 1, "NewSectionName"), 200);
+            //Incorrect input
+            Add(new Section(0, 1, "NewSectionName"), null, null);
         }
     }
 }

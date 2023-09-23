@@ -25,14 +25,6 @@
 
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Data\Room2\" />
-      <Folder Include="Models\Document\" />
-      <Folder Include="Models\File\" />
-      <Folder Include="Models\Note\" />
-    </ItemGroup>
-
-
 
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
