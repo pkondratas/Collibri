@@ -10,11 +10,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace Collibri.Controllers
 {
     
-    [Route("/v1/rooms/{roomName}/sections/{sectionName}")] // tokiu ir tokiu adresu issaugos faila.
+    [Route("/v1/Documents")] // tokiu ir tokiu adresu issaugos faila.
     [ApiController]
     public class DocumentController : ControllerBase
     {
-        // static List<Document> list = new List<Document>();
+        
 
         private readonly IDocumentRepository _documentRepository;
 
@@ -26,8 +26,6 @@ namespace Collibri.Controllers
         [HttpPost]
         public IActionResult CreateDocument([FromBody]Document input)
         {
-            // Document document = new Document(input.ID, input.author, input.text);
-            // list.Add(document);
 
             var result = _documentRepository.CreateDocument(input);
             return result == null? Conflict(): Ok(result);
@@ -38,6 +36,20 @@ namespace Collibri.Controllers
         public IActionResult GetDocuments()
         {
             return Ok(_documentRepository.GetDocuments());
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteDocument(int id)
+        {
+            var result = _documentRepository.DeleteById(id);
+            return result == true ? Ok() : Conflict();
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateDocument([FromBody] Document input, int id)
+        {
+            var result = _documentRepository.UpdateDocument(input, id);
+            return result == null ? Conflict() : Ok(result);
         }
         
     }

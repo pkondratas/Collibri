@@ -8,7 +8,7 @@ public class Document
     private string _text;
     private int _sectionId;
 
-    public int ID
+    public int Id
     {
         get => _id;
         set => _id = value;
