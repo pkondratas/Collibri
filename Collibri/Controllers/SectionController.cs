@@ -1,4 +1,4 @@
-using Collibri.Models.Section;
+using Collibri.Models.Sections;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Collibri.Controllers

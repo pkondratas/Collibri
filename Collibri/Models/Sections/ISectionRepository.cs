@@ -1,4 +1,4 @@
-namespace Collibri.Models.Section
+namespace Collibri.Models.Sections
 {
     public interface ISectionRepository
     {
