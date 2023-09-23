@@ -49,7 +49,7 @@ namespace Collibri.Tests.Models.Sections
             var actual = repository.GetAllSections(roomId, roomName);
             
             //Assert
-            Assert.Equal(list.Where(item => item.RoomId == roomId), actual);
+            Assert.Equal(list.Where(item => item.RoomId == roomId).AsEnumerable(), actual);
         }
     }
 }
