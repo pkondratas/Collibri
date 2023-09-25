@@ -11,9 +11,9 @@ namespace Collibri.Models.Sections
             _dataHandler = dataHandler;
         }
         
-        public Section? CreateSection(Section section, string roomName)
+        public Section? CreateSection(Section section)
         {
-            List<Section> sectionList = _dataHandler.GetAllItems<Section>(ModelType.Sections);
+            var sectionList = _dataHandler.GetAllItems<Section>(ModelType.Sections);
             
             foreach (var sections in sectionList)
             {
@@ -29,6 +29,14 @@ namespace Collibri.Models.Sections
             _dataHandler.PostAllItems(sectionList, ModelType.Sections);
             
             return section;
+        }
+
+        public IEnumerable<Section> GetAllSections(int roomId)
+        {
+            var sectionList = _dataHandler.GetAllItems<Section>(ModelType.Sections);
+            var queriedSection = sectionList.Where(section => section.RoomId == roomId);
+            
+            return queriedSection;
         }
     }
 }
