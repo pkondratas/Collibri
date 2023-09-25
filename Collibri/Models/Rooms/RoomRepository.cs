@@ -1,5 +1,4 @@
 using Collibri.Models.DataHandling;
-using Collibri.RoomModels;
 
 namespace Collibri.Models.Rooms
 {
@@ -15,16 +14,19 @@ namespace Collibri.Models.Rooms
         public Room? CreateRoom(Room room)
         {
             List<Room> roomList = _dataHandler.GetAllItems<Room>(ModelType.Rooms);
+            int newId = GenerateUniqueId(roomList);
             
-            if (roomList.Any(existingRoom => existingRoom.Id == room.Id))
-            {
-                return null; 
-            }
-
+            room.Id = newId;
             roomList.Add(room);
             _dataHandler.PostAllItems(roomList, ModelType.Rooms);
 
             return room;
+        }
+
+        private int GenerateUniqueId(List<Room> roomList)
+        {
+            int maxId = roomList.Count > 0 ? roomList.Max(room => room.Id) : 0;
+            return maxId + 1;
         }
 
         public List<Room> GetAllRooms()
@@ -35,7 +37,7 @@ namespace Collibri.Models.Rooms
         public Room? UpdateRoom(int roomId, Room updatedRoom)
         {
             List<Room> roomList = _dataHandler.GetAllItems<Room>(ModelType.Rooms);
-            Room existingRoom = roomList.FirstOrDefault(room => room.Id == roomId);
+            Room? existingRoom = roomList.FirstOrDefault(room => room.Id == roomId);
 
             if (existingRoom == null)
             {
@@ -52,7 +54,7 @@ namespace Collibri.Models.Rooms
         public bool DeleteRoom(int roomId)
         {
             List<Room> roomList = _dataHandler.GetAllItems<Room>(ModelType.Rooms);
-            Room roomToRemove = roomList.FirstOrDefault(room => room.Id == roomId);
+            Room? roomToRemove = roomList.FirstOrDefault(room => room.Id == roomId);
 
             if (roomToRemove == null)
             {
