@@ -1,8 +1,14 @@
+using Collibri.Models.DataHandling;
+using Collibri.Models.Sections;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IDataHandler, DataHandler>();
+builder.Services.AddScoped<ISectionRepository, SectionRepository>();
 
 var app = builder.Build();
 
