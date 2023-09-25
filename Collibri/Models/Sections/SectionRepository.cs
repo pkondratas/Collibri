@@ -22,6 +22,7 @@ namespace Collibri.Models.Sections
                     return null;
                 }
             }
+            
             section.SectionId = new Random().Next(1, int.MaxValue);
             sectionList.Add(section);
             
