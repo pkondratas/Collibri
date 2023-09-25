@@ -25,7 +25,12 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Collibri\Collibri.csproj" />
+    <ItemGroup>
+      <Folder Include="Models\Notes\" />
     </ItemGroup>
+
+    </ItemGroup>
+
 
 
 
