@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Collibri.Models.Documents
 {
-
     public class DocumentRepository : IDocumentRepository
     {
         private readonly IDataHandler _dataHandler;
@@ -16,83 +15,55 @@ namespace Collibri.Models.Documents
             _documentList = _dataHandler.GetAllItems<Document>(ModelType.Documents);
         }
 
-        
-        public Document? CreateDocument(Document document)
+
+        public Document? CreateDocument(Document document, int sectionId)
         {
-
-            
-
             document.Id = new Random().Next(1, int.MaxValue);
 
             if (DocumentExists(document.Id))
             {
                 return null;
             }
-            
+
+            document.SectionId = sectionId;
             _documentList?.Add(document);
 
             _dataHandler.PostAllItems(_documentList, ModelType.Documents);
 
 
             return document;
-
-
         }
 
-        public List<Document> GetDocuments()
+        public IEnumerable<Document> GetDocuments(int sectionId)
         {
-            return _dataHandler.GetAllItems<Document>(ModelType.Documents);
+            return _documentList.Where(document => document.SectionId == sectionId);
         }
 
-        public bool DeleteById(int id)
+        public Document? DeleteById(int id)
         {
-            if (DocumentExists(id))
+            var document = GetById(id);
+            if (document != null)
             {
-                _documentList?.Remove(GetById(id) ?? throw new InvalidOperationException());
+                _documentList?.Remove(document ?? throw new InvalidOperationException());
                 if (_documentList != null)
                 {
                     _dataHandler.PostAllItems(_documentList, ModelType.Documents);
                 }
-                return true;
-            }
-        
-            return false;
-        }
 
+                return null;
+            }
+
+            return document;
+        }
         
         public bool DocumentExists(int id)
         {
-            if (_documentList != null)
-            {
-                foreach (Document documents in _documentList)
-                {
-                    if (documents.Id.Equals(id))
-                    {
-                        return true;
-                    }
-                }
-                
-            }
-
-            return false;
+            return _documentList?.Any(documents => documents.Id == id) ?? false;
         }
 
         public Document? GetById(int id)
         {
-            if (_documentList != null)
-            {
-                foreach (Document documents in _documentList)
-                {
-                    if (documents.Id.Equals(id))
-                    {
-                        return documents;
-                    }
-                }
-            }
-                
-                
-
-            return null;
+            return _documentList?.FirstOrDefault(documents => documents.Id == id);
         }
 
         public Document? UpdateDocument(Document document, int id)
@@ -109,7 +80,7 @@ namespace Collibri.Models.Documents
                     {
                         _dataHandler.PostAllItems(_documentList, ModelType.Documents);
                     }
-                        
+
                     return doc;
                 }
             }

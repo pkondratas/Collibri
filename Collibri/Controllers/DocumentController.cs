@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Collibri.Controllers
 {
     
-    [Route("/v1/Documents")] // tokiu ir tokiu adresu issaugos faila.
+    [Route("/v1/documents")] // tokiu ir tokiu adresu issaugos faila.
     [ApiController]
     public class DocumentController : ControllerBase
     {
@@ -23,26 +23,26 @@ namespace Collibri.Controllers
             _documentRepository = documentRepository;
         }
         
-        [HttpPost]
-        public IActionResult CreateDocument([FromBody]Document input)
+        [HttpPost("{sectionId}")]
+        public IActionResult CreateDocument([FromBody]Document input, int sectionId)
         {
 
-            var result = _documentRepository.CreateDocument(input);
+            var result = _documentRepository.CreateDocument(input, sectionId);
             return result == null? Conflict(): Ok(result);
             
         }
 
-        [HttpGet]
-        public IActionResult GetDocuments()
+        [HttpGet("{sectionId}")]
+        public IActionResult GetDocuments(int sectionId)
         {
-            return Ok(_documentRepository.GetDocuments());
+            return Ok(_documentRepository.GetDocuments(sectionId));
         }
 
         [HttpDelete("{id}")]
         public IActionResult DeleteDocument(int id)
         {
             var result = _documentRepository.DeleteById(id);
-            return result == true ? Ok() : Conflict();
+            return result == null ? NotFound(result) : Ok();
         }
 
         [HttpPut("{id}")]
