@@ -8,6 +8,8 @@
         public int SectionId { get; set; }
         public int RoomId { get; set; }
         public int Id { get; set; }
+        public DateTime CreationDate { get; set; }
+        public DateTime LastUpdatedDate { get; set; }
 
         public Note(int sectionId, int roomId, string name, string text, string author)
         {

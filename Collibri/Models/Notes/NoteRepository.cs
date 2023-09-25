@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Text.Json;
-using Collibri.Models.DataHandling;
+﻿using Collibri.Models.DataHandling;
 
 namespace Collibri.Models.Notes
 {
@@ -11,21 +9,6 @@ namespace Collibri.Models.Notes
         public NoteRepository(IDataHandler dataHandler)
         {
             this._dataHandler = dataHandler;
-        }
-
-        private bool NoteExists(int id)
-        {
-            List<Note> noteList = _dataHandler.GetAllItems<Note>(ModelType.Notes);
-
-            foreach (var note in noteList)
-            {
-                if (note.Id == id)
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
 
         public Note? CreateNote(Note note)
@@ -40,8 +23,9 @@ namespace Collibri.Models.Notes
                 }
             }
             
-            note.SectionId = new Random().Next(1, int.MaxValue);
             note.Id = new Random().Next(1, int.MaxValue);
+            note.CreationDate = DateTime.Now;
+            note.LastUpdatedDate = note.CreationDate;
             noteList.Add(note);
             
             _dataHandler.PostAllItems(noteList, ModelType.Notes);
@@ -64,39 +48,52 @@ namespace Collibri.Models.Notes
             return null;
         }
 
-        public List<Note> GetAllNotes()
+        public IEnumerable<Note> GetAllNotesInSection(int sectionId)
         {
-            return _dataHandler.GetAllItems<Note>(ModelType.Notes);
+            var noteList = _dataHandler.GetAllItems<Note>(ModelType.Notes);
+            var notesInSection = noteList.Where(note => note.SectionId == sectionId);
+            
+            return notesInSection;
+        }
+        
+        public IEnumerable<Note> GetAllNotesInRoom(int roomId)
+        {
+            var noteList = _dataHandler.GetAllItems<Note>(ModelType.Notes);
+            var notesInSection = noteList.Where(note => note.RoomId == roomId);
+            
+            return notesInSection;
         }
 
         public Note? DeleteNote(int id)
         {
             List<Note> noteList = _dataHandler.GetAllItems<Note>(ModelType.Notes);
 
-            var note = GetNote(id);
-
-            if (note != null)
+            foreach (var note in noteList)
             {
-                noteList.Remove(note);
-                _dataHandler.PostAllItems(noteList, ModelType.Notes);
-                return note;
+                if (note.Id == id)
+                {
+                    noteList.Remove(note);
+                    _dataHandler.PostAllItems(noteList, ModelType.Notes);
+                    return note;
+                }
             }
+
             return null;
         }
 
         public Note? UpdateNote(Note note, int id)
         {
-            if (NoteExists(id))
-            {
-                var targetNote = GetNote(id);
+            List<Note> noteList = _dataHandler.GetAllItems<Note>(ModelType.Notes);
+            var targetNote = noteList.FirstOrDefault(notes => notes.Id == id);
 
-                if (targetNote != null)
-                {
-                    targetNote.Name = note.Name;
-                    targetNote.Text = note.Text;
-                    targetNote.Author = note.Author;
+            if (targetNote != null)
+            { 
+                targetNote.Name = note.Name; 
+                targetNote.Text = note.Text;
+                targetNote.LastUpdatedDate = DateTime.Now;
 
-                }
+                _dataHandler.PostAllItems(noteList, ModelType.Notes); 
+                return targetNote;
             }
 
             return null;

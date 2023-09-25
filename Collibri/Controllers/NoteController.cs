@@ -28,17 +28,29 @@ namespace Collibri.Controllers
             return result == null ? Conflict() : Ok(result);
         }
         
-        [HttpGet("")]
-        public List<Note> GetNote()
+        [HttpGet("inSection/{sectionId:int}")]
+        public IActionResult GetAllNotesInSection(int sectionId)
         {
-            var result = _noteRepository.GetAllNotes();
-            return result;
+            return Ok(_noteRepository.GetAllNotesInSection(sectionId));
+        }
+        
+        [HttpGet("inRoom/{roomId:int}")]
+        public IActionResult GetAllNotesInRoom(int roomId)
+        {
+            return Ok(_noteRepository.GetAllNotesInRoom(roomId));
         }
 
         [HttpDelete("{id:int}")]
         public IActionResult DeleteNote(int id)
         {
             var result = _noteRepository.DeleteNote(id);
+            return result == null ? Conflict() : Ok(result);
+        }
+
+        [HttpPut("{id:int}")]
+        public IActionResult UpdateNote([FromBody] Note note, int id)
+        {
+            var result = _noteRepository.UpdateNote(note, id);
             return result == null ? Conflict() : Ok(result);
         }
     }
