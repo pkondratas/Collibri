@@ -11,7 +11,6 @@ namespace Collibri.Tests.Models.Sections
         void CreateSection_Should_ReturnSection_WhenNonExistent(
             Section section,
             Section? expected,
-            string roomName,
             List<Section> list)
         {   
             //Assign
@@ -21,7 +20,7 @@ namespace Collibri.Tests.Models.Sections
                 .Setup(x => x.GetAllItems<Section>(ModelType.Sections)).Returns(list);
 
             //Act
-            var actual = repository.CreateSection(section, roomName);
+            var actual = repository.CreateSection(section);
             if (actual != null)
             {
                 expected = section;
@@ -35,8 +34,7 @@ namespace Collibri.Tests.Models.Sections
         [Theory]
         [ClassData(typeof(GetAllSectionsTestData))]
         public void GetAllSection_Should_ReturnListOfSections(
-            int roomId, 
-            string roomName, 
+            int roomId,
             List<Section> list)
         {
             //Assign
@@ -46,7 +44,7 @@ namespace Collibri.Tests.Models.Sections
                 .Setup(x => x.GetAllItems<Section>(ModelType.Sections)).Returns(list);
             
             //Act
-            var actual = repository.GetAllSections(roomId, roomName);
+            var actual = repository.GetAllSections(roomId);
             
             //Assert
             Assert.Equal(list.Where(item => item.RoomId == roomId).AsEnumerable(), actual);

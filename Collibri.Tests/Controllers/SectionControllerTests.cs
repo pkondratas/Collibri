@@ -17,10 +17,10 @@ namespace Collibri.Tests.Controllers
             var repository = new Mock<ISectionRepository>();
             var controller = new SectionController(repository.Object);
             repository
-                .Setup(x => x.CreateSection(section, "roomName")).Returns(methodResult);
+                .Setup(x => x.CreateSection(section)).Returns(methodResult);
             
             //Act
-            var actual = controller.CreateSection(section, "roomName") as ObjectResult;
+            var actual = controller.CreateSection(section) as ObjectResult;
             
             //Assert
             Assert.Equal(statusCode, actual?.StatusCode);
@@ -29,18 +29,17 @@ namespace Collibri.Tests.Controllers
         [Theory]
         [ClassData(typeof(GetAllSectionsTestData))]
         public void GetAllSections_Should_ReturnAllSections(
-            int roomId, 
-            string roomName, 
+            int roomId,
             IEnumerable<Section> list)
         {
             //Assign
             var repository = new Mock<ISectionRepository>();
             var controller = new SectionController(repository.Object);
             repository
-                .Setup(x => x.GetAllSections(roomId, roomName)).Returns(list);
+                .Setup(x => x.GetAllSections(roomId)).Returns(list);
             
             //Act
-            var actual = controller.GetAllSections(roomId, roomName) as ObjectResult;
+            var actual = controller.GetAllSections(roomId) as ObjectResult;
             
             //Assert
             Assert.IsType<List<Section>>(actual.Value);
