@@ -1,5 +1,6 @@
-namespace Collibri.Models.Files; 
+namespace Collibri.Models.Files;
 
-public interface IFileRepository {
-	File? CreateFile(IFormFile file);
+public interface IFileRepository
+{
+	File? CreateFile(IFormFile fileStream);
 }
