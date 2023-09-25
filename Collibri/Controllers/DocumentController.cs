@@ -42,7 +42,7 @@ namespace Collibri.Controllers
         public IActionResult DeleteDocument(int id)
         {
             var result = _documentRepository.DeleteById(id);
-            return result == null ? NotFound(result) : Ok();
+            return result == null ? NotFound() : Ok(result);
         }
 
         [HttpPut("{id}")]

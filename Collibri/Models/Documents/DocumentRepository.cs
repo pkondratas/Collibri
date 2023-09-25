@@ -41,19 +41,20 @@ namespace Collibri.Models.Documents
 
         public Document? DeleteById(int id)
         {
-            var document = GetById(id);
-            if (document != null)
+            
+            if (DocumentExists(id))
             {
+                var document = GetById(id);
                 _documentList?.Remove(document ?? throw new InvalidOperationException());
                 if (_documentList != null)
                 {
                     _dataHandler.PostAllItems(_documentList, ModelType.Documents);
                 }
 
-                return null;
+                return document;
             }
 
-            return document;
+            return null;
         }
         
         public bool DocumentExists(int id)
