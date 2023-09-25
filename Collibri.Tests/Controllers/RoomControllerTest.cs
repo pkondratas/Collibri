@@ -3,7 +3,6 @@ using Collibri.RoomModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Collibri.Tests.Controllers;
-
 public class RoomControllerTests
 {
     // Helper method to create a RoomController with a mock repository
@@ -19,7 +18,7 @@ public class RoomControllerTests
         var mockRepo = new Mock<IRoomRepository>();
         var roomController = CreateRoomController(mockRepo);
 
-        var roomToCreate = new Room("TestRoom");
+        var roomToCreate = new Room(1, "TestRoom");
         mockRepo.Setup(repo => repo.CreateRoom(roomToCreate)).Returns(roomToCreate);
 
         // Act
@@ -38,7 +37,7 @@ public class RoomControllerTests
         var mockRepo = new Mock<IRoomRepository>();
         var roomController = CreateRoomController(mockRepo);
 
-        var existingRoom  = new Room("TestRoom");;
+        var existingRoom = new Room(2, "TestRoom");
         mockRepo.Setup(repo => repo.CreateRoom(existingRoom)).Returns((Room)null);
 
         // Act
@@ -56,7 +55,7 @@ public class RoomControllerTests
         var mockRepo = new Mock<IRoomRepository>();
         var roomController = CreateRoomController(mockRepo);
 
-        var rooms = new List<Room> { new Room("Room1"), new Room("Room2") };
+        var rooms = new List<Room> { new Room (1, "Room1"), new Room (2, "Room2") };
         mockRepo.Setup(repo => repo.GetAllRooms()).Returns(rooms);
 
         // Act
@@ -75,14 +74,14 @@ public class RoomControllerTests
         var mockRepo = new Mock<IRoomRepository>();
         var roomController = CreateRoomController(mockRepo);
 
-        var existingRoomName = "ExistingRoom";
-        var updatedRoom = new Room("UpdatedRoom");
-        var existingRoom = new Room(existingRoomName);
+        var existingRoomId = 1;
+        var updatedRoom = new Room (existingRoomId, "UpdatedRoom");
+        var existingRoom = new Room (existingRoomId, "ExistingRoom");
 
-        mockRepo.Setup(repo => repo.UpdateRoom(existingRoomName, updatedRoom)).Returns(existingRoom);
+        mockRepo.Setup(repo => repo.UpdateRoom(existingRoomId, updatedRoom)).Returns(existingRoom);
 
         // Act
-        var result = roomController.UpdateRoom(existingRoomName, updatedRoom) as OkObjectResult;
+        var result = roomController.UpdateRoom(existingRoomId, updatedRoom) as OkObjectResult;
 
         // Assert
         Assert.NotNull(result);
@@ -97,13 +96,13 @@ public class RoomControllerTests
         var mockRepo = new Mock<IRoomRepository>();
         var roomController = CreateRoomController(mockRepo);
 
-        var nonExistentRoomName = "NonExistentRoom";
-        var updatedRoom = new Room ("UpdatedRoom");
+        var nonExistentRoomId = 3;
+        var updatedRoom = new Room (nonExistentRoomId, "UpdatedRoom");;
 
-        mockRepo.Setup(repo => repo.UpdateRoom(nonExistentRoomName, updatedRoom)).Returns((Room)null);
+        mockRepo.Setup(repo => repo.UpdateRoom(nonExistentRoomId, updatedRoom)).Returns((Room)null);
 
         // Act
-        var result = roomController.UpdateRoom(nonExistentRoomName, updatedRoom) as NotFoundResult;
+        var result = roomController.UpdateRoom(nonExistentRoomId, updatedRoom) as NotFoundResult;
 
         // Assert
         Assert.NotNull(result);
@@ -117,12 +116,12 @@ public class RoomControllerTests
         var mockRepo = new Mock<IRoomRepository>();
         var roomController = CreateRoomController(mockRepo);
 
-        var existingRoomName = "ExistingRoom";
+        var existingRoomId = 1;
 
-        mockRepo.Setup(repo => repo.DeleteRoom(existingRoomName)).Returns(true);
+        mockRepo.Setup(repo => repo.DeleteRoom(existingRoomId)).Returns(true);
 
         // Act
-        var result = roomController.DeleteRoom(existingRoomName) as NoContentResult;
+        var result = roomController.DeleteRoom(existingRoomId) as NoContentResult;
 
         // Assert
         Assert.NotNull(result);
@@ -136,12 +135,12 @@ public class RoomControllerTests
         var mockRepo = new Mock<IRoomRepository>();
         var roomController = CreateRoomController(mockRepo);
 
-        var nonExistentRoomName = "NonExistentRoom";
+        var nonExistentRoomId = 3;
 
-        mockRepo.Setup(repo => repo.DeleteRoom(nonExistentRoomName)).Returns(false);
+        mockRepo.Setup(repo => repo.DeleteRoom(nonExistentRoomId)).Returns(false);
 
         // Act
-        var result = roomController.DeleteRoom(nonExistentRoomName) as NotFoundResult;
+        var result = roomController.DeleteRoom(nonExistentRoomId) as NotFoundResult;
 
         // Assert
         Assert.NotNull(result);

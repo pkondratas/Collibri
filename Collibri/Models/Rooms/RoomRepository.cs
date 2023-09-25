@@ -11,30 +11,31 @@ namespace Collibri.Models.Rooms
         {
             _dataHandler = dataHandler;
         }
+
         public Room? CreateRoom(Room room)
         {
             List<Room> roomList = _dataHandler.GetAllItems<Room>(ModelType.Rooms);
-
-            if (roomList.Any(existingRoom => existingRoom.Name.Equals(room.Name)))
+            
+            if (roomList.Any(existingRoom => existingRoom.Id == room.Id))
             {
-                return null;
+                return null; 
             }
 
             roomList.Add(room);
             _dataHandler.PostAllItems(roomList, ModelType.Rooms);
-    
+
             return room;
         }
-        
+
         public List<Room> GetAllRooms()
         {
             return _dataHandler.GetAllItems<Room>(ModelType.Rooms);
         }
-        
-        public Room? UpdateRoom(string roomName, Room updatedRoom)
+
+        public Room? UpdateRoom(int roomId, Room updatedRoom)
         {
             List<Room> roomList = _dataHandler.GetAllItems<Room>(ModelType.Rooms);
-            Room existingRoom = roomList.FirstOrDefault(room => room.Name.Equals(roomName, StringComparison.OrdinalIgnoreCase));
+            Room existingRoom = roomList.FirstOrDefault(room => room.Id == roomId);
 
             if (existingRoom == null)
             {
@@ -47,20 +48,19 @@ namespace Collibri.Models.Rooms
 
             return existingRoom;
         }
-        
-        public bool DeleteRoom(string roomName)
+
+        public bool DeleteRoom(int roomId)
         {
             List<Room> roomList = _dataHandler.GetAllItems<Room>(ModelType.Rooms);
-            Room roomToRemove = roomList.FirstOrDefault(room => room.Name.Equals(roomName, StringComparison.OrdinalIgnoreCase));
+            Room roomToRemove = roomList.FirstOrDefault(room => room.Id == roomId);
 
             if (roomToRemove == null)
             {
-                return false; // Room with the given name not found.
+                return false; 
             }
 
             roomList.Remove(roomToRemove);
-
-            // Save the updated list of rooms without the deleted room
+            
             _dataHandler.PostAllItems(roomList, ModelType.Rooms);
 
             return true;

@@ -20,7 +20,7 @@ namespace Collibri.Controllers
             var result = _roomRepository.CreateRoom(room);
             return result == null ? Conflict() : Ok(result);
         }
-        
+
         [HttpGet("")]
         public IActionResult GetAllRooms()
         {
@@ -33,31 +33,32 @@ namespace Collibri.Controllers
 
             return Ok(rooms);
         }
-        
-        [HttpPut("{roomName}")]
-        public IActionResult UpdateRoom(string roomName, [FromBody] Room updatedRoom)
+
+        [HttpPut("{roomId}")]
+        public IActionResult UpdateRoom(int roomId, [FromBody] Room updatedRoom)
         {
-            var result = _roomRepository.UpdateRoom(roomName, updatedRoom);
+            var result = _roomRepository.UpdateRoom(roomId, updatedRoom);
 
             if (result == null)
             {
-                return NotFound(); // Return 404 Not Found if the room with the given name doesn't exist.
+                return NotFound(); // Return 404 Not Found if the room with the given Id doesn't exist.
             }
 
             return Ok(result);
         }
-        
-        [HttpDelete("{roomName}")]
-        public IActionResult DeleteRoom(string roomName)
+
+        [HttpDelete("{roomId}")]
+        public IActionResult DeleteRoom(int roomId)
         {
-            var deleted = _roomRepository.DeleteRoom(roomName);
+            var deleted = _roomRepository.DeleteRoom(roomId);
 
             if (!deleted)
             {
-                return NotFound(); // Return 404 Not Found if the room with the given name doesn't exist.
+                return NotFound(); // Return 404 Not Found if the room with the given Id doesn't exist.
             }
 
             return NoContent(); // Return 204 No Content to indicate successful deletion.
         }
     }
 }
+
