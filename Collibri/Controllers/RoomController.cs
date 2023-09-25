@@ -34,7 +34,6 @@ namespace Collibri.Controllers
             return Ok(rooms);
         }
         
-        
         [HttpPut("{roomName}")]
         public IActionResult UpdateRoom(string roomName, [FromBody] Room updatedRoom)
         {
@@ -60,6 +59,5 @@ namespace Collibri.Controllers
 
             return NoContent(); // Return 204 No Content to indicate successful deletion.
         }
-
     }
 }
