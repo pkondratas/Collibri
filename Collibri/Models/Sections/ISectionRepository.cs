@@ -4,7 +4,9 @@ namespace Collibri.Models.Sections
     {
         Section? CreateSection(Section section);
 
-        IEnumerable<Section> GetAllSections(int roomId); 
+        IEnumerable<Section> GetAllSections(int roomId);
+
+        Section? DeleteSectionById(int sectionId);
     }
 }
 

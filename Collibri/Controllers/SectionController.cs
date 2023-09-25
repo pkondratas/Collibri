@@ -26,5 +26,13 @@ namespace Collibri.Controllers
         {
             return Ok(_sectionRepository.GetAllSections(roomId));
         }
+
+        [HttpDelete("")]
+        public IActionResult DeleteSectionById([FromQuery] int sectionId)
+        {
+            var deletedSection = _sectionRepository.DeleteSectionById(sectionId);
+
+            return deletedSection == null ? NotFound() : Ok(deletedSection);
+        }
     }
 }
