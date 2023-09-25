@@ -1,9 +1,11 @@
+using System.Security.Cryptography.X509Certificates;
+
 namespace Collibri.RoomModels;
 
 public class Room
 {
-    public string Name { get; private set; }
-
+    public string Name { get; set; }
+    
     public Room(string name)
     {
         Name = name;
