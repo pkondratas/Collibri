@@ -1,4 +1,5 @@
 using Collibri.Models.DataHandling;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace Collibri.Models.Sections
 {
@@ -20,7 +21,7 @@ namespace Collibri.Models.Sections
                 if (sections.RoomId.Equals(section.RoomId) && sections.SectionName.Equals(section.SectionName))
                 {
                     return null;
-                }
+                } 
             }
             
             section.SectionId = new Random().Next(1, int.MaxValue);
