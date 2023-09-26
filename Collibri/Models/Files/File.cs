@@ -1,25 +1,20 @@
 namespace Collibri.Models.Files;
 
 /// <summary>
-/// Abstract class that stores basic information
-/// about a file (name, extension, file path).
+/// Class that stores basic information
+/// about a file (name, extension, file path, section ID).
 /// </summary>
 public class File
 {
-	private protected string _name;
-	private protected string _extension;
-	// private protected int _id;
-	private protected byte[] _fileData;
+	private string _name;
+	private string _path;
+	private int _sectionId;
 
-	public File(IFormFile requestedFile)
+	public File(string path, int sectionId)
 	{
-		var fullName = requestedFile.FileName.Split(".");
-		_name = fullName[0];
-		_extension = "." + fullName[1];
-		
-		var memoryStream = new MemoryStream();
-		requestedFile.CopyTo(memoryStream);
-		_fileData = memoryStream.ToArray();
+		_path = path;
+		_name = path.Substring(path.LastIndexOf('\\') + 1);
+		_sectionId = sectionId;
 	}
 
 	public string Name
@@ -27,18 +22,13 @@ public class File
 		get { return _name; }
 	}
 
-	public string Extension
+	public string Path
 	{
-		get { return _extension; }
+		get { return _path; }
 	}
 
-	// public int Id
-	// {
-	// 	get { return _id; }
-	// }
-
-	public byte[] ByteData
+	public int SectionId
 	{
-		get { return _fileData; }
+		get { return _sectionId; }
 	}
 }

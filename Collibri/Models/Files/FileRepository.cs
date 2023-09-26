@@ -1,19 +1,51 @@
-using System.Text.Json;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Collibri.Models.Files;
 
 public class FileRepository : IFileRepository
 {
-	public File? CreateFile(IFormFile fileStream)
+	public File? CreateFile(IFormFile file, string sectionId)
 	{
 		var path = new DirectoryInfo(
-			$@"{Directory.GetParent(Directory.GetCurrentDirectory())}\Collibri\Data\Files.json").FullName;
+			$@"{Directory.GetParent(Directory.GetCurrentDirectory())}\Collibri\Data\Files\{sectionId}\").FullName;
 
-		var file =  (File?) new File(fileStream);
+		if (!Directory.Exists(path))
+		{
+			Directory.CreateDirectory(path);
+		}
+		
+		if (System.IO.File.Exists(path + file.FileName))
+		{
+			return null;
+		}
 
-		var jsonString = JsonSerializer.Serialize(file);
-		System.IO.File.WriteAllText(path, jsonString);
+		var fileStream = System.IO.File.Create(path + file.FileName);
+		file.CopyTo(fileStream);
+		fileStream.Close();
 
-		return file;
+		return (File?)new File(path + file.FileName, int.Parse(sectionId));
+	}
+
+	public File? DeleteFile(string fileName, string sectionId)
+	{
+		var path = new DirectoryInfo(
+			$@"{Directory.GetParent(Directory.GetCurrentDirectory())}\Collibri\Data\Files\{sectionId}\").FullName;
+		
+		if (!System.IO.File.Exists(path + fileName))
+		{
+			return null;
+		}
+		System.IO.File.Delete(path + fileName);
+		
+		return (File?)new File(path + fileName, int.Parse(sectionId));
+	}
+
+	public FileStreamResult GetFile(string fileName, string sectionId)
+	{
+		var path = new DirectoryInfo(
+			$@"{Directory.GetParent(Directory.GetCurrentDirectory())}\Collibri\Data\Files\{sectionId}\").FullName;
+
+		var fileStream = new FileStream(path + fileName, FileMode.Open, FileAccess.Read);
+		return new FileStreamResult(fileStream, "application/octet-stream");
 	}
 }
