@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Collibri.Controllers
 {
     [ApiController]
-    [Route("/v1/Notes")]
+    [Route("/v1/notes")]
     public class NoteController : ControllerBase
     {
         private readonly INoteRepository _noteRepository;

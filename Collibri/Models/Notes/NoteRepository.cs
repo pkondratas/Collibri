@@ -37,12 +37,9 @@ namespace Collibri.Models.Notes
         {
             List<Note> noteList = _dataHandler.GetAllItems<Note>(ModelType.Notes);
 
-            foreach (var note in noteList)
+            if (noteList.Any(x => x.Id == id))
             {
-                if (note.Id == id)
-                {
-                    return note;
-                }
+                return noteList.FirstOrDefault(x => x.Id == id);
             }
 
             return null;
@@ -67,7 +64,7 @@ namespace Collibri.Models.Notes
         public Note? DeleteNote(int id)
         {
             List<Note> noteList = _dataHandler.GetAllItems<Note>(ModelType.Notes);
-
+            
             foreach (var note in noteList)
             {
                 if (note.Id == id)
