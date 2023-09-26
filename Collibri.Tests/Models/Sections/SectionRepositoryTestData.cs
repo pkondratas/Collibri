@@ -22,7 +22,7 @@ namespace Collibri.Tests.Models.Sections
                     new Section(23456, 1, "Section3")
                 }
             );
-            //Incorrect input
+            //Failing input
             Add(new Section(0, 1, "Section1"), null, 
                 new List<Section>
                 {
@@ -52,6 +52,31 @@ namespace Collibri.Tests.Models.Sections
                 }
             );
             Add(1, new List<Section>());
+        }
+    }
+
+    public class DeleteSectionByIdTestData : TheoryData<int, Section?, List<Section>>
+    {
+        public DeleteSectionByIdTestData()
+        {
+            //Correct input
+            Add(123, new Section(123, 1, "Section to Delete"),
+                new List<Section>
+                {
+                    new Section(2974823, 1, "Other section"),
+                    new Section(123, 1, "Section to Delete")
+                }
+            );
+            //Failing input
+            Add(123, null,
+                new List<Section>
+                {
+                    new Section(2974823, 1, "Other section"),
+                    new Section(2345, 1, "Section to Delete")
+                }
+            );
+            //Failing input
+            Add(123, null, new List<Section>());
         }
     }
 }

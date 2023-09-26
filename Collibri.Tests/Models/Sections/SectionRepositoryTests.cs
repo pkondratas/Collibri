@@ -1,4 +1,3 @@
-using System.Collections.Specialized;
 using Collibri.Models.DataHandling;
 using Collibri.Models.Sections;
 
@@ -48,6 +47,26 @@ namespace Collibri.Tests.Models.Sections
             
             //Assert
             Assert.Equal(list.Where(item => item.RoomId == roomId).AsEnumerable(), actual);
+        }
+
+        [Theory]
+        [ClassData(typeof(DeleteSectionByIdTestData))]
+        public void DeleteSectionById_Should_ReturnDeletedSectionIfExists(
+            int sectionId,
+            Section? expected,
+            List<Section> list)
+        {
+            //Assign
+            var dataHandler = new Mock<IDataHandler>();
+            var repository = new SectionRepository(dataHandler.Object);
+            dataHandler
+                .Setup(x => x.GetAllItems<Section>(ModelType.Sections)).Returns(list);
+            
+            //Act
+            var actual = repository.DeleteSectionById(sectionId);
+
+            //Assert
+            Assert.Equivalent(expected, actual);
         }
     }
 }

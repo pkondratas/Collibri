@@ -39,6 +39,20 @@ namespace Collibri.Models.Sections
             
             return queriedSection;
         }
+
+        public Section? DeleteSectionById(int sectionId)
+        {
+            var sectionList = _dataHandler.GetAllItems<Section>(ModelType.Sections);
+            var sectionToDelete = sectionList.SingleOrDefault(x => x.SectionId == sectionId);
+            
+            if(sectionToDelete != null && sectionList.Remove(sectionToDelete))
+            {
+                _dataHandler.PostAllItems(sectionList, ModelType.Sections);
+                return sectionToDelete;
+            }
+            
+            return null;
+        }
     }
 }
 
