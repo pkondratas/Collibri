@@ -20,10 +20,19 @@ namespace Collibri.Tests.Controllers
                 .Setup(x => x.CreateSection(section)).Returns(methodResult);
             
             //Act
-            var actual = controller.CreateSection(section) as ObjectResult;
+            var actual = controller.CreateSection(section);
             
             //Assert
-            Assert.Equal(statusCode, actual?.StatusCode);
+            if (methodResult == null)
+            {
+                Assert.IsType<ConflictResult>(actual);
+                Assert.Equal(statusCode, ((ConflictResult)actual).StatusCode);
+            }
+            else
+            {
+                Assert.IsType<OkObjectResult>(actual);
+                Assert.Equal(statusCode, ((OkObjectResult)actual).StatusCode);
+            }
         }
 
         [Theory]
@@ -42,8 +51,38 @@ namespace Collibri.Tests.Controllers
             var actual = controller.GetAllSections(roomId) as ObjectResult;
             
             //Assert
-            Assert.IsType<List<Section>>(actual.Value);
+            Assert.IsType<List<Section>>(actual?.Value);
             Assert.Equal(list, actual.Value);
+        }
+
+        [Theory]
+        [ClassData(typeof(DeleteSectionByIdTestData))]
+        public void DeleteSectionById_Should_ReturnDeletedSectionIfExists(
+            int sectionId, 
+            Section? section, 
+            int statusCode)
+        {
+            //Assign
+            var repository = new Mock<ISectionRepository>();
+            var controller = new SectionController(repository.Object);
+            repository
+                .Setup(x => x.DeleteSectionById(sectionId)).Returns(section);
+
+            //Act
+            var actual = controller.DeleteSectionById(sectionId);
+
+            //Assert
+            if (section == null)
+            {
+                Assert.IsType<NotFoundResult>(actual);
+                Assert.Equal(statusCode, ((NotFoundResult)actual).StatusCode);
+            }
+            else
+            {
+                Assert.IsType<OkObjectResult>(actual);
+                Assert.Equal(statusCode, ((OkObjectResult)actual).StatusCode);
+                Assert.Equal(section, ((ObjectResult)actual).Value);
+            }
         }
     }
 }

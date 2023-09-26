@@ -8,8 +8,8 @@ namespace Collibri.Tests.Controllers
         {
             //Correct input
             Add(new Section(0, 1, "NewSectionName"), new Section(123, 1, "NewSectionName"), 200);
-            //Incorrect input
-            Add(new Section(0, 1, "NewSectionName"), null, null);
+            //Failing input
+            Add(new Section(0, 1, "NewSectionName"), null, 409);
         }
     }
 
@@ -26,6 +26,17 @@ namespace Collibri.Tests.Controllers
                 }.AsEnumerable()
             );
             Add(1, new List<Section>().AsEnumerable());
+        }
+    }
+
+    public class DeleteSectionByIdTestData : TheoryData<int, Section?, int>
+    {
+        public DeleteSectionByIdTestData()
+        {
+            //Correct input
+            Add(123, new Section(2345, 123, "Deleted section"), 200);
+            //Failing input
+            Add(123, null, 404);
         }
     }
 }
