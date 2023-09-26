@@ -29,8 +29,7 @@ namespace Collibri.Models.Documents
             _documentList?.Add(document);
 
             _dataHandler.PostAllItems(_documentList, ModelType.Documents);
-
-
+            
             return document;
         }
 
@@ -41,7 +40,6 @@ namespace Collibri.Models.Documents
 
         public Document? DeleteById(int id)
         {
-            
             if (DocumentExists(id))
             {
                 var document = GetById(id);
@@ -56,7 +54,7 @@ namespace Collibri.Models.Documents
 
             return null;
         }
-        
+
         public bool DocumentExists(int id)
         {
             return _documentList?.Any(documents => documents.Id == id) ?? false;
@@ -85,7 +83,6 @@ namespace Collibri.Models.Documents
                     return doc;
                 }
             }
-
             return null;
         }
     }
