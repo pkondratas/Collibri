@@ -1,4 +1,5 @@
 using Collibri.Models.DataHandling;
+using Collibri.Models.Notes;
 using Collibri.Models.Rooms;
 using Collibri.Models.Sections;
 
@@ -10,6 +11,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IDataHandler, DataHandler>();
 builder.Services.AddScoped<ISectionRepository, SectionRepository>();
+builder.Services.AddScoped<INoteRepository, NoteRepository>();
 builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 
 var app = builder.Build();
