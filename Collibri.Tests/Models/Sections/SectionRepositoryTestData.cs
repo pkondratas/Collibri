@@ -55,6 +55,28 @@ namespace Collibri.Tests.Models.Sections
         }
     }
 
+    public class UpdateSectionByIdTestData : TheoryData<Section, Section?, int, List<Section>>
+    {
+        public UpdateSectionByIdTestData()
+        {
+            Add(new Section(0, 1, "Updated section"), new Section(12345, 1, "Updated section"), 12345,
+                new List<Section>
+                {
+                    new Section(12345, 1, "Old section"),
+                    new Section(23456, 1, "Another section")
+                }
+            );
+            Add(new Section(0, 1, "Updated section"), null, 12345,
+                new List<Section>
+                {
+                    new Section(23456, 1, "Random section"),
+                    new Section(34567, 1, "Another section")
+                }
+            );
+            Add(new Section(0, 1, "Updated section"), null, 12345, new List<Section>());
+        }
+    }
+
     public class DeleteSectionByIdTestData : TheoryData<int, Section?, List<Section>>
     {
         public DeleteSectionByIdTestData()

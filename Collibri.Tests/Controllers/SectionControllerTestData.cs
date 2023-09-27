@@ -29,6 +29,16 @@ namespace Collibri.Tests.Controllers
         }
     }
 
+    public class UpdateSectionByIdTestData : TheoryData<Section, Section?, int, int>
+    {
+        public UpdateSectionByIdTestData()
+        {
+            //Correct input
+            Add(new Section(0, 2, "Old name"), new Section(12345, 2, "New name"), 12345, 200);
+            //Failing input
+            Add(new Section(0, 2, "Old name"), null, 23456, 404);
+        }
+    }
     public class DeleteSectionByIdTestData : TheoryData<int, Section?, int>
     {
         public DeleteSectionByIdTestData()

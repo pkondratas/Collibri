@@ -6,6 +6,8 @@ namespace Collibri.Models.Sections
 
         IEnumerable<Section> GetAllSections(int roomId);
 
+        Section? UpdateSectionById(Section section, int sectionId);
+
         Section? DeleteSectionById(int sectionId);
     }
 }

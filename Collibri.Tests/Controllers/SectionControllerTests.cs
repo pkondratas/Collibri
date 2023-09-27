@@ -54,7 +54,38 @@ namespace Collibri.Tests.Controllers
             Assert.IsType<List<Section>>(actual?.Value);
             Assert.Equal(list, actual.Value);
         }
+        
+        [Theory]
+        [ClassData(typeof(UpdateSectionByIdTestData))]
+        public void UpdateSectionById_Should_ReturnOkAndUpdatedSectionWhenExists(
+            Section section,
+            Section? updatedSection,
+            int sectionId,
+            int statusCode)
+        {
+            //Assign
+            var repository = new Mock<ISectionRepository>();
+            var controller = new SectionController(repository.Object);
+            repository
+                .Setup(x => x.UpdateSectionById(section, sectionId)).Returns(updatedSection);
+            
+            //Act
+            var actual = controller.UpdateSectionById(sectionId, section);
 
+            //Assert
+            if (updatedSection == null)
+            {
+                Assert.IsType<NotFoundResult>(actual);
+                Assert.Equal(statusCode, ((NotFoundResult)actual).StatusCode);
+            }
+            else
+            {
+                Assert.IsType<OkObjectResult>(actual);
+                Assert.Equal(statusCode, ((OkObjectResult)actual).StatusCode);
+                Assert.Equal(updatedSection, ((ObjectResult)actual).Value);
+            }
+        }
+        
         [Theory]
         [ClassData(typeof(DeleteSectionByIdTestData))]
         public void DeleteSectionById_Should_ReturnDeletedSectionIfExists(

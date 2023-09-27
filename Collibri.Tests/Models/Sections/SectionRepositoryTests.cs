@@ -50,6 +50,27 @@ namespace Collibri.Tests.Models.Sections
         }
 
         [Theory]
+        [ClassData(typeof(UpdateSectionByIdTestData))]
+        public void UpdateSectionById_Should_ReturnUpdatedSectionWhenExists(
+            Section section,
+            Section? expected,
+            int sectionId,
+            List<Section> list)
+        {
+            //Assign
+            var dataHandler = new Mock<IDataHandler>();
+            var repository = new SectionRepository(dataHandler.Object);
+            dataHandler
+                .Setup(x => x.GetAllItems<Section>(ModelType.Sections)).Returns(list);
+            
+            //Act
+            var actual = repository.UpdateSectionById(section, sectionId);
+            
+            //Assert
+            Assert.Equivalent(expected, actual);
+        }
+        
+        [Theory]
         [ClassData(typeof(DeleteSectionByIdTestData))]
         public void DeleteSectionById_Should_ReturnDeletedSectionIfExists(
             int sectionId,
