@@ -27,6 +27,14 @@ namespace Collibri.Controllers
             return Ok(_sectionRepository.GetAllSections(roomId));
         }
 
+        [HttpPut("")]
+        public IActionResult UpdateSectionById([FromQuery] int sectionId, [FromBody] Section section)
+        {
+            var updatedSection = _sectionRepository.UpdateSectionById(section, sectionId);
+
+            return updatedSection == null ? NotFound() : Ok(updatedSection);
+        }
+
         [HttpDelete("")]
         public IActionResult DeleteSectionById([FromQuery] int sectionId)
         {
