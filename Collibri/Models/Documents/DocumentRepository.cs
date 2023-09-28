@@ -7,17 +7,16 @@ namespace Collibri.Models.Documents
     public class DocumentRepository : IDocumentRepository
     {
         private readonly IDataHandler _dataHandler;
-        private static List<Document>? _documentList;
+
 
         public DocumentRepository(IDataHandler dataHandler)
         {
             _dataHandler = dataHandler;
-            _documentList = _dataHandler.GetAllItems<Document>(ModelType.Documents);
         }
-
 
         public Document? CreateDocument(Document document, int sectionId)
         {
+            var documentList = _dataHandler.GetAllItems<Document>(ModelType.Documents);
             document.Id = new Random().Next(1, int.MaxValue);
 
             if (DocumentExists(document.Id))
@@ -26,64 +25,59 @@ namespace Collibri.Models.Documents
             }
 
             document.SectionId = sectionId;
-            _documentList?.Add(document);
+            documentList?.Add(document);
 
-            _dataHandler.PostAllItems(_documentList, ModelType.Documents);
-            
+            _dataHandler.PostAllItems(documentList, ModelType.Documents);
+
             return document;
         }
 
         public IEnumerable<Document> GetDocuments(int sectionId)
         {
-            return _documentList.Where(document => document.SectionId == sectionId);
+            var documentList = _dataHandler.GetAllItems<Document>(ModelType.Documents);
+            return documentList.Where(document => document.SectionId == sectionId);
         }
 
         public Document? DeleteById(int id)
         {
-            if (DocumentExists(id))
+            var documentList = _dataHandler.GetAllItems<Document>(ModelType.Documents);
+            var documentToDelete = documentList.SingleOrDefault(x => x.Id == id);
+            
+            if (documentToDelete == null || !documentList.Remove(documentToDelete))
             {
-                var document = GetById(id);
-                _documentList?.Remove(document ?? throw new InvalidOperationException());
-                if (_documentList != null)
-                {
-                    _dataHandler.PostAllItems(_documentList, ModelType.Documents);
-                }
-
-                return document;
+                return null;
             }
-
-            return null;
+            
+            _dataHandler.PostAllItems(documentList, ModelType.Documents);
+            return documentToDelete;
         }
 
         public bool DocumentExists(int id)
         {
-            return _documentList?.Any(documents => documents.Id == id) ?? false;
+            var documentList = _dataHandler.GetAllItems<Document>(ModelType.Documents);
+            return documentList?.Any(documents => documents.Id == id) ?? false;
         }
 
         public Document? GetById(int id)
         {
-            return _documentList?.FirstOrDefault(documents => documents.Id == id);
+            var documentList = _dataHandler.GetAllItems<Document>(ModelType.Documents);
+            return documentList?.FirstOrDefault(documents => documents.Id == id);
         }
 
         public Document? UpdateDocument(Document document, int id)
         {
-            if (DocumentExists(id))
+            var documentList = _dataHandler.GetAllItems<Document>(ModelType.Documents);
+            var documentToUpdate = documentList.SingleOrDefault(x => x.Id == id);
+            
+            if (documentToUpdate == null || !documentList.Remove(documentToUpdate))
             {
-                var doc = GetById(id);
-                if (doc != null)
-                {
-                    doc.SectionId = document.SectionId;
-                    doc.Title = document.Title;
-                    doc.Text = document.Text;
-                    if (_documentList != null)
-                    {
-                        _dataHandler.PostAllItems(_documentList, ModelType.Documents);
-                    }
-
-                    return doc;
-                }
+                return null;
             }
-            return null;
+            
+            documentToUpdate.SectionId = document.SectionId;
+            documentToUpdate.Title = document.Title;
+            documentToUpdate.Text = document.Text;
+            _dataHandler.PostAllItems(documentList, ModelType.Documents);
         }
     }
 }
