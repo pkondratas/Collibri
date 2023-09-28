@@ -48,4 +48,17 @@ public class FileRepository : IFileRepository
 		var fileStream = new FileStream(path + fileName, FileMode.Open, FileAccess.Read);
 		return new FileStreamResult(fileStream, "application/octet-stream");
 	}
+
+	public File? UpdateFileName(string fileName, string sectionId, string updatedName)
+	{
+		var path = new DirectoryInfo(
+			$@"{Directory.GetParent(Directory.GetCurrentDirectory())}\Collibri\Data\Files\{sectionId}\").FullName;
+		
+		if (!System.IO.File.Exists(path + fileName) || System.IO.File.Exists(path + updatedName))
+		{
+			return null;
+		}
+		System.IO.File.Move(path + fileName, path + updatedName);
+		return (File?)new File(path + updatedName, int.Parse(sectionId));
+	}
 }
