@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Collibri.Controllers
 {
     [ApiController]
-    [Route("/v1/rooms/{roomName}/sections")]
+    [Route("/v1/sections")]
     public class SectionController : ControllerBase
     {
         private readonly ISectionRepository _sectionRepository;
@@ -15,10 +15,32 @@ namespace Collibri.Controllers
         }
 
         [HttpPost("")]
-        public IActionResult CreateSection([FromBody] Section section, string roomName)
+        public IActionResult CreateSection([FromBody] Section section)
         {
-            var result = _sectionRepository.CreateSection(section, roomName);
+            var result = _sectionRepository.CreateSection(section);
             return result == null ? Conflict() : Ok(result);
+        }
+        
+        [HttpGet("")]
+        public IActionResult GetAllSections([FromQuery] int roomId)
+        {
+            return Ok(_sectionRepository.GetAllSections(roomId));
+        }
+
+        [HttpPut("")]
+        public IActionResult UpdateSectionById([FromQuery] int sectionId, [FromBody] Section section)
+        {
+            var updatedSection = _sectionRepository.UpdateSectionById(section, sectionId);
+
+            return updatedSection == null ? NotFound() : Ok(updatedSection);
+        }
+
+        [HttpDelete("")]
+        public IActionResult DeleteSectionById([FromQuery] int sectionId)
+        {
+            var deletedSection = _sectionRepository.DeleteSectionById(sectionId);
+
+            return deletedSection == null ? NotFound() : Ok(deletedSection);
         }
     }
 }

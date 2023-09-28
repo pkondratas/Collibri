@@ -26,7 +26,6 @@
     <ItemGroup>
       <ProjectReference Include="..\Collibri\Collibri.csproj" />
     </ItemGroup>
-
-
-
+    
+    
 </Project>

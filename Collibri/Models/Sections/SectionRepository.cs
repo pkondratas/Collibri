@@ -1,4 +1,5 @@
 using Collibri.Models.DataHandling;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace Collibri.Models.Sections
 {
@@ -11,16 +12,16 @@ namespace Collibri.Models.Sections
             _dataHandler = dataHandler;
         }
         
-        public Section? CreateSection(Section section, string roomName)
+        public Section? CreateSection(Section section)
         {
-            List<Section> sectionList = _dataHandler.GetAllItems<Section>(ModelType.Sections);
+            var sectionList = _dataHandler.GetAllItems<Section>(ModelType.Sections);
             
             foreach (var sections in sectionList)
             {
                 if (sections.RoomId.Equals(section.RoomId) && sections.SectionName.Equals(section.SectionName))
                 {
                     return null;
-                }
+                } 
             }
             
             section.SectionId = new Random().Next(1, int.MaxValue);
@@ -29,6 +30,45 @@ namespace Collibri.Models.Sections
             _dataHandler.PostAllItems(sectionList, ModelType.Sections);
             
             return section;
+        }
+
+        public IEnumerable<Section> GetAllSections(int roomId)
+        {
+            var sectionList = _dataHandler.GetAllItems<Section>(ModelType.Sections);
+            var queriedSection = sectionList.Where(section => section.RoomId == roomId);
+            
+            return queriedSection;
+        }
+
+        public Section? UpdateSectionById(Section section, int sectionId)
+        {
+            var sectionList = _dataHandler.GetAllItems<Section>(ModelType.Sections);
+            var sectionToUpdate = sectionList.SingleOrDefault(x => x.SectionId == sectionId);
+
+            if (sectionToUpdate == null)
+            {
+                return null;
+            }
+            
+            //updating contents of section part
+            sectionToUpdate.SectionName = section.SectionName;
+            _dataHandler.PostAllItems(sectionList, ModelType.Sections);
+            
+            return sectionToUpdate;
+        }
+
+        public Section? DeleteSectionById(int sectionId)
+        {
+            var sectionList = _dataHandler.GetAllItems<Section>(ModelType.Sections);
+            var sectionToDelete = sectionList.SingleOrDefault(x => x.SectionId == sectionId);
+            
+            if(sectionToDelete == null || !sectionList.Remove(sectionToDelete))
+            {
+                return null;
+            }
+            
+            _dataHandler.PostAllItems(sectionList, ModelType.Sections);
+            return sectionToDelete;
         }
     }
 }

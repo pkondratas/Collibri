@@ -1,4 +1,3 @@
-using System.Collections.Specialized;
 using Collibri.Models.DataHandling;
 using Collibri.Models.Sections;
 
@@ -11,7 +10,6 @@ namespace Collibri.Tests.Models.Sections
         void CreateSection_Should_ReturnSection_WhenNonExistent(
             Section section,
             Section? expected,
-            string roomName,
             List<Section> list)
         {   
             //Assign
@@ -21,7 +19,7 @@ namespace Collibri.Tests.Models.Sections
                 .Setup(x => x.GetAllItems<Section>(ModelType.Sections)).Returns(list);
 
             //Act
-            var actual = repository.CreateSection(section, roomName);
+            var actual = repository.CreateSection(section);
             if (actual != null)
             {
                 expected = section;
@@ -30,6 +28,66 @@ namespace Collibri.Tests.Models.Sections
             
             //Assert
             Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [ClassData(typeof(GetAllSectionsTestData))]
+        public void GetAllSection_Should_ReturnListOfSections(
+            int roomId,
+            List<Section> list)
+        {
+            //Assign
+            var dataHandler = new Mock<IDataHandler>();
+            var repository = new SectionRepository(dataHandler.Object);
+            dataHandler
+                .Setup(x => x.GetAllItems<Section>(ModelType.Sections)).Returns(list);
+            
+            //Act
+            var actual = repository.GetAllSections(roomId);
+            
+            //Assert
+            Assert.Equal(list.Where(item => item.RoomId == roomId).AsEnumerable(), actual);
+        }
+
+        [Theory]
+        [ClassData(typeof(UpdateSectionByIdTestData))]
+        public void UpdateSectionById_Should_ReturnUpdatedSectionWhenExists(
+            Section section,
+            Section? expected,
+            int sectionId,
+            List<Section> list)
+        {
+            //Assign
+            var dataHandler = new Mock<IDataHandler>();
+            var repository = new SectionRepository(dataHandler.Object);
+            dataHandler
+                .Setup(x => x.GetAllItems<Section>(ModelType.Sections)).Returns(list);
+            
+            //Act
+            var actual = repository.UpdateSectionById(section, sectionId);
+            
+            //Assert
+            Assert.Equivalent(expected, actual);
+        }
+        
+        [Theory]
+        [ClassData(typeof(DeleteSectionByIdTestData))]
+        public void DeleteSectionById_Should_ReturnDeletedSectionIfExists(
+            int sectionId,
+            Section? expected,
+            List<Section> list)
+        {
+            //Assign
+            var dataHandler = new Mock<IDataHandler>();
+            var repository = new SectionRepository(dataHandler.Object);
+            dataHandler
+                .Setup(x => x.GetAllItems<Section>(ModelType.Sections)).Returns(list);
+            
+            //Act
+            var actual = repository.DeleteSectionById(sectionId);
+
+            //Assert
+            Assert.Equivalent(expected, actual);
         }
     }
 }
