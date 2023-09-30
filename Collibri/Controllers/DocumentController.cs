@@ -51,7 +51,7 @@ namespace Collibri.Controllers
             var result = _documentRepository.UpdateDocument(input, id);
             return result == null ? Conflict() : Ok(result);
         }
-        
+
     }
     
     
