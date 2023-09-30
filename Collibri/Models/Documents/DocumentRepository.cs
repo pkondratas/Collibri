@@ -19,9 +19,12 @@ namespace Collibri.Models.Documents
             var documentList = _dataHandler.GetAllItems<Document>(ModelType.Documents);
             document.Id = new Random().Next(1, int.MaxValue);
 
-            if (DocumentExists(document.Id))
+            foreach (var doc in documentList)
             {
-                return null;
+                if (doc.SectionId.Equals(sectionId) && doc.Id == document.Id)
+                {
+                    return null;
+                }
             }
 
             document.SectionId = sectionId;
@@ -51,33 +54,23 @@ namespace Collibri.Models.Documents
             _dataHandler.PostAllItems(documentList, ModelType.Documents);
             return documentToDelete;
         }
-
-        public bool DocumentExists(int id)
-        {
-            var documentList = _dataHandler.GetAllItems<Document>(ModelType.Documents);
-            return documentList?.Any(documents => documents.Id == id) ?? false;
-        }
-
-        public Document? GetById(int id)
-        {
-            var documentList = _dataHandler.GetAllItems<Document>(ModelType.Documents);
-            return documentList?.FirstOrDefault(documents => documents.Id == id);
-        }
+        
 
         public Document? UpdateDocument(Document document, int id)
         {
             var documentList = _dataHandler.GetAllItems<Document>(ModelType.Documents);
             var documentToUpdate = documentList.SingleOrDefault(x => x.Id == id);
             
-            if (documentToUpdate == null || !documentList.Remove(documentToUpdate))
+            if (documentToUpdate == null)
             {
                 return null;
             }
             
-            documentToUpdate.SectionId = document.SectionId;
             documentToUpdate.Title = document.Title;
             documentToUpdate.Text = document.Text;
             _dataHandler.PostAllItems(documentList, ModelType.Documents);
+
+            return documentToUpdate;
         }
     }
 }
