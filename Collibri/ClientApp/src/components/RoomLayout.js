@@ -1,4 +1,5 @@
 import React from "react";
+import PostContainer from "./PostContainer";
 
 const RoomLayout = () => {
   return (
@@ -6,24 +7,24 @@ const RoomLayout = () => {
       <div className="container">
         <div className="row">
           {/* Grid header element */}
-          {/*<p align={"center"}>header</p>*/}
+          <p align={"center"}>header</p>
         </div>
         <div className="row">
           <div className="col-lg-2">
             {/* Grid element to display room icons/names(kaip discorde) */}
-            {/*<p>rooms</p>*/}
+            <p>rooms</p>
           </div>
           <div className="col-lg-4">
             {/* Grid element to display sections */}
-            {/*<p>sections</p>*/}
+            <p>sections</p>
           </div>
           <div className="col-lg-6">
             {/* Grid element to display all posts */}
-            {/*<p>posts</p>*/}
+            <PostContainer />
             <div className="row">
               {/* Nested row for grid element */}
               <div className="col-lg-12">
-                {/*<p>write post</p>*/}
+                <p>write post</p>
                 {/* Grid element to write a post */}
               </div>
             </div>
