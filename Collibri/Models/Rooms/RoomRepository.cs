@@ -5,28 +5,25 @@ namespace Collibri.Models.Rooms
     public class RoomRepository : IRoomRepository
     {
         private readonly IDataHandler _dataHandler;
+        private List<Room> _rooms;
 
         public RoomRepository(IDataHandler dataHandler)
         {
             _dataHandler = dataHandler;
+            _rooms = _dataHandler.GetAllItems<Room>(ModelType.Rooms) ?? new List<Room>();
         }
 
-        public Room? CreateRoom(Room room)
+        public Room CreateRoom(Room room)
         {
-            List<Room> roomList = _dataHandler.GetAllItems<Room>(ModelType.Rooms);
-            int newId = GenerateUniqueId(roomList);
-            
-            room.Id = newId;
-            roomList.Add(room);
-            _dataHandler.PostAllItems(roomList, ModelType.Rooms);
-
+            room.Id = GenerateUniqueId(_rooms);
+            _rooms.Add(room);
+            _dataHandler.PostAllItems(_rooms, ModelType.Rooms);
             return room;
         }
 
         private int GenerateUniqueId(List<Room> roomList)
         {
-            int maxId = roomList.Count > 0 ? roomList.Max(room => room.Id) : 0;
-            return maxId + 1;
+            return roomList.Count + 1;
         }
 
         public List<Room> GetAllRooms()
@@ -53,19 +50,14 @@ namespace Collibri.Models.Rooms
 
         public bool DeleteRoom(int roomId)
         {
-            List<Room> roomList = _dataHandler.GetAllItems<Room>(ModelType.Rooms);
-            Room? roomToRemove = roomList.FirstOrDefault(room => room.Id == roomId);
-
-            if (roomToRemove == null)
+            var roomToRemove = _rooms.Find(room => room.Id == roomId);
+            if (roomToRemove != null)
             {
-                return false; 
+                _rooms.Remove(roomToRemove);
+                _dataHandler.PostAllItems(_rooms, ModelType.Rooms);
+                return true;
             }
-
-            roomList.Remove(roomToRemove);
-            
-            _dataHandler.PostAllItems(roomList, ModelType.Rooms);
-
-            return true;
+            return false;
         }
     }
 }
