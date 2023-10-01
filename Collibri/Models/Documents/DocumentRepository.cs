@@ -28,7 +28,7 @@ namespace Collibri.Models.Documents
             }
 
             document.SectionId = sectionId;
-            documentList?.Add(document);
+            documentList.Add(document);
 
             _dataHandler.PostAllItems(documentList, ModelType.Documents);
 
