@@ -1,3 +1,4 @@
+using Collibri.Models.Files;
 using Collibri.Models.DataHandling;
 using Collibri.Models.Notes;
 using Collibri.Models.Rooms;
@@ -10,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddScoped<IFileRepository, FileRepository>();
 builder.Services.AddScoped<IDataHandler, DataHandler>();
 builder.Services.AddScoped<ISectionRepository, SectionRepository>();
 builder.Services.AddScoped<INoteRepository, NoteRepository>();
