@@ -17,7 +17,7 @@ const AppRoutes = [
     element: <FetchData />
   },
   {
-    path: '/testPage',
+    path: '/testPage/:roomId',
     element: <TestPage />
   }
 ];

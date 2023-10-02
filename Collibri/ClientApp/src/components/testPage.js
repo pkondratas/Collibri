@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Listcomponent from "./ListComponent";
+import {useParams} from "react-router-dom";
 
 export class TestPage extends Component {
     static displayName = TestPage.name;
@@ -26,10 +27,6 @@ export class TestPage extends Component {
 
                 <p>Cia yra kazkas tai.</p>
 
-
-
-
-                
                 <div>
                     <h1>List Example</h1>
                     <Listcomponent  />
