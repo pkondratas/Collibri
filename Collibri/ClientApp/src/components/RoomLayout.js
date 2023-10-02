@@ -1,12 +1,14 @@
 import React from "react";
-
+import Header from './Header';
 const RoomLayout = () => {
   return (
     <div className="container">
       <div className="container">
         <div className="row">
           {/* Grid header element */}
-          {/*<p align={"center"}>header</p>*/}
+          <div className="col-lg-12">
+            <Header />
+          </div>
         </div>
         <div className="row">
           <div className="col-lg-2">
