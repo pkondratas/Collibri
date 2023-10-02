@@ -5,6 +5,7 @@ using Collibri.Models.Rooms;
 using Collibri.Models.Sections;
 
 using Collibri.Models.Documents;
+using Collibri.Models.Posts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,7 @@ builder.Services.AddScoped<ISectionRepository, SectionRepository>();
 builder.Services.AddScoped<INoteRepository, NoteRepository>();
 builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 builder.Services.AddScoped<IDocumentRepository, DocumentRepository>();
+builder.Services.AddScoped<IPostRepository, PostRepository>();
 
 var app = builder.Build();
 
