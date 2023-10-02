@@ -5,7 +5,7 @@ namespace Collibri.Models.Rooms
     public class RoomRepository : IRoomRepository
     {
         private readonly IDataHandler _dataHandler;
-        private List<Room> _rooms;
+        private readonly List<Room> _rooms;
 
         public RoomRepository(IDataHandler dataHandler)
         {
@@ -28,7 +28,7 @@ namespace Collibri.Models.Rooms
 
         public List<Room> GetAllRooms()
         {
-            return _dataHandler.GetAllItems<Room>(ModelType.Rooms);
+            return _rooms;
         }
 
         public Room? UpdateRoom(int roomId, Room updatedRoom)

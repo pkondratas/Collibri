@@ -28,11 +28,11 @@ namespace Collibri.Tests.Models.Rooms
             // Arrange
             var dataHandlerMock = new Mock<IDataHandler>();
             var repository = new RoomRepository(dataHandlerMock.Object);
-            var existingRoom = RoomRepositoryTestData.ExistingRoom;
             dataHandlerMock.Setup(handler => handler.GetAllItems<Room>(ModelType.Rooms))
                 .Returns(RoomRepositoryTestData.RoomsExist);
 
             // Act
+            var existingRoom = RoomRepositoryTestData.ExistingRoom;
             var updatedRoom = RoomRepositoryTestData.UpdatedRoom;
             var result = repository.UpdateRoom(existingRoom.Id, updatedRoom);
 
@@ -62,13 +62,11 @@ namespace Collibri.Tests.Models.Rooms
 
             // Additional verification
             var deletedRoom = roomList.Find(room => room.Id == RoomRepositoryTestData.ExistingRoomId);
-            Assert.Null(deletedRoom); // Ensure the room with the specified ID is no longer in the room list
+            Assert.Null(deletedRoom); 
 
             // Verify that PostAllItems method of IDataHandler was called with the updated roomList
             dataHandlerMock.Verify(handler => handler.PostAllItems(roomList, ModelType.Rooms), Times.Once);
         }
-
-
 
         [Fact]
         public void DeleteRoom_Should_NotRemoveNonExistentRoomFromList()
@@ -90,7 +88,7 @@ namespace Collibri.Tests.Models.Rooms
         public void GetAllRooms_Should_ReturnListOfRooms()
         {
             // Arrange
-            var expectedRooms = RoomRepositoryTestData.RoomsExist; // Your expected list of rooms from test data
+            var expectedRooms = RoomRepositoryTestData.RoomsExist; 
             var dataHandlerMock = new Mock<IDataHandler>();
             dataHandlerMock.Setup(handler => handler.GetAllItems<Room>(ModelType.Rooms))
                 .Returns(expectedRooms);
@@ -103,13 +101,7 @@ namespace Collibri.Tests.Models.Rooms
             // Assert
             Assert.NotNull(actualRooms);
             Assert.Equal(expectedRooms.Count, actualRooms.Count);
-
-            for (int i = 0; i < expectedRooms.Count; i++)
-            {
-                Assert.Equal(expectedRooms[i].Id, actualRooms[i].Id);
-                Assert.Equal(expectedRooms[i].Name, actualRooms[i].Name);
-                // Add more property comparisons if there are additional properties in your Room class
-            }
+            Assert.Equivalent(expectedRooms, actualRooms);
         }
     }
 }
