@@ -1,6 +1,4 @@
 using Collibri.Models.DataHandling;
-using Collibri.Models.Documents;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Collibri.Models.Documents
 {

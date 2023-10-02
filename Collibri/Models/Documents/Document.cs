@@ -6,6 +6,7 @@ namespace Collibri.Models.Documents
         private string _title;
         private string _text;
         private int _sectionId;
+        private Guid _postId;
 
         public int Id
         {
@@ -30,12 +31,19 @@ namespace Collibri.Models.Documents
             get => _sectionId;
             set => _sectionId = value;
         }
+        
+        public Guid PostId
+        {
+            get => _postId;
+            set => _postId = value;
+        }
 
 
-        public Document(int id, string title, string text, int sectionId)
+        public Document(int id, Guid postId, string title, string text, int sectionId)
         {
             _title = title;
             _id = id;
+            _postId = postId;
             _text = text;
             _sectionId = sectionId;
         }

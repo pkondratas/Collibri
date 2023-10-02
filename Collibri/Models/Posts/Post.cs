@@ -12,8 +12,6 @@ namespace Collibri.Models.Posts
         public int LikeCount { get; set; }
         public int DislikeCount { get; set; }
         public int NoteId { get; set; }
-        //su docais reikia susitvarkyt, negali but listas
-        // public List<int> FileIdList { get; set; } 
         public DateTime CreationDate { get; set; }
         public DateTime LastUpdatedDate { get; set; }
 
@@ -25,7 +23,6 @@ namespace Collibri.Models.Posts
             int likeCount, 
             int dislikeCount, 
             int noteId, 
-            List<int> documentIdList, 
             DateTime creationDate, 
             DateTime lastUpdatedDate)
         {
@@ -36,7 +33,6 @@ namespace Collibri.Models.Posts
             LikeCount = likeCount;
             DislikeCount = dislikeCount;
             NoteId = noteId;
-            DocumentIdList = documentIdList;
             CreationDate = creationDate;
             LastUpdatedDate = lastUpdatedDate;
         }
