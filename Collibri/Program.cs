@@ -1,5 +1,4 @@
 using Collibri.Models.Files;
-using Collibri.Models.Section;
 using Collibri.Models.DataHandling;
 using Collibri.Models.Notes;
 using Collibri.Models.Rooms;
