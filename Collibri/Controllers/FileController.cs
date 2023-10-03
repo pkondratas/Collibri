@@ -32,7 +32,7 @@ namespace Collibri.Controllers
 		public IActionResult GetFile(string fileName, string postId)
 		{
 			var result = _fileRepository.GetFile(fileName, postId);
-			return result;
+			return result == null ? Conflict("File does not exist") : Ok(result);
 		}
 
 		[HttpPut("{postId}/{fileName}/{updatedName}")]

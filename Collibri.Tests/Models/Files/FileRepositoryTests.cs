@@ -1,6 +1,7 @@
 using System.IO.Abstractions.TestingHelpers;
 using Collibri.Models.Files;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using File = Collibri.Models.Files.File;
 
 namespace Collibri.Tests.Models.Files
@@ -9,17 +10,10 @@ namespace Collibri.Tests.Models.Files
     {
         [Theory]
         [ClassData(typeof(CreateFileData))]
-        public void CreateFileShouldReturnFileTest(IFormFile fileData, string postId, File? expected)
+        public void CreateFile_Should_ReturnFileTest(MockFileSystem fileSystem, IFormFile fileData,
+            string postId, File? expected)
         {
             // Arrange
-            var path = new DirectoryInfo(
-                $@"{Directory.GetParent(Directory.GetCurrentDirectory())}\Collibri\Data\Files\{postId}\").FullName;
-            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData>
-            {
-                { path + "textFile.txt", new MockFileData("Text file test data") },
-                { path + "pdfFile.pdf", new MockFileData("PDF file test data") },
-                { path + "pngImage.png", new MockFileData(new byte[] { 0x12, 0x34, 0x56, 0xd2 }) }
-            });
             var fileRepository = new FileRepository(fileSystem.FileSystem);
 
             // Act
@@ -28,10 +22,76 @@ namespace Collibri.Tests.Models.Files
             // Assert
             if(expected == null)
                 Assert.Null(actual);
+            else
+            {
+                Assert.Equivalent(expected, actual);
+                Assert.True(fileSystem.File.Exists(expected.Path));
+            }
+        }
+
+        [Theory]
+        [ClassData(typeof(DeleteFileData))]
+        public void DeleteFile_Should_ReturnFileTest(MockFileSystem fileSystem, string fileName,
+            string postId, File? expected)
+        {
+            // Arrange
+            var fileRepository = new FileRepository(fileSystem.FileSystem);
             
-            Assert.Equal(expected.PostId, actual.PostId);
-            Assert.Equal(expected.Path, actual.Path);
-            Assert.True(fileSystem.File.Exists(actual.Path));
+            // Act
+            var actual = fileRepository.DeleteFile(fileName, postId);
+            
+            // Assert
+            if(expected == null)
+                Assert.Null(actual);
+            else
+            {
+                Assert.Equivalent(expected, actual);
+                Assert.True(!fileSystem.FileExists(expected.Path));
+            }
+        }
+
+        [Theory]
+        [ClassData(typeof(GetFileData))]
+        public void GetFile_Should_ReturnFileStreamResultTest(MockFileSystem fileSystem, string fileName,
+            string postId, FileStreamResult? expected)
+        {
+            // Arrange
+            var fileRepository = new FileRepository(fileSystem.FileSystem);
+            
+            // Act
+            var actual = fileRepository.GetFile(fileName, postId);
+            
+            // Assert
+            if(expected == null)
+                Assert.Null(actual);
+            else
+            {
+                Assert.True(HelperMethods.StreamEquals(expected.FileStream, actual.FileStream));
+            }
+        }
+
+        [Theory]
+        [ClassData(typeof(UpdateFileNameData))]
+        public void UpdateFileName_Should_ReturnFileTest(MockFileSystem fileSystem, string fileName, string postId,
+            string updatedName, File? expected)
+        {
+            // Arrange
+            var path = new DirectoryInfo(
+                $@"{Directory.GetParent(Directory.GetCurrentDirectory())}\Collibri\Data\Files\{postId}\").FullName;
+            var fileRepository = new FileRepository(fileSystem.FileSystem);
+            
+            // Act
+            var actual = fileRepository.UpdateFileName(fileName, postId, updatedName);
+            
+            // Assert
+            if(expected == null)
+                Assert.Null(actual);
+            else
+            {
+                Assert.Equivalent(expected, actual);
+                Assert.True(!fileSystem.FileExists(path + fileName));
+                Assert.True(fileSystem.FileExists(expected.Path));
+            }
         }
     }
 }
