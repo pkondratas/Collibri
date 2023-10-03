@@ -66,7 +66,7 @@ namespace Collibri.Tests.Models.Files
                 Assert.Null(actual);
             else
             {
-                Assert.True(HelperMethods.StreamEquals(expected.FileStream, actual.FileStream));
+                Assert.True(FileTestHelper.StreamEquals(expected.FileStream, actual.FileStream));
             }
         }
 

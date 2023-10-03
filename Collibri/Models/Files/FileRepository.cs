@@ -26,10 +26,10 @@ namespace Collibri.Models.Files
 				return null;
 			}
 
-			var fileStream = _fileSystem.File.Create(path + "\\" + file.FileName);
-			file.CopyTo(fileStream);
-			fileStream.Close();
-
+			using (var fileStream = _fileSystem.File.Create(path + "\\" + file.FileName))
+			{
+				file.CopyTo(fileStream);
+			}
 			return (File?) new File(path + "\\" + file.FileName, int.Parse(postId));
 		}
 
@@ -56,7 +56,7 @@ namespace Collibri.Models.Files
 			{
 				return null;
 			}
-			
+
 			var fileStream = _fileSystem.FileStream.New(path + "\\" + fileName, FileMode.Open, FileAccess.Read);
 			return new FileStreamResult(fileStream, "application/octet-stream");
 		}
