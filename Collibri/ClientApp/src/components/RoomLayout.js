@@ -16,7 +16,7 @@ const RoomLayout = () => {
           </div>
           <div className="col-lg-4">
             {/* Grid element to display sections */}
-            <p>sections</p>
+            {/*<p>sections</p>*/}
           </div>
           <div className="col-lg-6">
             {/* Grid element to display all posts */}
