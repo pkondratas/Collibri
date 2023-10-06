@@ -1,3 +1,4 @@
+using System.Net.Sockets;
 using Collibri.Models.Posts;
 
 namespace Collibri.Tests.Controllers
@@ -6,14 +7,17 @@ namespace Collibri.Tests.Controllers
     {
         public CreatePostTestData()
         {
+            //Correct input
             Add(new Post(Guid.Empty, "user", "title", 1, 0, 0, 1, DateTime.Now, DateTime.Now),
                 new Post(Guid.NewGuid(), "user", "title", 1, 0, 0, 1, DateTime.Now, DateTime.Now));
         }
     }   
+    
     public class GetAllPostsTestData : TheoryData<int, IEnumerable<Post>>
     {
         public GetAllPostsTestData()
         {
+            //Correct input
             Add(1, 
                 new List<Post>
                 {
@@ -25,5 +29,22 @@ namespace Collibri.Tests.Controllers
                 new List<Post>().AsEnumerable()
             );
         }
-    } 
+    }
+
+    public class UpdatePostByIdTestData : TheoryData<Guid, Post, Post?, int>
+    {
+        public UpdatePostByIdTestData()
+        {
+            //Correct input
+            Add(new Guid("2b8b88a3-cd97-48cf-9d4d-ef8db4ac4a61"),
+                new Post(new Guid("2b8b88a3-cd97-48cf-9d4d-ef8db4ac4a61"), "user1", "title1", 1, 0, 0, 1,  DateTime.Now, DateTime.Now),
+                new Post(new Guid("2b8b88a3-cd97-48cf-9d4d-ef8db4ac4a61"), "user1", "title1", 1, 0, 0, 1,  DateTime.Now, DateTime.Now),
+                200);
+            //Failing input
+            Add(new Guid("2b8b88a3-cd97-48cf-9d4d-ef8db4ac4a61"),
+                new Post(new Guid("2b8b88a3-cd97-48cf-9d4d-ef8db4ac4a61"), "user1", "title1", 1, 0, 0, 1,  DateTime.Now, DateTime.Now),
+                null,
+                404);
+        }
+    }
 }
