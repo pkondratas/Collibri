@@ -30,7 +30,7 @@ namespace Collibri.Models.Files
 			{
 				file.CopyTo(fileStream);
 			}
-			return (File?) new File(path + "\\" + file.FileName, int.Parse(postId));
+			return (File?) new File(path + "\\" + file.FileName, Guid.Parse(postId));
 		}
 
 		public File? DeleteFile(string fileName, string postId)
@@ -44,7 +44,7 @@ namespace Collibri.Models.Files
 			}
 			_fileSystem.File.Delete(path + "\\" + fileName);
 			
-			return (File?) new File(path + "\\" + fileName, int.Parse(postId));
+			return (File?) new File(path + "\\" + fileName, Guid.Parse(postId));
 		}
 
 		public FileStreamResult? GetFile(string fileName, string postId)
@@ -71,7 +71,7 @@ namespace Collibri.Models.Files
 				return null;
 			}
 			_fileSystem.File.Move(path + "\\" + fileName, path + "\\" + updatedName);
-			return (File?) new File(path + "\\" + updatedName, int.Parse(postId));
+			return (File?) new File(path + "\\" + updatedName, Guid.Parse(postId));
 		}
 	}
 }
