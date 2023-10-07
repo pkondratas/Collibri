@@ -15,7 +15,6 @@ builder.Services.AddScoped<IDataHandler, DataHandler>();
 builder.Services.AddScoped<ISectionRepository, SectionRepository>();
 builder.Services.AddScoped<INoteRepository, NoteRepository>();
 builder.Services.AddScoped<IRoomRepository, RoomRepository>();
-
 builder.Services.AddScoped<IDocumentRepository, DocumentRepository>();
 
 var app = builder.Build();
