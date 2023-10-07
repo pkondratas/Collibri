@@ -1,7 +1,7 @@
 using Collibri.Models.DataHandling;
 using Collibri.Models.Posts;
 
-namespace Collibri.Tests.Models.Sections
+namespace Collibri.Tests.Models.Posts
 {
     public class PostRepositoryTests
     {
@@ -40,6 +40,33 @@ namespace Collibri.Tests.Models.Sections
 
             //Assert
             Assert.Equivalent(list.Where(x => x.SectionId == sectionId).AsEnumerable(), actual);
+        }
+
+        [Theory]
+        [ClassData(typeof(UpdatePostByIdTestData))]
+        public void UpdatePostById_Should_ReturnUpdatedPost_WhenExists(
+            Guid postId,
+            Post update,
+            Post? expected,
+            List<Post> list)
+        {
+            //Assign
+            var dataHandler = new Mock<IDataHandler>();
+            var repository = new PostRepository(dataHandler.Object);
+            dataHandler
+                .Setup(x => x.GetAllItems<Post>(ModelType.Posts)).Returns(list);
+
+            //Act
+            var actual = repository.UpdatePostById(postId, update);
+
+            //Assert
+            if (actual != null)
+            {
+                actual.CreationDate = new DateTime();
+                actual.LastUpdatedDate = new DateTime();
+            }
+            
+            Assert.Equivalent(expected, actual);
         }
     }
 }

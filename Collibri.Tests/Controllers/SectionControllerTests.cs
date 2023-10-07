@@ -57,7 +57,7 @@ namespace Collibri.Tests.Controllers
         
         [Theory]
         [ClassData(typeof(UpdateSectionByIdTestData))]
-        public void UpdateSectionById_Should_ReturnOkAndUpdatedSectionWhenExists(
+        public void UpdateSectionById_Should_ReturnOkAndUpdatedSection_WhenExists(
             Section section,
             Section? updatedSection,
             int sectionId,
@@ -88,7 +88,7 @@ namespace Collibri.Tests.Controllers
         
         [Theory]
         [ClassData(typeof(DeleteSectionByIdTestData))]
-        public void DeleteSectionById_Should_ReturnDeletedSectionIfExists(
+        public void DeleteSectionById_Should_ReturnDeletedSection_IfExists(
             int sectionId, 
             Section? section, 
             int statusCode)
