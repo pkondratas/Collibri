@@ -25,5 +25,13 @@ namespace Collibri.Controllers
         {
             return Ok(_postRepository.GetAllPosts(sectionId));
         }
+
+        [HttpDelete("")]
+        public IActionResult DeletePostById([FromQuery] Guid postId)
+        {
+            var deletedPost = _postRepository.DeletePostById(postId);
+
+            return deletedPost == null ? NotFound() : Ok(deletedPost);
+        }
     }   
 }

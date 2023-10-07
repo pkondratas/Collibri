@@ -26,4 +26,17 @@ namespace Collibri.Tests.Controllers
             );
         }
     } 
+    
+    public class DeletePostByIdTestData : TheoryData<Guid, Post?>
+    {
+        public DeletePostByIdTestData()
+        {
+            //Correct input
+            Add(new Guid("2b8b88a3-cd97-48cf-9d4d-ef8db4ac4a61"), 
+                new Post(new Guid("2b8b88a3-cd97-48cf-9d4d-ef8db4ac4a61"), "user1", "new title", 1, 2, 1, 1,  new DateTime(), new DateTime()));
+            //Failing input
+            Add(new Guid("2b8b88a3-cd97-48cf-9d4d-ef8db4ac4a62"), 
+                null);
+        }
+    }
 }

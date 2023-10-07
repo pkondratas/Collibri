@@ -68,6 +68,7 @@ namespace Collibri.Models.Sections
             }
             
             _dataHandler.PostAllItems(sectionList, ModelType.Sections);
+            
             return sectionToDelete;
         }
     }
