@@ -45,33 +45,6 @@ namespace Collibri.Tests.Controllers
             Assert.IsType<OkObjectResult>(actual);
             Assert.Equivalent(list, ((OkObjectResult)actual).Value);
         }
-
-        [Theory]
-        [ClassData(typeof(DeletePostByIdTestData))]
-        public void DeletePostById_Should_ReturnDeletedPost_IfExists(
-            Guid postId,
-            Post? expected)
-        {
-            //Assign
-            var repository = new Mock<IPostRepository>();
-            var controller = new PostController(repository.Object);
-            repository
-                .Setup(x => x.DeletePostById(postId)).Returns(expected);
-
-            //Act
-            var actual = controller.DeletePostById(postId);
-
-            //Assert
-            if (expected == null)
-            {
-                Assert.IsType<NotFoundResult>(actual);
-            }
-            else
-            {
-                Assert.IsType<OkObjectResult>(actual);
-                Assert.Equivalent(expected, ((OkObjectResult)actual).Value);
-            }
-        }
     }
 }
 

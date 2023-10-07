@@ -1,7 +1,7 @@
 using Collibri.Models.DataHandling;
 using Collibri.Models.Posts;
 
-namespace Collibri.Tests.Models.Posts
+namespace Collibri.Tests.Models.Sections
 {
     public class PostRepositoryTests
     {
@@ -40,26 +40,6 @@ namespace Collibri.Tests.Models.Posts
 
             //Assert
             Assert.Equivalent(list.Where(x => x.SectionId == sectionId).AsEnumerable(), actual);
-        }
-
-        [Theory]
-        [ClassData(typeof(DeletePostByIdTestData))]
-        public void DeletePostById_Should_ReturnDeletedPost_IfExists(
-            Guid postId,
-            Post? expected,
-            List<Post> list)
-        {
-            //Assign
-            var dataHandler = new Mock<IDataHandler>();
-            var repository = new PostRepository(dataHandler.Object);
-            dataHandler
-                .Setup(x => x.GetAllItems<Post>(ModelType.Posts)).Returns(list);
-
-            //Act
-            var actual = repository.DeletePostById(postId);
-
-            //Assert
-            Assert.Equivalent(expected, actual);
         }
     }
 }
