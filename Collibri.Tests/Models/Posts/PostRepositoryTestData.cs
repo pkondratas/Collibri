@@ -6,10 +6,7 @@ namespace Collibri.Tests.Models.Posts
     {
         public CreatePostTestData()
         {
-<<<<<<< HEAD
             //Correct input
-=======
->>>>>>> origin/delete-post-by-id
             Add(new Post(Guid.NewGuid(), "user1", "title1", 1, 0, 0, 1,  DateTime.Now, DateTime.Now));
         }
     }
@@ -18,10 +15,7 @@ namespace Collibri.Tests.Models.Posts
     {
         public GetAllPostsTestData()
         {
-<<<<<<< HEAD
             //Correct inputs
-=======
->>>>>>> origin/delete-post-by-id
             Add(1, 
                 new List<Post>
                 {

@@ -46,7 +46,6 @@ namespace Collibri.Tests.Controllers
                 404);
         }
     }
-    } 
     
     public class DeletePostByIdTestData : TheoryData<Guid, Post?>
     {
