@@ -51,6 +51,21 @@ namespace Collibri.Models.Posts
 
             return postToUpdate;
         }
+
+        public Post? DeletePostById(Guid postId)
+        {
+            var postList = _dataHandler.GetAllItems<Post>(ModelType.Posts);
+            var postToDelete = postList.SingleOrDefault(x => x.PostId == postId);
+
+            if (postToDelete == null || !postList.Remove(postToDelete))
+            {
+                return null;
+            }
+
+            _dataHandler.PostAllItems(postList, ModelType.Posts);
+
+            return postToDelete;
+        }
     }
 }
 
