@@ -26,14 +26,6 @@ namespace Collibri.Controllers
             return Ok(_postRepository.GetAllPosts(sectionId));
         }
 
-        [HttpPut("")]
-        public IActionResult UpdatePostById([FromQuery] Guid postId, [FromBody] Post post)
-        {
-            var updatedPost = _postRepository.UpdatePostById(postId, post);
-
-            return updatedPost == null ? NotFound() : Ok(updatedPost);
-        }
-
         [HttpDelete("")]
         public IActionResult DeletePostById([FromQuery] Guid postId)
         {
