@@ -33,5 +33,6 @@ namespace Collibri.Controllers
 
             return updatedPost == null ? NotFound() : Ok(updatedPost);
         }
+        
     }   
 }
