@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import {useParams} from "react-router-dom";
+import BasicList from "./BasicList";
 // import * as React from 'react';
 // import Box from '@mui/material/Box';
 // import List from '@mui/material/List';
@@ -27,26 +28,32 @@ const ListComponent = () => {
             })
             .catch(error => console.error('Error fetching data:', error));
     }, [roomId]);
-    
-    let page
-    console.log(sections);
-    if(sections.length > 0){
-        page = <ul className="custom-list">
-            {sections?.map((section, index) => (
-                <li key={index}>
-                    Section ID: {section.sectionId}, Room ID: {section.roomId}, Name: {section.sectionName}
-                    {/*eilutes komponentas, priema Id stulpeli, roomId, ir name. Viskas i komponentus*/}
-                </li>
-            ))}
-        </ul>
+
+    if (sections.length > 0) {
+        console.log(sections);
+        return (
+            <ul>
+
+
+                {sections.map((section => <BasicList key = {section.sectionId}
+                                                     name = {section.sectionName}
+                                                     roomId = {section.roomId} 
+                                                     Id = {section.sectionId}
+                />))}
+                
+                
+          
+                
+            </ul>
+            
+            
+            
+        )
+
     }
-    else{
-        page = "loading";
-    }
-    return (page
-    );
-    
-    
+    return "empty";
+
+
 };
 
 export default ListComponent;
