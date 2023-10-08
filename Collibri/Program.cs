@@ -1,3 +1,4 @@
+using System.IO.Abstractions;
 using Collibri.Models.Files;
 using Collibri.Models.DataHandling;
 using Collibri.Models.Notes;
@@ -13,6 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IFileRepository, FileRepository>();
+builder.Services.AddScoped<IFileSystem, FileSystem>();
 builder.Services.AddScoped<IDataHandler, DataHandler>();
 builder.Services.AddScoped<ISectionRepository, SectionRepository>();
 builder.Services.AddScoped<INoteRepository, NoteRepository>();
