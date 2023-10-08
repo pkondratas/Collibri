@@ -1,6 +1,4 @@
 using Collibri.Models.DataHandling;
-using Collibri.Models.Documents;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Collibri.Models.Documents
 {
@@ -28,7 +26,7 @@ namespace Collibri.Models.Documents
             }
 
             document.SectionId = sectionId;
-            documentList?.Add(document);
+            documentList.Add(document);
 
             _dataHandler.PostAllItems(documentList, ModelType.Documents);
 

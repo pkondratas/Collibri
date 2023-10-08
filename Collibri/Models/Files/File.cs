@@ -2,19 +2,19 @@ namespace Collibri.Models.Files
 {
 	/// <summary>
 	/// Class that stores basic information
-	/// about a file (name, extension, file path, post ID).
+	/// about a file (name, extension, file path, section ID).
 	/// </summary>
 	public class File
 	{
 		private string _name;
 		private string _path;
-		private Guid _postId;
+		private int _sectionId;
 
-		public File(string path, Guid postId)
+		public File(string path, int sectionId)
 		{
 			_path = path;
 			_name = path.Substring(path.LastIndexOf('\\') + 1);
-			_postId = postId;
+			_sectionId = sectionId;
 		}
 
 		public string Name
@@ -27,9 +27,9 @@ namespace Collibri.Models.Files
 			get { return _path; }
 		}
 
-		public Guid PostId
+		public int SectionId
 		{
-			get { return _postId; }
+			get { return _sectionId; }
 		}
 	}
 }

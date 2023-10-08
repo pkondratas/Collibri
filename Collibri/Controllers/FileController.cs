@@ -14,31 +14,31 @@ namespace Collibri.Controllers
 			_fileRepository = fileRepository;
 		}
 
-		[HttpPost("{postId}")]
-		public IActionResult CreateFile([FromForm] IFormFile file, string postId)
+		[HttpPost("{sectionId}")]
+		public IActionResult CreateFile([FromForm] IFormFile file, string sectionId)
 		{
-			var result = _fileRepository.CreateFile(file, postId);
+			var result = _fileRepository.CreateFile(file, sectionId);
 			return result == null ? Conflict("File with this name already exists") : Ok(result);
 		}
 
-		[HttpDelete("{postId}/{fileName}")]
-		public IActionResult DeleteFile(string fileName, string postId)
+		[HttpDelete("{sectionId}/{fileName}")]
+		public IActionResult DeleteFile(string fileName, string sectionId)
 		{
-			var result = _fileRepository.DeleteFile(fileName, postId);
+			var result = _fileRepository.DeleteFile(fileName, sectionId);
 			return result == null ? Conflict("File does not exist") : Ok(result);
 		}
 	
-		[HttpGet("{postId}/{fileName}")]
-		public IActionResult GetFile(string fileName, string postId)
+		[HttpGet("{sectionId}/{fileName}")]
+		public IActionResult GetFile(string fileName, string sectionId)
 		{
-			var result = _fileRepository.GetFile(fileName, postId);
-			return result == null ? Conflict("File does not exist") : Ok(result);
+			var result = _fileRepository.GetFile(fileName, sectionId);
+			return result;
 		}
 
-		[HttpPut("{postId}/{fileName}/{updatedName}")]
-		public IActionResult UpdateFileName(string fileName, string postId, string updatedName)
+		[HttpPut("{sectionId}/{fileName}/{updatedName}")]
+		public IActionResult UpdateFileName(string fileName, string sectionId, string updatedName)
 		{
-			var result = _fileRepository.UpdateFileName(fileName, postId, updatedName);
+			var result = _fileRepository.UpdateFileName(fileName, sectionId, updatedName);
 			return result == null ? Conflict("File does not exist") : Ok(result);
 		}
 	}

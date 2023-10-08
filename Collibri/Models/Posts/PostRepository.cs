@@ -32,40 +32,6 @@ namespace Collibri.Models.Posts
 
             return queriedPosts;
         }
-
-        public Post? UpdatePostById(Guid postId, Post post)
-        {
-            var postList = _dataHandler.GetAllItems<Post>(ModelType.Posts);
-            var postToUpdate = postList.SingleOrDefault(x => x.PostId == postId);
-            
-            if (postToUpdate == null)
-            {
-                return null;
-            }
-
-            postToUpdate.LikeCount = post.LikeCount;
-            postToUpdate.DislikeCount = post.DislikeCount;
-            postToUpdate.Title = post.Title;
-            postToUpdate.LastUpdatedDate = DateTime.Now;
-            _dataHandler.PostAllItems(postList, ModelType.Posts);
-
-            return postToUpdate;
-        }
-
-        public Post? DeletePostById(Guid postId)
-        {
-            var postList = _dataHandler.GetAllItems<Post>(ModelType.Posts);
-            var postToDelete = postList.SingleOrDefault(x => x.PostId == postId);
-
-            if (postToDelete == null || !postList.Remove(postToDelete))
-            {
-                return null;
-            }
-
-            _dataHandler.PostAllItems(postList, ModelType.Posts);
-
-            return postToDelete;
-        }
     }
 }
 

@@ -10,7 +10,7 @@ const AppRoutes = [
     element: <Home />
   },
   {
-    path: '/counter',
+    path: '/counter/:roomId',
     element: <RoomLayout />
   },
   {
