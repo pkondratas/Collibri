@@ -18,7 +18,7 @@ namespace Collibri.Models.Sections
             
             foreach (var sections in sectionList)
             {
-                if (sections.RoomId.Equals(section.RoomId) && sections.SectionName.Equals(section.SectionName))
+                if (sections.Equals(section))
                 {
                     return null;
                 } 
@@ -68,6 +68,7 @@ namespace Collibri.Models.Sections
             }
             
             _dataHandler.PostAllItems(sectionList, ModelType.Sections);
+            
             return sectionToDelete;
         }
     }

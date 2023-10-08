@@ -21,7 +21,7 @@ namespace Collibri.Models.Documents
 
             foreach (var doc in documentList)
             {
-                if (doc.SectionId.Equals(sectionId) && doc.Id == document.Id)
+                if (doc.Id == document.Id)
                 {
                     return null;
                 }
