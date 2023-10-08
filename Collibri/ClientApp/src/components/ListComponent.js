@@ -10,6 +10,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {Button} from "@mui/material";
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 const ListComponent = () => {
     const [sections, setSections] = useState([]);
@@ -40,35 +42,35 @@ const ListComponent = () => {
             .catch(error => console.error('Error deleting section:', error));
     };
     const handleUpdate = (id) =>{
-
         
-        
-        
-        console.log(id);
-        console.log(sections);
         const sectionToUpdate = sections.find(section => section.sectionId === id);
-        console.log(sectionToUpdate);
-        if(sectionToUpdate){
+        if(sectionToUpdate) {
             const newName = window.prompt('Enter new name:');
-            const updatedSection = {
-                ...sectionToUpdate,
-                sectionName: newName,
-            };
-            setSections(updatedSection);
+            if(newName){
+                sectionToUpdate.sectionName = newName;
+                const updatedSections = [...sections];
+                const sectionIndex = updatedSections.findIndex(section => section.sectionId === id);
+                updatedSections[sectionIndex] = sectionToUpdate;
+                setSections(updatedSections);
+            }
+
+           
+           
             
         fetch(`/v1/sections?sectionId=${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(updatedSection), // Updated section data
+            body: JSON.stringify(sectionToUpdate), // Updated section data
         })
             .then(response => response.json())
             .then(data => {
                 console.log(data); // Log the response from the PUT request
-                setSections(data); // Store the updated section data in state if needed
+                // Store the updated section data in state if needed
             })
             .catch(error => console.error('Error updating section:', error));
+            
         }
         
     }
@@ -109,8 +111,8 @@ const ListComponent = () => {
                                     <TableCell component="th" scope="row"> {row.sectionName} </TableCell>
                                     <TableCell component="th" scope="row" align={"right"}> {row.roomId} </TableCell>
                                     <TableCell align="right">{row.sectionId}</TableCell>
-                                    <TableCell align="right"><Button onClick={() => handleDelete(row.sectionId)}>delete</Button>
-                                                             <Button onClick={() => handleUpdate(row.sectionId)}>Update</Button>
+                                    <TableCell align="right"><Button startIcon ={<DeleteIcon style={{ fontSize: 40 }} />}   onClick={() => handleDelete(row.sectionId)}></Button>
+                                                             <Button startIcon ={<EditIcon style=  {{ fontSize: 40 }} />}       onClick={() => handleUpdate(row.sectionId)}></Button>
                                     </TableCell>
                                     
                                 </TableRow>

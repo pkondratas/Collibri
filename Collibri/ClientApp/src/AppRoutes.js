@@ -2,6 +2,7 @@ import { Counter } from "./components/Counter";
 import { FetchData } from "./components/FetchData";
 import { Home } from "./components/Home";
 import {TestPage} from "./components/testPage";
+import RoomLayout from "./components/RoomLayout";
 
 const AppRoutes = [
   {
@@ -10,11 +11,7 @@ const AppRoutes = [
   },
   {
     path: '/counter',
-    element: <Counter />
-  },
-  {
-    path: '/fetch-data',
-    element: <FetchData />
+    element: <RoomLayout />
   },
   {
     path: '/testPage/:roomId',
