@@ -8,9 +8,9 @@ namespace Collibri.Models.Files
 	{
 		private string _name;
 		private string _path;
-		private int _postId; //Paskui pakeist is int i Guid
+		private Guid _postId; //Paskui pakeist is int i Guid
 
-		public File(string path, int postId)
+		public File(string path, Guid postId)
 		{
 			_path = path;
 			_name = path.Substring(path.LastIndexOf('\\') + 1);
@@ -27,7 +27,7 @@ namespace Collibri.Models.Files
 			get { return _path; }
 		}
 
-		public int PostId
+		public Guid PostId
 		{
 			get { return _postId; }
 		}

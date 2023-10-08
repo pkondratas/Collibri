@@ -10,9 +10,12 @@ namespace Collibri.Tests.Controllers
     {
         public CreateFileData()
         {
-            Add(FileTestHelper.CreateTestFormFile("textFile.txt", "Text file test data"), "123", 200,
-                new File(@"C:\Files\123\textFile.txt", 123));
-            Add(FileTestHelper.CreateTestFormFile("textFile.txt", "Text file test data"), "123", 409, null);
+            Add(FileTestHelper.CreateTestFormFile("textFile.txt", "Text file test data"),
+                "00000000000000000000000000000000", 200,
+                new File(@"C:\Files\00000000000000000000000000000000\textFile.txt", 
+                    Guid.Parse("00000000000000000000000000000000")));
+            Add(FileTestHelper.CreateTestFormFile("textFile.txt", "Text file test data"),
+                "00000000000000000000000000000000", 409, null);
         }
     }
 
@@ -20,8 +23,10 @@ namespace Collibri.Tests.Controllers
     {
         public DeleteFileData()
         {
-            Add("textFile.txt", "123", 200, new File(@"C:\Files\123\textFile.txt", 123));
-            Add("textFile.txt", "123", 409, null);
+            Add("textFile.txt", "00000000000000000000000000000000", 200,
+                new File(@"C:\Files\00000000000000000000000000000000\textFile.txt", 
+                Guid.Parse("00000000000000000000000000000000")));
+            Add("textFile.txt", "00000000000000000000000000000000", 409, null);
         }
     }
 
@@ -31,12 +36,14 @@ namespace Collibri.Tests.Controllers
         {
             var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData>()
             {
-                { @"C:\Files\123\textFile.txt", new MockFileData("Text file test data") }
+                { @"C:\Files\00000000000000000000000000000000\textFile.txt",
+                    new MockFileData("Text file test data") }
             });
             
-            Add("textFile.txt", "123", 200,
-                FileTestHelper.CreateTestFileStreamResult(fileSystem,  @"C:\Files\123", "textFile.txt"));
-            Add("textFile.txt", "123", 409, null);
+            Add("textFile.txt", "00000000000000000000000000000000", 200,
+                FileTestHelper.CreateTestFileStreamResult(fileSystem,  @"C:\Files\00000000000000000000000000000000",
+                    "textFile.txt"));
+            Add("textFile.txt", "00000000000000000000000000000000", 409, null);
         }
     }
     
@@ -44,8 +51,10 @@ namespace Collibri.Tests.Controllers
     {
         public UpdateFileNameData()
         {
-            Add("textFile.txt", "123", "updatedName.txt", 200, new File(@"C:\Files\123\updatedName.txt", 123));
-            Add("textFile.txt", "123", "updatedName.txt", 409, null);
+            Add("textFile.txt", "00000000000000000000000000000000", "updatedName.txt", 200,
+                new File(@"C:\Files\00000000000000000000000000000000\updatedName.txt", 
+                    Guid.Parse("00000000000000000000000000000000")));
+            Add("textFile.txt", "00000000000000000000000000000000", "updatedName.txt", 409, null);
         }
     }
 }
