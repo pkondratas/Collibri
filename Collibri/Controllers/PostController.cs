@@ -33,6 +33,13 @@ namespace Collibri.Controllers
 
             return updatedPost == null ? NotFound() : Ok(updatedPost);
         }
-        
+
+        [HttpDelete("")]
+        public IActionResult DeletePostById([FromQuery] Guid postId)
+        {
+            var deletedPost = _postRepository.DeletePostById(postId);
+
+            return deletedPost == null ? NotFound() : Ok(deletedPost);
+        }
     }   
 }
