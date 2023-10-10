@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import post from "../styles/post.css";
+import "../styles/post.css";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import axios from 'axios';
 
@@ -19,22 +19,37 @@ const Post = (props) => {
   
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
-  const [posts, setPosts] = useState(props)
   const [note, setNote] = useState(initialNote);
+  const [post, setPost] = useState(props.post);
+  
+  const fetchNote = () => {
+    axios.get(`/v1/notes/${props.noteId}`)
+      .then(response => setNote(response.data))
+  }
+  
+  const handleDelete = (postId) => {
+    props.setPosts((prevPosts) => prevPosts.filter((x) => x.postId !== postId));
+    axios.delete(`/v1/posts?postId=${postId}`)
+      .then();
+  }
+  
+  const updatePost = () => {
+    axios.put(`/v1/posts?postId=${props.postId}`, post)
+      .then();
+  }
   
   useEffect(() => {
     fetchNote();
   }, []);
   
-  const fetchNote = () => {
-    axios.get(`/v1/notes/${props.noteId}`)
-    .then(response => setNote(response.data))
-  }
+  useEffect(() => {
+    updatePost();
+  }, [post.likeCount, post.dislikeCount]);
 
   const updateCounts = (propertyToUpdate, incrementBy) => {
-    setPosts((prevPosts) => ({
-      ...prevPosts,
-      [propertyToUpdate]: prevPosts[propertyToUpdate] + incrementBy
+    setPost((prevPost) => ({
+      ...prevPost,
+      [propertyToUpdate]: prevPost[propertyToUpdate] + incrementBy
     }));
   }
   
@@ -77,20 +92,20 @@ const Post = (props) => {
             </div>
           </div>
           <div>
-            <button className="buttons">
-              <i className="bi bi-trash3"></i>
+            <button className="buttons delete-button" onClick={() => handleDelete(props.postId)}>
+              <i className="bi bi-trash3 delete-icon"></i>
             </button>
-            <button className="buttons">
-              <i className="bi bi-pen"></i>
+            <button className="buttons edit-button">
+              <i className="bi bi-pen edit-icon"></i>
             </button>
           </div>
         </div>
         <p>
           <button className="reaction-buttons" onClick={handleLike}>
-            {posts.likeCount} {liked ? <i className="bi bi-hand-thumbs-up-fill"></i> : <i className="bi bi-hand-thumbs-up"></i>}
+            {post.likeCount} {liked ? <i className="bi bi-hand-thumbs-up-fill"></i> : <i className="bi bi-hand-thumbs-up "></i>}
           </button>
           <button className="reaction-buttons" onClick={handleDislike}>
-            {posts.dislikeCount} {disliked ? <i className="bi bi-hand-thumbs-down-fill"></i> : <i className="bi bi-hand-thumbs-down"></i>}
+            {post.dislikeCount} {disliked ? <i className="bi bi-hand-thumbs-down-fill"></i> : <i className="bi bi-hand-thumbs-down"></i>}
           </button>
         </p>
       </div>

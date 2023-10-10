@@ -1,5 +1,6 @@
 import React from "react";
 import PostContainer from "./PostContainer";
+import "../styles/post-container.css";
 
 const RoomLayout = () => {
   return (
@@ -20,7 +21,9 @@ const RoomLayout = () => {
           </div>
           <div className="col-lg-6">
             {/* Grid element to display all posts */}
-            <PostContainer />
+            <div className="post-container">
+              <PostContainer />
+            </div>
             <div className="row">
               {/* Nested row for grid element */}
               <div className="col-lg-12">

@@ -19,7 +19,7 @@ const PostContainer = () => {
     <div>
       <ul>
         {posts.map(item => (
-          <Post key={item.postId} {...item} />
+          <Post key={item.postId} post={item} {...item} setPosts={setPosts}/>
         ))}
       </ul>
     </div>

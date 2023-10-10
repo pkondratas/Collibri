@@ -1,0 +1,5 @@
+.post-container {
+    height: 30rem;
+    width: 44rem;
+    overflow-y: auto;
+}
