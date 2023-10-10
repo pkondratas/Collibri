@@ -12,10 +12,13 @@ import Paper from '@mui/material/Paper';
 import {Button} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import ReactModal from 'react-modal';
+import modalStyles from './ModalStyle';
 
 const ListComponent = () => {
     const [sections, setSections] = useState([]);
     const {roomId} = useParams()
+    
     
     useEffect(() => {
         
@@ -78,19 +81,11 @@ const ListComponent = () => {
     
     if (sections.length > 0) {
         console.log(sections);
+       
         return (
             <>
             
-            <ul>
-                
-                {sections.map((section => <BasicList key = {section.sectionId}
-                                                     name = {section.sectionName}
-                                                     roomId = {section.roomId} 
-                                                     Id = {section.sectionId} 
-                                                     onDelete={handleDelete}
-                                                     onUpdate={handleUpdate}
-                />))}
-            </ul>
+            
                 
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -120,8 +115,8 @@ const ListComponent = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-
-
+        
+                
             </>
 
     )
