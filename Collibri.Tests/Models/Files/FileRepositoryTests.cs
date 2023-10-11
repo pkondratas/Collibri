@@ -76,7 +76,8 @@ namespace Collibri.Tests.Models.Files
             string updatedName, File? expected)
         {
             // Arrange
-            var path = FileTestHelper.GetPath(postId);
+            var path = new DirectoryInfo(
+                $@"{Directory.GetParent(Directory.GetCurrentDirectory())}\Collibri\Data\Files\{postId}\").FullName;
             var fileRepository = new FileRepository(fileSystem.FileSystem);
             
             // Act
