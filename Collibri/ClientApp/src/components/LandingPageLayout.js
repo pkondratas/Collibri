@@ -1,5 +1,6 @@
 import React from "react";
-import { CreateRoom, JoinRoom } from "./RoomPageButtons";
+import { CreateRoom } from "./CreateRoom";
+import { JoinRoom } from "./JoinRoom";
 import './LandingPage.css';
 
 export const LandingPageLayout = () => {
