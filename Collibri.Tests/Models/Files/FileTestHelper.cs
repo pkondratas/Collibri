@@ -8,7 +8,8 @@ namespace Collibri.Tests.Models.Files
 	{
 		public static FileStreamResult CreateTestFileStreamResult(MockFileSystem fileSystem, string path, string fileName)
 		{
-			var fileStream = fileSystem.FileStream.New(path + "\\" + fileName, FileMode.Open, FileAccess.Read);
+			var fileStream = fileSystem.FileStream.New(
+				path + Path.DirectorySeparatorChar + fileName, FileMode.Open, FileAccess.Read);
 			return new FileStreamResult(fileStream, "application/octet-stream");
 		}
         
@@ -25,8 +26,9 @@ namespace Collibri.Tests.Models.Files
 
 		public static string GetPath(string postId)
 		{
-			return new DirectoryInfo($@"{Directory.GetParent(
-				Directory.GetCurrentDirectory())}\Collibri\Data\Files\{postId}").FullName;
+			return new DirectoryInfo(Path.Combine(
+						Directory.GetParent(Directory.GetCurrentDirectory()).FullName, 
+						"Collibri", "Data", "Files", postId)).FullName;
 		}
         
 		public static bool StreamEquals(Stream a, Stream b)
