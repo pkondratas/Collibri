@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "SectionId": 923960306,
+    "RoomId": 2,
+    "SectionName": "zzzz"
+  },
+  {
+    "SectionId": 1308143254,
+    "RoomId": 1,
+    "SectionName": "Another section"
+  }
+]
