@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Listcomponent from "./ListComponent";
+import Listcomponent from "./ParentCombonent";
 import {useParams} from "react-router-dom";
 
 

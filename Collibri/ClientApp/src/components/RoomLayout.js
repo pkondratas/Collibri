@@ -1,5 +1,5 @@
 import React from "react";
-import ListComponent from "./ListComponent";
+import ParentCombonent from "./ParentCombonent";
 
 const RoomLayout = () => {
   return (
@@ -17,7 +17,7 @@ const RoomLayout = () => {
           <div className="col-lg-7">
             {/* Grid element to display sections */}
             {/*<p>sections</p>*/}
-            <ListComponent />
+            <ParentCombonent />
           </div>
           <div className="col-lg-6">
             {/* Grid element to display all posts */}

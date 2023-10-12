@@ -6,7 +6,7 @@ import Api from "./Api";
 
 import {Button} from "@mui/material";
 
-const ListComponent = () => {
+const ParentCombonent = () => {
    
     const {sections, handleDelete,handleUpdate, handlePost} = Api();
     
@@ -23,6 +23,6 @@ const ListComponent = () => {
         )
     
 };
-export default ListComponent;
+export default ParentCombonent;
 
 
