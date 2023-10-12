@@ -1,75 +1,28 @@
 
-import React, { useState, useEffect } from 'react';
-import {useParams} from "react-router-dom";
+import React, { } from 'react';
 import TableDisplay from "./TableDisplay";
 import Api from "./Api";
 
-import ReactModal from 'react-modal';
+
+import {Button} from "@mui/material";
 
 const ListComponent = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [inputValue, setInputValue] = useState('');
-    const {sections, handleDelete,handleUpdate} = Api();
-
-    const openModal = () => {
-        setIsModalOpen(true);
-    };
-
-    const closeModal = () => {
-        setIsModalOpen(false);
-    };
-    const handleInputChange = (e) => {
-        setInputValue(e.target.value);
-    };
-
-    const handleSubmit = () => {
-        // Handle form submission logic here
-        console.log('Submitted value:', inputValue);
-        closeModal();
-    };
-
-    const customStyles = {
-        content: {
-            width: '50%', // Set your desired width here
-            height: '50%', // Set your desired height here
-            margin: 'auto', // Center the modal horizontally
-        },
-    };
+   
+    const {sections, handleDelete,handleUpdate, handlePost} = Api();
     
     if (sections.length > 0) {
         return (<>
-            <TableDisplay sections={sections} handleDelete={handleDelete} handleUpdate={handleUpdate} />
-            <button onClick={openModal}>Open Modal</button>
-            <ReactModal
-                isOpen={isModalOpen}
-                onRequestClose={closeModal}
-                style={customStyles}
-                ariaHideApp={false} // Set this prop to prevent a11y issues
-            >
-
-                <h2>Modal Title</h2>
-                <p>This is some text inside the modal.</p>
-
-                <div>
-                    <label htmlFor="inputField">Text Field:</label>
-                    <input
-                        type="text"
-                        id="inputField"
-                        value={inputValue}
-                        onChange={handleInputChange}
-                    />
-                </div>
-
-                <button onClick={handleSubmit}>Submit</button>
-                <button onClick={closeModal}>Close Modal</button>
-            </ReactModal>    
+            <TableDisplay sections={sections} handleDelete={handleDelete} handleUpdate={handleUpdate} handlePost={handlePost} />
         </>)
         
     }
-    return "No sections Present fam";
+    return (<>
+            No sections present click to
+            <Button className={"addSec"}  onClick={() => handlePost()}>add Section</Button>
+    </>
+        )
     
 };
-
 export default ListComponent;
 
 

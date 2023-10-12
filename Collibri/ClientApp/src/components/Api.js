@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-
 const Api = () => {
     const [sections, setSections] = useState([]);
     const {roomId} = useParams()
@@ -30,7 +29,6 @@ const Api = () => {
             })
             .catch(error => console.error('Error deleting section:', error));
     };
-
     const handleUpdate = (id) =>{
 
         const sectionToUpdate = sections.find(section => section.sectionId === id);
@@ -61,6 +59,45 @@ const Api = () => {
         }
 
     }
-    return { sections, handleDelete, handleUpdate };
+    
+const handlePost = () => {
+
+    const newName = window.prompt('Enter new name:');
+    if(!newName){
+        return false;
+    }
+    
+    console.log(roomId);
+    
+    // Prepare the data you want to send in the POST request
+    const postData = {
+        roomId: roomId, // Assuming roomId is defined elsewhere in your component
+        sectionName: newName, // Replace this with the actual section name you want to send
+    };
+
+    fetch('/v1/sections', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(postData), // Convert JavaScript object to JSON string
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+            setSections(prevSections => [...prevSections, data]);
+            
+        })
+        .catch(error => {
+            console.error('Error posting section:', error);
+            // Display an error message to the user interface
+        });
+};
+    return { sections, handleDelete, handleUpdate, handlePost };
 };
 export default Api;
