@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import {useParams} from "react-router-dom";
 import TableDisplay from "./TableDisplay";
 import Api from "./Api";
-import modalStyles from "./ModalStyle";
+
 import ReactModal from 'react-modal';
 
 const ListComponent = () => {
@@ -27,7 +27,14 @@ const ListComponent = () => {
         console.log('Submitted value:', inputValue);
         closeModal();
     };
-    
+
+    const customStyles = {
+        content: {
+            width: '50%', // Set your desired width here
+            height: '50%', // Set your desired height here
+            margin: 'auto', // Center the modal horizontally
+        },
+    };
     
     if (sections.length > 0) {
         return (<>
@@ -36,7 +43,7 @@ const ListComponent = () => {
             <ReactModal
                 isOpen={isModalOpen}
                 onRequestClose={closeModal}
-                style={modalStyles}
+                style={customStyles}
                 ariaHideApp={false} // Set this prop to prevent a11y issues
             >
 
