@@ -1,11 +1,6 @@
-using Collibri.Models.Files;
-using Collibri.Models.DataHandling;
-using Collibri.Models.Notes;
-using Collibri.Models.Rooms;
-using Collibri.Models.Sections;
-
-using Collibri.Models.Documents;
-using Collibri.Models.Posts;
+using Collibri.Repositories;
+using Collibri.Repositories.DataHandling;
+using Collibri.Repositories.FileBasedImplementation;
 
 var builder = WebApplication.CreateBuilder(args);
 

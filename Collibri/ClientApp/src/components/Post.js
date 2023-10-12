@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
-import "../styles/post.css";
-import 'bootstrap-icons/font/bootstrap-icons.css';
-import axios from 'axios';
+import React, { useEffect, useState } from "react"
+import "../styles/post.css"
+import 'bootstrap-icons/font/bootstrap-icons.css'
+import UpdatePostModal from "./UpdatePostModal"
+import axios from 'axios'
 
 const Post = (props) => {
   
@@ -15,12 +16,13 @@ const Post = (props) => {
     id: 0,
     creationDate: new Date(),
     lastUpdatedDate: new Date(),
-  };
+  }
   
-  const [liked, setLiked] = useState(false);
-  const [disliked, setDisliked] = useState(false);
-  const [note, setNote] = useState(initialNote);
-  const [post, setPost] = useState(props.post);
+  const [liked, setLiked] = useState(false)
+  const [disliked, setDisliked] = useState(false)
+  const [note, setNote] = useState(initialNote)
+  const [post, setPost] = useState(props.post)
+  const [showModal, setShowModal] = useState(false)
   
   const fetchNote = () => {
     axios.get(`/v1/notes/${props.noteId}`)
@@ -28,89 +30,94 @@ const Post = (props) => {
   }
   
   const handleDelete = (postId) => {
-    props.setPosts((prevPosts) => prevPosts.filter((x) => x.postId !== postId));
+    props.setPosts((prevPosts) => prevPosts.filter((x) => x.postId !== postId))
     axios.delete(`/v1/posts?postId=${postId}`)
-      .then();
+      .then()
   }
   
-  const updatePost = () => {
-    axios.put(`/v1/posts?postId=${props.postId}`, post)
-      .then();
+  const updatePost = (postToUpdate) => {
+    axios.put(`/v1/posts?postId=${props.postId}`, postToUpdate)
+      .then()
   }
   
   useEffect(() => {
-    fetchNote();
-  }, []);
+    fetchNote()
+  }, [])
   
   useEffect(() => {
-    updatePost();
-  }, [post.likeCount, post.dislikeCount]);
+    updatePost(post)
+  }, [post.likeCount, post.dislikeCount, post.title])
 
-  const updateCounts = (propertyToUpdate, incrementBy) => {
+  const updatePostContent = (propertyToUpdate, value) => {
     setPost((prevPost) => ({
       ...prevPost,
-      [propertyToUpdate]: prevPost[propertyToUpdate] + incrementBy
-    }));
+      [propertyToUpdate]: value
+    }))
   }
   
   const handleLike = () => {
     if(disliked) {
-      setDisliked(!disliked);
-      updateCounts("dislikeCount", -1);
+      setDisliked(!disliked)
+      updatePostContent("dislikeCount", post.dislikeCount - 1)
     }
     
     if(!liked) {
-      updateCounts("likeCount", 1);
+      updatePostContent("likeCount", post.likeCount + 1)
     } else {
-      updateCounts("likeCount", -1)
+      updatePostContent("likeCount", post.likeCount - 1)
     }
-    setLiked(!liked);
+    setLiked(!liked)
   }
 
   const handleDislike = () => {
     if(liked) {
-      setLiked(!liked);
-      updateCounts("likeCount", -1);
+      setLiked(!liked)
+      updatePostContent("likeCount", post.likeCount - 1)
     }
 
     if(!disliked) {
-      updateCounts("dislikeCount", 1);
+      updatePostContent("dislikeCount", post.dislikeCount + 1)
     } else {
-      updateCounts("dislikeCount", -1)
+      updatePostContent("dislikeCount", post.dislikeCount - 1)
     }
-    setDisliked(!disliked);
+    setDisliked(!disliked)
   }
   
   return(
-    <div className="card post">
-      <div className="card-body">
-        <div className="content-placement">
-          <div>
-            <h5 className="card-title post-title">{props.title}</h5>
-            <div className="card-text note">
-              {note.text}
+    <>
+      <div className="card post">
+        <div className="card-body">
+          <div className="content-placement">
+            <div>
+              <h5 className="post-title">{props.title}</h5>
+              <div className="card-text note">
+                {note.text}
+              </div>
+            </div>
+            <div>
+              <button className="buttons delete-button" onClick={() => handleDelete(props.postId)}>
+                <i className="bi bi-trash3 delete-icon"></i>
+              </button>
+              <button className="buttons edit-button" onClick={() => {setShowModal(true)}}>
+                <i className="bi bi-pen edit-icon"></i>
+              </button>
             </div>
           </div>
-          <div>
-            <button className="buttons delete-button" onClick={() => handleDelete(props.postId)}>
-              <i className="bi bi-trash3 delete-icon"></i>
+          <p>
+            <button className="reaction-buttons" onClick={handleLike}>
+              {post.likeCount} {liked ? <i className="bi bi-hand-thumbs-up-fill"></i> : <i className="bi bi-hand-thumbs-up "></i>}
             </button>
-            <button className="buttons edit-button">
-              <i className="bi bi-pen edit-icon"></i>
+            <button className="reaction-buttons" onClick={handleDislike}>
+              {post.dislikeCount} {disliked ? <i className="bi bi-hand-thumbs-down-fill"></i> : <i className="bi bi-hand-thumbs-down"></i>}
             </button>
-          </div>
+          </p>
         </div>
-        <p>
-          <button className="reaction-buttons" onClick={handleLike}>
-            {post.likeCount} {liked ? <i className="bi bi-hand-thumbs-up-fill"></i> : <i className="bi bi-hand-thumbs-up "></i>}
-          </button>
-          <button className="reaction-buttons" onClick={handleDislike}>
-            {post.dislikeCount} {disliked ? <i className="bi bi-hand-thumbs-down-fill"></i> : <i className="bi bi-hand-thumbs-down"></i>}
-          </button>
-        </p>
       </div>
-    </div>
-  );
+      <div>
+        <UpdatePostModal post={post} {...props.post} showModal={showModal} setShowModal={setShowModal} updatePost={updatePost} updatePostContent={updatePostContent} />
+      </div>
+    </>
+  )
 }
 
-export default Post;
+export default Post

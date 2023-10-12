@@ -1,5 +1,6 @@
 using Collibri.Controllers;
-using Collibri.Models.Posts;
+using Collibri.Models;
+using Collibri.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Collibri.Tests.Controllers

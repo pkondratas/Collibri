@@ -2,18 +2,18 @@ import React, { useEffect, useState } from "react";
 import Post from "./Post";
 import axios from 'axios';
 
-const PostContainer = () => {
+const PostContainer = (props) => {
   
   const [posts, setPosts] = useState([]);
 
   const fetchPosts = () => {
-    axios.get('/v1/posts?sectionId=2')
+    axios.get(`/v1/posts?sectionId=${props.sectionId}`)
       .then(response => setPosts(response.data))
   }
 
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [props.sectionId]);
   
   return (
     <div>

@@ -1,4 +1,4 @@
-using Collibri.Models.Posts;
+using Collibri.Models;
 
 namespace Collibri.Tests.Controllers
 {
