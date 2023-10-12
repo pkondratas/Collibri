@@ -12,10 +12,7 @@ const AppRoutes = [
     path: '/counter/:roomId',
     element: <RoomLayout />
   },
-  {
-    path: '/testPage/:roomId',
-    element: <TestPage />
-  }
+  
 ];
 
 export default AppRoutes;
