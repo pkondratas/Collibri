@@ -40,18 +40,21 @@ namespace Collibri.Models.Sections
             return queriedSection;
         }
 
-        public Section? UpdateSectionById(Section section, int sectionId)
+        public Section? UpdateSectionById(Section newSection, int sectionId)
         {
             var sectionList = _dataHandler.GetAllItems<Section>(ModelType.Sections);
             var sectionToUpdate = sectionList.SingleOrDefault(x => x.SectionId == sectionId);
 
-            if (sectionToUpdate == null)
+            foreach (var sections in sectionList)
             {
-                return null;
+                if (sections.Equals(newSection) || sectionToUpdate == null)
+                {
+                    return null;
+                } 
             }
             
             //updating contents of section part
-            sectionToUpdate.SectionName = section.SectionName;
+            sectionToUpdate.SectionName = newSection.SectionName;
             _dataHandler.PostAllItems(sectionList, ModelType.Sections);
             
             return sectionToUpdate;

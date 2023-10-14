@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button } from '@mui/material';
+import  React from 'react';
+import {Button, Container} from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Paper from "@mui/material/Paper";
@@ -14,16 +14,9 @@ import TableContainer from "@mui/material/TableContainer";
 const TableDisplay = ({ sections, handleDelete, handleUpdate, handlePost }) => {
     return (
         <>
-            <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    {/*<TableHead>*/}
-                    {/*    <TableRow >*/}
-                    {/*        <TableCell>Section Name</TableCell>*/}
-                    {/*        <TableCell align="right">room ID</TableCell>*/}
-                    {/*        <TableCell align="right">Section ID </TableCell>*/}
-                    {/*        <TableCell align="right">Actions</TableCell>*/}
-                    {/*    </TableRow>*/}
-                    {/*</TableHead>*/}
+            
+            <TableContainer component={Paper} style={{ maxHeight: 300 }}>
+                <Table stickyHeader sx={{ minWidth:400 }} aria-label="simple table">
                     <TableBody>
                         {sections.map((row) => (
                             <TableRow
@@ -31,10 +24,8 @@ const TableDisplay = ({ sections, handleDelete, handleUpdate, handlePost }) => {
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
                                 <TableCell component="th" scope="row"> {"#" + row.sectionName} </TableCell>
-                                {/*<TableCell component="th" scope="row" align={"right"}> {row.roomId} </TableCell>*/}
-                                {/*<TableCell align="right">{row.sectionId}</TableCell>*/}
-                                <TableCell align="right"><Button startIcon ={<DeleteIcon style={{ fontSize: 40 }} />}   onClick={() => handleDelete(row.sectionId)}></Button>
-                                    <Button startIcon ={<EditIcon style=  {{ fontSize: 40 }} />}       onClick={() => handleUpdate(row.sectionId)}></Button>
+                                <TableCell align="right"><Button startIcon ={<DeleteIcon style={{ fontSize: 30 }} />}   onClick={() => handleDelete(row.sectionId)}></Button>
+                                    <Button startIcon ={<EditIcon style=  {{ fontSize: 30 }} />}       onClick={() => handleUpdate(row.sectionId)}></Button>
                                 </TableCell>
 
                             </TableRow>
