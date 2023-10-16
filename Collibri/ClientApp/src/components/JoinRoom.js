@@ -1,5 +1,5 @@
 import React from "react";
-import "./LandingPageModal.css";
+import { Button } from "@mui/material";
 
 export const JoinRoom = () => {
     const handleJoinRoom = () => {
@@ -9,7 +9,7 @@ export const JoinRoom = () => {
 
     return (
         <div>
-            <button className={"btn buttons"} onClick={handleJoinRoom}>Join Room</button>
+            <Button size="large" onClick={handleJoinRoom} variant="contained">Join Room</Button>
         </div>
     );
 }

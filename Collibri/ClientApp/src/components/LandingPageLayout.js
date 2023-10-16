@@ -2,20 +2,23 @@ import React from "react";
 import { CreateRoom } from "./CreateRoom";
 import { JoinRoom } from "./JoinRoom";
 import './LandingPage.css';
+import { Box } from "@mui/material";
 
 export const LandingPageLayout = () => {
     return (
-        <div className={"main"}>
-            <div className={"room-page-header"}>
+        <Box className={"main"}>
+            <Box className={"room-page-header"}>
                 Collibri
-            </div>
-            <div className={"list"}>
+            </Box>
+            <Box className={"list"}>
                 {/*Room list here*/}
-            </div>
-            <div className={"button-area"}>
+            </Box>
+            <Box className={"create-button-area"}>
                 <CreateRoom />
+            </Box>
+            <Box className={"join-button-area"}>
                 <JoinRoom />
-            </div>
-        </div>
+            </Box>
+        </Box>
     );
 }

@@ -1,56 +1,54 @@
 import React, { useState } from "react";
 import { createRoom } from "./RoomAPI";
-import Modal from "react-modal";
-import "./LandingPageModal.css";
+import { TextField, Button, Modal, Box, Typography, Divider } from "@mui/material";
 
-const modalStyle = {
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-    },
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 500,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4
 };
 
 export const CreateRoom = () => {
-    const [modalIsOpen, setIsOpen] = useState(false);
     const [name, setName] = useState('');
-    function openModal() {
-        setIsOpen(true);
-    }
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
-    function closeModal() {
-        setIsOpen(false);
-    }
-    
     function handleCreateRoom() {
-        if(name === null || name === '') {
+        if (name === null || name === '') {
             return;
         }
-        
-        closeModal();
+
+        handleClose();
         createRoom(name);
         setName(null);
     }
 
     return (
         <div>
-            <button className={"btn buttons"} onClick={openModal}>Create Room</button>
+            <Button size="large" onClick={handleOpen} variant="contained">Create Room</Button>
             <Modal
-                isOpen={modalIsOpen}
-                onRequestClose={closeModal}
-                style={modalStyle}>
-                <h1>Create room</h1>
-                <label className={"message"}>Enter room name:</label>
-                <input 
-                    value={name} 
-                    onChange={e => setName(e.target.value)} />
-                <hr />
-                <button onClick={handleCreateRoom}>Confirm</button>
-                <button onClick={closeModal}>Cancel</button>
-                <div></div>
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={style}>
+                    <Typography variant="h5">
+                        Create a new room
+                    </Typography>
+                    <TextField fullWidth id="roomName" label="Room name" variant="outlined"
+                               onChange={e => setName(e.target.value)} margin="normal"/>
+                    <Divider />
+                    <Button onClick={handleCreateRoom}>Confirm</Button>
+                    <Button onClick={handleClose}>Cancel</Button>
+                </Box>
             </Modal>
         </div>
     );
