@@ -1,28 +1,29 @@
 import React from 'react';
-import {AppBar,Toolbar,IconButton,Tooltip,OutlinedInput,InputAdornment,Typography, Box} from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
+import { AppBar, Toolbar, Box, IconButton, Typography, OutlinedInput, InputAdornment, Tooltip } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import SearchIcon from '@mui/icons-material/Search';
+import { HeaderStyles } from '../styles/HeaderStyles'; 
 
 const Header = () => {
     return (
-        <AppBar position="static" style={{ background: 'white' }}>
-            <Toolbar style={{ justifyContent: 'space-between' }}>
-                <Box style={{ display: 'flex', alignItems: 'center' }}>
+        <AppBar position="static" style={HeaderStyles.appBar}>
+            <Toolbar style={HeaderStyles.toolbar}>
+                <Box style={HeaderStyles.box}>
                     <Tooltip title="Back functionality not implemented">
                         <IconButton color="inherit" aria-label="Back">
-                            <ArrowBackIcon style={{ color: 'black' }} />
+                            <ArrowBackIcon style={HeaderStyles.backButton} />
                         </IconButton>
                     </Tooltip>
-                    <Typography variant="h4" style={{ color: 'black', fontWeight: 'bold'}}>Collibri</Typography>
+                    <Typography variant="h4" style={HeaderStyles.title}>Collibri</Typography>
                 </Box>
-                <Box style={{ display: 'flex', alignItems: 'center' }}>
+                <Box style={HeaderStyles.box}>
                     <Tooltip title="Search functionality not implemented">
                         <OutlinedInput
                             placeholder="Enter text"
-                            style={{ width: '200px', height: '35px'}}
+                            style={HeaderStyles.searchInput}
                             startAdornment={
                                 <InputAdornment position="start">
-                                    <SearchIcon style={{ color: 'black' }} />
+                                    <SearchIcon style={HeaderStyles.backButton} />
                                 </InputAdornment>
                             }
                         />
@@ -32,5 +33,4 @@ const Header = () => {
         </AppBar>
     );
 }
-
 export default Header;

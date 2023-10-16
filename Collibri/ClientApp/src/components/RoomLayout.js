@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {Grid, Paper} from '@mui/material';
 import ParentComponent from "./ParentComponent";
 import PostContainer from "./PostContainer";
+import Header from "./Header";
 import { postContainerStyle } from "../styles/RoomLayoutStyle";
 
 
@@ -15,7 +16,7 @@ const RoomLayout = () => {
           justifyContent="space-evenly"
           alignItems="strech">
       <Grid item xs={12}>
-        <Paper>Header</Paper>
+        <Paper><Header/></Paper>
       </Grid>
       <Grid item xs={1}>
         <Paper>rooms</Paper>
