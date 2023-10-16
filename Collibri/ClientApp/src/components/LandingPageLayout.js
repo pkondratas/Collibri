@@ -3,7 +3,7 @@ import { CreateRoom } from "./CreateRoom";
 import { JoinRoom } from "./JoinRoom";
 import './LandingPage.css';
 import { Box } from "@mui/material";
-import {LandingPageApi} from "../apis/LandingPageApi";
+import {LandingPageApi} from "../api/LandingPageApi";
 import {RoomList} from "./RoomList";
 
 export const LandingPageLayout = () => {
