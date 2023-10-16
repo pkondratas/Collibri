@@ -1,10 +1,10 @@
 using System.IO.Abstractions.TestingHelpers;
-using Collibri.Models.Files;
+using Collibri.Repositories.FileBasedImplementation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using File = Collibri.Models.Files.File;
+using File = Collibri.Models.File;
 
-namespace Collibri.Tests.Models.Files
+namespace Collibri.Tests.Repositories.Files
 {
     public class FileRepositoryTests
     {

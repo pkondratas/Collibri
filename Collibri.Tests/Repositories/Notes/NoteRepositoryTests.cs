@@ -1,8 +1,8 @@
-using Collibri.Models.DataHandling;
-using Collibri.Models.Notes;
-using Collibri.Models.Sections;
+using Collibri.Models;
+using Collibri.Repositories.DataHandling;
+using Collibri.Repositories.FileBasedImplementation;
 
-namespace Collibri.Tests.Models.Notes
+namespace Collibri.Tests.Repositories.Notes
 {
     public class NoteRepositoryTests
     {

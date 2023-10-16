@@ -6,8 +6,7 @@ namespace Collibri.Repositories.FileBasedImplementation
     public class DocumentRepository : IDocumentRepository
     {
         private readonly IDataHandler _dataHandler;
-
-
+        
         public DocumentRepository(IDataHandler dataHandler)
         {
             _dataHandler = dataHandler;

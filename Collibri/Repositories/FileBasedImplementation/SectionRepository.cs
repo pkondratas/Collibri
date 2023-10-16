@@ -1,5 +1,6 @@
 using Collibri.Models;
 using Collibri.Repositories.DataHandling;
+using Collibri.Repositories.ExtensionMethods;
 
 namespace Collibri.Repositories.FileBasedImplementation
 {
@@ -23,8 +24,8 @@ namespace Collibri.Repositories.FileBasedImplementation
                     return null;
                 } 
             }
-            
-            section.SectionId = new Random().Next(1, int.MaxValue);
+
+            section.SectionId = new int().GenerateNewId(sectionList.Select(x => x.SectionId).ToList());
             sectionList.Add(section);
             
             _dataHandler.PostAllItems(sectionList, ModelType.Sections);
@@ -44,15 +45,13 @@ namespace Collibri.Repositories.FileBasedImplementation
         {
             var sectionList = _dataHandler.GetAllItems<Section>(ModelType.Sections);
             var sectionToUpdate = sectionList.SingleOrDefault(x => x.SectionId == sectionId);
-
-            foreach (var sections in sectionList)
-            {
-                if (sections.Equals(newSection) || sectionToUpdate == null)
-                {
-                    return null;
-                } 
-            }
             
+            //method 
+            if (sectionList.Any(sections => sections.Equals(newSection)) || sectionToUpdate == null)
+            {
+                return null;
+            }
+
             //updating contents of section part
             sectionToUpdate.SectionName = newSection.SectionName;
             _dataHandler.PostAllItems(sectionList, ModelType.Sections);

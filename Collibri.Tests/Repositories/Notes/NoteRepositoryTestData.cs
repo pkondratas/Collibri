@@ -1,7 +1,6 @@
-using System.Net.Sockets;
-using Collibri.Models.Notes;
+using Collibri.Models;
 
-namespace Collibri.Tests.Models.Notes
+namespace Collibri.Tests.Repositories.Notes
 {
     public class CreateNoteTestData : TheoryData<Note, Note?, List<Note>>
     {

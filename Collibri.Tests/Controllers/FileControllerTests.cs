@@ -1,8 +1,8 @@
 using Collibri.Controllers;
-using Collibri.Models.Files;
+using Collibri.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using File = Collibri.Models.Files.File;
+using File = Collibri.Models.File;
 
 namespace Collibri.Tests.Controllers
 {

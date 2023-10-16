@@ -2,7 +2,7 @@ using System.IO.Abstractions.TestingHelpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Collibri.Tests.Models.Files
+namespace Collibri.Tests.Repositories.Files
 {
 	static class FileTestHelper
 	{

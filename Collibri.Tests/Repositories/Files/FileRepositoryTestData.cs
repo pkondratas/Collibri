@@ -1,9 +1,9 @@
 using System.IO.Abstractions.TestingHelpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using File = Collibri.Models.Files.File;
+using File = Collibri.Models.File;
 
-namespace Collibri.Tests.Models.Files
+namespace Collibri.Tests.Repositories.Files
 {
     public class CreateFileData : TheoryData<MockFileSystem, IFormFile, string, File?>
     {

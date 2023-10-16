@@ -7,7 +7,7 @@ const AppRoutes = [
     element: <Home />
   },
   {
-    path: '/counter/:roomId',
+    path: '/room/:roomId',
     element: <RoomLayout />
   },
 ];
