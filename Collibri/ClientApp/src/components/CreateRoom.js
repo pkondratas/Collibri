@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { TextField, Button, Modal, Box, Typography, Divider } from "@mui/material";
 import CModal from "./CModal";
+import {createRoom} from "../api/LandingPageApi";
 
 const style = {
     position: 'absolute',
@@ -14,7 +15,7 @@ const style = {
     p: 4
 };
 
-export const CreateRoom = ({createRoom}) => {
+export const CreateRoom = ({setRooms}) => {
     const [name, setName] = useState('');
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -26,7 +27,7 @@ export const CreateRoom = ({createRoom}) => {
         }
 
         handleClose();
-        createRoom(name);
+        createRoom(name, setRooms);
         setName(null);
     }
 

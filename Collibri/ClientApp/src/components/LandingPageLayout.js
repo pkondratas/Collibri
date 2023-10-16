@@ -1,14 +1,14 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { CreateRoom } from "./CreateRoom";
 import { JoinRoom } from "./JoinRoom";
 import './LandingPage.css';
 import { Box } from "@mui/material";
-import {LandingPageApi} from "../api/LandingPageApi";
 import {RoomList} from "./RoomList";
+import {getRooms} from "../api/LandingPageApi";
 
 export const LandingPageLayout = () => {
 
-    const {rooms, handleDeleteRoom, createRoom, selectedRow, setSelectedRow} = LandingPageApi();
+    const [rooms, setRooms] = useState([]);
     
     return (
         <Box className={"main"}>
@@ -16,10 +16,10 @@ export const LandingPageLayout = () => {
                 Collibri
             </Box>
             <Box className={"list"}>
-                <RoomList selectedRow={selectedRow} setSelectedRow={setSelectedRow} rooms={rooms} handleDeleteRoom={handleDeleteRoom}/>
+                <RoomList rooms={rooms} setRooms={setRooms}/>
             </Box>
             <Box className={"create-button-area"}>
-                <CreateRoom createRoom={createRoom}/>
+                <CreateRoom setRooms={setRooms}/>
             </Box>
             <Box className={"join-button-area"}>
                 <JoinRoom/>

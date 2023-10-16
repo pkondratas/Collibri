@@ -1,12 +1,34 @@
-import React from 'react';
-import {Button, Paper, Table, TableBody, TableCell, TableContainer, TableRow} from "@mui/material";
+import React, {useEffect, useState} from 'react';
+import {Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableRow} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import UpdateRoomModal from "./UpdateRoomModal";
+import { useNavigate } from "react-router-dom";
+import {deleteRoom, getRooms, updateRoom} from "../api/LandingPageApi";
 
-export const RoomList = ({selectedRow, setSelectedRow, rooms, handleDeleteRoom}) => {
+export const RoomList = ({rooms, setRooms}) => {
+
+    const [updateModal, setUpdateModal] = useState(false);
+    const [room, setRoom] = useState({ "Id": 0, "Name": "default"});
+    const navigate = useNavigate();
+    
+    const handleOpenModal = (currentRoom) => {
+        setRoom(currentRoom);    
+        setUpdateModal(true);
+    }
+    
+    const updateRoomName = (newName) => {
+        room.Name = newName;
+        updateRoom(room.id, room, rooms, setRooms);
+    }
+
+    useEffect(() => {
+            getRooms(setRooms)
+        }, []
+    );
     
     return (
-        <div>
+        <Box>
         <TableContainer component={Paper} style={{ maxHeight: 400 }}>
             <Table stickyHeader sx={{ minWidth:300 }} aria-label="simple table">
                 <TableBody>
@@ -15,14 +37,16 @@ export const RoomList = ({selectedRow, setSelectedRow, rooms, handleDeleteRoom})
                             key={row.id}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
-                            <TableCell component="th" scope="row" onClick={() => setSelectedRow(row.id)}> {row.name} </TableCell>
+                            <TableCell component="th" scope="row" onClick={() => navigate(`/room/${row.id}`)}> {row.name} </TableCell>
                             
                             <TableCell align="center">
-                                <Button onClick={() => handleDeleteRoom(row.id)} startIcon={<DeleteIcon style={{fontSize: 25}}/>}></Button>
+                                <Button onClick={() => deleteRoom(row.id, setRooms)} startIcon={<DeleteIcon style={{fontSize: 25}}/>}></Button>
                             </TableCell>
                             
                             <TableCell align="center">
-                                <Button startIcon={<EditIcon style={{fontSize: 25}}/>}></Button>
+                                <Button startIcon={<EditIcon style={{fontSize: 25}}/>}
+                                    onClick={() => {handleOpenModal(row)}
+                                }></Button>
                             </TableCell>
 
                         </TableRow>
@@ -30,7 +54,7 @@ export const RoomList = ({selectedRow, setSelectedRow, rooms, handleDeleteRoom})
                 </TableBody>
             </Table>
         </TableContainer>
-        <p>{selectedRow}</p>
-        </div>
+            <UpdateRoomModal room={room} updateModal={updateModal} setUpdateModal={setUpdateModal} updateRoomName={updateRoomName}/>
+        </Box>
     );
 }
