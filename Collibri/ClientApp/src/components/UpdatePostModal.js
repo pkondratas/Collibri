@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import {styled, TextField, Typography} from '@mui/material';
+import { TextField, Typography } from '@mui/material';
 import { modalTitleStyle, modalTextField } from '../styles/UpdatePostModalStyle';
 import CModal from './CModal';
 

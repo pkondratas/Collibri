@@ -22,4 +22,5 @@ export const deletePost = (postId) => {
 export const updatePost = (postId, postToUpdate) => {
   axios.put(`/v1/posts?postId=${postId}`, postToUpdate)
     .then()
+    .catch(error => console.error('Error updating post: ', error))
 }

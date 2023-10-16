@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PostContainer from './PostContainer';
 
 const RoomLayout = () => {
-  
-  const [showPosts, setShowPosts] = useState(0);
-  
   return (
     <div className="container">
       <div className="container">

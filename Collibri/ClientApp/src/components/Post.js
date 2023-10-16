@@ -93,7 +93,7 @@ const Post = (props) => {
   
   useEffect(() => {
     fetchNote(props.noteId, setNote);
-  }, []);
+  }, [props.noteId]);
   
   return(
     <>
