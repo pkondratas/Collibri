@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { createRoom } from "./RoomAPI";
 import { TextField, Button, Modal, Box, Typography, Divider } from "@mui/material";
 
 const style = {
@@ -14,7 +13,7 @@ const style = {
     p: 4
 };
 
-export const CreateRoom = () => {
+export const CreateRoom = ({createRoom}) => {
     const [name, setName] = useState('');
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);

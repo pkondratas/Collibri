@@ -15,15 +15,10 @@ namespace Collibri.Models.Rooms
 
         public Room CreateRoom(Room room)
         {
-            room.Id = GenerateUniqueId(_rooms);
+            room.Id = new Random().Next(1, int.MaxValue);
             _rooms.Add(room);
             _dataHandler.PostAllItems(_rooms, ModelType.Rooms);
             return room;
-        }
-
-        private int GenerateUniqueId(List<Room> roomList)
-        {
-            return roomList.Count + 1;
         }
 
         public List<Room> GetAllRooms()

@@ -1,9 +1,9 @@
 import React, {} from 'react';
 import TableDisplay from "./TableDisplay";
-import Api from "./Api";
 
 
 import {Button} from "@mui/material";
+import Api from "../apis/Api";
 
 const ParentCombonent = () => {
 
