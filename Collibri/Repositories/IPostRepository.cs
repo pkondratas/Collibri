@@ -13,4 +13,3 @@ namespace Collibri.Repositories
         public Post? DeletePostById(Guid postId);
     }
 }
-

@@ -1,40 +1,34 @@
-import React from 'react';
-import PostContainer from './PostContainer';
+import React from "react";
+import {Grid,Paper} from '@mui/material';
+import ParentComponent from "./ParentComponent";
+
+
 
 const RoomLayout = () => {
-  return (
-    <div className="container">
-      <div className="container">
-        <div className="row">
-          {/* Grid header element */}
-          <p align={"center"}>header</p>
-        </div>
-        <div className="row">
-          <div className="col-lg-2">
-            {/* Grid element to display room icons/names(kaip discorde) */}
-            <p>rooms</p>
-          </div>
-          <div className="col-lg-3">
-            {/* Grid element to display sections */}
-            {/*<p>sections</p>*/}
-          </div>
-          <div className="col-lg-6">
-            {/* Grid element to display all posts */}
-            <div className="post-container">
-              <PostContainer sectionId="2"/>
-            </div>
-            <div className="row">
-              {/* Nested row for grid element */}
-              <div className="col-lg-12">
-                <p>write post</p>
-                {/* Grid element to write a post */}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+    return (
+
+        <Grid container spacing={2}
+              direction="row"
+              justifyContent="space-evenly"
+              alignItems="strech">
+            <Grid item xs={12}>
+                <Paper>Header</Paper>
+            </Grid>
+            <Grid item xs={1}>
+                <Paper>rooms</Paper>
+            </Grid>
+            <Grid item md={4}>
+                <Paper><ParentComponent/></Paper>
+            </Grid>
+            <Grid item xs={6}>
+                <Paper>Posts</Paper>
+            </Grid>
+            <Grid container justifyContent="flex-end" item xs={6}>
+                <Paper>text text text text text</Paper>
+            </Grid>
+        </Grid>
+
+    );
 }
 
 export default RoomLayout;
