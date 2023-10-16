@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-import PostContainer from "./PostContainer";
-import "../styles/post-container.css";
+import React, { useState } from 'react';
+import PostContainer from './PostContainer';
 
 const RoomLayout = () => {
   
-  const [showPosts, setShowPosts] = useState(0)
+  const [showPosts, setShowPosts] = useState(0);
   
   return (
     <div className="container">

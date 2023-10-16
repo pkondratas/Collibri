@@ -1,28 +1,28 @@
-import React, { useEffect, useState } from "react";
-import Post from "./Post";
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { fetchPosts } from '../api/PostAPI';
+import { Box, List, ListItem } from '@mui/material';
+import Post from './Post';
 
 const PostContainer = (props) => {
   
   const [posts, setPosts] = useState([]);
 
-  const fetchPosts = () => {
-    axios.get(`/v1/posts?sectionId=${props.sectionId}`)
-      .then(response => setPosts(response.data))
-  }
-
   useEffect(() => {
-    fetchPosts();
+    fetchPosts(props.sectionId, setPosts);
   }, [props.sectionId]);
   
   return (
-    <div>
-      <ul>
-        {posts.map(item => (
-          <Post key={item.postId} post={item} {...item} setPosts={setPosts}/>
-        ))}
-      </ul>
-    </div>
+    <>
+     <Box>
+       <List>
+         {posts.map(item => (
+           <ListItem key={item.postId}>
+             <Post post={item} {...item} setPosts={setPosts}/>
+           </ListItem>
+         ))}
+       </List>
+     </Box>
+    </>
   );
 }
 

@@ -1,123 +1,141 @@
-import React, { useEffect, useState } from "react"
-import "../styles/post.css"
-import 'bootstrap-icons/font/bootstrap-icons.css'
-import UpdatePostModal from "./UpdatePostModal"
-import axios from 'axios'
+import React, { useEffect, useState } from 'react';
+import { Box, Card, CardContent, Typography, Button } from '@mui/material';
+import {
+  ThumbUp,
+  ThumbUpAltOutlined,
+  ThumbDown,
+  ThumbDownOffAltOutlined,
+  DeleteOutline,
+  EditOutlined
+} from '@mui/icons-material';
+import {
+  postCardStyle,
+  postContentBoxStyle,
+  postEditingBox,
+  postEditingButtons,
+  postNoteStyle, postReactionButtons
+} from '../styles/PostStyle';
+import { deletePost, updatePost } from '../api/PostAPI';
+import { fetchNote } from '../api/NoteAPI';
+import UpdatePostModal from './UpdatePostModal';
+import DeleteModal from "./DeleteModal";
+import '../styles/post.css';
 
 const Post = (props) => {
-  
-  const initialNote = {
-    name: "",
-    text: "",
-    author: "",
-    sectionId: 0,
-    roomId: 0,
-    postId: "",
-    id: 0,
-    creationDate: new Date(),
-    lastUpdatedDate: new Date(),
-  }
-  
-  const [liked, setLiked] = useState(false)
-  const [disliked, setDisliked] = useState(false)
-  const [note, setNote] = useState(initialNote)
-  const [post, setPost] = useState(props.post)
-  const [showModal, setShowModal] = useState(false)
-  
-  const fetchNote = () => {
-    axios.get(`/v1/notes/${props.noteId}`)
-      .then(response => setNote(response.data))
-  }
-  
+  const [liked, setLiked] = useState(false);
+  const [disliked, setDisliked] = useState(false);
+  const [note, setNote] = useState('');
+  const [post, setPost] = useState(props.post);
+  const [updateModal, setUpdateModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
+    
   const handleDelete = (postId) => {
-    props.setPosts((prevPosts) => prevPosts.filter((x) => x.postId !== postId))
-    axios.delete(`/v1/posts?postId=${postId}`)
-      .then()
+    deletePost(postId)
+      .then(deletedData => {
+        props.setPosts((prevPosts) => prevPosts.filter((x) => x.postId !== deletedData.postId));
+      })
   }
-  
-  const updatePost = (postToUpdate) => {
-    axios.put(`/v1/posts?postId=${props.postId}`, postToUpdate)
-      .then()
-  }
-  
-  useEffect(() => {
-    fetchNote()
-  }, [])
-  
-  useEffect(() => {
-    updatePost(post)
-  }, [post.likeCount, post.dislikeCount, post.title])
 
   const updatePostContent = (propertyToUpdate, value) => {
-    setPost((prevPost) => ({
-      ...prevPost,
+    const updatedPost = {
+      ...post,
       [propertyToUpdate]: value
-    }))
+    };
+    updatePost(post.postId, updatedPost);
+    setPost(updatedPost);
   }
   
+  const updateReactionCounts = (likes, dislikes) => {
+    const updatedPost = {
+      ...post,
+      "likeCount": likes,
+      "dislikeCount": dislikes
+    };
+    updatePost(post.postId, updatedPost);
+    setPost(updatedPost);
+  }
+
   const handleLike = () => {
+    let likes = post.likeCount;
+    let dislikes = post.dislikeCount;
+    
     if(disliked) {
-      setDisliked(!disliked)
-      updatePostContent("dislikeCount", post.dislikeCount - 1)
+      dislikes = post.dislikeCount - 1;
+      setDisliked(!disliked);
     }
     
     if(!liked) {
-      updatePostContent("likeCount", post.likeCount + 1)
+      likes = post.likeCount + 1;
     } else {
-      updatePostContent("likeCount", post.likeCount - 1)
+      likes = post.likeCount - 1;
     }
-    setLiked(!liked)
+    updateReactionCounts(likes, dislikes);
+    setLiked(!liked);
   }
 
   const handleDislike = () => {
+    let likes = post.likeCount;
+    let dislikes = post.dislikeCount;
+    
     if(liked) {
-      setLiked(!liked)
-      updatePostContent("likeCount", post.likeCount - 1)
+      likes = post.likeCount - 1;
+      setLiked(!liked);
     }
 
     if(!disliked) {
-      updatePostContent("dislikeCount", post.dislikeCount + 1)
+      dislikes = post.dislikeCount + 1;
     } else {
-      updatePostContent("dislikeCount", post.dislikeCount - 1)
+      dislikes = post.dislikeCount - 1;
     }
-    setDisliked(!disliked)
+    updateReactionCounts(likes, dislikes);
+    setDisliked(!disliked);
   }
+  
+  useEffect(() => {
+    fetchNote(props.noteId, setNote);
+  }, []);
   
   return(
     <>
-      <div className="card post">
-        <div className="card-body">
-          <div className="content-placement">
-            <div>
-              <h5 className="post-title">{props.title}</h5>
-              <div className="card-text note">
-                {note.text}
-              </div>
-            </div>
-            <div>
-              <button className="buttons delete-button" onClick={() => handleDelete(props.postId)}>
-                <i className="bi bi-trash3 delete-icon"></i>
-              </button>
-              <button className="buttons edit-button" onClick={() => {setShowModal(true)}}>
-                <i className="bi bi-pen edit-icon"></i>
-              </button>
-            </div>
-          </div>
-          <p>
-            <button className="reaction-buttons" onClick={handleLike}>
-              {post.likeCount} {liked ? <i className="bi bi-hand-thumbs-up-fill"></i> : <i className="bi bi-hand-thumbs-up "></i>}
-            </button>
-            <button className="reaction-buttons" onClick={handleDislike}>
-              {post.dislikeCount} {disliked ? <i className="bi bi-hand-thumbs-down-fill"></i> : <i className="bi bi-hand-thumbs-down"></i>}
-            </button>
-          </p>
-        </div>
-      </div>
-      <div>
-        <UpdatePostModal post={post} {...props.post} showModal={showModal} setShowModal={setShowModal} updatePost={updatePost} updatePostContent={updatePostContent} />
-      </div>
+      <Card hover className="Card" sx={postCardStyle}>
+        <CardContent>
+          <Typography gutterBottom variant="h5">
+            {props.title}
+          </Typography>
+          <Box sx={postContentBoxStyle}>
+            <Typography 
+              variant="body2" 
+              color="text.secondary"
+              sx={postNoteStyle}
+            >
+              {note.text}
+            </Typography>
+            <Box sx={postEditingBox}>
+              <Button sx={postEditingButtons} className="Button" onClick={() => {setDeleteModal(true)}}>
+                <DeleteOutline fontSize="small" />
+              </Button>
+              <Button sx={postEditingButtons} className="Button" onClick={() => {setUpdateModal(true)}}>
+                <EditOutlined fontSize="small" />
+              </Button>
+            </Box>
+          </Box>
+          <Typography>
+            <Button onClick={handleLike}>
+              {post.likeCount} {liked ? <ThumbUp fontSize="small" sx={postReactionButtons} /> : <ThumbUpAltOutlined fontSize="small" sx={postReactionButtons}/>}
+            </Button>
+            <Button onClick={handleDislike}>
+              {post.dislikeCount} {disliked ? <ThumbDown fontSize="small" sx={postReactionButtons} /> : <ThumbDownOffAltOutlined fontSize="small" sx={postReactionButtons} />}
+            </Button>
+            <Typography variant="caption">
+              Last edited: {post.lastUpdatedDate ? post.lastUpdatedDate.toLocaleString() : 'Loading...'}
+            </Typography>
+          </Typography>
+          <UpdatePostModal post={post} {...props.post} updateModal={updateModal} setUpdateModal={setUpdateModal} updatePost={updatePost} updatePostContent={updatePostContent} />
+          <DeleteModal postId={props.postId} deleteModal={deleteModal} setDeleteModal={setDeleteModal} handleDelete={handleDelete} />
+        </CardContent>
+      </Card>
     </>
   )
 }
 
-export default Post
+export default Post;
