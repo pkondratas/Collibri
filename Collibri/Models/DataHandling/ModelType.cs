@@ -6,6 +6,6 @@ namespace Collibri.Models.DataHandling
         Sections,
         Documents,
         Notes,
-        Files
+        Posts
     }   
 }

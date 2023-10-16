@@ -1,6 +1,4 @@
 using Collibri.Models.DataHandling;
-using Collibri.Models.Documents;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Collibri.Models.Documents
 {
@@ -21,14 +19,14 @@ namespace Collibri.Models.Documents
 
             foreach (var doc in documentList)
             {
-                if (doc.SectionId.Equals(sectionId) && doc.Id == document.Id)
+                if (doc.Id == document.Id)
                 {
                     return null;
                 }
             }
 
             document.SectionId = sectionId;
-            documentList?.Add(document);
+            documentList.Add(document);
 
             _dataHandler.PostAllItems(documentList, ModelType.Documents);
 

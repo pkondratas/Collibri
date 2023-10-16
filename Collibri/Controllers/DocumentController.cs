@@ -49,7 +49,7 @@ namespace Collibri.Controllers
         public IActionResult UpdateDocument([FromBody] Document input, int id)
         {
             var result = _documentRepository.UpdateDocument(input, id);
-            return result == null ? Conflict() : Ok(result);
+            return result == null ? NotFound() : Ok(result);
         }
 
     }
