@@ -7,6 +7,7 @@ namespace Collibri.Models.Posts
         public IEnumerable<Post> GetAllPosts(int sectionId);
 
         public Post? UpdatePostById(Guid postId, Post post);
+
+        public Post? DeletePostById(Guid postId);
     }
 }
-
