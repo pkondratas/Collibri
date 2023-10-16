@@ -11,4 +11,3 @@ namespace Collibri.Models.Posts
         public Post? DeletePostById(Guid postId);
     }
 }
-

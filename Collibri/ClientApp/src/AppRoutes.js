@@ -1,3 +1,4 @@
+
 import { Home } from "./components/Home";
 import RoomLayout from "./components/RoomLayout";
 
@@ -7,9 +8,10 @@ const AppRoutes = [
     element: <Home />
   },
   {
-    path: '/counter',
+    path: '/counter/:roomId',
     element: <RoomLayout />
-  }
+  },
+  
 ];
 
 export default AppRoutes;
