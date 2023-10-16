@@ -4,7 +4,6 @@ import { JoinRoom } from "./JoinRoom";
 import './LandingPage.css';
 import { Box } from "@mui/material";
 import {RoomList} from "./RoomList";
-import {getRooms} from "../api/LandingPageApi";
 
 export const LandingPageLayout = () => {
 
