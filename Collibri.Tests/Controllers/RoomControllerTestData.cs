@@ -1,4 +1,4 @@
-using Collibri.Models.Rooms;
+using Collibri.Models;
 
 namespace Collibri.Tests.Controllers
 {
