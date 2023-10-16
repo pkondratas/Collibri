@@ -1,5 +1,6 @@
 using Collibri.Models;
 using Collibri.Repositories.DataHandling;
+using Collibri.Repositories.ExtensionMethods;
 
 namespace Collibri.Repositories.FileBasedImplementation
 {
@@ -15,7 +16,7 @@ namespace Collibri.Repositories.FileBasedImplementation
         public Document? CreateDocument(Document document, int sectionId)
         {
             var documentList = _dataHandler.GetAllItems<Document>(ModelType.Documents);
-            document.Id = new Random().Next(1, int.MaxValue);
+            document.Id = new int().GenerateNewId(documentList.Select(x => x.Id).ToList());
 
             foreach (var doc in documentList)
             {
