@@ -21,9 +21,11 @@ const UpdatePostModal = (props) => {
   }
   
   const handleChanges = () => {
-    if(!error) {
+    if(!error && titleFieldRef.current.value !== '') {
       props.updatePostContent('title', titleFieldRef.current.value.trim());
       handleClose();
+    } else {
+      setError(true);
     }
   }
   
