@@ -1,21 +1,35 @@
 import React from 'react';
+import {AppBar,Toolbar,IconButton,Tooltip,OutlinedInput,InputAdornment,Typography} from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const Header = () => {
     return (
-        <header className="d-flex justify-content-between align-items-center mb-3" style={{ marginTop: '8px' }}>
-            <div className="d-flex align-items-center">
-                <button className="btn" style={{ width: '50px', marginRight: '16px' }}>
-                    <i className="fas fa-arrow-left"></i> {/* Font Awesome back arrow icon */}
-                </button>
-                <h2 className="mb-0">Collibri</h2>
-            </div>
-            <div className="d-flex align-items-center">
-                <input type="text" className="form-control mr-2" style={{ marginRight: '8px' }} placeholder="Enter text" />
-                <button className="btn">
-                    <i className="fas fa-search"></i> {/* Font Awesome search icon */}
-                </button>
-            </div>
-        </header>
+        <AppBar position="static" style={{ background: 'white' }}>
+            <Toolbar style={{ justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <Tooltip title="Back functionality not implemented">
+                        <IconButton color="inherit" aria-label="Back">
+                            <ArrowBackIcon style={{ color: 'black' }} />
+                        </IconButton>
+                    </Tooltip>
+                    <Typography variant="h4" style={{ color: 'black', fontWeight: 'bold'}}>Collibri</Typography>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <Tooltip title="Search functionality not implemented">
+                        <OutlinedInput
+                            placeholder="Enter text"
+                            style={{ width: '200px', height: '35px'}}
+                            startAdornment={
+                                <InputAdornment position="start">
+                                    <SearchIcon style={{ color: 'black' }} />
+                                </InputAdornment>
+                            }
+                        />
+                    </Tooltip>
+                </div>
+            </Toolbar>
+        </AppBar>
     );
 }
 
