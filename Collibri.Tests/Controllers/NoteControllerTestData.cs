@@ -1,5 +1,4 @@
-using System.Net.Sockets;
-using Collibri.Models.Notes;
+using Collibri.Models;
 
 namespace Collibri.Tests.Controllers
 {

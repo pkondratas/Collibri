@@ -1,10 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Collibri.Models.Documents;
-using Microsoft.AspNetCore.Http;
+using Collibri.Models;
+using Collibri.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Collibri.Controllers
@@ -24,7 +19,7 @@ namespace Collibri.Controllers
         }
         
         [HttpPost("{sectionId}")]
-        public IActionResult CreateDocument([FromBody]Document input, int sectionId)
+        public IActionResult CreateDocument([FromBody] Document input, int sectionId)
         {
 
             var result = _documentRepository.CreateDocument(input, sectionId);
@@ -51,13 +46,5 @@ namespace Collibri.Controllers
             var result = _documentRepository.UpdateDocument(input, id);
             return result == null ? NotFound() : Ok(result);
         }
-
     }
-    
-    
-    
-    
-    
-   
-
 }

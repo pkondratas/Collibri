@@ -1,4 +1,5 @@
-using Collibri.Models.Posts;
+using Collibri.Models;
+using Collibri.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Collibri.Controllers
@@ -37,6 +38,7 @@ namespace Collibri.Controllers
         [HttpDelete("")]
         public IActionResult DeletePostById([FromQuery] Guid postId)
         {
+         
             var deletedPost = _postRepository.DeletePostById(postId);
 
             return deletedPost == null ? NotFound() : Ok(deletedPost);

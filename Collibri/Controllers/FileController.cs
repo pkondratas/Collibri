@@ -1,4 +1,4 @@
-using Collibri.Models.Files;
+using Collibri.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Collibri.Controllers
