@@ -1,8 +1,8 @@
 using System.IO.Abstractions.TestingHelpers;
-using Collibri.Tests.Models.Files;
+using Collibri.Tests.Repositories.Files;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using File = Collibri.Models.Files.File;
+using File = Collibri.Models.File;
 
 namespace Collibri.Tests.Controllers
 {

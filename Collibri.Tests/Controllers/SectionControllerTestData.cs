@@ -1,4 +1,4 @@
-using Collibri.Models.Sections;
+using Collibri.Models;
 
 namespace Collibri.Tests.Controllers
 {

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { TextField, Button, Modal, Box, Typography, Divider } from "@mui/material";
+import CModal from "./CModal";
 
 const style = {
     position: 'absolute',
@@ -32,23 +33,31 @@ export const CreateRoom = ({createRoom}) => {
     return (
         <div>
             <Button size="large" onClick={handleOpen} variant="contained">Create Room</Button>
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <Box sx={style}>
-                    <Typography variant="h5">
-                        Create a new room
-                    </Typography>
-                    <TextField fullWidth id="roomName" label="Room name" variant="outlined"
-                               onChange={e => setName(e.target.value)} margin="normal"/>
-                    <Divider />
-                    <Button onClick={handleCreateRoom}>Confirm</Button>
-                    <Button onClick={handleClose}>Cancel</Button>
-                </Box>
-            </Modal>
+            <CModal showModal={open} handleClose={handleClose} handleChanges={handleCreateRoom} >
+                <Typography variant="h5">
+                    Create a new room
+                </Typography>
+                <TextField fullWidth id="roomName" label="Room name" variant="outlined"
+                           onChange={e => setName(e.target.value)} margin="normal"/>
+                <Divider />
+            </CModal>
+            {/*<Modal*/}
+            {/*    open={open}*/}
+            {/*    onClose={handleClose}*/}
+            {/*    aria-labelledby="modal-modal-title"*/}
+            {/*    aria-describedby="modal-modal-description"*/}
+            {/*>*/}
+            {/*    <Box sx={style}>*/}
+            {/*        <Typography variant="h5">*/}
+            {/*            Create a new room*/}
+            {/*        </Typography>*/}
+            {/*        <TextField fullWidth id="roomName" label="Room name" variant="outlined"*/}
+            {/*                   onChange={e => setName(e.target.value)} margin="normal"/>*/}
+            {/*        <Divider />*/}
+            {/*        <Button onClick={handleCreateRoom}>Confirm</Button>*/}
+            {/*        <Button onClick={handleClose}>Cancel</Button>*/}
+            {/*    </Box>*/}
+            {/*</Modal>*/}
         </div>
     );
 }

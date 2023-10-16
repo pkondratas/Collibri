@@ -1,19 +1,19 @@
-import React, {} from 'react';
+import React from 'react';
 import TableDisplay from "./TableDisplay";
-
-
+import Api from "./Api";
 import {Button} from "@mui/material";
-import Api from "../apis/Api";
 
-const ParentCombonent = () => {
+const ParentComponent = (props) => {
 
     const {sections, handleDelete, handleUpdate, handlePost} = Api();
 
     if (sections.length > 0) {
-        return (<>
+        return (
+          <>
             <TableDisplay sections={sections} handleDelete={handleDelete} handleUpdate={handleUpdate}
-                          handlePost={handlePost}/>
-        </>)
+                          handlePost={handlePost} setSectionId={props.setSectionId} />
+          </>
+        )
 
     }
     return (<>
@@ -23,6 +23,6 @@ const ParentCombonent = () => {
     )
 
 };
-export default ParentCombonent;
+export default ParentComponent;
 
 
