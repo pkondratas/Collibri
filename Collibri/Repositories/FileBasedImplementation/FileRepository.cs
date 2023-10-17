@@ -58,8 +58,10 @@ namespace Collibri.Repositories.FileBasedImplementation
 				return null;
 			}
 
-			var fileStream = _fileSystem.FileStream.New(path + separator + fileName, FileMode.Open, FileAccess.Read);
-			return new FileStreamResult(fileStream, "application/octet-stream");
+			using (var fileStream = _fileSystem.FileStream.New(path + separator + fileName, FileMode.Open, FileAccess.Read))
+			{
+				return new FileStreamResult(fileStream, "application/octet-stream");
+			}
 		}
 
 		public File? UpdateFileName(string fileName, string postId, string updatedName)
