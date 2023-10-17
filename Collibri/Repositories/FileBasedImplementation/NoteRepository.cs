@@ -1,5 +1,6 @@
 ﻿using Collibri.Models;
 using Collibri.Repositories.DataHandling;
+using Collibri.Repositories.ExtensionMethods;
 
 namespace Collibri.Repositories.FileBasedImplementation
 {
@@ -24,7 +25,7 @@ namespace Collibri.Repositories.FileBasedImplementation
                 }
             }
             
-            note.Id = new Random().Next(1, int.MaxValue);
+            note.Id = new int().GenerateNewId(noteList.Select(x => x.Id).ToList());
             note.CreationDate = DateTime.Now;
             note.LastUpdatedDate = note.CreationDate;
             noteList.Add(note);

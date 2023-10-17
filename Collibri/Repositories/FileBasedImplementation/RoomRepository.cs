@@ -1,5 +1,6 @@
 using Collibri.Models;
 using Collibri.Repositories.DataHandling;
+using Collibri.Repositories.ExtensionMethods;
 
 namespace Collibri.Repositories.FileBasedImplementation
 {
@@ -16,15 +17,10 @@ namespace Collibri.Repositories.FileBasedImplementation
 
         public Room CreateRoom(Room room)
         {
-            room.Id = GenerateUniqueId(_rooms);
+            room.Id = new int().GenerateNewId(_rooms.Select(x => x.Id).ToList());
             _rooms.Add(room);
             _dataHandler.PostAllItems(_rooms, ModelType.Rooms);
             return room;
-        }
-
-        private int GenerateUniqueId(List<Room> roomList)
-        {
-            return roomList.Count + 1;
         }
 
         public List<Room> GetAllRooms()

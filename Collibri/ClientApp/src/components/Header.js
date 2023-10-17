@@ -3,14 +3,18 @@ import { AppBar, Toolbar, Box, IconButton, Typography, OutlinedInput, InputAdorn
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SearchIcon from '@mui/icons-material/Search';
 import { HeaderStyles } from '../styles/HeaderStyles'; 
+import {useNavigate} from "react-router-dom";
 
 const Header = () => {
+    
+    const navigate = useNavigate();
+    
     return (
         <AppBar position="static" style={HeaderStyles.appBar}>
             <Toolbar style={HeaderStyles.toolbar}>
                 <Box style={HeaderStyles.box}>
-                    <Tooltip title="Back functionality not implemented">
-                        <IconButton color="inherit" aria-label="Back">
+                    <Tooltip title="Go back to room selection">
+                        <IconButton color="inherit" aria-label="Back" onClick={() => navigate("/room-page")}>
                             <ArrowBackIcon style={HeaderStyles.backButton} />
                         </IconButton>
                     </Tooltip>
