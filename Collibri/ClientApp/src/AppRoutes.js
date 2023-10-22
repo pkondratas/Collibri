@@ -1,6 +1,7 @@
 import { Home } from "./components/Home";
 import RoomLayout from "./components/RoomLayout";
 import { LandingPageLayout } from "./components/LandingPageLayout";
+import LoginPage from "./components/LoginPage";
 
 const AppRoutes = [
   {
@@ -14,6 +15,10 @@ const AppRoutes = [
   {
     path: '/room-page',
     element: <LandingPageLayout />
+  },
+  {
+    path: '/login',
+    element: <LoginPage />
   }
 ];
 
