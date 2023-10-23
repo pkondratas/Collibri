@@ -3,7 +3,7 @@ import {Button,Paper,Table,TableRow,TableCell,TableBody,TableContainer} from '@m
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
-const TableDisplay = ({sections, handleDelete, handleUpdate, handlePost, setSectionId}) => {
+const SectionsContainer = ({sections, handleDelete, handleUpdate, handlePost, setSectionId}) => {
     return (
         <>
 
@@ -15,7 +15,11 @@ const TableDisplay = ({sections, handleDelete, handleUpdate, handlePost, setSect
                                 key={row.sectionId}
                                 sx={{'&:last-child td, &:last-child th': {border: 0}}}
                             >
-                                <TableCell component="th" scope="row" onClick={() => setSectionId(row.sectionId)}> {"#" + row.sectionName} </TableCell>
+                                <TableCell component="th" scope="row">
+                                  <Button onClick={() => setSectionId(row.sectionId)}>
+                                    {"#" + row.sectionName}
+                                  </Button>
+                                </TableCell>
                                 <TableCell align="right"><Button startIcon={<DeleteIcon style={{fontSize: 30}}/>}
                                                                  onClick={() => handleDelete(row.sectionId)}></Button>
                                     <Button startIcon={<EditIcon style={{fontSize: 30}}/>}
@@ -33,4 +37,4 @@ const TableDisplay = ({sections, handleDelete, handleUpdate, handlePost, setSect
     );
 };
 
-export default TableDisplay;
+export default SectionsContainer;

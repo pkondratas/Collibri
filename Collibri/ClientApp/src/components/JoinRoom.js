@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "@mui/material";
+import { JoinCreateRoomStyles } from "../styles/JoinCreateRoomStyles";
 
 export const JoinRoom = () => {
     const handleJoinRoom = () => {
@@ -9,7 +10,7 @@ export const JoinRoom = () => {
 
     return (
         <div>
-            <Button size="large" onClick={handleJoinRoom} variant="contained">Join Room</Button>
+            <Button sx={JoinCreateRoomStyles.button} size="large" onClick={handleJoinRoom} variant="contained">Join Room</Button>
         </div>
     );
 }

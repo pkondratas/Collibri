@@ -22,11 +22,7 @@
     padding-top: 40%;
 }
 
-.create-button-area {
-    grid-row: span 1;
-    grid-column: span 1;
-}
-.join-button-area {
+.button-area {
     grid-row: span 1;
     grid-column: span 1;
 }

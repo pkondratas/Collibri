@@ -17,10 +17,10 @@ export const LandingPageLayout = () => {
             <Box className={"list"}>
                 <RoomList rooms={rooms} setRooms={setRooms}/>
             </Box>
-            <Box className={"create-button-area"}>
+            <Box className={"button-area"}>
                 <CreateRoom setRooms={setRooms}/>
             </Box>
-            <Box className={"join-button-area"}>
+            <Box className={"button-area"}>
                 <JoinRoom/>
             </Box>
         </Box>

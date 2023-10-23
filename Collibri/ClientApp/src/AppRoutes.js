@@ -5,15 +5,11 @@ import { LandingPageLayout } from "./components/LandingPageLayout";
 const AppRoutes = [
   {
     index: true,
-    element: <Home />
-  },
-  {
-    path: '/room/:roomId',
-    element: <RoomLayout />
-  },
-  {
-    path: '/room-page',
     element: <LandingPageLayout />
+  },
+  {
+    path: '/:roomId',
+    element: <RoomLayout />
   }
 ];
 
