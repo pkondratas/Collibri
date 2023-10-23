@@ -16,7 +16,7 @@ namespace Collibri.Repositories.FileBasedImplementation
         {
             var postList = _dataHandler.GetAllItems<Post>(ModelType.Posts);
 
-            post.PostId = Guid.NewGuid();
+            post.Id = Guid.NewGuid();
             post.CreationDate = DateTime.Now;
             post.LastUpdatedDate = DateTime.Now;
             postList.Add(post);
@@ -37,7 +37,7 @@ namespace Collibri.Repositories.FileBasedImplementation
         public Post? UpdatePostById(Guid postId, Post post)
         {
             var postList = _dataHandler.GetAllItems<Post>(ModelType.Posts);
-            var postToUpdate = postList.SingleOrDefault(x => x.PostId == postId);
+            var postToUpdate = postList.SingleOrDefault(x => x.Id == postId);
             
             if (postToUpdate == null)
             {
@@ -56,7 +56,7 @@ namespace Collibri.Repositories.FileBasedImplementation
         public Post? DeletePostById(Guid postId)
         {
             var postList = _dataHandler.GetAllItems<Post>(ModelType.Posts);
-            var postToDelete = postList.SingleOrDefault(x => x.PostId == postId);
+            var postToDelete = postList.SingleOrDefault(x => x.Id == postId);
 
             if (postToDelete == null || !postList.Remove(postToDelete))
             {

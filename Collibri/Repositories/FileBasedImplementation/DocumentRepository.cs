@@ -13,7 +13,7 @@ namespace Collibri.Repositories.FileBasedImplementation
             _dataHandler = dataHandler;
         }
 
-        public Document? CreateDocument(Document document, int sectionId)
+        public Document? CreateDocument(Document document, string postId)
         {
             var documentList = _dataHandler.GetAllItems<Document>(ModelType.Documents);
             document.Id = new int().GenerateNewId(documentList.Select(x => x.Id).ToList());
@@ -26,7 +26,7 @@ namespace Collibri.Repositories.FileBasedImplementation
                 }
             }
 
-            document.SectionId = sectionId;
+            document.PostId = Guid.Parse(postId);
             documentList.Add(document);
 
             _dataHandler.PostAllItems(documentList, ModelType.Documents);
@@ -34,10 +34,10 @@ namespace Collibri.Repositories.FileBasedImplementation
             return document;
         }
 
-        public IEnumerable<Document> GetDocuments(int sectionId)
+        public IEnumerable<Document> GetDocuments(string PostId)
         {
             var documentList = _dataHandler.GetAllItems<Document>(ModelType.Documents);
-            return documentList.Where(document => document.SectionId == sectionId);
+            return documentList.Where(document => document.PostId.Equals(Guid.Parse(PostId)));
         }
 
         public Document? DeleteById(int id)

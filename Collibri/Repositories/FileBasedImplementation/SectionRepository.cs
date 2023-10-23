@@ -17,15 +17,12 @@ namespace Collibri.Repositories.FileBasedImplementation
         {
             var sectionList = _dataHandler.GetAllItems<Section>(ModelType.Sections);
             
-            foreach (var sections in sectionList)
+            if (sectionList.Any(sections => sections.Equals(section)))
             {
-                if (sections.Equals(section))
-                {
-                    return null;
-                } 
+                return null;
             }
 
-            section.SectionId = new int().GenerateNewId(sectionList.Select(x => x.SectionId).ToList());
+            section.Id = new int().GenerateNewId(sectionList.Select(x => x.Id).ToList());
             sectionList.Add(section);
             
             _dataHandler.PostAllItems(sectionList, ModelType.Sections);
@@ -44,7 +41,7 @@ namespace Collibri.Repositories.FileBasedImplementation
         public Section? UpdateSectionById(Section newSection, int sectionId)
         {
             var sectionList = _dataHandler.GetAllItems<Section>(ModelType.Sections);
-            var sectionToUpdate = sectionList.SingleOrDefault(x => x.SectionId == sectionId);
+            var sectionToUpdate = sectionList.SingleOrDefault(x => x.Id == sectionId);
             
             //method 
             if (sectionList.Any(sections => sections.Equals(newSection)) || sectionToUpdate == null)
@@ -62,7 +59,7 @@ namespace Collibri.Repositories.FileBasedImplementation
         public Section? DeleteSectionById(int sectionId)
         {
             var sectionList = _dataHandler.GetAllItems<Section>(ModelType.Sections);
-            var sectionToDelete = sectionList.SingleOrDefault(x => x.SectionId == sectionId);
+            var sectionToDelete = sectionList.SingleOrDefault(x => x.Id == sectionId);
             
             if(sectionToDelete == null || !sectionList.Remove(sectionToDelete))
             {
