@@ -48,7 +48,6 @@ export const RoomList = ({rooms, setRooms}) => {
                                     onClick={() => {handleOpenModal(row)}
                                 }></Button>
                             </TableCell>
-
                         </TableRow>
                     ))}
                 </TableBody>

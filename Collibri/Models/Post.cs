@@ -8,7 +8,7 @@ namespace Collibri.Models
         public int SectionId { get; set; }
         public int LikeCount { get; set; }
         public int DislikeCount { get; set; }
-        public int NoteId { get; set; }
+        public string Description { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime LastUpdatedDate { get; set; }
 
@@ -19,7 +19,7 @@ namespace Collibri.Models
             int sectionId,
             int likeCount, 
             int dislikeCount, 
-            int noteId, 
+            string description, 
             DateTime creationDate, 
             DateTime lastUpdatedDate)
         {
@@ -29,7 +29,7 @@ namespace Collibri.Models
             SectionId = sectionId;
             LikeCount = likeCount;
             DislikeCount = dislikeCount;
-            NoteId = noteId;
+            Description = description;
             CreationDate = creationDate;
             LastUpdatedDate = lastUpdatedDate;
         }
