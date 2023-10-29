@@ -37,7 +37,19 @@ export const RoomList = ({rooms, setRooms}) => {
                             key={row.id}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
-                            <TableCell component="th" scope="row" onClick={() => navigate(`/room/${row.id}`)}> {row.name} </TableCell>
+                            <TableCell
+                                component="th"
+                                scope="row"
+                                onClick={() => navigate(`/room/${row.id}`)}
+                                sx={{
+                                    cursor: 'pointer',
+                                    '&:hover': {
+                                        color: '#38a3ff', // Change text color to light blue when hovered
+                                    },
+                                }}
+                            >
+                                {row.name}
+                            </TableCell>
                             
                             <TableCell align="center">
                                 <Button onClick={() => deleteRoom(row.id, setRooms)} startIcon={<DeleteIcon style={{fontSize: 25}}/>}></Button>
