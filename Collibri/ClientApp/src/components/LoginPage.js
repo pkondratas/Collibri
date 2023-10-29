@@ -1,10 +1,20 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { TextField, Button, Typography, Container, Paper, Box } from '@mui/material';
-import { Link } from 'react-router-dom';
 import { Tooltip } from '@mui/material';
 import { LoginPageStyles } from '../styles/LoginPageStyles.js';
+import ForgotPasswordModal from "./ForgotPasswordModal";
 
 const LoginPage = () => {
+    const [forgotPasswordModalOpen, setForgotPasswordModalOpen] = useState(false);
+
+    const handleForgotPasswordClick = () => {
+        setForgotPasswordModalOpen(true);
+    };
+
+    const closeForgotPasswordModal = () => {
+        setForgotPasswordModalOpen(false);
+    };
+    
     return (
         <Box style={LoginPageStyles.container}>
             <Box style={LoginPageStyles.header}>
@@ -40,11 +50,9 @@ const LoginPage = () => {
                             sx={LoginPageStyles.input}
                         />
                         <Typography variant="body2" style={LoginPageStyles.link}>
-                            <Tooltip title="Functionality not implemented" arrow>
-                                <Link to="/forgot-password" style={LoginPageStyles.link}>
+                                <span style={{ cursor: 'pointer' }} onClick={handleForgotPasswordClick}>
                                     Forgot Password?
-                                </Link>
-                            </Tooltip>
+                                </span>
                         </Typography>
                         <Tooltip title="Functionality not implemented" arrow>
                             <Button type="submit" fullWidth variant="contained" style={LoginPageStyles.button}>
@@ -54,6 +62,10 @@ const LoginPage = () => {
                     </Box>
                 </Paper>
             </Container>
+            <ForgotPasswordModal
+                open={forgotPasswordModalOpen}
+                onClose={closeForgotPasswordModal}
+            />
         </Box>
     );
 };
