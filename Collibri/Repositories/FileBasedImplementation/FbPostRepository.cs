@@ -3,11 +3,11 @@ using Collibri.Repositories.DataHandling;
 
 namespace Collibri.Repositories.FileBasedImplementation
 {
-    public class PostRepository : IPostRepository
+    public class FbPostRepository : IPostRepository
     {
         private readonly IDataHandler _dataHandler;
         
-        public PostRepository(IDataHandler dataHandler)
+        public FbPostRepository(IDataHandler dataHandler)
         {
             _dataHandler = dataHandler;
         }

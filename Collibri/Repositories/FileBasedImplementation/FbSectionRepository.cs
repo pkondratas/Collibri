@@ -4,11 +4,11 @@ using Collibri.Repositories.ExtensionMethods;
 
 namespace Collibri.Repositories.FileBasedImplementation
 {
-    public class SectionRepository : ISectionRepository
+    public class FbSectionRepository : ISectionRepository
     {
         private readonly IDataHandler _dataHandler;
 
-        public SectionRepository(IDataHandler dataHandler)
+        public FbSectionRepository(IDataHandler dataHandler)
         {
             _dataHandler = dataHandler;
         }
