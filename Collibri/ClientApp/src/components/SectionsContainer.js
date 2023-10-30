@@ -5,7 +5,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import '../styles/tableList.css';
 import {buttonStyle, nameCellStyle, tableRowStyle} from "../styles/tableListStyle";
 
-const TableDisplay = ({sections, handleDelete, handleUpdate, handlePost, setSectionId}) => {
+const SectionsContainer = ({sections, handleDelete, handleUpdate, handlePost, setSectionId}) => {
     return (
         <>
 
@@ -37,4 +37,4 @@ const TableDisplay = ({sections, handleDelete, handleUpdate, handlePost, setSect
     );
 };
 
-export default TableDisplay;
+export default SectionsContainer;

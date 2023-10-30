@@ -51,7 +51,7 @@ export const RoomList = ({rooms, setRooms}) => {
                             key={row.id}
                             sx={tableRowStyle}
                         >
-                            <TableCell sx={nameCellStyle} component="th" scope="row" onClick={() => navigate(`/room/${row.id}`)}> {row.name} </TableCell>
+                            <TableCell sx={nameCellStyle} component="th" scope="row" onClick={() => navigate(`/${row.id}`)}> {row.name} </TableCell>
                             
                             <TableCell align="center">
                                 <Button sx={buttonStyle} className="Button" onClick={() => {handleOpenDeleteModal(row)}} startIcon={<DeleteIcon style={{fontSize: 25}}/>}></Button>
