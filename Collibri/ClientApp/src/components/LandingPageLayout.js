@@ -8,21 +8,48 @@ import {RoomList} from "./RoomList";
 export const LandingPageLayout = () => {
 
     const [rooms, setRooms] = useState([]);
-    
+
     return (
-        <Box className={"main"}>
-            <Box className={"room-page-header"}>
-                Collibri
-            </Box>
-            <Box className={"list"}>
-                <RoomList rooms={rooms} setRooms={setRooms}/>
-            </Box>
-            <Box className={"button-area"}>
-                <CreateRoom setRooms={setRooms}/>
-            </Box>
-            <Box className={"button-area"}>
-                <JoinRoom/>
-            </Box>
-        </Box>
+        <Grid container
+              style={{width: "100vw", height: "100vh"}}>
+
+            {/*Header*/}
+            <Grid item xs={6} style={headerStyle}>
+                <ThemeProvider theme={headerTextTheme}>
+                    <Typography>
+                        Collibri
+                    </Typography>
+                </ThemeProvider>
+            </Grid>
+
+            {/*List and buttons*/}
+            <Grid item xs={6}
+                  container
+                  direction="column"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  style={{paddingTop: "2em", paddingBottom: "9em"}}>
+
+                {/*List*/}
+                <Grid item>
+                    <RoomList rooms={rooms} setRooms={setRooms}/>
+                </Grid>
+
+                {/*Button grid*/}
+                <Grid item
+                      container
+                      direction="row"
+                      justifyContent="space-evenly"
+                      alignItems="center">
+                    <Grid item>
+                        <CreateRoom setRooms={setRooms}/>
+                    </Grid>
+                    <Grid item>
+                        <JoinRoom/>
+                    </Grid>
+                </Grid>
+
+            </Grid>
+        </Grid>
     );
 }

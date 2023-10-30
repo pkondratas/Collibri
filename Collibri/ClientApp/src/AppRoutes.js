@@ -10,6 +10,10 @@ const AppRoutes = [
   {
     path: '/:roomId',
     element: <RoomLayout />
+  },
+  {
+    path: '/login',
+    element: <LoginPage />
   }
 ];
 
