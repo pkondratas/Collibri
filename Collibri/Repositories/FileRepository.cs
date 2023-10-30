@@ -1,4 +1,5 @@
 using System.IO.Abstractions;
+using Collibri.Models;
 using Microsoft.AspNetCore.Mvc;
 using File = Collibri.Models.File;
 
@@ -31,6 +32,9 @@ namespace Collibri.Repositories.FileBasedImplementation
 			{
 				file.CopyTo(fileStream);
 			}
+
+			var room = new Room() { Id = 5, Name = "name" };
+            
 			return (File?) new File(path + separator + file.FileName, Guid.Parse(postId));
 		}
 

@@ -7,18 +7,18 @@ namespace Collibri.Tests.Repositories.Documents
         public CreateDocumentTestData()
         {
             //Correct input
-            Add(0, new Document(6, Guid.NewGuid(), "title", "text", 0),
+            Add(0, new Document() { Id = 6, PostId = Guid.NewGuid(), Title = "title", Text = "text" },
                 new List<Document>
                 {
-                    new Document(15, Guid.NewGuid(), "title", "text", 0),
-                    new Document(481, Guid.NewGuid(), "title", "text", 0)
+                    new Document() { Id = 15, PostId = Guid.NewGuid(), Title = "title", Text = "text" },
+                    new Document() { Id = 481, PostId = Guid.NewGuid(), Title = "title", Text = "text" }
                 });
             //Failling input
-            Add(0, new Document(50, Guid.NewGuid(), "title", "text", 0),
+            Add(0, new Document() { Id = 50, PostId = Guid.NewGuid(), Title = "title", Text = "text" },
                 new List<Document>
                 {
-                    new Document(50, Guid.NewGuid(), "title", "text", 0),
-                    new Document(481, Guid.NewGuid(), "title", "text", 0)
+                    new Document() { Id = 50, PostId = Guid.NewGuid(), Title = "title", Text = "text" },
+                    new Document() { Id = 481, PostId = Guid.NewGuid(), Title = "title", Text = "text" }
                 });
         }
     }
@@ -30,15 +30,8 @@ namespace Collibri.Tests.Repositories.Documents
             Add(1,
                 new List<Document>
                 {
-                    new Document(123, Guid.NewGuid(), "matke", "text", 5),
-                    new Document(456, Guid.NewGuid(), "matke", "text", 5)
-                }
-            );
-            Add(1,
-                new List<Document>
-                {
-                    new Document(123, Guid.NewGuid(), "matke", "text", 5),
-                    new Document(456, Guid.NewGuid(), "matke", "text", 4)
+                    new Document() { Id = 123, PostId = Guid.NewGuid(), Title = "title", Text = "text" },
+                    new Document() { Id = 456, PostId = Guid.NewGuid(), Title = "title", Text = "text" }
                 }
             );
             Add(1, new List<Document>());
@@ -51,25 +44,25 @@ namespace Collibri.Tests.Repositories.Documents
         {
             Guid sameGuid = new Guid();
             //Correct input
-            Add(new Document(123, sameGuid, "new matke", "new text", 5),
-                new Document(123, sameGuid, "new matke", "new text", 5), 123,
+            Add(new Document() { Id = 123, PostId = sameGuid, Title = "new title", Text = "new text" },
+                new Document() { Id = 123, PostId = sameGuid, Title = "new title", Text = "new text" }, 123,
                 new List<Document>
                 {
-                    new Document(456, Guid.NewGuid(), "random", "random", 5),
-                    new Document(123, sameGuid, "to update", "to update", 5)
+                    new Document() { Id = 456, PostId = Guid.NewGuid(), Title = "random", Text = "random" },
+                    new Document() { Id = 123, PostId = sameGuid, Title = "to update", Text = "to update" }
                 }
             );
             //Failing input
-            Add(new Document(123, Guid.NewGuid(), "matke", "text", 5), null, 123,
+            Add(new Document() { Id = 123, PostId = sameGuid, Title = "new title", Text = "new text" }, null, 123,
                 new List<Document>
                 {
-                    new Document(456, Guid.NewGuid(), "random", "random", 5),
-                    new Document(12378, Guid.NewGuid(), "to update", "to update", 5)
+                    new Document() { Id = 456, PostId = Guid.NewGuid(), Title = "new title", Text = "new text" },
+                    new Document() { Id = 123456, PostId = Guid.NewGuid(), Title = "new title", Text = "new text" }
                 }
             );
             //Failing input
 
-            Add(new Document(123, Guid.NewGuid(), "matke", "text", 5), null, 123, new List<Document>());
+            Add(new Document() { Id = 123, PostId = Guid.NewGuid(), Title = "title", Text = "text" }, null, 123, new List<Document>());
         }
     }
 
@@ -79,18 +72,18 @@ namespace Collibri.Tests.Repositories.Documents
         {
             Guid sameGuid = new Guid();
             //Correct input
-            Add(123, new Document(123, sameGuid, "matke to delete", "text to delete", 5),
+            Add(123, new Document(){ Id = 123, PostId = sameGuid, Title = "new title", Text = "new text" },
                 new List<Document>
                 {
-                    new Document(4561, Guid.NewGuid(), "matke random", "text random", 7),
-                    new Document(123, sameGuid, "matke to delete", "text to delete", 5)
+                    new Document(){ Id = 456789, PostId = Guid.NewGuid(), Title = "new title", Text = "new text" },
+                    new Document(){ Id = 123, PostId = sameGuid, Title = "new title", Text = "new text" }
                 });
             //Failing input
             Add(123, null,
                 new List<Document>
                 {
-                    new Document(4561, Guid.NewGuid(), "matke random", "text random", 7),
-                    new Document(459, Guid.NewGuid(), "matke to delete", "text to delete", 5)
+                    new Document(){ Id = 456789, PostId = Guid.NewGuid(), Title = "new title", Text = "new text" },
+                    new Document(){ Id = 123, PostId = Guid.NewGuid(), Title = "new title", Text = "new text" }
                 });
             Add(123, null, new List<Document>());
         }

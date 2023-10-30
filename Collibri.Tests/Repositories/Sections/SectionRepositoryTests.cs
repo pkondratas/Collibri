@@ -15,7 +15,7 @@ namespace Collibri.Tests.Repositories.Sections
         {   
             //Assign
             var dataHandler = new Mock<IDataHandler>();
-            var repository = new SectionRepository(dataHandler.Object);
+            var repository = new FbSectionRepository(dataHandler.Object);
             dataHandler
                 .Setup(x => x.GetAllItems<Section>(ModelType.Sections)).Returns(list);
 
@@ -39,7 +39,7 @@ namespace Collibri.Tests.Repositories.Sections
         {
             //Assign
             var dataHandler = new Mock<IDataHandler>();
-            var repository = new SectionRepository(dataHandler.Object);
+            var repository = new FbSectionRepository(dataHandler.Object);
             dataHandler
                 .Setup(x => x.GetAllItems<Section>(ModelType.Sections)).Returns(list);
             
@@ -60,7 +60,7 @@ namespace Collibri.Tests.Repositories.Sections
         {
             //Assign
             var dataHandler = new Mock<IDataHandler>();
-            var repository = new SectionRepository(dataHandler.Object);
+            var repository = new FbSectionRepository(dataHandler.Object);
             dataHandler
                 .Setup(x => x.GetAllItems<Section>(ModelType.Sections)).Returns(list);
             
@@ -80,7 +80,7 @@ namespace Collibri.Tests.Repositories.Sections
         {
             //Assign
             var dataHandler = new Mock<IDataHandler>();
-            var repository = new SectionRepository(dataHandler.Object);
+            var repository = new FbSectionRepository(dataHandler.Object);
             dataHandler
                 .Setup(x => x.GetAllItems<Section>(ModelType.Sections)).Returns(list);
             
