@@ -6,6 +6,7 @@ const Api = () => {
     const {roomId} = useParams()
 
     useEffect(() => {
+        // console.log("data")
         fetch('/v1/sections?roomId=' + roomId)
             .then(response => response.json())
             .then(data => {
@@ -13,7 +14,7 @@ const Api = () => {
                 setSections(data);
             })
             .catch(error => console.error('Error fetching data:', error));
-    }, [roomId]);
+    }, []);
 
     const handleDelete = id => {
         fetch(`/v1/sections?sectionId=${id}`, {

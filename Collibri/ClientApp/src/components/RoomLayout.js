@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import {Grid, Paper} from '@mui/material';
+import {Button, Grid, Paper} from '@mui/material';
 import ParentComponent from "./ParentComponent";
 import PostContainer from "./PostContainer";
 import Header from "./Header";
 import { postContainerStyle } from "../styles/RoomLayoutStyle";
+import {AddSection} from "./AddSection";
 
 
 const RoomLayout = () => {
   const [sectionId, setSectionId] = useState(0);
+  const [sections, setSections] = useState([]);
   
   return (
 
@@ -22,7 +24,8 @@ const RoomLayout = () => {
         <Paper>rooms</Paper>
       </Grid>
       <Grid item md={4}>
-        <Paper><ParentComponent setSectionId={setSectionId} /></Paper>
+            <AddSection setSections={setSections} ></AddSection>
+          <Paper><ParentComponent sections={sections} setSections={setSections} setSectionId={setSectionId} /></Paper>
       </Grid>
       <Grid item xs={6}>
         <Paper sx={postContainerStyle}>
