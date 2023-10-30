@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React, { useState } from "react";
 import { CreateRoom } from "./CreateRoom";
 import { JoinRoom } from "./JoinRoom";
 import './LandingPage.css';
-import { Box } from "@mui/material";
 import {RoomList} from "./RoomList";
+import {Grid, ThemeProvider, Typography} from "@mui/material";
+import {headerStyle, headerTextTheme} from "../styles/LandingPageStyle";
 
 export const LandingPageLayout = () => {
 

@@ -29,31 +29,31 @@ export const RoomList = ({rooms, setRooms}) => {
     
     return (
         <Box>
-        <TableContainer component={Paper} style={{ maxHeight: 400 }}>
-            <Table stickyHeader sx={{ minWidth:300 }} aria-label="simple table">
-                <TableBody>
-                    {rooms.map((row) => (
-                        <TableRow
-                            key={row.id}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                        >
-                            <TableCell component="th" scope="row" onClick={() => navigate(`/${row.id}`)}> {row.name} </TableCell>
-                            
-                            <TableCell align="center">
-                                <Button onClick={() => deleteRoom(row.id, setRooms)} startIcon={<DeleteIcon style={{fontSize: 25}}/>}></Button>
-                            </TableCell>
-                            
-                            <TableCell align="center">
-                                <Button startIcon={<EditIcon style={{fontSize: 25}}/>}
-                                    onClick={() => {handleOpenModal(row)}
-                                }></Button>
-                            </TableCell>
-
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+            <TableContainer component={Paper} style={{ maxHeight: 400 }}>
+                <Table stickyHeader sx={{ minWidth:300 }} aria-label="simple table">
+                    <TableBody>
+                        {rooms.map((row) => (
+                            <TableRow
+                                key={row.id}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            >
+                                <TableCell component="th" scope="row" onClick={() => navigate(`/${row.id}`)}> {row.name} </TableCell>
+                                
+                                <TableCell align="center">
+                                    <Button onClick={() => deleteRoom(row.id, setRooms)} startIcon={<DeleteIcon style={{fontSize: 25}}/>}></Button>
+                                </TableCell>
+                                
+                                <TableCell align="center">
+                                    <Button startIcon={<EditIcon style={{fontSize: 25}}/>}
+                                        onClick={() => {handleOpenModal(row)}
+                                    }></Button>
+                                </TableCell>
+    
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
             <UpdateRoomModal room={room} updateModal={updateModal} setUpdateModal={setUpdateModal} updateRoomName={updateRoomName}/>
         </Box>
     );
