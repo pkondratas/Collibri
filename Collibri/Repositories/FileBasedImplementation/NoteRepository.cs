@@ -76,7 +76,7 @@ namespace Collibri.Repositories.FileBasedImplementation
                     return note;
                 }
             }
-
+            
             return null;
         }
 
