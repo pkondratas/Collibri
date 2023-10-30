@@ -28,6 +28,10 @@
 
 
 
+    <ItemGroup>
+      <Folder Include="ClientApp\src\themes\" />
+    </ItemGroup>
+
     </ItemGroup>
 
 

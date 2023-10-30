@@ -1,1 +1,57 @@
-[]
+[
+  {
+    "Name": "New Note",
+    "Text": "Same note as for some others",
+    "Author": "Me",
+    "SectionId": 1,
+    "RoomId": 2,
+    "PostId": "506c990f-4832-4772-a845-8beaa45cb4b4",
+    "Id": 123,
+    "CreationDate": "2023-10-11T17:43:26.582703+03:00",
+    "LastUpdatedDate": "2023-10-11T17:43:26.582703+03:00"
+  },
+  {
+    "Name": "Yeehaw",
+    "Text": "Noterinio",
+    "Author": "Pardner",
+    "SectionId": 1,
+    "RoomId": 2,
+    "PostId": "00000000-0000-0000-0000-000000000000",
+    "Id": 234,
+    "CreationDate": "2023-10-11T17:43:26.6624906+03:00",
+    "LastUpdatedDate": "2023-10-11T17:43:26.6624906+03:00"
+  },
+  {
+    "Name": "Another Note",
+    "Text": "Nothing to see here, just another note. Nothing to see here, just another note. Nothing to see here, just another note. Nothing to see here, just another note. aha ahaaha ahaaha ahaaha aha",
+    "Author": "Somebody",
+    "SectionId": 2,
+    "RoomId": 3,
+    "PostId": "00000000-0000-0000-0000-000000000000",
+    "Id": 345,
+    "CreationDate": "2023-10-11T17:43:26.7012288+03:00",
+    "LastUpdatedDate": "2023-10-11T17:43:26.7012288+03:00"
+  },
+  {
+    "Name": "Yeehaww",
+    "Text": "Long loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong text",
+    "Author": "Pardner",
+    "SectionId": 1,
+    "RoomId": 2,
+    "PostId": "00000000-0000-0000-0000-000000000000",
+    "Id": 456,
+    "CreationDate": "2023-10-11T18:14:32.3799502+03:00",
+    "LastUpdatedDate": "2023-10-11T18:14:32.3799502+03:00"
+  },
+  {
+    "Name": "New Nooote",
+    "Text": "This is a new note",
+    "Author": "Me",
+    "SectionId": 1,
+    "RoomId": 2,
+    "PostId": "00000000-0000-0000-0000-000000000000",
+    "Id": 2053871880,
+    "CreationDate": "2023-10-16T12:19:15.8379164+03:00",
+    "LastUpdatedDate": "2023-10-16T12:19:15.8379164+03:00"
+  }
+]
