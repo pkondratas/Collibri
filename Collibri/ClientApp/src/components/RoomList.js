@@ -6,6 +6,8 @@ import UpdateRoomModal from "./UpdateRoomModal";
 import { useNavigate } from "react-router-dom";
 import {deleteRoom, getRooms, updateRoom} from "../api/LandingPageApi";
 import DeleteRoomModal from "./DeleteRoomModal";
+import {buttonStyle, nameCellStyle, tableRowStyle} from "../styles/tableListStyle";
+import '../styles/tableList.css';
 
 export const RoomList = ({rooms, setRooms}) => {
 
@@ -44,17 +46,19 @@ export const RoomList = ({rooms, setRooms}) => {
                 <TableBody>
                     {rooms.map((row) => (
                         <TableRow
+                            hover
+                            className="TableRow"
                             key={row.id}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            sx={tableRowStyle}
                         >
-                            <TableCell component="th" scope="row" onClick={() => navigate(`/room/${row.id}`)}> {row.name} </TableCell>
+                            <TableCell sx={nameCellStyle} component="th" scope="row" onClick={() => navigate(`/room/${row.id}`)}> {row.name} </TableCell>
                             
                             <TableCell align="center">
-                                <Button onClick={() => {handleOpenDeleteModal(row)}} startIcon={<DeleteIcon style={{fontSize: 25}}/>}></Button>
+                                <Button sx={buttonStyle} className="Button" onClick={() => {handleOpenDeleteModal(row)}} startIcon={<DeleteIcon style={{fontSize: 25}}/>}></Button>
                             </TableCell>
                             
                             <TableCell align="center">
-                                <Button startIcon={<EditIcon style={{fontSize: 25}}/>}
+                                <Button sx={buttonStyle} className="Button" startIcon={<EditIcon style={{fontSize: 25}}/>}
                                     onClick={() => {handleOpenUpdateModal(row)}
                                 }></Button>
                             </TableCell>
