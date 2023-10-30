@@ -1,5 +1,5 @@
 import React from 'react';
-import TableDisplay from "./TableDisplay";
+import SectionsContainer from "./SectionsContainer";
 import Api from "../api/Api";
 import {Button} from "@mui/material";
 
@@ -10,8 +10,8 @@ const ParentComponent = (props) => {
     if (sections.length > 0) {
         return (
           <>
-            <TableDisplay sections={sections} handleDelete={handleDelete} handleUpdate={handleUpdate}
-                          handlePost={handlePost} setSectionId={props.setSectionId} />
+            <SectionsContainer sections={sections} handleDelete={handleDelete} handleUpdate={handleUpdate}
+                               handlePost={handlePost} setSectionId={props.setSectionId} />
           </>
         )
 
