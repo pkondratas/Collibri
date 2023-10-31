@@ -15,8 +15,8 @@ namespace Collibri.Repositories.DbImplementation
         public Post CreatePost(Post post)
         {
             post.Id = Guid.NewGuid();
-            post.CreationDate = DateTime.Now;
-            post.LastUpdatedDate = DateTime.Now;
+            post.CreationDate = DateTime.UtcNow;
+            post.LastUpdatedDate = DateTime.UtcNow;
             _context.Posts.Add(post);
             _context.SaveChanges();
 
@@ -40,7 +40,7 @@ namespace Collibri.Repositories.DbImplementation
             postToUpdate.LikeCount = post.LikeCount;
             postToUpdate.DislikeCount = post.DislikeCount;
             postToUpdate.Title = post.Title;
-            postToUpdate.LastUpdatedDate = DateTime.Now;
+            postToUpdate.LastUpdatedDate = DateTime.UtcNow;
             _context.Posts.Update(postToUpdate);
             _context.SaveChanges();
 

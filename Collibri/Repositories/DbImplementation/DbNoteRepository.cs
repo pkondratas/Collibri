@@ -22,7 +22,7 @@ namespace Collibri.Repositories.DbImplementation
             }
             
             note.Id = new int().GenerateNewId(noteList.Select(x => x.Id).ToList());
-            note.CreationDate = DateTime.Now;
+            note.CreationDate = DateTime.UtcNow;
             note.LastUpdatedDate = note.CreationDate;
 
             _context.Notes.Add(note);
@@ -65,7 +65,7 @@ namespace Collibri.Repositories.DbImplementation
         
             targetNote.Name = note.Name; 
             targetNote.Text = note.Text;
-            targetNote.LastUpdatedDate = DateTime.Now;
+            targetNote.LastUpdatedDate = DateTime.UtcNow;
 
             _context.Notes.Update(targetNote);
             _context.SaveChanges();
