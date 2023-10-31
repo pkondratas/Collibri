@@ -27,10 +27,10 @@ namespace Collibri.Repositories.FileBasedImplementation
 				return null;
 			}
 
-			using (var fileStream = _fileSystem.File.Create(path + separator + file.FileName))
-			{
-				file.CopyTo(fileStream);
-			}
+			var fileStream = _fileSystem.File.Create(path + separator + file.FileName);
+			
+			file.CopyTo(fileStream);
+			
 			return (File?) new File(path + separator + file.FileName, Guid.Parse(postId));
 		}
 
