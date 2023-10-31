@@ -22,7 +22,7 @@ export const CreateRoom = ({setRooms}) => {
     }
 
     function handleCreateRoom() {
-        if (nameFieldRef.current.value.trim() === null || nameFieldRef.current.value.trim() === '') {
+        if (nameFieldRef.current.value === null || nameFieldRef.current.value.trim() === '') {
             setError(true);
             return;
         } else {

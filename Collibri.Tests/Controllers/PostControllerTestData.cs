@@ -7,42 +7,24 @@ namespace Collibri.Tests.Controllers
         public CreatePostTestData()
         {
             //Correct input
-
-            Add(
-                new Post()
-                {
-                    Id = Guid.Empty, CreatorUsername = "user", Title = "title", LikeCount = 1, DislikeCount = 1,
-                    SectionId = 1, CreationDate = DateTime.Now, LastUpdatedDate = DateTime.Now
-                },
-                new Post()
-                {
-                    Id = Guid.Empty, CreatorUsername = "user", Title = "title", LikeCount = 1, DislikeCount = 1,
-                    SectionId = 1, CreationDate = DateTime.Now, LastUpdatedDate = DateTime.Now
-                });
+            Add(new Post(Guid.Empty, "user", "title", 1, 0, 0, "test", DateTime.Now, DateTime.Now),
+                new Post(Guid.NewGuid(), "user", "title", 1, 0, 0, "test", DateTime.Now, DateTime.Now));
         }
-    }
-
+    }   
+    
     public class GetAllPostsTestData : TheoryData<int, IEnumerable<Post>>
     {
         public GetAllPostsTestData()
         {
             //Correct input
-            Add(1,
+            Add(1, 
                 new List<Post>
                 {
-                    new Post()
-                    {
-                        Id = Guid.Empty, CreatorUsername = "user1", Title = "title1", LikeCount = 1, DislikeCount = 1,
-                        SectionId = 1, CreationDate = DateTime.Now, LastUpdatedDate = DateTime.Now
-                    },
-                    new Post()
-                    {
-                        Id = Guid.Empty, CreatorUsername = "user2", Title = "title2", LikeCount = 1, DislikeCount = 1,
-                        SectionId = 1, CreationDate = DateTime.Now, LastUpdatedDate = DateTime.Now
-                    }
+                    new Post(Guid.NewGuid(), "user1", "title1", 1, 0, 0, "test",  DateTime.Now, DateTime.Now),
+                    new Post(Guid.NewGuid(), "user2", "title2", 1, 2, 0, "test", DateTime.Now, DateTime.Now) 
                 }.AsEnumerable()
             );
-            Add(1,
+            Add(1, 
                 new List<Post>().AsEnumerable()
             );
         }
@@ -54,46 +36,26 @@ namespace Collibri.Tests.Controllers
         {
             //Correct input
             Add(new Guid("2b8b88a3-cd97-48cf-9d4d-ef8db4ac4a61"),
-                new Post()
-                {
-                    Id = new Guid("2b8b88a3-cd97-48cf-9d4d-ef8db4ac4a61"), CreatorUsername = "user", Title = "title",
-                    LikeCount = 1, DislikeCount = 1, SectionId = 1, CreationDate = DateTime.Now,
-                    LastUpdatedDate = DateTime.Now
-                },
-                new Post()
-                {
-                    Id = new Guid("2b8b88a3-cd97-48cf-9d4d-ef8db4ac4a61"), CreatorUsername = "user", Title = "title",
-                    LikeCount = 1, DislikeCount = 1, SectionId = 1, CreationDate = DateTime.Now,
-                    LastUpdatedDate = DateTime.Now
-                },
+                new Post(new Guid("2b8b88a3-cd97-48cf-9d4d-ef8db4ac4a61"), "user1", "title1", 1, 0, 0, "test",  DateTime.Now, DateTime.Now),
+                new Post(new Guid("2b8b88a3-cd97-48cf-9d4d-ef8db4ac4a61"), "user1", "title1", 1, 0, 0, "test",  DateTime.Now, DateTime.Now),
                 200);
             //Failing input
             Add(new Guid("2b8b88a3-cd97-48cf-9d4d-ef8db4ac4a61"),
-                new Post()
-                {
-                    Id = new Guid("2b8b88a3-cd97-48cf-9d4d-ef8db4ac4a61"), CreatorUsername = "user", Title = "title",
-                    LikeCount = 1, DislikeCount = 1, SectionId = 1, CreationDate = DateTime.Now,
-                    LastUpdatedDate = DateTime.Now
-                },
+                new Post(new Guid("2b8b88a3-cd97-48cf-9d4d-ef8db4ac4a61"), "user1", "title1", 1, 0, 0, "test",  DateTime.Now, DateTime.Now),
                 null,
                 404);
         }
     }
-
+    
     public class DeletePostByIdTestData : TheoryData<Guid, Post?>
     {
         public DeletePostByIdTestData()
         {
             //Correct input
-            Add(new Guid("2b8b88a3-cd97-48cf-9d4d-ef8db4ac4a61"),
-                new Post()
-                {
-                    Id = new Guid("2b8b88a3-cd97-48cf-9d4d-ef8db4ac4a61"), CreatorUsername = "user", Title = "title",
-                    LikeCount = 1, DislikeCount = 1, SectionId = 1, CreationDate = DateTime.Now,
-                    LastUpdatedDate = DateTime.Now
-                });
+            Add(new Guid("2b8b88a3-cd97-48cf-9d4d-ef8db4ac4a61"), 
+                new Post(new Guid("2b8b88a3-cd97-48cf-9d4d-ef8db4ac4a61"), "user1", "new title", 1, 2, 1, "test",  new DateTime(), new DateTime()));
             //Failing input
-            Add(new Guid("2b8b88a3-cd97-48cf-9d4d-ef8db4ac4a62"),
+            Add(new Guid("2b8b88a3-cd97-48cf-9d4d-ef8db4ac4a62"), 
                 null);
         }
     }

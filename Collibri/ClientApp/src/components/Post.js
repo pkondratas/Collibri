@@ -91,9 +91,9 @@ const Post = (props) => {
     setDisliked(!disliked);
   }
   
-  useEffect(() => {
-    fetchNote(props.noteId, setNote);
-  }, [props.noteId]);
+  //useEffect(() => {
+  //  fetchNote(props.noteId, setNote);
+  //}, [props.noteId]);
   
   return(
     <>
@@ -108,7 +108,7 @@ const Post = (props) => {
               color="text.secondary"
               sx={postNoteStyle}
             >
-              {note.text}
+              {props.description}
             </Typography>
             <Box sx={postEditingBox}>
               <Button sx={postEditingButtons} className="Button" onClick={() => {setDeleteModal(true)}}>
