@@ -12,7 +12,7 @@ namespace Collibri.Tests.Repositories.Posts
         {   
             //Assign
             var dataHandler = new Mock<IDataHandler>();
-            var repository = new PostRepository(dataHandler.Object);
+            var repository = new FbPostRepository(dataHandler.Object);
             dataHandler
                 .Setup(x => x.GetAllItems<Post>(ModelType.Posts)).Returns(new List<Post>());
             
@@ -21,7 +21,7 @@ namespace Collibri.Tests.Repositories.Posts
             
             //Assert
             Assert.Equivalent(post.SectionId , actual.SectionId);
-            Assert.True(Guid.Empty != actual.PostId);
+            Assert.True(Guid.Empty != actual.Id);
         }
 
         [Theory]
@@ -32,7 +32,7 @@ namespace Collibri.Tests.Repositories.Posts
         {
             //Assign
             var dataHandler = new Mock<IDataHandler>();
-            var repository = new PostRepository(dataHandler.Object);
+            var repository = new FbPostRepository(dataHandler.Object);
             dataHandler
                 .Setup(x => x.GetAllItems<Post>(ModelType.Posts)).Returns(list);
             
@@ -53,7 +53,7 @@ namespace Collibri.Tests.Repositories.Posts
         {
             //Assign
             var dataHandler = new Mock<IDataHandler>();
-            var repository = new PostRepository(dataHandler.Object);
+            var repository = new FbPostRepository(dataHandler.Object);
             dataHandler
                 .Setup(x => x.GetAllItems<Post>(ModelType.Posts)).Returns(list);
 
@@ -79,7 +79,7 @@ namespace Collibri.Tests.Repositories.Posts
         {
             //Assign
             var dataHandler = new Mock<IDataHandler>();
-            var repository = new PostRepository(dataHandler.Object);
+            var repository = new FbPostRepository(dataHandler.Object);
             dataHandler
                 .Setup(x => x.GetAllItems<Post>(ModelType.Posts)).Returns(list);
 

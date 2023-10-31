@@ -9,23 +9,23 @@ namespace Collibri.Tests.Repositories.Documents
         [Theory]
         [ClassData(typeof(CreateDocumentTestData))]
         public void CreateDocument_Should_ReturnDocument_WhenIdIsUnique(
-            int sectionId,
+            string postId,
             Document document,
             List<Document> list)
         {
             //Assign
             Document? expected = null;
             var dataHandler = new Mock<IDataHandler>();
-            var repository = new DocumentRepository(dataHandler.Object);
+            var repository = new FbDocumentRepository(dataHandler.Object);
             dataHandler.Setup(x => x.GetAllItems<Document>(ModelType.Documents)).Returns(list);
 
             //Act
-            var actual = repository.CreateDocument(document, sectionId);
+            var actual = repository.CreateDocument(document, postId);
 
             if (actual != null)
             {
                 expected = document;
-                expected.SectionId = actual.SectionId;
+                expected.PostId = actual.PostId;
             }
 
             //Assert
@@ -35,21 +35,21 @@ namespace Collibri.Tests.Repositories.Documents
         [Theory]
         [ClassData(typeof(GetDocumentsTestData))]
         public void GetDocuments_Should_ReturnDocumentsInSection(
-            int sectionId,
+            string postId,
             List<Document> list)
         {
             //Assign
             Document? expected = null;
             var dataHandler = new Mock<IDataHandler>();
-            var repository = new DocumentRepository(dataHandler.Object);
+            var repository = new FbDocumentRepository(dataHandler.Object);
             dataHandler.Setup(x => x.GetAllItems<Document>(ModelType.Documents)).Returns(list);
 
             //Act
-            var actual = repository.GetDocuments(sectionId);
+            var actual = repository.GetDocuments(postId);
 
 
             //Assert
-            Assert.Equal(list.Where(item => item.SectionId == sectionId).AsEnumerable(), actual);
+            Assert.Equal(list.Where(item => item.PostId == Guid.Parse(postId)).AsEnumerable(), actual);
         }
 
         [Theory]
@@ -62,7 +62,7 @@ namespace Collibri.Tests.Repositories.Documents
         {
             //Assign
             var dataHandler = new Mock<IDataHandler>();
-            var repository = new DocumentRepository(dataHandler.Object);
+            var repository = new FbDocumentRepository(dataHandler.Object);
             dataHandler.Setup(x => x.GetAllItems<Document>(ModelType.Documents)).Returns(list);
 
             //Act
@@ -81,7 +81,7 @@ namespace Collibri.Tests.Repositories.Documents
         {
             //Assign
             var dataHandler = new Mock<IDataHandler>();
-            var repository = new DocumentRepository(dataHandler.Object);
+            var repository = new FbDocumentRepository(dataHandler.Object);
             dataHandler.Setup(x => x.GetAllItems<Document>(ModelType.Documents)).Returns(list);
 
             //Act
