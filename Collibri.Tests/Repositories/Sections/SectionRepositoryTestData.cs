@@ -7,27 +7,27 @@ namespace Collibri.Tests.Repositories.Sections
         public CreateSectionTestData() 
         {
             //Correct input
-            Add(new Section() { Id = 0, RoomId = 1, SectionName = "Section1" }, null, 
+            Add(new Section(0, 1, "Section1"), null, 
                 new List<Section>
                 {
-                    new Section() { Id = 12345, RoomId = 1, SectionName = "Section2" },
-                    new Section() { Id = 23456, RoomId = 1, SectionName = "Section3" }
+                    new Section(12345, 1, "Section2"),
+                    new Section(23456, 1, "Section3")
                 }
             );
             //Correct input
-            Add(new Section() { Id = 0, RoomId = 1, SectionName = "Section1" }, null,
+            Add(new Section(0, 1, "Section1"), null,
                 new List<Section>
                 {
-                    new Section() { Id = 12345, RoomId = 1, SectionName = "Section2" },
-                    new Section() { Id = 23456, RoomId = 1, SectionName = "Section3" }
+                    new Section(12345, 2, "Section1"),
+                    new Section(23456, 1, "Section3")
                 }
             );
             //Failing input
-            Add(new Section() { Id = 0, RoomId = 1, SectionName = "Section1" }, null, 
+            Add(new Section(0, 1, "Section1"), null, 
                 new List<Section>
                 {
-                    new Section() { Id = 12345, RoomId = 1, SectionName = "Section1" },
-                    new Section() { Id = 23456, RoomId = 1, SectionName = "Section3" }
+                    new Section(12345, 1, "Section1"),
+                    new Section(23456, 1, "Section3")
                 }
             );
         }
@@ -40,15 +40,15 @@ namespace Collibri.Tests.Repositories.Sections
             Add(1, 
                 new List<Section>
                 {
-                    new Section() { Id = 12345, RoomId = 1, SectionName = "Section1" },
-                    new Section() { Id = 23456, RoomId = 1, SectionName = "Section2" } 
+                    new Section(12345, 1, "Section1"),
+                    new Section(23456, 1, "Section2")        
                 }
             );
             Add(1, 
                 new List<Section>
                 {
-                    new Section() { Id = 12345, RoomId = 1, SectionName = "Section1" },
-                    new Section() { Id = 23456, RoomId = 2, SectionName = "Section2" }         
+                    new Section(12345, 1, "Section1"),
+                    new Section(23456, 2, "Section2")        
                 }
             );
             Add(1, new List<Section>());
@@ -59,21 +59,21 @@ namespace Collibri.Tests.Repositories.Sections
     {
         public UpdateSectionByIdTestData()
         {
-            Add(new Section() { Id = 0, RoomId = 1, SectionName = "Updated section" }, new Section() { Id = 12345, RoomId = 1, SectionName = "Updated section" }, 12345,
+            Add(new Section(0, 1, "Updated section"), new Section(12345, 1, "Updated section"), 12345,
                 new List<Section>
                 {
-                    new Section() { Id = 12345, RoomId = 1, SectionName = "Old section" },
-                    new Section() { Id = 23456, RoomId = 1, SectionName = "Another section" }
+                    new Section(12345, 1, "Old section"),
+                    new Section(23456, 1, "Another section")
                 }
             );
-            Add(new Section() { Id = 0, RoomId = 1, SectionName = "Updated section" }, null, 12345,
+            Add(new Section(0, 1, "Updated section"), null, 12345,
                 new List<Section>
                 {
-                    new Section() { Id = 23456, RoomId = 1, SectionName = "Random section" },
-                    new Section() { Id = 34567, RoomId = 1, SectionName = "Another section" }
+                    new Section(23456, 1, "Random section"),
+                    new Section(34567, 1, "Another section")
                 }
             );
-            Add(new Section() { Id = 0, RoomId = 1, SectionName = "Updated section" }, null, 12345, new List<Section>());
+            Add(new Section(0, 1, "Updated section"), null, 12345, new List<Section>());
         }
     }
 
@@ -82,19 +82,19 @@ namespace Collibri.Tests.Repositories.Sections
         public DeleteSectionByIdTestData()
         {
             //Correct input
-            Add(123, new Section() { Id = 123, RoomId = 1, SectionName = "Section to Delete" },
+            Add(123, new Section(123, 1, "Section to Delete"),
                 new List<Section>
                 {
-                    new Section() { Id = 123456789, RoomId = 1, SectionName = "Random section" },
-                    new Section() { Id = 123, RoomId = 1, SectionName = "Section to Delete" }
+                    new Section(2974823, 1, "Other section"),
+                    new Section(123, 1, "Section to Delete")
                 }
             );
             //Failing input
             Add(123, null,
                 new List<Section>
                 {
-                    new Section() { Id = 123456789, RoomId = 1, SectionName = "Random section" },
-                    new Section() { Id = 123, RoomId = 1, SectionName = "Section to Delete" }
+                    new Section(2974823, 1, "Other section"),
+                    new Section(2345, 1, "Section to Delete")
                 }
             );
             //Failing input

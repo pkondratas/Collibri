@@ -10,6 +10,7 @@ namespace Collibri.Tests.Controllers
         [Theory]
         [ClassData(typeof(CreateDocumentTestData))]
         public void CreateDocument_Should_ReturnDocument_WhenIDNoneexistent(
+            int sectionId,
             Document document,
             Document? methodResult,
             int? statusCode

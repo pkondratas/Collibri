@@ -16,7 +16,7 @@ namespace Collibri.Tests.Repositories.Documents
             //Assign
             Document? expected = null;
             var dataHandler = new Mock<IDataHandler>();
-            var repository = new FbDocumentRepository(dataHandler.Object);
+            var repository = new DocumentRepository(dataHandler.Object);
             dataHandler.Setup(x => x.GetAllItems<Document>(ModelType.Documents)).Returns(list);
 
             //Act
@@ -41,7 +41,7 @@ namespace Collibri.Tests.Repositories.Documents
             //Assign
             Document? expected = null;
             var dataHandler = new Mock<IDataHandler>();
-            var repository = new FbDocumentRepository(dataHandler.Object);
+            var repository = new DocumentRepository(dataHandler.Object);
             dataHandler.Setup(x => x.GetAllItems<Document>(ModelType.Documents)).Returns(list);
 
             //Act
@@ -62,7 +62,7 @@ namespace Collibri.Tests.Repositories.Documents
         {
             //Assign
             var dataHandler = new Mock<IDataHandler>();
-            var repository = new FbDocumentRepository(dataHandler.Object);
+            var repository = new DocumentRepository(dataHandler.Object);
             dataHandler.Setup(x => x.GetAllItems<Document>(ModelType.Documents)).Returns(list);
 
             //Act
@@ -81,7 +81,7 @@ namespace Collibri.Tests.Repositories.Documents
         {
             //Assign
             var dataHandler = new Mock<IDataHandler>();
-            var repository = new FbDocumentRepository(dataHandler.Object);
+            var repository = new DocumentRepository(dataHandler.Object);
             dataHandler.Setup(x => x.GetAllItems<Document>(ModelType.Documents)).Returns(list);
 
             //Act

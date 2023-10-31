@@ -11,7 +11,7 @@ namespace Collibri.Tests.Repositories.Rooms
         {
             // Arrange
             var dataHandlerMock = new Mock<IDataHandler>();
-            var repository = new FbRoomRepository(dataHandlerMock.Object);
+            var repository = new RoomRepository(dataHandlerMock.Object);
             var room = RoomRepositoryTestData.ValidRoom;
 
             // Act
@@ -28,7 +28,7 @@ namespace Collibri.Tests.Repositories.Rooms
         {
             // Arrange
             var dataHandlerMock = new Mock<IDataHandler>();
-            var repository = new FbRoomRepository(dataHandlerMock.Object);
+            var repository = new RoomRepository(dataHandlerMock.Object);
             dataHandlerMock.Setup(handler => handler.GetAllItems<Room>(ModelType.Rooms))
                 .Returns(RoomRepositoryTestData.RoomsExist);
 
@@ -53,7 +53,7 @@ namespace Collibri.Tests.Repositories.Rooms
             dataHandlerMock.Setup(handler => handler.GetAllItems<Room>(ModelType.Rooms))
                 .Returns(roomList);
 
-            var repository = new FbRoomRepository(dataHandlerMock.Object);
+            var repository = new RoomRepository(dataHandlerMock.Object);
 
             // Act
             var result = repository.DeleteRoom(RoomRepositoryTestData.ExistingRoom.Id);
@@ -74,7 +74,7 @@ namespace Collibri.Tests.Repositories.Rooms
         {
             // Arrange
             var dataHandlerMock = new Mock<IDataHandler>();
-            var repository = new FbRoomRepository(dataHandlerMock.Object);
+            var repository = new RoomRepository(dataHandlerMock.Object);
             dataHandlerMock.Setup(handler => handler.GetAllItems<Room>(ModelType.Rooms))
                 .Returns(RoomRepositoryTestData.RoomsExist);
 
@@ -94,7 +94,7 @@ namespace Collibri.Tests.Repositories.Rooms
             dataHandlerMock.Setup(handler => handler.GetAllItems<Room>(ModelType.Rooms))
                 .Returns(expectedRooms);
 
-            var repository = new FbRoomRepository(dataHandlerMock.Object);
+            var repository = new RoomRepository(dataHandlerMock.Object);
 
             // Act
             var actualRooms = repository.GetAllRooms();

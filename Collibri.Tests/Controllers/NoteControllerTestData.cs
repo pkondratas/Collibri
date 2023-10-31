@@ -6,21 +6,11 @@ namespace Collibri.Tests.Controllers
     {
         public CreateNoteTestData()
         {
-            
-            Add(new Note()
-                {
-                    Author = "NoteAuthor", Name = "NoteName", Text = "NoteText", Id = 111, PostId = Guid.NewGuid()
-                }, 
-                new Note()
-                {
-                    Author = "NoteAuthor", Name = "NoteName", Text = "NoteText", Id = 111, PostId = Guid.NewGuid()
-                }, 
+            Add(new Note(111, 222, Guid.NewGuid(), "NoteName", "NoteText", "NoteAuthor"), 
+                new Note(111, 222, Guid.NewGuid(), "NoteName", "NoteText", "NoteAuthor", 1), 
                 200);
             
-            Add(new Note()
-                {
-                    Author = "NoteAuthor", Name = "NoteName", Text = "NoteText", Id = 111, PostId = Guid.NewGuid()
-                },
+            Add(new Note(111, 222, Guid.NewGuid(), "NoteName", "NoteText", "NoteAuthor"),
                 null,
                 409);
         }
@@ -33,14 +23,8 @@ namespace Collibri.Tests.Controllers
             Add(1,
                 new List<Note>
                 {
-                    new Note()
-                    {
-                        Author = "NoteAuthor", Name = "NoteName", Text = "NoteText", Id = 1, PostId = Guid.NewGuid()
-                    },
-                    new Note()
-                    {
-                        Author = "NoteAuthor2", Name = "NoteName2", Text = "NoteText2", Id = 111, PostId = Guid.NewGuid()
-                    }
+                    new Note(1, 10, Guid.NewGuid(), "NoteName", "NoteText", "NoteAuthor"),
+                    new Note(1, 10, Guid.NewGuid(), "NoteName2", "NoteText2", "NoteAuthor2")
                 }.AsEnumerable()
             );
             
@@ -52,22 +36,13 @@ namespace Collibri.Tests.Controllers
     {
         public UpdateNoteTestData()
         {
-            Add(new Note()
-            {
-                Author = "NoteAuthor", Name = "Old name", Text = "Old text", Id = 111, PostId = Guid.NewGuid()
-            },
-                new Note()
-                {
-                    Author = "NoteAuthor", Name = "New name", Text = "New text", Id = 111, PostId = Guid.NewGuid()
-                },
+            Add(new Note(1, 2, Guid.NewGuid(), "Old Name", "Old Text", "author", 1111),
+                new Note(1, 2, Guid.NewGuid(), "New Name", "New Text", "author", 1111),
                 1111,
                 200
             );
             
-            Add(new Note()
-                {
-                    Author = "NoteAuthor", Name = "NoteName", Text = "NoteText", Id = 111, PostId = Guid.NewGuid()
-                }, 
+            Add(new Note(1, 2, Guid.NewGuid(), "Old Name", "Old Text", "author", 1111), 
                 null, 
                 2222, 
                 409);

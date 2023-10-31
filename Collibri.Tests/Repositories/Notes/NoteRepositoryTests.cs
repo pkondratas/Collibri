@@ -15,7 +15,7 @@ namespace Collibri.Tests.Repositories.Notes
             )
         {
             var dataHandler = new Mock<IDataHandler>();
-            var repository = new FbNoteRepository(dataHandler.Object);
+            var repository = new NoteRepository(dataHandler.Object);
             dataHandler.Setup(x => x.GetAllItems<Note>(ModelType.Notes)).Returns(list);
             
             var actual = repository.CreateNote(note);
@@ -36,7 +36,7 @@ namespace Collibri.Tests.Repositories.Notes
             )
         {
             var dataHandler = new Mock<IDataHandler>();
-            var repository = new FbNoteRepository(dataHandler.Object);
+            var repository = new NoteRepository(dataHandler.Object);
             dataHandler.Setup(x => x.GetAllItems<Note>(ModelType.Notes)).Returns(list);
 
             var actual = repository.GetAllNotesInSection(sectionId);
@@ -53,7 +53,7 @@ namespace Collibri.Tests.Repositories.Notes
         )
         {
             var dataHandler = new Mock<IDataHandler>();
-            var repository = new FbNoteRepository(dataHandler.Object);
+            var repository = new NoteRepository(dataHandler.Object);
             dataHandler.Setup(x => x.GetAllItems<Note>(ModelType.Notes)).Returns(list);
 
             var actual = repository.DeleteNote(id);

@@ -7,10 +7,9 @@ namespace Collibri.Tests.Controllers
         public CreateSectionTestData()
         {
             //Correct input
-            Add(new Section() { Id = 0, RoomId = 1, SectionName = "NewSectionName" },
-                new Section() { Id = 123, RoomId = 1, SectionName = "NewSectionName" }, 200);
+            Add(new Section(0, 1, "NewSectionName"), new Section(123, 1, "NewSectionName"), 200);
             //Failing input
-            Add(new Section() { Id = 0, RoomId = 1, SectionName = "NewSectionName" }, null, 409);
+            Add(new Section(0, 1, "NewSectionName"), null, 409);
         }
     }
 
@@ -22,8 +21,8 @@ namespace Collibri.Tests.Controllers
             Add(1,
                 new List<Section>
                 {
-                    new Section(){Id = 12345, RoomId = 1, SectionName = "Section1"},
-                    new Section(){Id = 23456, RoomId = 1, SectionName = "Section2"}
+                    new Section(12345, 1, "Section1"),    
+                    new Section(23456, 1, "Section2")    
                 }.AsEnumerable()
             );
             Add(1, new List<Section>().AsEnumerable());
@@ -35,20 +34,20 @@ namespace Collibri.Tests.Controllers
         public UpdateSectionByIdTestData()
         {
             //Correct input
-            Add(new Section(){Id = 0, RoomId = 2, SectionName = "Old name"}, new Section(){Id = 12345, RoomId = 2, SectionName = "New name"}, 12345, 200);
+            Add(new Section(0, 2, "Old name"), new Section(12345, 2, "New name"), 12345, 200);
             //Failing input
-            Add(new Section(){Id = 0, RoomId = 2, SectionName = "Old name"}, null, 23456, 404);
+            Add(new Section(0, 2, "Old name"), null, 23456, 404);
         }
     }
-
     public class DeleteSectionByIdTestData : TheoryData<int, Section?, int>
     {
         public DeleteSectionByIdTestData()
         {
             //Correct input
-            Add(123, new Section(){Id = 2345, RoomId = 123, SectionName = "Deleted section"}, 200);
+            Add(123, new Section(2345, 123, "Deleted section"), 200);
             //Failing input
             Add(123, null, 404);
         }
     }
 }
+
