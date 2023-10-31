@@ -24,7 +24,7 @@ const RoomLayout = () => {
         <Paper>rooms</Paper>
       </Grid>
       <Grid item md={4}>
-            <AddSection setSections={setSections} ></AddSection>
+            <AddSection sections={sections} setSections={setSections} ></AddSection>
           <Paper><ParentComponent sections={sections} setSections={setSections} setSectionId={setSectionId} /></Paper>
       </Grid>
       <Grid item xs={6}>

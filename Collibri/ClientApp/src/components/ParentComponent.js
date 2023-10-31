@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import TableDisplay from "./TableDisplay";
-import Api from "../api/Api";
 import {Button} from "@mui/material";
 
 const ParentComponent = (props) => {

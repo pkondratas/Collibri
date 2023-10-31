@@ -1,35 +1,44 @@
-import {Button, Divider, TextField, Typography} from "@mui/material";
+import {Button, Divider, IconButton, TextField, Typography} from "@mui/material";
 import CModal from "./CModal";
 import React, {useRef, useState} from "react";
 import {createSection} from "../api/SectionApi";
 import {useParams} from "react-router-dom";
+import AddBoxIcon from '@mui/icons-material/AddBox';
+import DeleteIcon from "@mui/icons-material/Delete";
 
-export const AddSection = ({setSections}) => {
+
+export const AddSection = ({setSections, sections}) => {
     const nameFieldRef = useRef(null);
     const [open, setOpen] = useState(false);
-    const [error, setError] = useState(false);
+    const [isEmptyError, setIsEmptyError] = useState(false);
+    const [isAlreadyUsedError, setIsAlreadyUsedError] = useState(false);
+    
     const {roomId} = useParams()
 
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => {
         setOpen(false);
-        setError(false);
+        setIsEmptyError(false);
+        setIsAlreadyUsedError(false);
     }
 
     const handleOnChange = () => {
-        if (nameFieldRef.current.value.trim() !== '') {
-            setError(false);
-        } else {
-            setError(true);
-        }
+            setIsEmptyError(false);
+            setIsAlreadyUsedError(false);
     }
 
     function handleCreateSection() {
-        if (nameFieldRef.current.value === null || nameFieldRef.current.value.trim() === '') {
-            setError(true);
+        
+        if(nameFieldRef.current.value.trim() === ''){
+            setIsEmptyError(true);
             return;
-        } else {
+        }
+        else if (sections.some(section => section.sectionName === nameFieldRef.current.value.trim())){
+            setIsAlreadyUsedError(true);
+            return;
+        }
+        else {
             handleClose();
             createSection(nameFieldRef.current.value.trim(),roomId, setSections);
         }
@@ -37,13 +46,22 @@ export const AddSection = ({setSections}) => {
     
     return (
         <div>
-            <Button size="large" onClick={handleOpen} variant="contained">Create Room</Button>
+            <IconButton color="success" onClick={handleOpen}> 
+                <AddBoxIcon/> 
+            </IconButton>
             <CModal showModal={open} handleClose={handleClose} handleChanges={handleCreateSection}>
                 <Typography variant="h5">
                     Create a new Section
                 </Typography>
-                <TextField fullWidth id="roomName" label="Room name" variant="outlined" error={error}
-                           inputRef={nameFieldRef} helperText={error ? "Section name can not be empty" : " "}
+                <TextField fullWidth id="sectionName" label="Section name" variant="outlined" error={isEmptyError || isAlreadyUsedError}
+                           inputRef={nameFieldRef} 
+                           helperText={
+                    isEmptyError
+                        ? 'Section name cannot be empty'
+                        : isAlreadyUsedError
+                            ? 'Section name is already used'
+                            : ' '
+                }
                            onChange={handleOnChange} margin="normal"/>
                 <Divider/>
             </CModal>

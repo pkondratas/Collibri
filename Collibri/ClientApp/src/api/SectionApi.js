@@ -49,3 +49,26 @@ export const createSection = (newName,roomId, setSections) => {
             // Display an error message to the user interface
         });
 }
+export const updateSection = (id, updatedSection, sections, setSections) => {
+
+    
+    console.log(id);
+    console.log(updatedSection);
+    
+    fetch(`/v1/sections?sectionId=${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedSection), // Updated section data
+    })
+        .then(response => response.json())
+        .then((data) => {
+            console.log(data);
+            const updatedSections = [...sections];
+            const sectionIndex = updatedSections.findIndex(section => section.sectionId === id);
+            updatedSections[sectionIndex] = data;
+            setSections(updatedSections);
+        })
+        .catch(error => console.error('Error updating section:', error));
+}
