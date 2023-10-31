@@ -5,22 +5,21 @@ import {Button} from "@mui/material";
 const ParentComponent = (props) => {
 
    
-    // const {sections, handleDelete, handleUpdate, handlePost} = Api();
+    
 
     
-    // if (props.sections.length > 0) {
+     if (props.sections.length > 0) {
         return (
           <>
             <TableDisplay sections={props.sections} setSections={props.setSections} setSectionId={props.setSectionId} />
           </>
         )
 
-    // }
-        // return (<>
-        //         No sections present click to
-        //         {/*<Button className={"addSec"} onClick={() => handlePost()}>add Section</Button>*/}
-        //     </>
-        // )
+    }
+        return (<>
+                No sections present click to add sections
+            </>
+        )
 
 };
 export default ParentComponent;
