@@ -12,7 +12,7 @@ export const AddSection = ({setSections, sections}) => {
     const [open, setOpen] = useState(false);
     const [isEmptyError, setIsEmptyError] = useState(false);
     const [isAlreadyUsedError, setIsAlreadyUsedError] = useState(false);
-    
+
     const {roomId} = useParams()
 
 
@@ -24,44 +24,43 @@ export const AddSection = ({setSections, sections}) => {
     }
 
     const handleOnChange = () => {
-            setIsEmptyError(false);
-            setIsAlreadyUsedError(false);
+        setIsEmptyError(false);
+        setIsAlreadyUsedError(false);
     }
 
     function handleCreateSection() {
-        
-        if(nameFieldRef.current.value.trim() === ''){
+
+        if (nameFieldRef.current.value.trim() === '') {
             setIsEmptyError(true);
             return;
-        }
-        else if (sections.some(section => section.sectionName === nameFieldRef.current.value.trim())){
+        } else if (sections.some(section => section.sectionName === nameFieldRef.current.value.trim())) {
             setIsAlreadyUsedError(true);
             return;
-        }
-        else {
+        } else {
             handleClose();
-            createSection(nameFieldRef.current.value.trim(),roomId, setSections);
+            createSection(nameFieldRef.current.value.trim(), roomId, setSections);
         }
     }
-    
+
     return (
         <div>
-            <IconButton color="success" onClick={handleOpen}> 
-                <AddBoxIcon/> 
+            <IconButton color="success" onClick={handleOpen}>
+                <AddBoxIcon/>
             </IconButton>
             <CModal showModal={open} handleClose={handleClose} handleChanges={handleCreateSection}>
                 <Typography variant="h5">
                     Create a new Section
                 </Typography>
-                <TextField fullWidth id="sectionName" label="Section name" variant="outlined" error={isEmptyError || isAlreadyUsedError}
-                           inputRef={nameFieldRef} 
+                <TextField fullWidth id="sectionName" label="Section name" variant="outlined"
+                           error={isEmptyError || isAlreadyUsedError}
+                           inputRef={nameFieldRef}
                            helperText={
-                    isEmptyError
-                        ? 'Section name cannot be empty'
-                        : isAlreadyUsedError
-                            ? 'Section name is already used'
-                            : ' '
-                }
+                               isEmptyError
+                                   ? 'Section name cannot be empty'
+                                   : isAlreadyUsedError
+                                       ? 'Section name is already used'
+                                       : ' '
+                           }
                            onChange={handleOnChange} margin="normal"/>
                 <Divider/>
             </CModal>

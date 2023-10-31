@@ -1,4 +1,3 @@
-
 export const getSections = (setSections, roomId) => {
     fetch('/v1/sections?roomId=' + roomId)
         .then(response => response.json())
@@ -7,7 +6,7 @@ export const getSections = (setSections, roomId) => {
             setSections(data);
         })
         .catch(error => console.error('Error fetching data:', error));
-} 
+}
 export const deleteSection = (id, setSections) => {
     fetch(`/v1/sections?sectionId=${id}`, {
         method: 'DELETE',
@@ -22,14 +21,14 @@ export const deleteSection = (id, setSections) => {
         })
         .catch(error => console.error('Error deleting section:', error));
 }
-export const createSection = (newName,roomId, setSections) => {
+export const createSection = (newName, roomId, setSections) => {
     fetch('/v1/sections', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            roomId: roomId, 
+            roomId: roomId,
             sectionName: newName,
         }), // Convert JavaScript object to JSON string
     })
@@ -51,10 +50,10 @@ export const createSection = (newName,roomId, setSections) => {
 }
 export const updateSection = (id, updatedSection, sections, setSections) => {
 
-    
+
     console.log(id);
     console.log(updatedSection);
-    
+
     fetch(`/v1/sections?sectionId=${id}`, {
         method: 'PUT',
         headers: {

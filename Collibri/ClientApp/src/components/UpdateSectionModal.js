@@ -23,15 +23,13 @@ const UpdateSectionModal = (props) => {
 
     function handleUpdateSection() {
 
-        if(nameFieldRef.current.value.trim() === ''){
+        if (nameFieldRef.current.value.trim() === '') {
             setIsEmptyError(true);
             return;
-        }
-        else if (props.sections.some(section => section.sectionName === nameFieldRef.current.value.trim())){
+        } else if (props.sections.some(section => section.sectionName === nameFieldRef.current.value.trim())) {
             setIsAlreadyUsedError(true);
             return;
-        }
-        else {
+        } else {
             handleClose();
             props.updateSection(nameFieldRef.current.value.trim());
         }
@@ -39,7 +37,7 @@ const UpdateSectionModal = (props) => {
 
     return (
         <>
-            <CModal showModal={props.updateModal} handleClose={handleClose} handleChanges={handleUpdateSection} >
+            <CModal showModal={props.updateModal} handleClose={handleClose} handleChanges={handleUpdateSection}>
                 <Typography id='modal-modal-title' variant='h5' component='h5' sx={modalTitleStyle}>
                     Update name of '{props.section.sectionName}'
                 </Typography>
@@ -61,6 +59,6 @@ const UpdateSectionModal = (props) => {
             </CModal>
         </>
     );
-    
+
 }
-export  default UpdateSectionModal
+export default UpdateSectionModal
