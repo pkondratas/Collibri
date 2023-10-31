@@ -11,25 +11,30 @@ namespace Collibri.Models
         public DateTime CreationDate { get; set; }
         public DateTime LastUpdatedDate { get; set; }
 
-        // public Post(
-        //     Guid postId, 
-        //     string creatorUsername, 
-        //     string title, 
-        //     int sectionId,
-        //     int likeCount, 
-        //     int dislikeCount,
-        //     DateTime creationDate, 
-        //     DateTime lastUpdatedDate)
-        // {
-        //     Id = new Guid();
-        //     CreatorUsername = creatorUsername;
-        //     Title = title;
-        //     SectionId = sectionId;
-        //     LikeCount = likeCount;
-        //     DislikeCount = dislikeCount;
-        //     CreationDate = creationDate;
-        //     LastUpdatedDate = lastUpdatedDate;
-        // }
+        public Post()
+        {
+            
+        }
+        
+        public Post(
+            Guid postId, 
+            string creatorUsername, 
+            string title, 
+            int sectionId,
+            int likeCount, 
+            int dislikeCount,
+            DateTime creationDate, 
+            DateTime lastUpdatedDate)
+        {
+            Id = new Guid();
+            CreatorUsername = creatorUsername;
+            Title = title;
+            SectionId = sectionId;
+            LikeCount = likeCount;
+            DislikeCount = dislikeCount;
+            CreationDate = creationDate;
+            LastUpdatedDate = lastUpdatedDate;
+        }
     }
 }
 

@@ -10,13 +10,17 @@ namespace Collibri.Models
 
         public Guid PostId { get; set; }
 
-
-        // public Document(int id, Guid postId, string title, string text)
-        // {
-        //     Title = title;
-        //     Id = id;
-        //     PostId = postId;
-        //     Text = text;
-        // }
+        public Document()
+        {
+            
+        }
+        
+        public Document(int id, Guid postId, string title, string text)
+        {
+            Title = title;
+            Id = id;
+            PostId = postId;
+            Text = text;
+        }
     }
 }

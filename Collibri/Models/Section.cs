@@ -6,12 +6,17 @@ namespace Collibri.Models
         public int RoomId { get; set; }
         public string SectionName { get; set; } = "";
         
-        // public Section(int sectionId, int roomId, string sectionName)
-        // {
-        //     Id = sectionId;
-        //     RoomId = roomId;
-        //     SectionName = sectionName;
-        // }
+        public Section()
+        {
+            
+        }
+        
+        public Section(int sectionId, int roomId, string sectionName)
+        {
+            Id = sectionId;
+            RoomId = roomId;
+            SectionName = sectionName;
+        }
 
         public bool Equals(Section? other)
         {
