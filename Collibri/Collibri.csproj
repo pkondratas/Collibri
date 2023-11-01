@@ -24,14 +24,6 @@
         <Content Remove="$(SpaRoot)**"/>
         <None Remove="$(SpaRoot)**"/>
         <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**"/>
-
-
-
-
-    <ItemGroup>
-      <Folder Include="ClientApp\src\themes\" />
-    </ItemGroup>
-
     </ItemGroup>
 
 
