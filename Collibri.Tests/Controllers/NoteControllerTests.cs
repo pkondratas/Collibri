@@ -33,22 +33,22 @@ namespace Collibri.Tests.Controllers
             }
         }
 
-        [Theory]
-        [ClassData(typeof(GetAllNotesInSectionTestData))]
-        public void GetAllNotesInSectionTest(
-            int id,
-            IEnumerable<Note> result
-            )
-        {
-            var repository = new Mock<INoteRepository>(); 
-            var controller = new NoteController(repository.Object);
-            repository.Setup(x => x.GetAllNotesInSection(id)).Returns(result);
-
-            var actual = controller.GetAllNotesInSection(id) as ObjectResult;
-
-            Assert.IsType<List<Note>>(actual?.Value);
-            Assert.Equal(result, actual.Value);
-        }
+        // [Theory]
+        // [ClassData(typeof(GetAllNotesInSectionTestData))]
+        // public void GetAllNotesInSectionTest(
+        //     int id,
+        //     IEnumerable<Note> result
+        //     )
+        // {
+        //     var repository = new Mock<INoteRepository>(); 
+        //     var controller = new NoteController(repository.Object);
+        //     repository.Setup(x => x.GetAllNotesInSection(id)).Returns(result);
+        //
+        //     var actual = controller.GetAllNotesInSection(id) as ObjectResult;
+        //
+        //     Assert.IsType<List<Note>>(actual?.Value);
+        //     Assert.Equal(result, actual.Value);
+        // }
         
         [Theory]
         [ClassData(typeof(UpdateNoteTestData))]

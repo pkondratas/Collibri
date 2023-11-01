@@ -18,19 +18,19 @@ namespace Collibri.Controllers
             _documentRepository = documentRepository;
         }
         
-        [HttpPost("{sectionId}")]
-        public IActionResult CreateDocument([FromBody] Document input, int sectionId)
+        [HttpPost("{postId}")]
+        public IActionResult CreateDocument([FromBody] Document input, string postId)
         {
 
-            var result = _documentRepository.CreateDocument(input, sectionId);
+            var result = _documentRepository.CreateDocument(input, postId);
             return result == null? Conflict(): Ok(result);
             
         }
 
-        [HttpGet("{sectionId}")]
-        public IActionResult GetDocuments(int sectionId)
+        [HttpGet("{postId}")]
+        public IActionResult GetDocuments(string postId)
         {
-            return Ok(_documentRepository.GetDocuments(sectionId));
+            return Ok(_documentRepository.GetDocuments(postId));
         }
 
         [HttpDelete("{id}")]

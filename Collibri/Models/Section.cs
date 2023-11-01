@@ -2,13 +2,18 @@ namespace Collibri.Models
 {
     public class Section : IEquatable<Section>
     {
-        public int SectionId { get; set; }
+        public int Id { get; set; }
         public int RoomId { get; set; }
-        public string SectionName { get; set; }
+        public string SectionName { get; set; } = "";
+        
+        public Section()
+        {
+            
+        }
         
         public Section(int sectionId, int roomId, string sectionName)
         {
-            SectionId = sectionId;
+            Id = sectionId;
             RoomId = roomId;
             SectionName = sectionName;
         }
