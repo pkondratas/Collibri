@@ -10,7 +10,7 @@ namespace Collibri.Tests.Controllers
         [Theory]
         [ClassData(typeof(CreateDocumentTestData))]
         public void CreateDocument_Should_ReturnDocument_WhenIDNoneexistent(
-            int sectionId,
+            string postId,
             Document document,
             Document? methodResult,
             int? statusCode
@@ -19,10 +19,10 @@ namespace Collibri.Tests.Controllers
             //Assign
             var repository = new Mock<IDocumentRepository>();
             var controller = new DocumentController(repository.Object);
-            repository.Setup(x => x.CreateDocument(document, sectionId)).Returns(methodResult);
+            repository.Setup(x => x.CreateDocument(document, postId)).Returns(methodResult);
 
             //Act
-            var actual = controller.CreateDocument(document, sectionId);
+            var actual = controller.CreateDocument(document, postId);
 
             //Assert
             if (methodResult == null)
@@ -39,17 +39,17 @@ namespace Collibri.Tests.Controllers
 
         [Theory]
         [ClassData(typeof(GetDocumentsTestData))]
-        public void GetDocuments_Should_ReturnDocumentsInSection_WhenNameNonexistent(
-            int sectionId,
+        public void GetDocuments_Should_ReturnDocumentsInPost_WhenNameNonexistent(
+            string postId,
             IEnumerable<Document> list)
         {
             //Assign
             var repository = new Mock<IDocumentRepository>();
             var controller = new DocumentController(repository.Object);
-            repository.Setup(x => x.GetDocuments(sectionId)).Returns(list);
+            repository.Setup(x => x.GetDocuments(postId)).Returns(list);
 
             //Act
-            var actual = controller.GetDocuments(sectionId) as ObjectResult;
+            var actual = controller.GetDocuments(postId) as ObjectResult;
 
             //Assert
             Assert.IsType<List<Document>>(actual?.Value);
