@@ -1,64 +1,48 @@
-import React, { useState } from "react";
-import { TextField, Button, Modal, Box, Typography, Divider } from "@mui/material";
+import React, {useRef, useState} from "react";
+import {TextField, Button, Typography, Divider} from "@mui/material";
 import CModal from "./CModal";
 import {createRoom} from "../api/LandingPageApi";
 
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 500,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4
-};
-
 export const CreateRoom = ({setRooms}) => {
-    const [name, setName] = useState('');
-    const [open, setOpen] = React.useState(false);
+    const nameFieldRef = useRef(null);
+    const [open, setOpen] = useState(false);
+    const [error, setError] = useState(false);
     const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const handleClose = () => {
+        setOpen(false);
+        setError(false);
+    }
+
+    const handleOnChange = () => {
+        if (nameFieldRef.current.value.trim() !== '') {
+            setError(false);
+        } else {
+            setError(true);
+        }
+    }
 
     function handleCreateRoom() {
-        if (name === null || name === '') {
+        if (nameFieldRef.current.value === null || nameFieldRef.current.value.trim() === '') {
+            setError(true);
             return;
+        } else {
+            handleClose();
+            createRoom(nameFieldRef.current.value.trim(), setRooms);
         }
-
-        handleClose();
-        createRoom(name, setRooms);
-        setName(null);
     }
 
     return (
         <div>
             <Button size="large" onClick={handleOpen} variant="contained">Create Room</Button>
-            <CModal showModal={open} handleClose={handleClose} handleChanges={handleCreateRoom} >
+            <CModal showModal={open} handleClose={handleClose} handleChanges={handleCreateRoom}>
                 <Typography variant="h5">
                     Create a new room
                 </Typography>
-                <TextField fullWidth id="roomName" label="Room name" variant="outlined"
-                           onChange={e => setName(e.target.value)} margin="normal"/>
-                <Divider />
+                <TextField fullWidth id="roomName" label="Room name" variant="outlined" error={error}
+                           inputRef={nameFieldRef} helperText={error ? "Room name can not be empty" : " "}
+                           onChange={handleOnChange} margin="normal"/>
+                <Divider/>
             </CModal>
-            {/*<Modal*/}
-            {/*    open={open}*/}
-            {/*    onClose={handleClose}*/}
-            {/*    aria-labelledby="modal-modal-title"*/}
-            {/*    aria-describedby="modal-modal-description"*/}
-            {/*>*/}
-            {/*    <Box sx={style}>*/}
-            {/*        <Typography variant="h5">*/}
-            {/*            Create a new room*/}
-            {/*        </Typography>*/}
-            {/*        <TextField fullWidth id="roomName" label="Room name" variant="outlined"*/}
-            {/*                   onChange={e => setName(e.target.value)} margin="normal"/>*/}
-            {/*        <Divider />*/}
-            {/*        <Button onClick={handleCreateRoom}>Confirm</Button>*/}
-            {/*        <Button onClick={handleClose}>Cancel</Button>*/}
-            {/*    </Box>*/}
-            {/*</Modal>*/}
         </div>
     );
 }

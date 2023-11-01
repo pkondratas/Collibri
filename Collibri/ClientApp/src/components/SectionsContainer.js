@@ -2,15 +2,10 @@ import React from 'react';
 import {Button,Paper,Table,TableRow,TableCell,TableBody,TableContainer} from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import '../styles/tableList.css';
+import {buttonStyle, nameCellStyle, tableRowStyle} from "../styles/tableListStyle";
 
-
-const TableDisplay = ({ sections, handleDelete, handleUpdate, handlePost, setSectionId }) => {
-    const confirmDelete = (sectionId) => {
-        const isConfirmed = window.confirm('Are you sure you want to delete this section?');
-        if (isConfirmed) {
-            handleDelete(sectionId);
-        }
-    };
+const SectionsContainer = ({sections, handleDelete, handleUpdate, handlePost, setSectionId}) => {
     return (
         <>
 
@@ -19,13 +14,15 @@ const TableDisplay = ({ sections, handleDelete, handleUpdate, handlePost, setSec
                     <TableBody>
                         {sections.map((row) => (
                             <TableRow
+                                hover
+                                className="TableRow"
                                 key={row.sectionId}
-                                sx={{'&:last-child td, &:last-child th': {border: 0}}}
+                                sx={tableRowStyle}
                             >
-                                <TableCell component="th" scope="row" onClick={() => setSectionId(row.sectionId)}> {"#" + row.sectionName} </TableCell>
-                                <TableCell align="right"><Button startIcon={<DeleteIcon style={{ fontSize: 30 }} />}
-                                                                 onClick={() => confirmDelete(row.sectionId)}></Button>
-                                    <Button startIcon={<EditIcon style={{fontSize: 30}}/>}
+                                <TableCell sx={nameCellStyle} component="th" scope="row" onClick={() => setSectionId(row.sectionId)}> {"#" + row.sectionName} </TableCell>
+                                <TableCell align="right"><Button sx={buttonStyle} className="Button" startIcon={<DeleteIcon style={{fontSize: 30}}/>}
+                                                                 onClick={() => handleDelete(row.sectionId)}></Button>
+                                    <Button sx={buttonStyle} className="Button" startIcon={<EditIcon style={{fontSize: 30}}/>}
                                             onClick={() => handleUpdate(row.sectionId)}></Button>
                                 </TableCell>
 
@@ -40,4 +37,4 @@ const TableDisplay = ({ sections, handleDelete, handleUpdate, handlePost, setSec
     );
 };
 
-export default TableDisplay;
+export default SectionsContainer;
