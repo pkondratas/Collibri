@@ -27,7 +27,7 @@ namespace Collibri.Repositories.FileBasedImplementation
 				return null;
 			}
 
-			using (var fileStream = _fileSystem.File.Create(path + separator + file.FileName))
+			using(var fileStream = _fileSystem.File.Create(path + separator + file.FileName))
 			{
 				file.CopyTo(fileStream);
 			}
@@ -59,7 +59,9 @@ namespace Collibri.Repositories.FileBasedImplementation
 			}
 
 			var fileStream = _fileSystem.FileStream.New(path + separator + fileName, FileMode.Open, FileAccess.Read);
+			
 			return new FileStreamResult(fileStream, "application/octet-stream");
+			
 		}
 
 		public File? UpdateFileName(string fileName, string postId, string updatedName)

@@ -4,12 +4,12 @@ using Collibri.Repositories.ExtensionMethods;
 
 namespace Collibri.Repositories.FileBasedImplementation
 {
-    public class RoomRepository : IRoomRepository
+    public class FbRoomRepository : IRoomRepository
     {
         private readonly IDataHandler _dataHandler;
         private readonly List<Room> _rooms;
 
-        public RoomRepository(IDataHandler dataHandler)
+        public FbRoomRepository(IDataHandler dataHandler)
         {
             _dataHandler = dataHandler;
             _rooms = _dataHandler.GetAllItems<Room>(ModelType.Rooms) ?? new List<Room>();

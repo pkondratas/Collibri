@@ -2,9 +2,9 @@ namespace Collibri.Models
 {
     public class Post
     {
-        public Guid PostId { get; set; }
-        public string CreatorUsername { get; set; }
-        public string Title { get; set; }
+        public Guid Id { get; set; }
+        public string CreatorUsername { get; set; } = "";
+        public string Title { get; set; } = "";
         public int SectionId { get; set; }
         public int LikeCount { get; set; }
         public int DislikeCount { get; set; }
@@ -12,6 +12,11 @@ namespace Collibri.Models
         public DateTime CreationDate { get; set; }
         public DateTime LastUpdatedDate { get; set; }
 
+        public Post()
+        {
+            
+        }
+        
         public Post(
             Guid postId, 
             string creatorUsername, 
@@ -23,7 +28,7 @@ namespace Collibri.Models
             DateTime creationDate, 
             DateTime lastUpdatedDate)
         {
-            PostId = postId;
+            Id = postId;
             CreatorUsername = creatorUsername;
             Title = title;
             SectionId = sectionId;

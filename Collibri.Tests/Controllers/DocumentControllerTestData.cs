@@ -2,30 +2,31 @@ using Collibri.Models;
 
 namespace Collibri.Tests.Controllers
 {
-    public class CreateDocumentTestData : TheoryData<int, Document, Document?, int?>
+    public class CreateDocumentTestData : TheoryData<string, Document, Document?, int?>
     {
         public CreateDocumentTestData()
         {
+            var sameGuid = Guid.Parse("2b8b88a3-cd97-48cf-9d4d-ef8db4ac4a61");
             //Correct input
-            Add(1, new Document(0, Guid.NewGuid(), "matke", "text", 0), new Document(1, Guid.NewGuid(), "matke", "text", 1),
+            Add("2b8b88a3-cd97-48cf-9d4d-ef8db4ac4a61", new Document(0, sameGuid, "matke", "text"), new Document(1, sameGuid, "matke", "text"),
                 200);
             //Failing input
-            Add(1, new Document(0, Guid.NewGuid(), "matke", "text", 1), null, 409);
+            Add("2b8b88a3-cd97-48cf-9d4d-ef8db4ac4a61", new Document(0, Guid.NewGuid(), "matke", "text"), null, 409);
         }
     }
 
-    public class GetDocumentsTestData : TheoryData<int, IEnumerable<Document>>
+    public class GetDocumentsTestData : TheoryData<string, IEnumerable<Document>>
     {
         public GetDocumentsTestData()
         {
-            Add(1,
+            Add("2b8b88a3-cd97-48cf-9d4d-ef8db4ac4a61",
                 new List<Document>
                 {
-                    new Document(123, Guid.NewGuid(), "matke", "text", 5),
-                    new Document(456, Guid.NewGuid(), "matke", "text", 5)
+                    new Document(123, Guid.NewGuid(), "matke", "text"),
+                    new Document(456, Guid.NewGuid(), "matke", "text")
                 }.AsEnumerable()
             );
-            Add(1, new List<Document>().AsEnumerable());
+            Add("2b8b88a3-cd97-48cf-9d4d-ef8db4ac4a61", new List<Document>().AsEnumerable());
         }
     }
 
@@ -34,10 +35,10 @@ namespace Collibri.Tests.Controllers
         public UpdateDocumentTestData()
         {
             // Correct input
-            Add(new Document(123, Guid.NewGuid(), "old matke", " old text", 5),
-                new Document(123, Guid.NewGuid(), "new matke", "new text", 5), 123, 200);
+            Add(new Document(123, Guid.NewGuid(), "old matke", " old text"),
+                new Document(123, Guid.NewGuid(), "new matke", "new text"), 123, 200);
             //Failing input
-            Add(new Document(123, Guid.NewGuid(), "old matke", " old text", 5), null, 123, 404);
+            Add(new Document(123, Guid.NewGuid(), "old matke", " old text"), null, 123, 404);
         }
     }
 
@@ -46,7 +47,7 @@ namespace Collibri.Tests.Controllers
         public DeleteDocumentTestData()
         {
             //Correct input
-            Add(123, new Document(123, Guid.NewGuid(), "matke", "text", 5), 200);
+            Add(123, new Document(123, Guid.NewGuid(), "matke", "text"), 200);
             //Failing input
             Add(123, null, 404);
         }

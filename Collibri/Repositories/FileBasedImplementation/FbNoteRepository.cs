@@ -4,11 +4,11 @@ using Collibri.Repositories.ExtensionMethods;
 
 namespace Collibri.Repositories.FileBasedImplementation
 {
-    public class NoteRepository : INoteRepository
+    public class FbNoteRepository : INoteRepository
     {
         private readonly IDataHandler _dataHandler;
 
-        public NoteRepository(IDataHandler dataHandler)
+        public FbNoteRepository(IDataHandler dataHandler)
         {
             this._dataHandler = dataHandler;
         }
@@ -19,7 +19,7 @@ namespace Collibri.Repositories.FileBasedImplementation
             
             foreach (var notes in noteList)
             {
-                if (notes.RoomId.Equals(note.RoomId) && notes.SectionId.Equals(note.SectionId) && notes.Name.Equals(note.Name))
+                if (notes.Name.Equals(note.Name))
                 {
                     return null;
                 }
@@ -47,21 +47,21 @@ namespace Collibri.Repositories.FileBasedImplementation
             return null;
         }
 
-        public IEnumerable<Note> GetAllNotesInSection(int sectionId)
-        {
-            var noteList = _dataHandler.GetAllItems<Note>(ModelType.Notes);
-            var notesInSection = noteList.Where(note => note.SectionId == sectionId);
-            
-            return notesInSection;
-        }
-        
-        public IEnumerable<Note> GetAllNotesInRoom(int roomId)
-        {
-            var noteList = _dataHandler.GetAllItems<Note>(ModelType.Notes);
-            var notesInSection = noteList.Where(note => note.RoomId == roomId);
-            
-            return notesInSection;
-        }
+        // public IEnumerable<Note> GetAllNotesInSection(int sectionId)
+        // {
+        //     var noteList = _dataHandler.GetAllItems<Note>(ModelType.Notes);
+        //     var notesInSection = noteList.Where(note => note.SectionId == sectionId);
+        //     
+        //     return notesInSection;
+        // }
+        //
+        // public IEnumerable<Note> GetAllNotesInRoom(int roomId)
+        // {
+        //     var noteList = _dataHandler.GetAllItems<Note>(ModelType.Notes);
+        //     var notesInSection = noteList.Where(note => note.RoomId == roomId);
+        //     
+        //     return notesInSection;
+        // }
 
         public Note? DeleteNote(int id)
         {
