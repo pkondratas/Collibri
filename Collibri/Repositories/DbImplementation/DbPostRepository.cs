@@ -40,6 +40,7 @@ namespace Collibri.Repositories.DbImplementation
             postToUpdate.LikeCount = post.LikeCount;
             postToUpdate.DislikeCount = post.DislikeCount;
             postToUpdate.Title = post.Title;
+            postToUpdate.Description = post.Description;
             postToUpdate.LastUpdatedDate = DateTime.UtcNow;
             _context.Posts.Update(postToUpdate);
             _context.SaveChanges();

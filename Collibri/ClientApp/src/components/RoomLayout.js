@@ -5,6 +5,7 @@ import PostContainer from "./PostContainer";
 import Header from "./Header";
 import { postContainerStyle } from "../styles/RoomLayoutStyle";
 import {AddSection} from "./AddSection";
+import {AddPostButton} from "./AddPostButton";
 
 
 const RoomLayout = () => {
@@ -28,6 +29,7 @@ const RoomLayout = () => {
           <Paper><ParentComponent sections={sections} setSections={setSections} setSectionId={setSectionId} /></Paper>
       </Grid>
       <Grid item xs={6}>
+          <AddPostButton sectionId={sectionId}/>
         <Paper sx={postContainerStyle}>
           <PostContainer sectionId={sectionId} />
         </Paper>
