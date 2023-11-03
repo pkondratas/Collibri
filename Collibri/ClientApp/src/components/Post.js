@@ -32,7 +32,7 @@ const Post = (props) => {
   const handleDelete = (postId) => {
     deletePost(postId)
       .then(deletedData => {
-        props.setPosts((prevPosts) => prevPosts.filter((x) => x.postId !== deletedData.postId));
+        props.setPosts((prevPosts) => prevPosts.filter((x) => x.id !== deletedData.id));
       })
   }
 
@@ -41,7 +41,7 @@ const Post = (props) => {
       ...post,
       [propertyToUpdate]: value
     };
-    updatePost(post.postId, updatedPost);
+    updatePost(post.id, updatedPost);
     setPost(updatedPost);
   }
   
@@ -51,7 +51,7 @@ const Post = (props) => {
       "likeCount": likes,
       "dislikeCount": dislikes
     };
-    updatePost(post.postId, updatedPost);
+    updatePost(post.id, updatedPost);
     setPost(updatedPost);
   }
 
@@ -131,7 +131,7 @@ const Post = (props) => {
             </Typography>
           </Typography>
           <UpdatePostModal post={post} {...props.post} updateModal={updateModal} setUpdateModal={setUpdateModal} updatePost={updatePost} updatePostContent={updatePostContent} />
-          <DeleteModal postId={props.postId} deleteModal={deleteModal} setDeleteModal={setDeleteModal} handleDelete={handleDelete} />
+          <DeleteModal postId={props.id} deleteModal={deleteModal} setDeleteModal={setDeleteModal} handleDelete={handleDelete} />
         </CardContent>
       </Card>
     </>

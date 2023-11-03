@@ -49,7 +49,7 @@ export const CreatePostModal = (props) => {
                     Description: descFieldRef.current.value.trim()
                 })
             );
-            handleClose();
+            props.handleSuccessfulClose();
         }
     }
 

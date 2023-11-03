@@ -5,20 +5,18 @@ import Post from './Post';
 import { containerStyle } from "../styles/PostContainerStyle";
 
 const PostContainer = (props) => {
-  
-  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    fetchPosts(props.sectionId, setPosts);
+    fetchPosts(props.sectionId, props.setPosts);
   }, [props.sectionId]);
   
   return (
     <>
      <Box sx={containerStyle}>
        <List>
-         {posts.map(item => (
+         {props.posts.map(item => (
            <ListItem key={item.postId}>
-             <Post post={item} {...item} setPosts={setPosts}/>
+             <Post post={item} {...item} setPosts={props.setPosts}/>
            </ListItem>
          ))}
        </List>
