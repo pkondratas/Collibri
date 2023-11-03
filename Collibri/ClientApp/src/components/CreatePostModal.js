@@ -1,7 +1,7 @@
 import {Box, Button, Grid, Modal, TextField} from "@mui/material";
 import {CreatePostStyle} from "../styles/CreatePostStyle";
 import {useRef, useState} from "react";
-import {updateInitialPost} from "../api/CreatePostApi";
+import {deleteInitialPost, updateInitialPost} from "../api/CreatePostApi";
 
 export const CreatePostModal = (props) => {
 
@@ -56,6 +56,7 @@ export const CreatePostModal = (props) => {
     const handleClose = () => {
         handleOnChangeTitle();
         handleOnChangeDesc();
+        deleteInitialPost(props.postId)
         props.setOpen(false);
     }
     

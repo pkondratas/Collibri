@@ -48,3 +48,25 @@ export const updateInitialPost = (postId, updatedPost) => {
             console.error('Error updating post:', error.message);
         });
 }
+
+export const deleteInitialPost = (postId) => {
+
+    fetch(`/v1/posts?postId=${postId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to delete initial post');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Initial post deleted successfully:', data);
+        })
+        .catch(error => {
+            console.error('Error deleting initial post:', error.message);
+        });
+}
