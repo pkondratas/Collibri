@@ -5,6 +5,7 @@ import PostContainer from "./PostContainer";
 import Header from "./Header";
 import { postContainerStyle } from "../styles/RoomLayoutStyle";
 import {AddSection} from "./AddSection";
+import {RoomSettings} from "./RoomSettings";
 
 
 const RoomLayout = () => {
@@ -22,6 +23,7 @@ const RoomLayout = () => {
       </Grid>
       <Grid item xs={1}>
         <Paper>rooms</Paper>
+          <RoomSettings />
       </Grid>
       <Grid item md={4}>
             <AddSection sections={sections} setSections={setSections} ></AddSection>
