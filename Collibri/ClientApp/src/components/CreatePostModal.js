@@ -1,7 +1,8 @@
-import {Box, Button, Grid, Modal, TextField} from "@mui/material";
+import {Box, Button, Grid, Modal, TextField, Typography} from "@mui/material";
 import {CreatePostStyle} from "../styles/CreatePostStyle";
 import {useRef, useState} from "react";
-import {deleteInitialPost, updateInitialPost} from "../api/CreatePostApi";
+import {createPost} from "../api/CreatePostApi";
+import {Check, Clear} from "@mui/icons-material";
 
 export const CreatePostModal = (props) => {
 
@@ -14,12 +15,25 @@ export const CreatePostModal = (props) => {
     
     const handleOnChangeTitle = () => {
         setIsTitleEmptyError(false);
-        setIsTitleTooLongError(false);
+        
+        if (titleFieldRef.current.value.trim().length > 20) {
+            setIsTitleTooLongError(true);
+        }
+        else {
+            setIsTitleTooLongError(false);
+        }
+        
     }
 
     const handleOnChangeDesc = () => {
         setIsDescEmptyError(false);
-        setIsDescTooLongError(false);
+
+        if (descFieldRef.current.value.trim().length > 350) {
+            setIsDescTooLongError(true);
+        }
+        else {
+            setIsDescTooLongError(false);
+        }
     }
     
     function handleCreatePost() {
@@ -33,22 +47,19 @@ export const CreatePostModal = (props) => {
             setIsDescEmptyError(true);
             isOk = false;
         }
-        if(titleFieldRef.current.value.trim().length > 20) {
-            setIsTitleTooLongError(true);
+        if(isTitleTooLongError) {
             isOk = false;
         }
-        if(descFieldRef.current.value.trim().length > 350) {
-            setIsDescTooLongError(true);
+        if(isDescTooLongError) {
             isOk = false;
         }
         
-        if (isOk === true) {
-            updateInitialPost(props.postId, 
-                JSON.stringify({
-                    Title: titleFieldRef.current.value.trim(),
-                    Description: descFieldRef.current.value.trim()
-                })
-            );
+        if (isOk) {
+            createPost(JSON.stringify({
+                Title: titleFieldRef.current.value.trim(),
+                Description: descFieldRef.current.value.trim(),
+                SectionId: props.sectionId
+            }))
             props.handleSuccessfulClose();
         }
     }
@@ -56,7 +67,6 @@ export const CreatePostModal = (props) => {
     const handleClose = () => {
         handleOnChangeTitle();
         handleOnChangeDesc();
-        deleteInitialPost(props.postId)
         props.setOpen(false);
     }
     
@@ -70,7 +80,7 @@ export const CreatePostModal = (props) => {
                       justifyContent="space-evenly"
                       alignItems="strech"
                 >
-                    <Grid item xs={4}>
+                    <Grid item xs={12}>
                         <TextField id="outlined-basic" label="Post title" variant="outlined" multiline
                                    error={isTitleEmptyError || isTitleTooLongError}
                                    inputRef={titleFieldRef}
@@ -84,11 +94,13 @@ export const CreatePostModal = (props) => {
                                    }
                                    sx={CreatePostStyle.nameTextField}/>
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={12}>
                         <TextField id="outlined-basic" label="Post description" variant="outlined"
                                    error={isDescEmptyError || isDescTooLongError}
                                    inputRef={descFieldRef}
                                    onChange={handleOnChangeDesc}
+                                   multiline
+                                   rows={7}
                                    helperText={
                                        isDescEmptyError
                                            ? 'Description cannot be empty'
@@ -98,15 +110,13 @@ export const CreatePostModal = (props) => {
                                    }
                                    sx={CreatePostStyle.descriptionTextField}/>
                     </Grid>
-                    <Grid item xs={12}>notes</Grid>
-                    <Grid item xs={12}>documents</Grid>
-                    <Grid item xs={12}>files</Grid>
-                    <Grid item xs={6}>
-                        <Button onClick={handleClose}>Cancel</Button>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Button onClick={handleCreatePost}>Create</Button>
-                    </Grid>
+                    <Typography>
+                        Creating the post will then open it and allow you to add documents, notes and files.
+                    </Typography>
+                    <Box sx={CreatePostStyle.buttonBox}>
+                        <Button onClick={handleClose}><Clear/></Button>
+                        <Button onClick={handleCreatePost}><Check/></Button>
+                    </Box>
                 </Grid>
             </Box>
         </Modal>

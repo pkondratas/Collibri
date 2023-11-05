@@ -1,8 +1,8 @@
 export const CreatePostStyle = {
     modalWindow: {
         backgroundColor: '#eee',
-        width: 0.85,
-        height: 0.85,
+        width: 0.3,
+        height: 0.5,
         position: 'absolute',
         top: '50%',
         left: '50%',
@@ -17,6 +17,12 @@ export const CreatePostStyle = {
     },
     
     descriptionTextField: {
-        width: 800
+        width: 500
+    },
+    
+    buttonBox: {
+        height: 50,
+        width: 200,
+        margin: 2
     }
 }
