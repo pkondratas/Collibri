@@ -47,7 +47,7 @@ export const RoomSettings = () => {
                     <ListItemIcon>
                         <SettingsIcon fontSize="small" />
                     </ListItemIcon>
-                    <ListItemText>Server settings</ListItemText>
+                    <ListItemText>Room settings</ListItemText>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
                     <ListItemIcon>
