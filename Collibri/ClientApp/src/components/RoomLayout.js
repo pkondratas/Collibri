@@ -21,7 +21,7 @@ const RoomLayout = () => {
       <Grid item xs={12}>
         <Paper><Header/></Paper>
       </Grid>
-      <Grid item xs={1}>
+      <Grid item container xs={1} direction="column" justifyContent="space-between">
         <Paper>rooms</Paper>
           <RoomSettings />
       </Grid>
@@ -33,9 +33,6 @@ const RoomLayout = () => {
         <Paper sx={postContainerStyle}>
           <PostContainer sectionId={sectionId} />
         </Paper>
-      </Grid>
-      <Grid container justifyContent="flex-end" item xs={6}>
-        <Paper>text text text text text</Paper>
       </Grid>
     </Grid>
 

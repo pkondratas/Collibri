@@ -53,7 +53,7 @@ export const RoomSettings = () => {
                     <ListItemIcon>
                         <DeleteIcon fontSize="small" style={{color: "red"}} />
                     </ListItemIcon>
-                    <ListItemText style={{color: "red"}}>Istrint patamsejusi knopke</ListItemText>
+                    <ListItemText style={{color: "red"}}>Delete room</ListItemText>
                 </MenuItem>
             </Menu>
         </div>
