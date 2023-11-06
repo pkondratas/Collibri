@@ -19,6 +19,7 @@ builder.Services.AddScoped<INoteRepository, DbNoteRepository>();
 builder.Services.AddScoped<IRoomRepository, DbRoomRepository>();
 builder.Services.AddScoped<IDocumentRepository, DbDocumentRepository>();
 builder.Services.AddScoped<IPostRepository, DbPostRepository>();
+builder.Services.AddScoped<IAccountRepository, DbAccountRepository>();
 builder.Services.AddDbContext<DataContext>(options =>
 	options.UseNpgsql(builder.Configuration.GetConnectionString("LocalConnection")));
 
