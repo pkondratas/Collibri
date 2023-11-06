@@ -2,7 +2,6 @@ import AddBoxIcon from "@mui/icons-material/AddBox";
 import {Box, IconButton} from "@mui/material";
 import React, {useState} from "react";
 import {CreatePostModal} from "./CreatePostModal";
-import {createPost} from "../api/CreatePostApi";
 import {fetchPosts} from "../api/PostAPI";
 
 
@@ -11,7 +10,9 @@ export const AddPostButton = (props) => {
     const [postId, setPostId] = useState(0)
     
     const handleOpen = () => {
-        setOpen(true);
+        if (props.sectionId !== 0) {
+            setOpen(true);
+        }
     }
     
     const handleSuccessfulClose = () => {

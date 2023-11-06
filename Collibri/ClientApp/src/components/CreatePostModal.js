@@ -1,7 +1,7 @@
 import {Box, Button, Grid, Modal, TextField, Typography} from "@mui/material";
 import {CreatePostStyle} from "../styles/CreatePostStyle";
 import {useRef, useState} from "react";
-import {createPost} from "../api/CreatePostApi";
+import {createPost} from "../api/PostAPI";
 import {Check, Clear} from "@mui/icons-material";
 
 export const CreatePostModal = (props) => {

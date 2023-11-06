@@ -7,13 +7,14 @@ import {useParams} from "react-router-dom";
 const ParentComponent = (props) => {
     
     const {roomId} = useParams()
+    
     useEffect(() => {
         getSections(props.setSections, roomId);
     }, []);
 
 
     if (props.sections.length > 0) {
-
+        
         return (
             <>
                 <SectionsContainer sections={props.sections} setSections={props.setSections}

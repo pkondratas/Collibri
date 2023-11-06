@@ -23,7 +23,10 @@ const SectionsContainer = ({sections, setSections, setSectionId}) => {
         section.sectionName = newName;
         updateSection(section.id, section, sections, setSections);
     }
-   
+
+    useEffect(() => {
+        setSectionId(sections[0].id);
+    }, []);
 
     return (
         <>
