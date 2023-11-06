@@ -21,28 +21,28 @@ const SectionsContainer = ({sections, setSections, setSectionId}) => {
 
     const handleUpdateSection = (newName) => {
         section.sectionName = newName;
-        updateSection(section.sectionId, section, sections, setSections);
+        updateSection(section.id, section, sections, setSections);
     }
    
 
     return (
         <>
 
-            <TableContainer component={Paper} style={{maxHeight: 300}}>
+            <TableContainer component={Paper} style={{minHeight: "30rem", maxHeight: "30rem", overflowY: "auto", }}>
                 <Table stickyHeader sx={{minWidth: 400}} aria-label="simple table">
                     <TableBody>
                         {sections.map((row) => (
                             <TableRow
                                 hover
                                 className="TableRow"
-                                key={row.sectionId}
+                                key={row.id}
                                 sx={tableRowStyle}
                             >
                                 <TableCell sx={nameCellStyle} component="th" scope="row"
-                                           onClick={() => setSectionId(row.sectionId)}> {"#" + row.sectionName} </TableCell>
+                                           onClick={() => setSectionId(row.id)}> {"#" + row.sectionName} </TableCell>
                                 <TableCell align="right"><Button sx={buttonStyle} className="Button"
                                                                  startIcon={<DeleteIcon style={{fontSize: 30}}/>}
-                                                                 onClick={() => deleteSection(row.sectionId, setSections)}></Button>
+                                                                 onClick={() => deleteSection(row.id, setSections)}></Button>
                                     <Button sx={buttonStyle} className="Button"
                                             startIcon={<EditIcon style={{fontSize: 30}}/>}
                                             onClick={() => {
