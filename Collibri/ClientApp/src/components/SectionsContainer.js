@@ -19,7 +19,9 @@ const SectionsContainer = ({sections, handleDelete, handleUpdate, handlePost, se
                                 key={row.sectionId}
                                 sx={tableRowStyle}
                             >
-                                <TableCell sx={nameCellStyle} component="th" scope="row" onClick={() => setSectionId(row.sectionId)}> {"#" + row.sectionName} </TableCell>
+                                <TableCell sx={nameCellStyle} component="th" scope="row" onClick={() => {
+                                  setSectionId(row.id);
+                                }}> {"#" + row.sectionName} </TableCell>
                                 <TableCell align="right"><Button sx={buttonStyle} className="Button" startIcon={<DeleteIcon style={{fontSize: 30}}/>}
                                                                  onClick={() => handleDelete(row.sectionId)}></Button>
                                     <Button sx={buttonStyle} className="Button" startIcon={<EditIcon style={{fontSize: 30}}/>}

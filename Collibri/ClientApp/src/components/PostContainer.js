@@ -17,7 +17,7 @@ const PostContainer = (props) => {
      <Box sx={containerStyle}>
        <List>
          {posts.map(item => (
-           <ListItem key={item.postId}>
+           <ListItem key={item.id}>
              <Post post={item} {...item} setPosts={setPosts}/>
            </ListItem>
          ))}
