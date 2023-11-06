@@ -35,19 +35,25 @@ export const RoomSettings = () => {
                     <ListItemIcon>
                         <DriveFileRenameOutlineIcon fontSize="small" />
                     </ListItemIcon>
-                    <ListItemText>Change user name</ListItemText>
+                    <ListItemText>Change username</ListItemText>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
                     <ListItemIcon>
                         <PersonAddIcon fontSize="small" />
                     </ListItemIcon>
-                    <ListItemText>Add person</ListItemText>
+                    <ListItemText>Add user</ListItemText>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
                     <ListItemIcon>
-                        <DeleteIcon fontSize="small" />
+                        <SettingsIcon fontSize="small" />
                     </ListItemIcon>
-                    <ListItemText>Delete room</ListItemText>
+                    <ListItemText>Server settings</ListItemText>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                    <ListItemIcon>
+                        <DeleteIcon fontSize="small" style={{color: "red"}} />
+                    </ListItemIcon>
+                    <ListItemText style={{color: "red"}}>Istrint patamsejusi knopke</ListItemText>
                 </MenuItem>
             </Menu>
         </div>
