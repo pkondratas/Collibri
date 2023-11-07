@@ -65,13 +65,16 @@ export const CreatePostModal = (props) => {
     }
 
     const handleClose = () => {
-        handleOnChangeTitle();
-        handleOnChangeDesc();
+        setIsTitleEmptyError(false);
+        setIsTitleTooLongError(false);
+        setIsDescEmptyError(false);
+        setIsDescTooLongError(false);
+        
         props.setOpen(false);
     }
     
     return (
-        <Modal open={props.showModal}>
+        <Modal open={props.showModal} onClose={() => handleClose()}>
             <Box sx={CreatePostStyle.modalWindow}
                  align="center"
             >
