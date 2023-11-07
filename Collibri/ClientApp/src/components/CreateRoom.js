@@ -32,7 +32,7 @@ export const CreateRoom = ({setRooms}) => {
     }
 
     return (
-        <div>
+        <>
             <Button size="large" onClick={handleOpen} variant="contained">Create Room</Button>
             <CModal showModal={open} handleClose={handleClose} handleChanges={handleCreateRoom}>
                 <Typography variant="h5">
@@ -43,6 +43,6 @@ export const CreateRoom = ({setRooms}) => {
                            onChange={handleOnChange} margin="normal"/>
                 <Divider/>
             </CModal>
-        </div>
+        </>
     );
 }

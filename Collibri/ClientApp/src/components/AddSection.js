@@ -45,7 +45,7 @@ export const AddSection = ({setSections, sections}) => {
     return (
         <div>
             <IconButton color="success" onClick={handleOpen}>
-                <AddBoxIcon/>
+                <AddBoxIcon fontSize="large"/>
             </IconButton>
             <CModal showModal={open} handleClose={handleClose} handleChanges={handleCreateSection}>
                 <Typography variant="h5">
