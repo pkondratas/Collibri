@@ -43,5 +43,11 @@ namespace Collibri.Controllers
 
             return deletedPost == null ? NotFound() : Ok(deletedPost);
         }
+
+        [HttpDelete("in-section")]
+        public IActionResult DeleteAllPostsInSection([FromQuery] int sectionId)
+        {
+            return Ok(_postRepository.DeleteAllPostsInSection(sectionId));
+        }
     }   
 }

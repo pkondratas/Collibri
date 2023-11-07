@@ -5,11 +5,13 @@ import PostContainer from "./PostContainer";
 import Header from "./Header";
 import { postContainerStyle } from "../styles/RoomLayoutStyle";
 import {AddSection} from "./AddSection";
+import {AddPostButton} from "./AddPostButton";
 
 
 const RoomLayout = () => {
   const [sectionId, setSectionId] = useState(0);
   const [sections, setSections] = useState([]);
+  const [posts, setPosts] = useState([]);
   
   return (
 
@@ -28,8 +30,9 @@ const RoomLayout = () => {
           <Paper><ParentComponent sections={sections} setSections={setSections} setSectionId={setSectionId} /></Paper>
       </Grid>
       <Grid item xs={6}>
+          <AddPostButton sectionId={sectionId} setPosts={setPosts}/>
         <Paper sx={postContainerStyle}>
-          <PostContainer sectionId={sectionId} />
+          <PostContainer sectionId={sectionId} posts={posts} setPosts={setPosts}/>
         </Paper>
       </Grid>
       <Grid container justifyContent="flex-end" item xs={6}>
