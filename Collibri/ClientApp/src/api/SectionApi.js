@@ -17,7 +17,7 @@ export const deleteSection = (id, setSections) => {
         .then(response => response.json())
         .then(data => {
             console.log(data); // Log the response from the DELETE request
-            setSections(prevSections => prevSections.filter(section => section.sectionId !== id));
+            setSections(prevSections => prevSections.filter(section => section.id !== id));
         })
         .catch(error => console.error('Error deleting section:', error));
 }
@@ -65,7 +65,7 @@ export const updateSection = (id, updatedSection, sections, setSections) => {
         .then((data) => {
             console.log(data);
             const updatedSections = [...sections];
-            const sectionIndex = updatedSections.findIndex(section => section.sectionId === id);
+            const sectionIndex = updatedSections.findIndex(section => section.id === id);
             updatedSections[sectionIndex] = data;
             setSections(updatedSections);
         })

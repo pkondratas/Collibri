@@ -67,5 +67,18 @@ namespace Collibri.Repositories.FileBasedImplementation
 
             return postToDelete;
         }
+        
+        public IEnumerable<Post> DeleteAllPostsInSection(int sectionId)
+        {
+            var postList = _dataHandler.GetAllItems<Post>(ModelType.Posts);
+            var postsInSection = postList.Where(x => x.SectionId == sectionId).ToList();
+
+            foreach (var post in postsInSection)
+            {
+                postList.Remove(post);
+            }
+
+            return postsInSection;
+        }
     }
 }
