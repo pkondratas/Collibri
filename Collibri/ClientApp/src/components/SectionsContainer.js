@@ -7,6 +7,7 @@ import {useParams} from "react-router-dom";
 import UpdateSectionModal from "./UpdateSectionModal";
 import '../styles/tableList.css';
 import {buttonStyle, nameCellStyle, tableRowStyle} from "../styles/tableListStyle";
+import {deleteAllPostsInSection} from "../api/PostAPI";
 
 
 const SectionsContainer = ({sections, setSections, setSectionId}) => {
@@ -17,13 +18,20 @@ const SectionsContainer = ({sections, setSections, setSectionId}) => {
         setSection(currentSection);
         setUpdateModal(true);
     }
-
-
+    
     const handleUpdateSection = (newName) => {
         section.sectionName = newName;
         updateSection(section.id, section, sections, setSections);
     }
-   
+    
+    const handleDeleteSection = (row) => {
+        deleteSection(row.id, setSections);
+        deleteAllPostsInSection(row.id);
+    }
+
+    useEffect(() => {
+        setSectionId(sections[0].id);
+    }, []);
 
     return (
         <>
@@ -42,7 +50,7 @@ const SectionsContainer = ({sections, setSections, setSectionId}) => {
                                            onClick={() => setSectionId(row.id)}> {"#" + row.sectionName} </TableCell>
                                 <TableCell align="right"><Button sx={buttonStyle} className="Button"
                                                                  startIcon={<DeleteIcon style={{fontSize: 30}}/>}
-                                                                 onClick={() => deleteSection(row.id, setSections)}></Button>
+                                                                 onClick={() => handleDeleteSection(row)}></Button>
                                     <Button sx={buttonStyle} className="Button"
                                             startIcon={<EditIcon style={{fontSize: 30}}/>}
                                             onClick={() => {
