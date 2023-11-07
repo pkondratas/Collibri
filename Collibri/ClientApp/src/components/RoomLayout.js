@@ -21,12 +21,13 @@ const RoomLayout = () => {
       <Grid item xs={12}>
         <Paper><Header/></Paper>
       </Grid>
-      <Grid item container xs={1} direction="column" justifyContent="space-between">
-        <Paper>rooms</Paper>
+      <Grid item xs={1}>
           <RoomSettings />
+          <Paper>rooms</Paper>
+          
       </Grid>
       <Grid item md={4}>
-            <AddSection sections={sections} setSections={setSections} ></AddSection>
+          <AddSection sections={sections} setSections={setSections} ></AddSection>
           <Paper><ParentComponent sections={sections} setSections={setSections} setSectionId={setSectionId} /></Paper>
       </Grid>
       <Grid item xs={6}>

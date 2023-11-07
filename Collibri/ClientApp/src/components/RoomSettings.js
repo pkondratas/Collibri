@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, MenuItem, Menu, ListItemText, ListItemIcon} from "@mui/material";
+import {MenuItem, Menu, ListItemText, ListItemIcon, IconButton} from "@mui/material";
 import SettingsIcon from '@mui/icons-material/Settings';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
@@ -18,15 +18,14 @@ export const RoomSettings = () => {
     };
 
     return (
-        <div>
-            <Button id="options-button"
+        <>
+            <IconButton id="options-button"
                     aria-controls={open ? 'basic-menu' : undefined}
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}
-                    size="large" onClick={handleClick} variant="contained">
-                <SettingsIcon />
-            </Button>
-            
+                    onClick={handleClick}>
+                <SettingsIcon fontSize="large" />
+            </IconButton>
             <Menu id="options-menu" anchorEl={anchorEl} open={open} onClose={handleClose}
                   MenuListProps={{
                           'aria-labelledby': 'options-button',
@@ -56,6 +55,6 @@ export const RoomSettings = () => {
                     <ListItemText style={{color: "red"}}>Delete room</ListItemText>
                 </MenuItem>
             </Menu>
-        </div>
+        </>
     );
 }
