@@ -1,28 +1,40 @@
 export const CreatePostStyle = {
     modalWindow: {
         backgroundColor: '#eee',
-        width: 0.3,
-        height: 0.5,
         position: 'absolute',
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
         border: '2px solid #000',
         boxShadow: 24,
-        p: 4
+        p: 4,
+        display: 'flex',
+        flexDirection: 'column'
+    },
+    
+    textFieldBox: {
+        ml: 'auto',
+        mr: 'auto',
+        display: 'flex'
     },
     
     nameTextField: {
-        width: 400,
+        width: 500,
+        mb: 2
+    },
+    
+    warningNote: {
+        ml: 'auto',
+        mr: 'auto',
+        mt: 2,
+        mb: 2
     },
     
     descriptionTextField: {
-        width: 500
+        width: 600
     },
     
     buttonBox: {
-        height: 50,
-        width: 200,
-        margin: 2
+        margin: 'auto'
     }
 }

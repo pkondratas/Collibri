@@ -75,49 +75,43 @@ export const CreatePostModal = (props) => {
             <Box sx={CreatePostStyle.modalWindow}
                  align="center"
             >
-                <Grid container spacing={1}
-                      direction="row"
-                      justifyContent="space-evenly"
-                      alignItems="strech"
-                >
-                    <Grid item xs={12}>
-                        <TextField id="outlined-basic" label="Post title" variant="outlined" multiline
-                                   error={isTitleEmptyError || isTitleTooLongError}
-                                   inputRef={titleFieldRef}
-                                   onChange={handleOnChangeTitle}
-                                   helperText={
-                                       isTitleEmptyError
-                                           ? 'Title cannot be empty'
-                                           : isTitleTooLongError 
-                                                ? 'Title cannot be longer than 20 symbols' 
-                                                : ' '
-                                   }
-                                   sx={CreatePostStyle.nameTextField}/>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField id="outlined-basic" label="Post description" variant="outlined"
-                                   error={isDescEmptyError || isDescTooLongError}
-                                   inputRef={descFieldRef}
-                                   onChange={handleOnChangeDesc}
-                                   multiline
-                                   rows={7}
-                                   helperText={
-                                       isDescEmptyError
-                                           ? 'Description cannot be empty'
-                                           : isDescTooLongError 
-                                                ? 'Description cannot be longer than 350 symbols' 
-                                                : ' '
-                                   }
-                                   sx={CreatePostStyle.descriptionTextField}/>
-                    </Grid>
-                    <Typography>
-                        Creating the post will then open it and allow you to add documents, notes and files.
-                    </Typography>
-                    <Box sx={CreatePostStyle.buttonBox}>
-                        <Button onClick={handleClose}><Clear/></Button>
-                        <Button onClick={handleCreatePost}><Check/></Button>
-                    </Box>
-                </Grid>
+                <Box sx={CreatePostStyle.textFieldBox}>
+                    <TextField id="outlined-basic" label="Post title" variant="outlined" multiline
+                               error={isTitleEmptyError || isTitleTooLongError}
+                               inputRef={titleFieldRef}
+                               onChange={handleOnChangeTitle}
+                               helperText={
+                                   isTitleEmptyError
+                                       ? 'Title cannot be empty'
+                                       : isTitleTooLongError 
+                                            ? 'Title cannot be longer than 20 symbols' 
+                                            : 'Max 20 symbols'
+                               }
+                               sx={CreatePostStyle.nameTextField}/>
+                </Box>
+                <Box sx={CreatePostStyle.textFieldBox}>
+                    <TextField id="outlined-basic" label="Post description" variant="outlined"
+                               error={isDescEmptyError || isDescTooLongError}
+                               inputRef={descFieldRef}
+                               onChange={handleOnChangeDesc}
+                               multiline
+                               rows={7}
+                               helperText={
+                                   isDescEmptyError
+                                       ? 'Description cannot be empty'
+                                       : isDescTooLongError 
+                                            ? 'Description cannot be longer than 350 symbols' 
+                                            : 'Max 350 symbols'
+                               }
+                               sx={CreatePostStyle.descriptionTextField}/>
+                </Box>
+                <Typography sx={CreatePostStyle.warningNote}>
+                    Creating the post will then open it and allow you to add documents, notes and files.
+                </Typography>
+                <Box sx={CreatePostStyle.buttonBox}>
+                    <Button onClick={handleClose}><Clear/></Button>
+                    <Button onClick={handleCreatePost}><Check/></Button>
+                </Box>
             </Box>
         </Modal>
     );
