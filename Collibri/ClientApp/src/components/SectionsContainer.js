@@ -11,7 +11,7 @@ import {buttonStyle, nameCellStyle, tableRowStyle} from "../styles/tableListStyl
 
 const SectionsContainer = ({sections, setSections, setSectionId}) => {
     const [updateModal, setUpdateModal] = useState(false);
-    const [section, setSection] = useState({"Id": 0, "sectionName": "default"});
+    const [section, setSection] = useState({"Id": 0, "Name": "default"});
 
     const handleOpenModal = (currentSection) => {
         setSection(currentSection);
@@ -22,15 +22,17 @@ const SectionsContainer = ({sections, setSections, setSectionId}) => {
         section.sectionName = newName;
         updateSection(section.id, section, sections, setSections);
     }
-   
-    const handleDelete = (id) => {
-        deleteSection(id, setSections);
+    
+    const handleDeleteSection = (row) => {
+        deleteSection(row.id, setSections);
+        deleteAllPostsInSection(row.id);
     }
+   
 
     return (
         <>
 
-            <TableContainer component={Paper} style={{maxHeight: 300}}>
+            <TableContainer component={Paper} style={{minHeight: "30rem", maxHeight: "30rem", overflowY: "auto", }}>
                 <Table stickyHeader sx={{minWidth: 400}} aria-label="simple table">
                     <TableBody>
                         {sections.map((row) => (
@@ -44,7 +46,7 @@ const SectionsContainer = ({sections, setSections, setSectionId}) => {
                                            onClick={() => setSectionId(row.id)}> {"#" + row.sectionName} </TableCell>
                                 <TableCell align="right"><Button sx={buttonStyle} className="Button"
                                                                  startIcon={<DeleteIcon style={{fontSize: 30}}/>}
-                                                                 onClick={() => handleDelete(row.id)}></Button>
+                                                                 onClick={() => handleDeleteSection(row)}></Button>
                                     <Button sx={buttonStyle} className="Button"
                                             startIcon={<EditIcon style={{fontSize: 30}}/>}
                                             onClick={() => {
@@ -52,6 +54,7 @@ const SectionsContainer = ({sections, setSections, setSectionId}) => {
                                             }
                                             }></Button>
                                 </TableCell>
+
                             </TableRow>
                         ))}
                     </TableBody>

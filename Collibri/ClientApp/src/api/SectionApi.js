@@ -60,7 +60,7 @@ export const updateSection = (id, updatedSection, sections, setSections) => {
         .then((data) => {
             console.log(data);
             const updatedSections = [...sections];
-            const sectionIndex = updatedSections.findIndex(section => section.sectionId === id);
+            const sectionIndex = updatedSections.findIndex(section => section.id === id);
             updatedSections[sectionIndex] = data;
             setSections(updatedSections);
         })

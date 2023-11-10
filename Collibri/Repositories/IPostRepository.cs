@@ -11,5 +11,6 @@ namespace Collibri.Repositories
         public Post? UpdatePostById(Guid postId, Post post);
 
         public Post? DeletePostById(Guid postId);
+        public IEnumerable<Post> DeleteAllPostsInSection(int sectionId);
     }
 }

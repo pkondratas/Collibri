@@ -41,6 +41,7 @@ namespace Collibri.Repositories.DbImplementation
             postToUpdate.LikeCount = post.LikeCount;
             postToUpdate.DislikeCount = post.DislikeCount;
             postToUpdate.Title = post.Title;
+            postToUpdate.Description = post.Description;
             postToUpdate.LastUpdatedDate = DateTime.UtcNow;
             _context.Posts.Update(postToUpdate);
             _context.SaveChanges();
@@ -61,6 +62,20 @@ namespace Collibri.Repositories.DbImplementation
             _context.SaveChanges();
 
             return postToDelete;
+        }
+
+        public IEnumerable<Post> DeleteAllPostsInSection(int sectionId)
+        {
+            var postsInSection = _context.Posts.Where(x => x.SectionId == sectionId);
+
+            foreach (var post in postsInSection)
+            {
+                _context.Posts.Remove(post);
+            }
+
+            _context.SaveChanges();
+
+            return postsInSection;
         }
     }
 }
