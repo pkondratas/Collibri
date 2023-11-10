@@ -8,4 +8,13 @@ export const fetchNotes = async (postId, setNotes) => {
     console.log(err.message);
   }
 }
+
+export const deleteNote = async (noteId) => {
+  try {
+    const response = await axios.delete(`/v1/notes/${noteId}`);
+    return response.data;
+  } catch (err) {
+    console.log(err.message);
+  }
+}
  

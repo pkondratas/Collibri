@@ -111,7 +111,7 @@ const PostModal = (props) => {
                 <List sx={PostModalStyles.list}>
                   {notes.map((note) => (
                     <ListItem>
-                      <NoteCard {...note} />
+                      <NoteCard {...note} setNotes={setNotes}/>
                     </ListItem>
                   ))}
                 </List> 

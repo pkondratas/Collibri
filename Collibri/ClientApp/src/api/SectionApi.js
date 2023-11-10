@@ -17,7 +17,7 @@ export const deleteSection = (id, setSections) => {
         .then(response => response.json())
         .then(data => {
             console.log(data); // Log the response from the DELETE request
-            setSections(prevSections => prevSections.filter(section => section.sectionId !== id));
+            setSections(prevSections => prevSections.filter(section => section.id !== id));
         })
         .catch(error => console.error('Error deleting section:', error));
 }
@@ -49,11 +49,6 @@ export const createSection = (newName, roomId, setSections) => {
         });
 }
 export const updateSection = (id, updatedSection, sections, setSections) => {
-
-
-    console.log(id);
-    console.log(updatedSection);
-
     fetch(`/v1/sections?sectionId=${id}`, {
         method: 'PUT',
         headers: {

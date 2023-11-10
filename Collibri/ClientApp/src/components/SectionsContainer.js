@@ -11,19 +11,21 @@ import {buttonStyle, nameCellStyle, tableRowStyle} from "../styles/tableListStyl
 
 const SectionsContainer = ({sections, setSections, setSectionId}) => {
     const [updateModal, setUpdateModal] = useState(false);
-    const [section, setSection] = useState({"Id": 0, "Name": "default"});
+    const [section, setSection] = useState({"Id": 0, "sectionName": "default"});
 
     const handleOpenModal = (currentSection) => {
         setSection(currentSection);
         setUpdateModal(true);
     }
-
-
+    
     const handleUpdateSection = (newName) => {
         section.sectionName = newName;
-        updateSection(section.sectionId, section, sections, setSections);
+        updateSection(section.id, section, sections, setSections);
     }
    
+    const handleDelete = (id) => {
+        deleteSection(id, setSections);
+    }
 
     return (
         <>
@@ -35,14 +37,14 @@ const SectionsContainer = ({sections, setSections, setSectionId}) => {
                             <TableRow
                                 hover
                                 className="TableRow"
-                                key={row.sectionId}
+                                key={row.id}
                                 sx={tableRowStyle}
                             >
                                 <TableCell sx={nameCellStyle} component="th" scope="row"
-                                           onClick={() => setSectionId(row.sectionId)}> {"#" + row.sectionName} </TableCell>
+                                           onClick={() => setSectionId(row.id)}> {"#" + row.sectionName} </TableCell>
                                 <TableCell align="right"><Button sx={buttonStyle} className="Button"
                                                                  startIcon={<DeleteIcon style={{fontSize: 30}}/>}
-                                                                 onClick={() => deleteSection(row.sectionId, setSections)}></Button>
+                                                                 onClick={() => handleDelete(row.id)}></Button>
                                     <Button sx={buttonStyle} className="Button"
                                             startIcon={<EditIcon style={{fontSize: 30}}/>}
                                             onClick={() => {
@@ -50,7 +52,6 @@ const SectionsContainer = ({sections, setSections, setSectionId}) => {
                                             }
                                             }></Button>
                                 </TableCell>
-
                             </TableRow>
                         ))}
                     </TableBody>

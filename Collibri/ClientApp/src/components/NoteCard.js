@@ -9,9 +9,16 @@ import {
   Edit,
   Delete, CloseOutlined, MoreVertOutlined, FileDownloadOutlined
 } from "@mui/icons-material";
+import {deleteNote} from "../api/NoteAPI";
 
 const NoteCard = (props) => {
   const [moreButton, setMoreButton] = useState(false);
+  
+  const handleDelete = () => {
+    deleteNote(props.id)
+      .then(r => props.setNotes((prevNotes) => prevNotes.filter(x => x.id !== r.id)))
+    setMoreButton(false);
+  }
   
   return (
     <Card sx={NoteCardStyles.card}>
@@ -38,11 +45,11 @@ const NoteCard = (props) => {
                 <IconButton>
                   <Edit />
                 </IconButton>
-                <IconButton>
+                <IconButton onClick={() => handleDelete()}>
                   <Delete />
                 </IconButton>
-                <IconButton>
-                  <CloseOutlined onClick={() => setMoreButton(false)} />
+                <IconButton onClick={() => setMoreButton(false)}>
+                  <CloseOutlined />
                 </IconButton>
               </>
             ) : (
