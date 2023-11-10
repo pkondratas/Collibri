@@ -7,11 +7,12 @@ import {useParams} from "react-router-dom";
 import UpdateSectionModal from "./UpdateSectionModal";
 import '../styles/tableList.css';
 import {buttonStyle, nameCellStyle, tableRowStyle} from "../styles/tableListStyle";
+import {deleteAllPostsInSection} from "../api/PostAPI";
 
 
 const SectionsContainer = ({sections, setSections, setSectionId}) => {
     const [updateModal, setUpdateModal] = useState(false);
-    const [section, setSection] = useState({"Id": 0, "Name": "default"});
+    const [section, setSection] = useState({"id": 0, "sectionName": "default"});
 
     const handleOpenModal = (currentSection) => {
         setSection(currentSection);
