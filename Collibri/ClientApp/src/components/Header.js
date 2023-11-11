@@ -4,8 +4,9 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SearchIcon from '@mui/icons-material/Search';
 import { HeaderStyles } from '../styles/HeaderStyles'; 
 import {useNavigate} from "react-router-dom";
+import SearchBar from "./SearchBar";
 
-const Header = () => {
+const Header = (props) => {
     
     const navigate = useNavigate();
     
@@ -21,17 +22,7 @@ const Header = () => {
                     <Typography variant="h4" style={HeaderStyles.title}>Collibri</Typography>
                 </Box>
                 <Box style={HeaderStyles.box}>
-                    <Tooltip title="Search functionality not implemented">
-                        <OutlinedInput
-                            placeholder="Enter text"
-                            style={HeaderStyles.searchInput}
-                            startAdornment={
-                                <InputAdornment position="start">
-                                    <SearchIcon style={HeaderStyles.backButton} />
-                                </InputAdornment>
-                            }
-                        />
-                    </Tooltip>
+                    <SearchBar posts={props.posts} sectionId={props.SectionId} setPosts={props.setPosts}/>
                 </Box>
             </Toolbar>
         </AppBar>
