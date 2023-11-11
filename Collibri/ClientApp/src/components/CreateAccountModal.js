@@ -7,6 +7,7 @@ const CreateAccountModal = ({open, onClose}) => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
     
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -20,7 +21,7 @@ const CreateAccountModal = ({open, onClose}) => {
                 <Typography variant="h6" gutterBottom>
                     Create User
                 </Typography>
-                <form onSubmit={handleSubmit}>
+                <Box onSubmit={handleSubmit}>
                     <TextField
                         fullWidth
                         margin="normal"
@@ -28,6 +29,15 @@ const CreateAccountModal = ({open, onClose}) => {
                         variant="outlined"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
+                        sx={modalStyles.inputField}
+                    />
+                    <TextField
+                        fullWidth
+                        margin="normal"
+                        label="Email"
+                        variant="outlined"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         sx={modalStyles.inputField}
                     />
                     <TextField
@@ -41,7 +51,7 @@ const CreateAccountModal = ({open, onClose}) => {
                     />
 
                     <Tooltip title="Functionality not implemented" arrow>
-                        <span>
+                        <Box>
                              <Button
                                  type="submit"
                                  fullWidth
@@ -50,9 +60,9 @@ const CreateAccountModal = ({open, onClose}) => {
                              >
                             Register
                         </Button>
-                        </span>
+                        </Box>
                     </Tooltip>
-                </form>
+                </Box>
             </Box>
         </Modal>
     );
