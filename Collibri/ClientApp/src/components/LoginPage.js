@@ -3,17 +3,26 @@ import { TextField, Button, Typography, Container, Paper, Box } from '@mui/mater
 import { Tooltip } from '@mui/material';
 import { LoginPageStyles } from '../styles/LoginPageStyles.js';
 import ForgotPasswordModal from "./ForgotPasswordModal";
+import CreateAccountModal from "./CreateAccountModal";
 
 const LoginPage = () => {
     const [forgotPasswordModalOpen, setForgotPasswordModalOpen] = useState(false);
+    const [isRegistrationModalOpen , setRegistrationModalOpen] = useState(false);
 
     const handleForgotPasswordClick = () => {
         setForgotPasswordModalOpen(true);
     };
-
+    
     const closeForgotPasswordModal = () => {
         setForgotPasswordModalOpen(false);
     };
+
+    const handleRegistrationClick = () => {
+        setRegistrationModalOpen(true);
+    }
+    const closeRegistrationModal = () => {
+        setRegistrationModalOpen(false);
+    }
     
     return (
         <Box style={LoginPageStyles.container}>
@@ -26,6 +35,12 @@ const LoginPage = () => {
                 <Paper elevation={0} style={LoginPageStyles.paper}>
                     <Typography variant="h5" gutterBottom style={LoginPageStyles.typography}>
                         Login
+                    </Typography>
+                    <Typography variant="body2" style={LoginPageStyles.link} >
+                        Need an account?            
+                        <span style={{ cursor: 'pointer', color:"black" }} onClick={handleRegistrationClick}>
+                                    &nbsp;Register
+                                </span>
                     </Typography>
                     <Box component="form" noValidate sx={{ mt: 1 }}>
                         <TextField
@@ -65,6 +80,10 @@ const LoginPage = () => {
             <ForgotPasswordModal
                 open={forgotPasswordModalOpen}
                 onClose={closeForgotPasswordModal}
+            />
+            <CreateAccountModal
+            open={isRegistrationModalOpen}
+            onClose={closeRegistrationModal}
             />
         </Box>
     );
