@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Modal, TextField, Button, Box, Typography, Tooltip } from '@mui/material';
+import { Modal, TextField, Button, Box, Typography, Tooltip, IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close'; // Import the Close icon
 import modalStyles from '../styles/ForgotPasswordModalStyles';
 
 const ForgotPasswordModal = ({ open, onClose }) => {
@@ -17,7 +18,17 @@ const ForgotPasswordModal = ({ open, onClose }) => {
 
     return (
         <Modal open={open} onClose={onClose} centered>
-            <Box sx={modalStyles.container}>
+            <Box sx={modalStyles.container} position="relative">
+                <Box sx={modalStyles.closeButtonContainer}>
+                    <IconButton
+                        edge="end"
+                        color="inherit"
+                        onClick={onClose}
+                        aria-label="close"
+                    >
+                        <CloseIcon />
+                    </IconButton>
+                </Box>
                 <Typography variant="h6" gutterBottom>
                     Forgot Password
                 </Typography>
@@ -49,4 +60,3 @@ const ForgotPasswordModal = ({ open, onClose }) => {
 };
 
 export default ForgotPasswordModal;
-
