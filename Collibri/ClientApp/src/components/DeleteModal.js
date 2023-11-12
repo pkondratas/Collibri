@@ -5,7 +5,10 @@ import { deleteModalWarningStyle } from '../styles/DeleteModalStyle';
 
 const DeleteModal = (props) => {
   const handleClose = () => props.setDeleteModal(false);
-  const handleChanges = () => props.handleDelete(props.postId);
+  const handleChanges = () => {
+    props.handleDelete(props.id)
+    handleClose();
+  };
   
   return(
     <>
@@ -13,8 +16,8 @@ const DeleteModal = (props) => {
         <Typography variant="h5">
           Are you sure?
         </Typography>
-        <Typography variant="p" sx={deleteModalWarningStyle}>
-          Deleted posts cannot be recovered.
+        <Typography variant="body1" sx={deleteModalWarningStyle}>
+          Deleted items cannot be recovered.
         </Typography>
       </CModal>
     </>

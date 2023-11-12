@@ -1,6 +1,7 @@
+using Collibri.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Collibri.Models
+namespace Collibri.Data
 {
 	public class DataContext : DbContext
 	{

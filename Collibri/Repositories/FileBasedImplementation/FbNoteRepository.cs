@@ -47,14 +47,14 @@ namespace Collibri.Repositories.FileBasedImplementation
             return null;
         }
 
-        // public IEnumerable<Note> GetAllNotesInSection(int sectionId)
-        // {
-        //     var noteList = _dataHandler.GetAllItems<Note>(ModelType.Notes);
-        //     var notesInSection = noteList.Where(note => note.SectionId == sectionId);
-        //     
-        //     return notesInSection;
-        // }
-        //
+        public IEnumerable<Note> GetAllNotesByPost(Guid postId)
+        {
+            var noteList = _dataHandler.GetAllItems<Note>(ModelType.Notes);
+            var notesInPost = noteList.Where(note => note.PostId == postId);
+            
+            return notesInPost;
+        }
+        
         // public IEnumerable<Note> GetAllNotesInRoom(int roomId)
         // {
         //     var noteList = _dataHandler.GetAllItems<Note>(ModelType.Notes);
