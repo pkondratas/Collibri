@@ -12,7 +12,7 @@ import {deleteAllPostsInSection} from "../api/PostAPI";
 
 const SectionsContainer = ({sections, setSections, setSectionId}) => {
     const [updateModal, setUpdateModal] = useState(false);
-    const [section, setSection] = useState({"Id": 0, "Name": "default"});
+    const [section, setSection] = useState({"id": 0, "sectionName": "default"});
 
     const handleOpenModal = (currentSection) => {
         setSection(currentSection);
@@ -28,10 +28,7 @@ const SectionsContainer = ({sections, setSections, setSectionId}) => {
         deleteSection(row.id, setSections);
         deleteAllPostsInSection(row.id);
     }
-
-    useEffect(() => {
-        setSectionId(sections[0].id);
-    }, []);
+   
 
     return (
         <>

@@ -1,3 +1,4 @@
+using Collibri.Data;
 using Collibri.Models;
 using Collibri.Repositories.ExtensionMethods;
 
@@ -36,6 +37,13 @@ namespace Collibri.Repositories.DbImplementation
             var noteList = _context.Notes.ToList();
 
             return noteList.Any(x => x.Id == id) ? noteList.FirstOrDefault(x => x.Id == id) : null;
+        }
+        
+        public IEnumerable<Note> GetAllNotesByPost(Guid postId)
+        {
+            var notesInPost = _context.Notes.ToList().Where(note => note.PostId == postId);
+            
+            return notesInPost;
         }
 
         public Note? DeleteNote(int id)

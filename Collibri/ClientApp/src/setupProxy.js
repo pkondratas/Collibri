@@ -9,7 +9,7 @@ const context = [
   '/v1/notes',
   '/v1/rooms',
   '/v1/sections',
-  '/v1/Documents',
+  '/v1/documents',
 ];
 
 const onError = (err, req, resp, target) => {
