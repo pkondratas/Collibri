@@ -1,7 +1,7 @@
 using System.IO.Abstractions;
-using Collibri.Models;
+using Collibri.Data;
 using Collibri.Repositories;
-using Collibri.Repositories.DataHandling;
+// using Collibri.Repositories.DataHandling;
 using Collibri.Repositories.DbImplementation;
 using Collibri.Repositories.FileBasedImplementation;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +19,7 @@ builder.Services.AddScoped<INoteRepository, DbNoteRepository>();
 builder.Services.AddScoped<IRoomRepository, DbRoomRepository>();
 builder.Services.AddScoped<IDocumentRepository, DbDocumentRepository>();
 builder.Services.AddScoped<IPostRepository, DbPostRepository>();
+builder.Services.AddScoped<IAccountRepository, DbAccountRepository>();
 builder.Services.AddDbContext<DataContext>(options =>
 	options.UseNpgsql(builder.Configuration.GetConnectionString("LocalConnection")));
 

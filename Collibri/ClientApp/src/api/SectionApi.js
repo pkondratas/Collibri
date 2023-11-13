@@ -49,11 +49,6 @@ export const createSection = (newName, roomId, setSections) => {
         });
 }
 export const updateSection = (id, updatedSection, sections, setSections) => {
-
-
-    console.log(id);
-    console.log(updatedSection);
-
     fetch(`/v1/sections?sectionId=${id}`, {
         method: 'PUT',
         headers: {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Card, CardContent, Typography, Button } from '@mui/material';
+import {Box, Card, CardContent, Typography, Button, CardActionArea} from '@mui/material';
 import {
   ThumbUp,
   ThumbUpAltOutlined,
@@ -16,18 +16,18 @@ import {
   postNoteStyle, postReactionButtons
 } from '../styles/PostStyle';
 import { deletePost, updatePost } from '../api/PostAPI';
-import { fetchNote } from '../api/NoteAPI';
 import UpdatePostModal from './UpdatePostModal';
 import DeleteModal from "./DeleteModal";
 import '../styles/post.css';
+import PostModal from "./PostModal";
 
 const Post = (props) => {
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
-  const [note, setNote] = useState('');
   const [post, setPost] = useState(props.post);
   const [updateModal, setUpdateModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
+  const [postModal, setPostModal] = useState(false);
     
   const handleDelete = (postId) => {
     deletePost(postId)
@@ -55,7 +55,9 @@ const Post = (props) => {
     setPost(updatedPost);
   }
 
-  const handleLike = () => {
+  const handleLike = (event) => {
+    event.stopPropagation();
+    
     let likes = post.likeCount;
     let dislikes = post.dislikeCount;
     
@@ -73,7 +75,9 @@ const Post = (props) => {
     setLiked(!liked);
   }
 
-  const handleDislike = () => {
+  const handleDislike = (event) => {
+    event.stopPropagation();
+    
     let likes = post.likeCount;
     let dislikes = post.dislikeCount;
     
@@ -91,49 +95,67 @@ const Post = (props) => {
     setDisliked(!disliked);
   }
   
-  //useEffect(() => {
-  //  fetchNote(props.noteId, setNote);
-  //}, [props.noteId]);
-  
   return(
     <>
       <Card hover className="Card" sx={postCardStyle}>
-        <CardContent>
-          <Typography gutterBottom variant="h5">
-            {props.title}
-          </Typography>
-          <Box sx={postContentBoxStyle}>
-            <Typography 
-              variant="body2" 
-              color="text.secondary"
-              sx={postNoteStyle}
-            >
-              {props.description}
+        <CardActionArea disableRipple onClick={() => {
+          setPostModal(true);
+        }}>
+          <CardContent>
+            <Typography gutterBottom variant="h5">
+              {props.title}
             </Typography>
-            <Box sx={postEditingBox}>
-              <Button sx={postEditingButtons} className="Button" onClick={() => {setDeleteModal(true)}}>
-                <DeleteOutline fontSize="small" />
-              </Button>
-              <Button sx={postEditingButtons} className="Button" onClick={() => {setUpdateModal(true)}}>
-                <EditOutlined fontSize="small" />
-              </Button>
+            <Box sx={postContentBoxStyle}>
+              <Typography 
+                variant="body2" 
+                color="text.secondary"
+                sx={postNoteStyle}
+              >
+                {post.description}
+              </Typography>
+              <Box sx={postEditingBox}>
+                <Button sx={postEditingButtons} className="Button" onClick={(event) => {
+                  event.stopPropagation();
+                  setDeleteModal(true);
+                }}>
+                  <DeleteOutline fontSize="small" />
+                </Button>
+                <Button sx={postEditingButtons} className="Button" onClick={(event) => {
+                  event.stopPropagation();
+                  setUpdateModal(true);
+                }}>
+                  <EditOutlined fontSize="small" />
+                </Button>
+              </Box>
             </Box>
-          </Box>
-          <Typography>
-            <Button onClick={handleLike}>
-              {post.likeCount} {liked ? <ThumbUp fontSize="small" sx={postReactionButtons} /> : <ThumbUpAltOutlined fontSize="small" sx={postReactionButtons}/>}
-            </Button>
-            <Button onClick={handleDislike}>
-              {post.dislikeCount} {disliked ? <ThumbDown fontSize="small" sx={postReactionButtons} /> : <ThumbDownOffAltOutlined fontSize="small" sx={postReactionButtons} />}
-            </Button>
-            <Typography variant="caption">
-              Last edited: {post.lastUpdatedDate ? post.lastUpdatedDate.toLocaleString() : 'Loading...'}
+            <Typography>
+              <Button onClick={handleLike}>
+                {post.likeCount} {liked ? <ThumbUp fontSize="small" sx={postReactionButtons} /> : <ThumbUpAltOutlined fontSize="small" sx={postReactionButtons}/>}
+              </Button>
+              <Button onClick={handleDislike}>
+                {post.dislikeCount} {disliked ? <ThumbDown fontSize="small" sx={postReactionButtons} /> : <ThumbDownOffAltOutlined fontSize="small" sx={postReactionButtons} />}
+              </Button>
+              <Typography variant="caption">
+                Last edited: {post.lastUpdatedDate ? post.lastUpdatedDate.toLocaleString() : 'Loading...'}
+              </Typography>
             </Typography>
-          </Typography>
-          <UpdatePostModal post={post} {...props.post} updateModal={updateModal} setUpdateModal={setUpdateModal} updatePost={updatePost} updatePostContent={updatePostContent} />
-          <DeleteModal postId={props.id} deleteModal={deleteModal} setDeleteModal={setDeleteModal} handleDelete={handleDelete} />
-        </CardContent>
+          </CardContent>
+        </CardActionArea>
       </Card>
+      <UpdatePostModal post={post} {...post} updateModal={updateModal} setUpdateModal={setUpdateModal} updatePost={updatePost} updatePostContent={updatePostContent} />
+      <DeleteModal id={props.id} deleteModal={deleteModal} setDeleteModal={setDeleteModal} handleDelete={handleDelete} />
+      <PostModal 
+        post={post} 
+        {...post} 
+        postModal={postModal} 
+        setPostModal={setPostModal} 
+        liked={liked}
+        disliked={disliked}
+        handleLike={handleLike}
+        handleDislike={handleDislike}
+        deleteModal={deleteModal}
+        setDeleteModal={setDeleteModal}
+      />
     </>
   )
 }

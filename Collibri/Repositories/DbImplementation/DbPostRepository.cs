@@ -1,3 +1,4 @@
+using Collibri.Data;
 using Collibri.Models;
 
 namespace Collibri.Repositories.DbImplementation

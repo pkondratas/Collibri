@@ -21,7 +21,7 @@ namespace Collibri.Controllers
             var result =  _noteRepository.CreateNote(note);
             return result == null ? Conflict() : Ok(result);
         }
-
+        
         [HttpGet("{id:int}")]
         public IActionResult GetNote(int id)
         {
@@ -29,11 +29,12 @@ namespace Collibri.Controllers
             return result == null ? Conflict() : Ok(result);
         }
         
-        // [HttpGet("inSection/{sectionId:int}")]
-        // public IActionResult GetAllNotesInSection(int sectionId)
-        // {
-        //     return Ok(_noteRepository.GetAllNotesInSection(sectionId));
-        // }
+        [HttpGet("")]
+        public IActionResult GetAllNotesPost([FromQuery] Guid postId)
+        {
+            return Ok(_noteRepository.GetAllNotesByPost(postId));
+        }
+        
         //
         // [HttpGet("inRoom/{roomId:int}")]
         // public IActionResult GetAllNotesInRoom(int roomId)

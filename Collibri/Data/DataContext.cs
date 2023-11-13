@@ -1,6 +1,7 @@
+using Collibri.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Collibri.Models
+namespace Collibri.Data
 {
 	public class DataContext : DbContext
 	{
@@ -9,7 +10,8 @@ namespace Collibri.Models
 		public DbSet<Post> Posts { get; set; }
 		public DbSet<Room> Rooms { get; set; }
 		public DbSet<Section> Sections { get; set; }
-	
+		public DbSet<Account> Accounts { get; set; }
+
 		public DataContext(DbContextOptions<DataContext> options) : base(options)
 		{
 		}

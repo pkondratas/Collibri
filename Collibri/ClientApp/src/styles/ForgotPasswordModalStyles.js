@@ -21,6 +21,12 @@ const modalStyles = {
             backgroundColor: '#757575', // Set your custom hover color here
         },
     },
+    closeButtonContainer: {
+        position: 'absolute', 
+        top: '-5px', 
+        right: '0', 
+        padding: '16px'
+    },
 };
 
 export default modalStyles;
