@@ -14,13 +14,21 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Devart.Data" Version="5.0.3136" />
+        <PackageReference Include="Devart.Data.PostgreSql" Version="8.1.151" />
+        <PackageReference Include="Devart.Data.PostgreSql.EF6" Version="8.1.151" />
+        <PackageReference Include="Microsoft.AspNet.Identity.EntityFramework" Version="2.2.4" />
+        <PackageReference Include="Microsoft.AspNet.Identity.Owin" Version="2.2.4" />
         <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.12" />
         <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="7.0.9"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.12" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.12" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.12">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="Microsoft.Owin.Host.SystemWeb" Version="4.2.2" />
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
         <PackageReference Include="System.IO.Abstractions" Version="19.2.69" />
     </ItemGroup>

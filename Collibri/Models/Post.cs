@@ -1,7 +1,11 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Collibri.Models
 {
     public class Post
     {
+        [Key]
         public Guid Id { get; set; }
         public string CreatorUsername { get; set; } = "";
         public string Title { get; set; } = "";
@@ -11,6 +15,10 @@ namespace Collibri.Models
         public string Description { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime LastUpdatedDate { get; set; }
+        
+        public virtual Section? Section { get; set; }
+        public virtual ICollection<Note>? Notes { get; set; }
+        public virtual ICollection<Document>? Documents { get; set; }
 
         public Post()
         {
