@@ -31,7 +31,7 @@ export default function SearchBar(props) {
             options={options}
             getOptionLabel={(option) => option.label}
             sx={{ width: 300 }}
-            renderInput={(params) => <TextField {...params} label="Enter post title" />}
+            renderInput={(params) => <TextField {...params} label="Enter post title" variant="filled" />}
             noOptionsText={"There are no posts"}
         />
     );
