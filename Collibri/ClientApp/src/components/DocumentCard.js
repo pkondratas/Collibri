@@ -1,5 +1,16 @@
 import React, {useState} from 'react';
-import {Box, Card, CardActionArea, CardContent, Fade, Icon, IconButton, Tooltip, Typography} from "@mui/material";
+import {
+  Box,
+  Card,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  Fade,
+  Icon,
+  IconButton,
+  Tooltip,
+  Typography
+} from "@mui/material";
 import {
   Edit,
   Delete, FileDownload, FileDownloadOutlined, MoreVertOutlined, Close, CloseOutlined
@@ -24,54 +35,56 @@ const DocumentCard = (props) => {
   return (
     <>
       <Card sx={DocumentCardStyles.card}>
-        <CardActionArea disableRipple onClick={() => {
-          setDocumentModal(true);
-        }}>
-          <CardContent>
-            <Box sx={DocumentCardStyles.contentBox}>
-              <Box>
-                <Tooltip
-                    TransitionComponent={Fade}
-                    placement="top-start"
-                    title={props.title}>
-                  <Typography sx={{...DocumentCardStyles.generalText, ...DocumentCardStyles.title}} variant="h6">
-                    {props.title}
-                  </Typography>
-                </Tooltip>
-                <Box>
-                  <Typography sx={{...DocumentCardStyles.generalText, ...DocumentCardStyles.content}} variant="body2">
-                    {props.text}
-                  </Typography>
-                </Box>
+          <CardActionArea disableRipple sx={DocumentCardStyles.cardActionArea} onClick={() => {
+              setDocumentModal(true);
+          }}>
+              <CardContent>
+                  <Box sx={DocumentCardStyles.contentBox}>
+                      <Box>
+                          <Tooltip
+                              TransitionComponent={Fade}
+                              placement="top-start"
+                              title={props.title}>
+                              <Typography sx={{...DocumentCardStyles.generalText, ...DocumentCardStyles.title}} variant="h6">
+                                  {props.title}
+                              </Typography>
+                          </Tooltip>
+                          <Box>
+                              <Typography sx={{...DocumentCardStyles.generalText, ...DocumentCardStyles.content}} variant="body2">
+                                  {props.text}
+                              </Typography>
+                          </Box>
+                      </Box>
+                  </Box>
+              </CardContent>
+          </CardActionArea>
+          <CardActions >
+              <Box sx={{display: 'flex', flexDirection: 'column'}}>
+                  {moreButton ? (
+                      <>
+                          <IconButton>
+                              <Edit />
+                          </IconButton>
+                          <IconButton onClick={() => setDeleteModal(true)}>
+                              <Delete />
+                          </IconButton>
+                          <IconButton>
+                              <CloseOutlined onClick={() => setMoreButton(false)} />
+                          </IconButton>
+                      </>
+                  ) : (
+                      <>
+                          <IconButton onClick={() => setMoreButton(true)}>
+                              <MoreVertOutlined />
+                          </IconButton>
+                          <IconButton>
+                              <FileDownloadOutlined />
+                          </IconButton>
+                      </>
+                  )
+                  }
               </Box>
-              <Box>
-                {moreButton ? (
-                    <>
-                      <IconButton>
-                        <Edit />
-                      </IconButton>
-                      <IconButton onClick={() => setDeleteModal(true)}>
-                        <Delete />
-                      </IconButton>
-                      <IconButton>
-                        <CloseOutlined onClick={() => setMoreButton(false)} />
-                      </IconButton>
-                    </>
-                ) : (
-                    <>
-                      <IconButton onClick={() => setMoreButton(true)}>
-                        <MoreVertOutlined />
-                      </IconButton>
-                      <IconButton>
-                        <FileDownloadOutlined />
-                      </IconButton>
-                    </>
-                )
-                }
-              </Box>
-            </Box>
-          </CardContent>
-        </CardActionArea>
+          </CardActions>
       </Card>
       <DeleteModal id={props.id} handleDelete={handleDelete} deleteModal={deleteModal} setDeleteModal={setDeleteModal} />
       <DocumentModal id={props.id} title={props.title} text={props.text} documentModal={documentModal} setDocumentModal={setDocumentModal}/>

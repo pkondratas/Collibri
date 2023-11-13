@@ -1,6 +1,6 @@
 import React from "react";
 import {Box, Modal, Typography} from "@mui/material";
-import {documentModal} from "../styles/DocumentModalStyles";
+import  {DocumentModalStyles} from "../styles/DocumentModalStyles";
 
 const DocumentModal = (props) => {
     const handleClose = () => {
@@ -9,13 +9,13 @@ const DocumentModal = (props) => {
     
     return(
         <Modal open={props.documentModal} onClose={handleClose}>
-            <Box sx={documentModal}>
-                <Box>
-                    <Typography variant="h2">
+            <Box sx={DocumentModalStyles.modal}>
+                <Box align='justify' sx={DocumentModalStyles.title}>
+                    <Typography variant="h4">
                         {props.title}
                     </Typography>
                 </Box>
-                <Box>
+                <Box sx={DocumentModalStyles.body}>
                     <Typography variant="body1">
                         {props.text}
                     </Typography>
