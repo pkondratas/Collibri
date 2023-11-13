@@ -10,7 +10,7 @@ const ParentComponent = (props) => {
     
     useEffect(() => {
         getSections(props.setSections, roomId);
-    }, []);
+    }, [roomId]);
 
 
     if (props.sections.length > 0) {
