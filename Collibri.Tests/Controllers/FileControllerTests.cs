@@ -61,7 +61,7 @@ namespace Collibri.Tests.Controllers
 		[Theory]
 		[ClassData(typeof(GetFileData))]
 		public void GetFile_Should_ReturnFileStreamResultTest(string fileName,
-			string postId, int statusCode, FileStreamResult? expected)
+			string postId, int statusCode, FileContentResult? expected)
 		{
 			// Arrange
 			var repository = new Mock<IFileRepository>();

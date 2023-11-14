@@ -1,5 +1,7 @@
 using System.IO.Abstractions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.Net.Http.Headers;
 using File = Collibri.Models.File;
 
 namespace Collibri.Repositories.FileBasedImplementation
@@ -48,7 +50,7 @@ namespace Collibri.Repositories.FileBasedImplementation
 			return (File?) new File(path + separator + fileName, Guid.Parse(postId));
 		}
 
-		public FileStreamResult? GetFile(string fileName, string postId)
+		public FileContentResult? GetFile(string fileName, string postId)
 		{
 			var path = GetPath(postId);
 			var separator = _fileSystem.Path.DirectorySeparatorChar;
@@ -57,11 +59,11 @@ namespace Collibri.Repositories.FileBasedImplementation
 			{
 				return null;
 			}
-
-			var fileStream = _fileSystem.FileStream.New(path + separator + fileName, FileMode.Open, FileAccess.Read);
 			
-			return new FileStreamResult(fileStream, "application/octet-stream");
-			
+			string? contentType;
+			new FileExtensionContentTypeProvider().TryGetContentType(fileName, out contentType);
+			var bytes = _fileSystem.File.ReadAllBytes(path + separator + fileName);
+			return new FileContentResult(bytes, contentType ?? "application/octet-stream");
 		}
 
 		public File? UpdateFileName(string fileName, string postId, string updatedName)

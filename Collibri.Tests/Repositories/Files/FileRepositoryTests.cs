@@ -53,7 +53,7 @@ namespace Collibri.Tests.Repositories.Files
         [Theory]
         [ClassData(typeof(GetFileData))]
         public void GetFile_Should_ReturnFileStreamResultTest(MockFileSystem fileSystem, string fileName,
-            string postId, FileStreamResult? expected)
+            string postId, FileContentResult? expected)
         {
             // Arrange
             var fileRepository = new FileRepository(fileSystem.FileSystem);
@@ -66,7 +66,7 @@ namespace Collibri.Tests.Repositories.Files
                 Assert.Null(actual);
             else
             {
-                Assert.True(FileTestHelper.StreamEquals(expected.FileStream, actual.FileStream));
+                Assert.True(actual.FileContents.SequenceEqual(expected.FileContents));
             }
         }
 

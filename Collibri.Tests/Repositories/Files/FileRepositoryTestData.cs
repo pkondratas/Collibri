@@ -53,7 +53,7 @@ namespace Collibri.Tests.Repositories.Files
         }
     }
 
-    public class GetFileData : TheoryData<MockFileSystem, string, string, FileStreamResult?>
+    public class GetFileData : TheoryData<MockFileSystem, string, string, FileContentResult?>
     {
         public GetFileData()
         {
@@ -67,13 +67,13 @@ namespace Collibri.Tests.Repositories.Files
                 { path + "\\noExtension", new MockFileData("No extension file test data") }
             });
             Add(fileSystem, "textFile.txt", postId,
-                FileTestHelper.CreateTestFileStreamResult(fileSystem, path, "textFile.txt"));
+                FileTestHelper.CreateTestFileContentResult(fileSystem, path, "textFile.txt"));
             // Should return null
             Add(fileSystem, "noFile.txt", postId, null);
             Add(fileSystem, "noExtension", postId,
-                FileTestHelper.CreateTestFileStreamResult(fileSystem, path, "noExtension"));
+                FileTestHelper.CreateTestFileContentResult(fileSystem, path, "noExtension"));
             Add(fileSystem, "pngFile.png", postId,
-                FileTestHelper.CreateTestFileStreamResult(fileSystem, path, "pngFile.png"));
+                FileTestHelper.CreateTestFileContentResult(fileSystem, path, "pngFile.png"));
         }
     }
     
