@@ -1,5 +1,5 @@
 using Collibri.Controllers;
-using Collibri.Models;
+using Collibri.Dtos;
 using Collibri.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,8 +10,8 @@ namespace Collibri.Tests.Controllers
         [Theory]
         [ClassData(typeof(CreateSectionTestData))]
         public void CreateSection_Should_ReturnSection_WhenNameNonexistent(
-            Section section, 
-            Section? methodResult, 
+            SectionDTO section, 
+            SectionDTO? methodResult, 
             int? statusCode)
         {   
             //Assign
@@ -40,7 +40,7 @@ namespace Collibri.Tests.Controllers
         [ClassData(typeof(GetAllSectionsTestData))]
         public void GetAllSections_Should_ReturnAllSections(
             int roomId,
-            IEnumerable<Section> list)
+            IEnumerable<SectionDTO> list)
         {
             //Assign
             var repository = new Mock<ISectionRepository>();
@@ -52,15 +52,15 @@ namespace Collibri.Tests.Controllers
             var actual = controller.GetAllSections(roomId) as ObjectResult;
             
             //Assert
-            Assert.IsType<List<Section>>(actual?.Value);
+            Assert.IsType<List<SectionDTO>>(actual?.Value);
             Assert.Equal(list, actual.Value);
         }
         
         [Theory]
         [ClassData(typeof(UpdateSectionByIdTestData))]
         public void UpdateSectionById_Should_ReturnOkAndUpdatedSection_WhenExists(
-            Section section,
-            Section? updatedSection,
+            SectionDTO section,
+            SectionDTO? updatedSection,
             int sectionId,
             int statusCode)
         {
@@ -91,7 +91,7 @@ namespace Collibri.Tests.Controllers
         [ClassData(typeof(DeleteSectionByIdTestData))]
         public void DeleteSectionById_Should_ReturnDeletedSection_IfExists(
             int sectionId, 
-            Section? section, 
+            SectionDTO? section, 
             int statusCode)
         {
             //Assign

@@ -1,4 +1,4 @@
-using Collibri.Models;
+using Collibri.Dtos;
 using Collibri.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +19,7 @@ namespace Collibri.Controllers
         }
         
         [HttpPost("{postId}")]
-        public IActionResult CreateDocument([FromBody] Document input, string postId)
+        public IActionResult CreateDocument([FromBody] DocumentDTO input, string postId)
         {
 
             var result = _documentRepository.CreateDocument(input, postId);
@@ -41,7 +41,7 @@ namespace Collibri.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateDocument([FromBody] Document input, int id)
+        public IActionResult UpdateDocument([FromBody] DocumentDTO input, int id)
         {
             var result = _documentRepository.UpdateDocument(input, id);
             return result == null ? NotFound() : Ok(result);

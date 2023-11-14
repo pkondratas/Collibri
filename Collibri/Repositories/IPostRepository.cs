@@ -1,16 +1,16 @@
-using Collibri.Models;
+using Collibri.Dtos;
 
 namespace Collibri.Repositories
 {
     public interface IPostRepository
     {
-        public Post CreatePost(Post post);
+        public PostDTO CreatePost(PostDTO post);
 
-        public IEnumerable<Post> GetAllPosts(int sectionId);
+        public IEnumerable<PostDTO> GetAllPosts(int sectionId);
 
-        public Post? UpdatePostById(Guid postId, Post post);
+        public PostDTO? UpdatePostById(Guid postId, PostDTO post);
 
-        public Post? DeletePostById(Guid postId);
-        public IEnumerable<Post> DeleteAllPostsInSection(int sectionId);
+        public PostDTO? DeletePostById(Guid postId);
+        public IEnumerable<PostDTO> DeleteAllPostsInSection(int sectionId);
     }
 }

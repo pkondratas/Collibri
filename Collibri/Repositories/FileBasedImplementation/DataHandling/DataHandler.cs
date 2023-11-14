@@ -1,6 +1,7 @@
 using System.Text.Json;
+using Collibri.Repositories.DataHandling;
 
-namespace Collibri.Repositories.DataHandling
+namespace Collibri.Repositories.FileBasedImplementation.DataHandling
 {
     public class DataHandler : IDataHandler
     {

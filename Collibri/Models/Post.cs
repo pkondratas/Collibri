@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Collibri.Models
 {
@@ -16,35 +15,13 @@ namespace Collibri.Models
         public DateTime CreationDate { get; set; }
         public DateTime LastUpdatedDate { get; set; }
         
-        public virtual Section? Section { get; set; }
-        public virtual ICollection<Note>? Notes { get; set; }
-        public virtual ICollection<Document>? Documents { get; set; }
+        public virtual Section Section { get; set; }
+        public virtual ICollection<Note> Notes { get; set; }
+        public virtual ICollection<Document> Documents { get; set; }
 
         public Post()
         {
             
-        }
-        
-        public Post(
-            Guid postId, 
-            string creatorUsername, 
-            string title, 
-            int sectionId,
-            int likeCount, 
-            int dislikeCount, 
-            string description, 
-            DateTime creationDate, 
-            DateTime lastUpdatedDate)
-        {
-            Id = postId;
-            CreatorUsername = creatorUsername;
-            Title = title;
-            SectionId = sectionId;
-            LikeCount = likeCount;
-            DislikeCount = dislikeCount;
-            Description = description;
-            CreationDate = creationDate;
-            LastUpdatedDate = lastUpdatedDate;
         }
     }
 }

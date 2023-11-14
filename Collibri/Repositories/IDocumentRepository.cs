@@ -1,12 +1,12 @@
-using Collibri.Models;
+using Collibri.Dtos;
 
 namespace Collibri.Repositories
 {
     public interface IDocumentRepository
     {
-        public Document? CreateDocument(Document document, string postId);
-        public IEnumerable<Document> GetDocuments(string postId);
-        public Document? DeleteById(int id);
-        public Document? UpdateDocument(Document document, int id);
+        public DocumentDTO? CreateDocument(DocumentDTO document, string postId);
+        public IEnumerable<DocumentDTO> GetDocuments(string postId);
+        public DocumentDTO? DeleteById(int id);
+        public DocumentDTO? UpdateDocument(DocumentDTO document, int id);
     }
 }

@@ -1,4 +1,6 @@
+using AutoMapper;
 using Collibri.Data;
+using Collibri.Dtos;
 using Collibri.Models;
 using Collibri.Repositories.ExtensionMethods;
 
@@ -7,26 +9,28 @@ namespace Collibri.Repositories.DbImplementation
     public class DbRoomRepository : IRoomRepository
     {
         private readonly DataContext _context;
+        private readonly IMapper _mapper;
         
-        public DbRoomRepository(DataContext dataContext)
+        public DbRoomRepository(DataContext dataContext, IMapper mapper)
         {
             _context = dataContext;
+            _mapper = mapper;
         }
     
-        public Room? CreateRoom(Room room)
+        public RoomDTO? CreateRoom(RoomDTO room)
         {
             room.Id = new int().GenerateNewId(_context.Rooms.Select(x => x.Id).ToList());
-            _context.Rooms.Add(room);
+            _context.Rooms.Add(_mapper.Map<Room>(room));
             _context.SaveChanges();
             return room;
         }
 
-        public List<Room> GetAllRooms()
+        public List<RoomDTO> GetAllRooms()
         {
-            return _context.Rooms.ToList();
+            return _mapper.Map<List<RoomDTO>>(_context.Rooms.ToList());
         }
 
-        public Room? UpdateRoom(int roomId, Room updatedRoom)
+        public RoomDTO? UpdateRoom(int roomId, RoomDTO updatedRoom)
         {
             var roomToUpdate = _context.Rooms.FirstOrDefault(room => room.Id == roomId);
 
@@ -40,7 +44,7 @@ namespace Collibri.Repositories.DbImplementation
             _context.Rooms.Update(roomToUpdate);
             _context.SaveChanges();
 
-            return roomToUpdate;
+            return _mapper.Map<RoomDTO>(roomToUpdate);
         }
 
         public bool DeleteRoom(int roomId)

@@ -1,5 +1,5 @@
 using Collibri.Controllers;
-using Collibri.Models;
+using Collibri.Dtos;
 using Collibri.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,8 +11,8 @@ namespace Collibri.Tests.Controllers
         [ClassData(typeof(CreateDocumentTestData))]
         public void CreateDocument_Should_ReturnDocument_WhenIDNoneexistent(
             string postId,
-            Document document,
-            Document? methodResult,
+            DocumentDTO document,
+            DocumentDTO? methodResult,
             int? statusCode
         )
         {
@@ -41,7 +41,7 @@ namespace Collibri.Tests.Controllers
         [ClassData(typeof(GetDocumentsTestData))]
         public void GetDocuments_Should_ReturnDocumentsInPost_WhenNameNonexistent(
             string postId,
-            IEnumerable<Document> list)
+            IEnumerable<DocumentDTO> list)
         {
             //Assign
             var repository = new Mock<IDocumentRepository>();
@@ -52,15 +52,15 @@ namespace Collibri.Tests.Controllers
             var actual = controller.GetDocuments(postId) as ObjectResult;
 
             //Assert
-            Assert.IsType<List<Document>>(actual?.Value);
+            Assert.IsType<List<DocumentDTO>>(actual?.Value);
             Assert.Equal(list, actual.Value);
         }
 
         [Theory]
         [ClassData(typeof(UpdateDocumentTestData))]
         public void UpdateDocument_Should_ReturnOkAndUpdatedDocument_WhenDocumentExists(
-            Document document,
-            Document? updatedDocument,
+            DocumentDTO document,
+            DocumentDTO? updatedDocument,
             int documentId,
             int statusCode)
 
@@ -91,7 +91,7 @@ namespace Collibri.Tests.Controllers
         [ClassData(typeof(DeleteDocumentTestData))]
         public void DeleteDocument_Should_ReturnDeletedDocument_WhenDocumentExists(
             int documentId,
-            Document? deletedDocument,
+            DocumentDTO? deletedDocument,
             int statusCode
         )
 

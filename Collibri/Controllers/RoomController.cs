@@ -1,3 +1,4 @@
+using Collibri.Dtos;
 using Collibri.Models;
 using Collibri.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,7 @@ namespace Collibri.Controllers
         }
 
         [HttpPost("")]
-        public IActionResult CreateRoom([FromBody] Room room)
+        public IActionResult CreateRoom([FromBody] RoomDTO room)
         {
             var result = _roomRepository.CreateRoom(room);
             return result == null ? Conflict() : Ok(result);
@@ -25,12 +26,12 @@ namespace Collibri.Controllers
         [HttpGet("")]
         public IActionResult GetAllRooms()
         {
-            List<Room> rooms = _roomRepository.GetAllRooms();
+            List<RoomDTO> rooms = _roomRepository.GetAllRooms();
             return rooms.Count == 0 ? NoContent() : Ok(rooms);
         }
 
         [HttpPut("{roomId}")]
-        public IActionResult UpdateRoom(int roomId, [FromBody] Room updatedRoom)
+        public IActionResult UpdateRoom(int roomId, [FromBody] RoomDTO updatedRoom)
         {
             var result = _roomRepository.UpdateRoom(roomId, updatedRoom);
     

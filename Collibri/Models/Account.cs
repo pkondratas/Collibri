@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations.Schema;
 using Collibri.Repositories.ExtensionMethods;
 using Microsoft.AspNetCore.Identity;
 
@@ -6,7 +5,7 @@ namespace Collibri.Models
 {
     public class Account : IdentityUser<Guid>
     {
-        public virtual ICollection<RoomMember>? RoomMembers { get; set; }
+        public virtual ICollection<RoomMember> RoomMembers { get; set; }
         
         public Account()
         {

@@ -14,6 +14,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="12.0.1" />
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
         <PackageReference Include="Devart.Data" Version="5.0.3136" />
         <PackageReference Include="Devart.Data.PostgreSql" Version="8.1.151" />
         <PackageReference Include="Devart.Data.PostgreSql.EF6" Version="8.1.151" />
@@ -38,6 +40,8 @@
         <Content Remove="$(SpaRoot)**"/>
         <None Remove="$(SpaRoot)**"/>
         <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**"/>
+
+
     </ItemGroup>
 
 
