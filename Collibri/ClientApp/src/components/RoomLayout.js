@@ -8,6 +8,7 @@ import {AddSection} from "./AddSection";
 import {RoomSettings} from "./RoomSettings";
 import {AddPostButton} from "./AddPostButton";
 import {SideRoomTable} from "./SideRooms";
+import {UserInfoContainer} from "./UserInfoContainer";
 
 
 const RoomLayout = () => {
@@ -27,6 +28,7 @@ const RoomLayout = () => {
             <Grid item xs={1}>
                 <RoomSettings/>
                 <SideRoomTable/>
+                <UserInfoContainer username={"Future User"}/>
             </Grid>
             <Grid item md={4}>
                 <AddSection sections={sections} setSections={setSections}></AddSection>
