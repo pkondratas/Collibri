@@ -8,6 +8,7 @@ import {AddSection} from "./AddSection";
 import {RoomSettings} from "./RoomSettings";
 import {AddPostButton} from "./AddPostButton";
 import {SideRoomTable} from "./SideRooms";
+import SearchBar from "./SearchBar";
 
 
 const RoomLayout = () => {
@@ -22,7 +23,7 @@ const RoomLayout = () => {
               justifyContent="space-evenly"
               alignItems="strech">
             <Grid item xs={12}>
-                <Paper><Header sectionId={sectionId} posts={posts} setPosts={setPosts}/></Paper>
+                <Paper><Header/></Paper>
             </Grid>
             <Grid item xs={1}>
                 <RoomSettings/>
@@ -33,8 +34,14 @@ const RoomLayout = () => {
                 <Paper><ParentComponent sections={sections} setSections={setSections}
                                         setSectionId={setSectionId}/></Paper>
             </Grid>
-            <Grid item xs={6}>
-                <AddPostButton sectionId={sectionId} setPosts={setPosts}/>
+            <Grid  item xs={6}>
+                <Grid container
+                      direction="row"
+                      sx={{mb:'0.5rem'}}
+                ><AddPostButton sectionId={sectionId} setPosts={setPosts}/>
+                    <SearchBar posts={posts} sectionId={sectionId} setPosts={setPosts}/>
+                </Grid>
+                
                 <Paper sx={postContainerStyle}>
                     <PostContainer sectionId={sectionId} posts={posts} setPosts={setPosts}/>
                 </Paper>
