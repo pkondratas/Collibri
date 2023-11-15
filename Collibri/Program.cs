@@ -26,9 +26,6 @@ builder.Services.AddScoped<IPostRepository, DbPostRepository>();
 builder.Services.AddDbContext<DataContext>(options =>
 	options.UseNpgsql(builder.Configuration.GetConnectionString("LocalConnection")));
 
-builder.Services.AddDbContext<DataContext>(options =>
-	options.UseNpgsql(builder.Configuration.GetConnectionString("LocalConnection")));
-
 builder.Services.AddIdentity<Account, IdentityRole<Guid>>()
 	.AddEntityFrameworkStores<DataContext>()
 	.AddDefaultTokenProviders();

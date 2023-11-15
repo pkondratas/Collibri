@@ -19,7 +19,7 @@ namespace Collibri.Repositories.DbImplementation
     
         public SectionDTO? CreateSection(SectionDTO section)
         {
-            if (false)
+            if (_mapper.Map<List<SectionDTO>>(_context.Sections.ToList()).Any(sections => sections.Equals(section)))
             {
                 return null;
             }
