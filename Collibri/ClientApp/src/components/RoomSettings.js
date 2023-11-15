@@ -34,7 +34,7 @@ export const RoomSettings = () => {
                     <ListItemIcon>
                         <DriveFileRenameOutlineIcon fontSize="small" />
                     </ListItemIcon>
-                    <ListItemText>Change username</ListItemText>
+                    <ListItemText>Change room name</ListItemText>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
                     <ListItemIcon>
@@ -42,12 +42,12 @@ export const RoomSettings = () => {
                     </ListItemIcon>
                     <ListItemText>Add user</ListItemText>
                 </MenuItem>
-                <MenuItem onClick={handleClose}>
-                    <ListItemIcon>
-                        <SettingsIcon fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText>Room settings</ListItemText>
-                </MenuItem>
+                {/*<MenuItem onClick={handleClose}>*/}
+                {/*    <ListItemIcon>*/}
+                {/*        <SettingsIcon fontSize="small" />*/}
+                {/*    </ListItemIcon>*/}
+                {/*    <ListItemText>Room settings</ListItemText>*/}
+                {/*</MenuItem>*/}
                 <MenuItem onClick={handleClose}>
                     <ListItemIcon>
                         <DeleteIcon fontSize="small" style={{color: "red"}} />
