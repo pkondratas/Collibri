@@ -1,4 +1,6 @@
+using AutoMapper;
 using Collibri.Data;
+using Collibri.Dtos;
 using Collibri.Models;
 using Collibri.Repositories.ExtensionMethods;
 
@@ -7,32 +9,34 @@ namespace Collibri.Repositories.DbImplementation
     public class DbSectionRepository : ISectionRepository
     {
         private readonly DataContext _context;
+        private readonly IMapper _mapper;
         
-        public DbSectionRepository(DataContext dataContext)
+        public DbSectionRepository(DataContext dataContext, IMapper mapper)
         {
             _context = dataContext;
+            _mapper = mapper;
         }
     
-        public Section? CreateSection(Section section)
+        public SectionDTO? CreateSection(SectionDTO section)
         {
-            if (_context.Sections.ToList().Any(sections => sections.Equals(section)))
+            if (_mapper.Map<List<SectionDTO>>(_context.Sections.ToList()).Any(sections => sections.Equals(section)))
             {
                 return null;
             }
 
             section.Id = new int().GenerateNewId(_context.Sections.Select(x => x.Id).ToList());
-            _context.Sections.Add(section);
+            _context.Sections.Add(_mapper.Map<Section>(section));
             _context.SaveChanges();
 
             return section;
         }
 
-        public IEnumerable<Section> GetAllSections(int roomId)
+        public IEnumerable<SectionDTO> GetAllSections(int roomId)
         {
-            return _context.Sections.Where(section => section.RoomId == roomId);
+            return _mapper.Map<List<SectionDTO>>(_context.Sections.Where(section => section.RoomId == roomId)).AsEnumerable();
         }
 
-        public Section? UpdateSectionById(Section section, int sectionId)
+        public SectionDTO? UpdateSectionById(SectionDTO section, int sectionId)
         {
             var sectionToUpdate = _context.Sections.SingleOrDefault(x => x.Id == sectionId);
             
@@ -47,10 +51,10 @@ namespace Collibri.Repositories.DbImplementation
             _context.Sections.Update(sectionToUpdate);
             _context.SaveChanges();
 
-            return sectionToUpdate;
+            return _mapper.Map<SectionDTO>(sectionToUpdate);
         }
 
-        public Section? DeleteSectionById(int sectionId)
+        public SectionDTO? DeleteSectionById(int sectionId)
         {
             var sectionToDelete = _context.Sections.SingleOrDefault(x => x.Id == sectionId);
             
@@ -62,7 +66,7 @@ namespace Collibri.Repositories.DbImplementation
             _context.Sections.Remove(sectionToDelete);
             _context.SaveChanges();
 
-            return sectionToDelete;
+            return _mapper.Map<SectionDTO>(sectionToDelete);
         }
     }
 }

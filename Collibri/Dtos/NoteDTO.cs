@@ -1,10 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Collibri.Models
+namespace Collibri.Dtos
 {
-    public class Note
+    public class NoteDTO
     {
-        [Key]
         public int Id { get; set; }
         public string Name { get; set; } = "";
         public string Text { get; set; } = "";
@@ -12,12 +9,19 @@ namespace Collibri.Models
         public string Author { get; set; } = "";
         public DateTime CreationDate { get; set; }
         public DateTime LastUpdatedDate { get; set; }
-        
-        public virtual Post Post { get; set; }
-        
-        public Note()
+
+        public NoteDTO()
         {
             
+        }
+        
+        public NoteDTO(Guid postId, string name, string text, string author, int id = 0)
+        {
+            this.Author = author;
+            this.Name = name;
+            this.Text = text;
+            this.PostId = postId;
+            this.Id = id;
         }
     }
 }

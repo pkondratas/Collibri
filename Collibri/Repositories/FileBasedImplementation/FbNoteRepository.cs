@@ -1,4 +1,4 @@
-﻿using Collibri.Models;
+﻿using Collibri.Dtos;
 using Collibri.Repositories.DataHandling;
 using Collibri.Repositories.ExtensionMethods;
 
@@ -13,9 +13,9 @@ namespace Collibri.Repositories.FileBasedImplementation
             this._dataHandler = dataHandler;
         }
 
-        public Note? CreateNote(Note note)
+        public NoteDTO? CreateNote(NoteDTO note)
         {
-            List<Note> noteList = _dataHandler.GetAllItems<Note>(ModelType.Notes);
+            List<NoteDTO> noteList = _dataHandler.GetAllItems<NoteDTO>(ModelType.Notes);
             
             foreach (var notes in noteList)
             {
@@ -35,9 +35,9 @@ namespace Collibri.Repositories.FileBasedImplementation
             return note;
         }
 
-        public Note? GetNote(int id)
+        public NoteDTO? GetNote(int id)
         {
-            List<Note> noteList = _dataHandler.GetAllItems<Note>(ModelType.Notes);
+            List<NoteDTO> noteList = _dataHandler.GetAllItems<NoteDTO>(ModelType.Notes);
 
             if (noteList.Any(x => x.Id == id))
             {
@@ -47,25 +47,25 @@ namespace Collibri.Repositories.FileBasedImplementation
             return null;
         }
 
-        public IEnumerable<Note> GetAllNotesByPost(Guid postId)
+        public IEnumerable<NoteDTO> GetAllNotesByPost(Guid postId)
         {
-            var noteList = _dataHandler.GetAllItems<Note>(ModelType.Notes);
+            var noteList = _dataHandler.GetAllItems<NoteDTO>(ModelType.Notes);
             var notesInPost = noteList.Where(note => note.PostId == postId);
             
             return notesInPost;
         }
         
-        // public IEnumerable<Note> GetAllNotesInRoom(int roomId)
+        // public IEnumerable<NoteDTO> GetAllNotesInRoom(int roomId)
         // {
-        //     var noteList = _dataHandler.GetAllItems<Note>(ModelType.Notes);
+        //     var noteList = _dataHandler.GetAllItems<NoteDTO>(ModelType.Notes);
         //     var notesInSection = noteList.Where(note => note.RoomId == roomId);
         //     
         //     return notesInSection;
         // }
 
-        public Note? DeleteNote(int id)
+        public NoteDTO? DeleteNote(int id)
         {
-            List<Note> noteList = _dataHandler.GetAllItems<Note>(ModelType.Notes);
+            List<NoteDTO> noteList = _dataHandler.GetAllItems<NoteDTO>(ModelType.Notes);
             
             foreach (var note in noteList)
             {
@@ -80,9 +80,9 @@ namespace Collibri.Repositories.FileBasedImplementation
             return null;
         }
 
-        public Note? UpdateNote(Note note, int id)
+        public NoteDTO? UpdateNote(NoteDTO note, int id)
         {
-            List<Note> noteList = _dataHandler.GetAllItems<Note>(ModelType.Notes);
+            List<NoteDTO> noteList = _dataHandler.GetAllItems<NoteDTO>(ModelType.Notes);
             var targetNote = noteList.FirstOrDefault(notes => notes.Id == id);
 
             if (targetNote != null)

@@ -1,3 +1,4 @@
+using Collibri.Dtos;
 using Collibri.Models;
 using Collibri.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,7 @@ namespace Collibri.Controllers
         }
 
         [HttpPost("")]
-        public IActionResult CreateSection([FromBody] Section section)
+        public IActionResult CreateSection([FromBody] SectionDTO section)
         {
             var result = _sectionRepository.CreateSection(section);
             return result == null ? Conflict() : Ok(result);
@@ -29,7 +30,7 @@ namespace Collibri.Controllers
         }
 
         [HttpPut("")]
-        public IActionResult UpdateSectionById([FromQuery] int sectionId, [FromBody] Section section)
+        public IActionResult UpdateSectionById([FromQuery] int sectionId, [FromBody] SectionDTO section)
         {
             var updatedSection = _sectionRepository.UpdateSectionById(section, sectionId);
 

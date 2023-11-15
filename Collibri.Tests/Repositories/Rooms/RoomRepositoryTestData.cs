@@ -1,23 +1,23 @@
-using Collibri.Models;
+using Collibri.Dtos;
 
 namespace Collibri.Tests.Repositories.Rooms
 {
     public class RoomRepositoryTestData
     {
-        public static Room ValidRoom => new Room("Test Room");
+        public static RoomDTO ValidRoom => new RoomDTO("Test RoomDTO");
 
-        public static Room ExistingRoom => new Room("Existing Room");
+        public static RoomDTO ExistingRoom => new RoomDTO("Existing RoomDTO");
 
-        public static List<Room> RoomsExist => new List<Room>
+        public static List<RoomDTO> RoomsExist => new List<RoomDTO>
         {
-            new Room("Room 1"),
-            new Room("Room 2")
+            new RoomDTO("RoomDTO 1"),
+            new RoomDTO("RoomDTO 2")
         };
 
         public static int ExistingRoomId => 1;
 
         public static int NonExistentRoomId => 3;
 
-        public static Room UpdatedRoom => new Room("Updated Room");
+        public static RoomDTO UpdatedRoom => new RoomDTO("Updated RoomDTO");
     }
 }

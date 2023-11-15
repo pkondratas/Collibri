@@ -1,4 +1,4 @@
-using Collibri.Models;
+using Collibri.Dtos;
 using Collibri.Repositories.DataHandling;
 using Collibri.Repositories.FileBasedImplementation;
 
@@ -9,14 +9,14 @@ namespace Collibri.Tests.Repositories.Notes
         [Theory]
         [ClassData(typeof(CreateNoteTestData))]
         public void CreateNoteTest(
-            Note note,
-            Note? expected,
-            List<Note> list
+            NoteDTO note,
+            NoteDTO? expected,
+            List<NoteDTO> list
             )
         {
             var dataHandler = new Mock<IDataHandler>();
             var repository = new FbNoteRepository(dataHandler.Object);
-            dataHandler.Setup(x => x.GetAllItems<Note>(ModelType.Notes)).Returns(list);
+            dataHandler.Setup(x => x.GetAllItems<NoteDTO>(ModelType.Notes)).Returns(list);
             
             var actual = repository.CreateNote(note);
             if (actual != null)
@@ -32,12 +32,12 @@ namespace Collibri.Tests.Repositories.Notes
         // [ClassData(typeof(GetAllNotesInSectionTestData))]
         // public void GetAllNotesInSectionTest(
         //     int sectionId,
-        //     List<Note> list
+        //     List<NoteDTO> list
         //     )
         // {
         //     var dataHandler = new Mock<IDataHandler>();
         //     var repository = new FbNoteRepository(dataHandler.Object);
-        //     dataHandler.Setup(x => x.GetAllItems<Note>(ModelType.Notes)).Returns(list);
+        //     dataHandler.Setup(x => x.GetAllItems<NoteDTO>(ModelType.Notes)).Returns(list);
         //
         //     var actual = repository.GetAllNotesInSection(sectionId);
         //     
@@ -48,13 +48,13 @@ namespace Collibri.Tests.Repositories.Notes
         [ClassData(typeof(DeleteNoteTestData))]
         public void DeleteNoteTest(
             int id,
-            Note? expected,
-            List<Note> list
+            NoteDTO? expected,
+            List<NoteDTO> list
         )
         {
             var dataHandler = new Mock<IDataHandler>();
             var repository = new FbNoteRepository(dataHandler.Object);
-            dataHandler.Setup(x => x.GetAllItems<Note>(ModelType.Notes)).Returns(list);
+            dataHandler.Setup(x => x.GetAllItems<NoteDTO>(ModelType.Notes)).Returns(list);
 
             var actual = repository.DeleteNote(id);
             
