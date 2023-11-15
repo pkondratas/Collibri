@@ -1,5 +1,5 @@
 using Collibri.Controllers;
-using Collibri.Models;
+using Collibri.Dtos;
 using Collibri.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,8 +10,8 @@ namespace Collibri.Tests.Controllers
         [Theory]
         [ClassData(typeof(CreatePostTestData))]
         public void CreatePost_Should_ReturnCreatedPost(
-            Post post,
-            Post expected)
+            PostDTO post,
+            PostDTO expected)
         {
             //Assign
             var repository = new Mock<IPostRepository>();
@@ -31,7 +31,7 @@ namespace Collibri.Tests.Controllers
         [ClassData(typeof(GetAllPostsTestData))]
         public void GetAllPosts_Should_ReturnAllPosts(
             int sectionId,
-            IEnumerable<Post> list)
+            IEnumerable<PostDTO> list)
         {
             //Assign
             var repository = new Mock<IPostRepository>();
@@ -51,8 +51,8 @@ namespace Collibri.Tests.Controllers
         [ClassData(typeof(UpdatePostByIdTestData))]
         public void UpdatePostById_Should_ReturnOkUpdatedPost_WhenExists(
             Guid postId,
-            Post update,
-            Post? expected,
+            PostDTO update,
+            PostDTO? expected,
             int statusCode)
         {
             //Assign
@@ -74,9 +74,9 @@ namespace Collibri.Tests.Controllers
             {
                 Assert.IsType<OkObjectResult>(actual);
                 Assert.Equal(statusCode, ((OkObjectResult)actual).StatusCode);
-                Assert.Equivalent(expected.LikeCount, ((Post?)((ObjectResult)actual).Value).LikeCount);
-                Assert.Equivalent(expected.DislikeCount, ((Post?)((ObjectResult)actual).Value).DislikeCount);
-                Assert.Equivalent(expected.Title, ((Post?)((ObjectResult)actual).Value).Title);
+                Assert.Equivalent(expected.LikeCount, ((PostDTO?)((ObjectResult)actual).Value).LikeCount);
+                Assert.Equivalent(expected.DislikeCount, ((PostDTO?)((ObjectResult)actual).Value).DislikeCount);
+                Assert.Equivalent(expected.Title, ((PostDTO?)((ObjectResult)actual).Value).Title);
             }
         }
 
@@ -84,7 +84,7 @@ namespace Collibri.Tests.Controllers
         [ClassData(typeof(DeletePostByIdTestData))]
         public void DeletePostById_Should_ReturnDeletedPost_IfExists(
             Guid postId,
-            Post? expected)
+            PostDTO? expected)
         {
             //Assign
             var repository = new Mock<IPostRepository>();

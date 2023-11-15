@@ -1,4 +1,4 @@
-using Collibri.Models;
+using Collibri.Dtos;
 using Collibri.Repositories.DataHandling;
 using Collibri.Repositories.ExtensionMethods;
 
@@ -13,9 +13,9 @@ namespace Collibri.Repositories.FileBasedImplementation
             _dataHandler = dataHandler;
         }
 
-        public Document? CreateDocument(Document document, string postId)
+        public DocumentDTO? CreateDocument(DocumentDTO document, string postId)
         {
-            var documentList = _dataHandler.GetAllItems<Document>(ModelType.Documents);
+            var documentList = _dataHandler.GetAllItems<DocumentDTO>(ModelType.Documents);
             document.Id = new int().GenerateNewId(documentList.Select(x => x.Id).ToList());
 
             foreach (var doc in documentList)
@@ -34,15 +34,15 @@ namespace Collibri.Repositories.FileBasedImplementation
             return document;
         }
 
-        public IEnumerable<Document> GetDocuments(string PostId)
+        public IEnumerable<DocumentDTO> GetDocuments(string PostId)
         {
-            var documentList = _dataHandler.GetAllItems<Document>(ModelType.Documents);
+            var documentList = _dataHandler.GetAllItems<DocumentDTO>(ModelType.Documents);
             return documentList.Where(document => document.PostId.Equals(Guid.Parse(PostId)));
         }
 
-        public Document? DeleteById(int id)
+        public DocumentDTO? DeleteById(int id)
         {
-            var documentList = _dataHandler.GetAllItems<Document>(ModelType.Documents);
+            var documentList = _dataHandler.GetAllItems<DocumentDTO>(ModelType.Documents);
             var documentToDelete = documentList.SingleOrDefault(x => x.Id == id);
             
             if (documentToDelete == null || !documentList.Remove(documentToDelete))
@@ -55,9 +55,9 @@ namespace Collibri.Repositories.FileBasedImplementation
         }
         
 
-        public Document? UpdateDocument(Document document, int id)
+        public DocumentDTO? UpdateDocument(DocumentDTO document, int id)
         {
-            var documentList = _dataHandler.GetAllItems<Document>(ModelType.Documents);
+            var documentList = _dataHandler.GetAllItems<DocumentDTO>(ModelType.Documents);
             var documentToUpdate = documentList.SingleOrDefault(x => x.Id == id);
             
             if (documentToUpdate == null)

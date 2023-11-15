@@ -1,4 +1,4 @@
-using Collibri.Models;
+using Collibri.Dtos;
 using Collibri.Repositories.DataHandling;
 using Collibri.Repositories.ExtensionMethods;
 
@@ -7,15 +7,15 @@ namespace Collibri.Repositories.FileBasedImplementation
     public class FbRoomRepository : IRoomRepository
     {
         private readonly IDataHandler _dataHandler;
-        private readonly List<Room> _rooms;
+        private readonly List<RoomDTO> _rooms;
 
         public FbRoomRepository(IDataHandler dataHandler)
         {
             _dataHandler = dataHandler;
-            _rooms = _dataHandler.GetAllItems<Room>(ModelType.Rooms) ?? new List<Room>();
+            _rooms = _dataHandler.GetAllItems<RoomDTO>(ModelType.Rooms) ?? new List<RoomDTO>();
         }
 
-        public Room CreateRoom(Room room)
+        public RoomDTO CreateRoom(RoomDTO room)
         {
             room.Id = new int().GenerateNewId(_rooms.Select(x => x.Id).ToList());
             _rooms.Add(room);
@@ -23,15 +23,15 @@ namespace Collibri.Repositories.FileBasedImplementation
             return room;
         }
 
-        public List<Room> GetAllRooms()
+        public List<RoomDTO> GetAllRooms()
         {
             return _rooms;
         }
 
-        public Room? UpdateRoom(int roomId, Room updatedRoom)
+        public RoomDTO? UpdateRoom(int roomId, RoomDTO updatedRoom)
         {
-            List<Room> roomList = _dataHandler.GetAllItems<Room>(ModelType.Rooms);
-            Room? existingRoom = roomList.FirstOrDefault(room => room.Id == roomId);
+            List<RoomDTO> roomList = _dataHandler.GetAllItems<RoomDTO>(ModelType.Rooms);
+            RoomDTO? existingRoom = roomList.FirstOrDefault(room => room.Id == roomId);
 
             if (existingRoom == null)
             {

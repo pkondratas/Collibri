@@ -1,15 +1,18 @@
 using System.IO.Abstractions;
 using Collibri.Data;
+using Collibri.Models;
 using Collibri.Repositories;
 // using Collibri.Repositories.DataHandling;
 using Collibri.Repositories.DbImplementation;
 using Collibri.Repositories.FileBasedImplementation;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IFileRepository, FileRepository>();
 builder.Services.AddScoped<IFileSystem, FileSystem>();
@@ -19,9 +22,13 @@ builder.Services.AddScoped<INoteRepository, DbNoteRepository>();
 builder.Services.AddScoped<IRoomRepository, DbRoomRepository>();
 builder.Services.AddScoped<IDocumentRepository, DbDocumentRepository>();
 builder.Services.AddScoped<IPostRepository, DbPostRepository>();
-builder.Services.AddScoped<IAccountRepository, DbAccountRepository>();
+// builder.Services.AddScoped<IAccountRepository, DbAccountRepository>();
 builder.Services.AddDbContext<DataContext>(options =>
 	options.UseNpgsql(builder.Configuration.GetConnectionString("LocalConnection")));
+
+builder.Services.AddIdentity<Account, IdentityRole<Guid>>()
+	.AddEntityFrameworkStores<DataContext>()
+	.AddDefaultTokenProviders();
 
 var app = builder.Build();
 

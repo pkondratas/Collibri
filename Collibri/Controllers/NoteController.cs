@@ -1,4 +1,5 @@
-﻿using Collibri.Models;
+﻿using Collibri.Dtos;
+using Collibri.Models;
 using Collibri.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +17,7 @@ namespace Collibri.Controllers
         }
 
         [HttpPost("")]
-        public IActionResult CreateNote([FromBody] Note note)
+        public IActionResult CreateNote([FromBody] NoteDTO note)
         {
             var result =  _noteRepository.CreateNote(note);
             return result == null ? Conflict() : Ok(result);
@@ -50,7 +51,7 @@ namespace Collibri.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public IActionResult UpdateNote([FromBody] Note note, int id)
+        public IActionResult UpdateNote([FromBody] NoteDTO note, int id)
         {
             var result = _noteRepository.UpdateNote(note, id);
             return result == null ? Conflict() : Ok(result);

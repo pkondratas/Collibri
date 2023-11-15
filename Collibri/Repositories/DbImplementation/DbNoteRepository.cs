@@ -1,4 +1,6 @@
+using AutoMapper;
 using Collibri.Data;
+using Collibri.Dtos;
 using Collibri.Models;
 using Collibri.Repositories.ExtensionMethods;
 
@@ -7,15 +9,17 @@ namespace Collibri.Repositories.DbImplementation
     public class DbNoteRepository : INoteRepository
     {
         private readonly DataContext _context;
+        private readonly IMapper _mapper;
         
-        public DbNoteRepository(DataContext dataContext)
+        public DbNoteRepository(DataContext dataContext, IMapper mapper)
         {
             _context = dataContext;
+            _mapper = mapper;
         }
     
-        public Note? CreateNote(Note note)
+        public NoteDTO? CreateNote(NoteDTO note)
         {
-            List<Note> noteList = _context.Notes.ToList();
+            var noteList = _context.Notes.ToList();
             
             if (noteList.Any(notes => notes.Name.Equals(note.Name)))
             {
@@ -26,27 +30,27 @@ namespace Collibri.Repositories.DbImplementation
             note.CreationDate = DateTime.UtcNow;
             note.LastUpdatedDate = note.CreationDate;
 
-            _context.Notes.Add(note);
+            _context.Notes.Add(_mapper.Map<Note>(note));
             _context.SaveChanges();
 
             return note;
         }
 
-        public Note? GetNote(int id)
+        public NoteDTO? GetNote(int id)
         {
             var noteList = _context.Notes.ToList();
 
-            return noteList.Any(x => x.Id == id) ? noteList.FirstOrDefault(x => x.Id == id) : null;
+            return noteList.Any(x => x.Id == id) ? _mapper.Map<NoteDTO>(noteList.FirstOrDefault(x => x.Id == id)) : null;
         }
         
-        public IEnumerable<Note> GetAllNotesByPost(Guid postId)
+        public IEnumerable<NoteDTO> GetAllNotesByPost(Guid postId)
         {
             var notesInPost = _context.Notes.ToList().Where(note => note.PostId == postId);
             
-            return notesInPost;
+            return _mapper.Map<List<NoteDTO>>(notesInPost).AsEnumerable();
         }
 
-        public Note? DeleteNote(int id)
+        public NoteDTO? DeleteNote(int id)
         {
             var noteList = _context.Notes.ToList();
             
@@ -57,13 +61,13 @@ namespace Collibri.Repositories.DbImplementation
                 _context.Notes.Remove(note);
                 _context.SaveChanges();
 
-                return note;
+                return _mapper.Map<NoteDTO>(note);
             }
 
             return null;
         }
 
-        public Note? UpdateNote(Note note, int id)
+        public NoteDTO? UpdateNote(NoteDTO note, int id)
         {
             var noteList = _context.Notes.ToList();
             var targetNote = noteList.FirstOrDefault(notes => notes.Id == id);
@@ -78,8 +82,7 @@ namespace Collibri.Repositories.DbImplementation
             _context.Notes.Update(targetNote);
             _context.SaveChanges();
         
-            return targetNote;
-
+            return _mapper.Map<NoteDTO>(targetNote);
         }
     }
 }

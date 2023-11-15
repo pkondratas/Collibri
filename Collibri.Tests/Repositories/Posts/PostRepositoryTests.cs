@@ -1,4 +1,4 @@
-using Collibri.Models;
+using Collibri.Dtos;
 using Collibri.Repositories.DataHandling;
 using Collibri.Repositories.FileBasedImplementation;
 
@@ -8,13 +8,13 @@ namespace Collibri.Tests.Repositories.Posts
     {
         [Theory]
         [ClassData(typeof(CreatePostTestData))]
-        public void CreatePost_Should_ReturnCreatePost(Post post)
+        public void CreatePost_Should_ReturnCreatePost(PostDTO post)
         {   
             //Assign
             var dataHandler = new Mock<IDataHandler>();
             var repository = new FbPostRepository(dataHandler.Object);
             dataHandler
-                .Setup(x => x.GetAllItems<Post>(ModelType.Posts)).Returns(new List<Post>());
+                .Setup(x => x.GetAllItems<PostDTO>(ModelType.Posts)).Returns(new List<PostDTO>());
             
             //Act
             var actual = repository.CreatePost(post);
@@ -28,13 +28,13 @@ namespace Collibri.Tests.Repositories.Posts
         [ClassData(typeof(GetAllPostsTestData))]
         public void GetAllPosts_Should_ReturnAllPosts(
             int sectionId,
-            List<Post> list) 
+            List<PostDTO> list) 
         {
             //Assign
             var dataHandler = new Mock<IDataHandler>();
             var repository = new FbPostRepository(dataHandler.Object);
             dataHandler
-                .Setup(x => x.GetAllItems<Post>(ModelType.Posts)).Returns(list);
+                .Setup(x => x.GetAllItems<PostDTO>(ModelType.Posts)).Returns(list);
             
             //Act
             var actual = repository.GetAllPosts(sectionId);
@@ -47,15 +47,15 @@ namespace Collibri.Tests.Repositories.Posts
         [ClassData(typeof(UpdatePostByIdTestData))]
         public void UpdatePostById_Should_ReturnUpdatedPost_WhenExists(
             Guid postId,
-            Post update,
-            Post? expected,
-            List<Post> list)
+            PostDTO update,
+            PostDTO? expected,
+            List<PostDTO> list)
         {
             //Assign
             var dataHandler = new Mock<IDataHandler>();
             var repository = new FbPostRepository(dataHandler.Object);
             dataHandler
-                .Setup(x => x.GetAllItems<Post>(ModelType.Posts)).Returns(list);
+                .Setup(x => x.GetAllItems<PostDTO>(ModelType.Posts)).Returns(list);
 
             //Act
             var actual = repository.UpdatePostById(postId, update);
@@ -74,14 +74,14 @@ namespace Collibri.Tests.Repositories.Posts
         [ClassData(typeof(DeletePostByIdTestData))]
         public void DeletePostById_Should_ReturnDeletedPost_IfExists(
             Guid postId,
-            Post? expected,
-            List<Post> list)
+            PostDTO? expected,
+            List<PostDTO> list)
         {
             //Assign
             var dataHandler = new Mock<IDataHandler>();
             var repository = new FbPostRepository(dataHandler.Object);
             dataHandler
-                .Setup(x => x.GetAllItems<Post>(ModelType.Posts)).Returns(list);
+                .Setup(x => x.GetAllItems<PostDTO>(ModelType.Posts)).Returns(list);
 
             //Act
             var actual = repository.DeletePostById(postId);

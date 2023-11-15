@@ -1,5 +1,5 @@
 using Collibri.Controllers;
-using Collibri.Models;
+using Collibri.Dtos;
 using Collibri.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -40,7 +40,7 @@ namespace Collibri.Tests.Controllers
             var roomController = CreateRoomController(mockRepo);
 
             var existingRoom = RoomControllerTestData.ExistingRoom;
-            mockRepo.Setup(repo => repo.CreateRoom(existingRoom)).Returns((Room)null);
+            mockRepo.Setup(repo => repo.CreateRoom(existingRoom)).Returns((RoomDTO)null);
 
             // Act
             var result = roomController.CreateRoom(existingRoom) as StatusCodeResult;
@@ -101,7 +101,7 @@ namespace Collibri.Tests.Controllers
             var nonExistentRoomId = RoomControllerTestData.NonExistentRoomId;
             var updatedRoom = RoomControllerTestData.UpdatedRoom;
 
-            mockRepo.Setup(repo => repo.UpdateRoom(nonExistentRoomId, updatedRoom)).Returns((Room)null);
+            mockRepo.Setup(repo => repo.UpdateRoom(nonExistentRoomId, updatedRoom)).Returns((RoomDTO)null);
 
             // Act
             var result = roomController.UpdateRoom(nonExistentRoomId, updatedRoom) as NotFoundResult;
