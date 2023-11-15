@@ -5,14 +5,13 @@ export const UserInfoStyles = {
     mainBox: {
         mt:'13vh',
         display:'flex',
-         backgroundColor:'red',
+        boxShadow: 12,
         minHeight:'4rem',
-        minWidth:'19rem'
+        minWidth:'19rem',
+        maxWidth:'15rem'
     },
     iconBox: {
         bgcolor: 'background.paper',
-        border: '1px solid #000',
-        boxShadow: 12,
         width:'5rem',
         paddingTop: '0.75rem',
         paddingLeft: '1.25rem',
@@ -20,12 +19,9 @@ export const UserInfoStyles = {
     },
     nameBox:{
         bgcolor: 'background.paper',
-        borderTop: '1px solid #000',
-        borderRight: '1px solid #000',
-        borderBottom: '1px solid #000',
-        boxShadow: 12,
         minWidth: '14rem',
         paddingTop: '1.25rem',
+        paddingRight:'1.5rem',
         textAlign: 'center'
     },
     StyledBadge:  styled(Badge)(({ theme }) => ({

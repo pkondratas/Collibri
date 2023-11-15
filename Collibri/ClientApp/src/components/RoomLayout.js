@@ -1,6 +1,5 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Button, Grid, Paper} from '@mui/material';
-import ParentComponent from "./ParentComponent";
 import PostContainer from "./PostContainer";
 import Header from "./Header";
 import {postContainerStyle} from "../styles/RoomLayoutStyle";
@@ -9,12 +8,22 @@ import {RoomSettings} from "./RoomSettings";
 import {AddPostButton} from "./AddPostButton";
 import {SideRoomTable} from "./SideRooms";
 import {UserInfoContainer} from "./UserInfoContainer";
+import SectionsContainer from "./SectionsContainer";
+import {useParams} from "react-router-dom";
+import {getSections} from "../api/SectionApi";
 
 
 const RoomLayout = () => {
     const [sectionId, setSectionId] = useState(0);
     const [sections, setSections] = useState([]);
     const [posts, setPosts] = useState([]);
+
+
+    const {roomId} = useParams()
+
+    useEffect(() => {
+        getSections(setSections, roomId);
+    }, [roomId]);
 
     return (
 
@@ -28,12 +37,14 @@ const RoomLayout = () => {
             <Grid item xs={1}>
                 <RoomSettings/>
                 <SideRoomTable/>
-                <UserInfoContainer username={"Future User"}/>
+
             </Grid>
             <Grid item md={4}>
                 <AddSection sections={sections} setSections={setSections}></AddSection>
-                <Paper><ParentComponent sections={sections} setSections={setSections}
-                                        setSectionId={setSectionId}/></Paper>
+                <Paper><SectionsContainer sections={sections} setSections={setSections}
+                                          setSectionId={setSectionId}/>
+                </Paper>
+                <UserInfoContainer username={"Future User"}/>
             </Grid>
             <Grid item xs={6}>
                 <AddPostButton sectionId={sectionId} setPosts={setPosts}/>

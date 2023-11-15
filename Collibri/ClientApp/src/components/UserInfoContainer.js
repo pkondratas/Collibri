@@ -15,9 +15,7 @@ export const UserInfoContainer = (props) => {
                     <Avatar>TBD</Avatar>
                 </UserInfoStyles.StyledBadge>
             </Box>
-            <Box sx={UserInfoStyles.nameBox}  >
-                <Typography>{props.username}</Typography>
-            </Box>
+                <Typography  sx={UserInfoStyles.nameBox}>{props.username}</Typography>
         </Box>
     );
 }
