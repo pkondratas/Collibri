@@ -21,6 +21,17 @@ const PostContainer = (props) => {
           </>
       );
   }
+  else if (props.posts.length === 0) {
+      return (
+          <>
+              <Box sx={containerStyle}>
+                  <Typography>
+                      No posts created.
+                  </Typography>
+              </Box>
+          </>
+      );
+  }
   else {
       return (
           <>
