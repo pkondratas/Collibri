@@ -13,15 +13,22 @@ namespace Collibri.Models
             get => _email;
             set
             {
-                if (value.IsValidEmail())
+                try
                 {
-                    _email = value;
+                    SetEmail(value);
                 }
-                else
+                catch (ArgumentException ex)
                 {
-                    throw new ArgumentException("Invalid email address");
+                    Console.WriteLine($"Error setting email: {ex.Message}");
                 }
             }
+        }
+
+        private void SetEmail(string value)
+        {
+            _email = value.IsValidEmail()
+                ? value
+                : throw new ArgumentException("Invalid email address");
         }
 
         public string Password { get; set; } = "";
