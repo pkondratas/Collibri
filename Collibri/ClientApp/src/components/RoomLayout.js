@@ -31,7 +31,7 @@ const RoomLayout = () => {
             <Grid item md={4}>
                 <AddSection sections={sections} setSections={setSections}></AddSection>
                 <Paper><ParentComponent sections={sections} setSections={setSections}
-                                        setSectionId={setSectionId}/></Paper>
+                                        setSectionId={setSectionId} posts={posts}/></Paper>
             </Grid>
             <Grid item xs={6}>
                 <AddPostButton sectionId={sectionId} setPosts={setPosts}/>

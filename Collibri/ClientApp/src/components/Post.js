@@ -20,6 +20,8 @@ import UpdatePostModal from './UpdatePostModal';
 import DeleteModal from "./DeleteModal";
 import '../styles/post.css';
 import PostModal from "./PostModal";
+import {deleteAllNotesInPost} from "../api/NoteAPI";
+import {deleteAllDocumentsInPost} from "../api/DocumentAPI";
 
 const Post = (props) => {
   const [liked, setLiked] = useState(false);
@@ -34,6 +36,8 @@ const Post = (props) => {
       .then(deletedData => {
         props.setPosts((prevPosts) => prevPosts.filter((x) => x.id !== deletedData.id));
       })
+    deleteAllNotesInPost(postId);
+    deleteAllDocumentsInPost(postId);
   }
 
   const updatePostContent = (propertyToUpdate, value) => {

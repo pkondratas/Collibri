@@ -18,7 +18,7 @@ const ParentComponent = (props) => {
         return (
             <>
                 <SectionsContainer sections={props.sections} setSections={props.setSections}
-                                   setSectionId={props.setSectionId}/>
+                                   setSectionId={props.setSectionId} posts={props.posts}/>
             </>
         )
 

@@ -8,9 +8,11 @@ import UpdateSectionModal from "./UpdateSectionModal";
 import '../styles/tableList.css';
 import {buttonStyle, nameCellStyle, tableRowStyle} from "../styles/tableListStyle";
 import {deleteAllPostsInSection} from "../api/PostAPI";
+import {deleteAllNotesInPost} from "../api/NoteAPI";
+import {deleteAllDocumentsInPost} from "../api/DocumentAPI";
 
 
-const SectionsContainer = ({sections, setSections, setSectionId}) => {
+const SectionsContainer = ({sections, setSections, setSectionId, posts}) => {
     const [updateModal, setUpdateModal] = useState(false);
     const [section, setSection] = useState({"Id": 0, "Name": "default"});
     const {roomId} = useParams()
@@ -26,9 +28,14 @@ const SectionsContainer = ({sections, setSections, setSectionId}) => {
     }
     
     const handleDeleteSection = (row) => {
+        posts.forEach((post) => {
+            deleteAllNotesInPost(post.id)
+            deleteAllDocumentsInPost(post.id)
+        });
+        deleteAllPostsInSection(row.id);
+        
         deleteSection(row.id, setSections);
         setSectionId(0)
-        deleteAllPostsInSection(row.id);
     }
 
     useEffect(() => {
