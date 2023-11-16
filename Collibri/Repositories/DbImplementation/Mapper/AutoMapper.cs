@@ -1,6 +1,7 @@
 using AutoMapper;
 using Collibri.Dtos;
 using Collibri.Models;
+using FileInfo = Collibri.Models.FileInfo;
 
 namespace Collibri.Repositories.DbImplementation.Mapper
 {
@@ -13,6 +14,7 @@ namespace Collibri.Repositories.DbImplementation.Mapper
             CreateMap<Room, RoomDTO>().ReverseMap();
             CreateMap<Section, SectionDTO>().ReverseMap();
             CreateMap<Document, DocumentDTO>().ReverseMap();
+            CreateMap<FileInfo, FileInfoDTO>().ReverseMap();
         }
     }
 }

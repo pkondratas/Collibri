@@ -2,6 +2,8 @@ using Collibri.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using FileInfo = Collibri.Models.FileInfo;
+
 namespace Collibri.Data
 {
 	public class DataContext : IdentityDbContext<Account, IdentityRole<Guid>, Guid>
@@ -13,6 +15,7 @@ namespace Collibri.Data
 		public DbSet<Section> Sections { get; set; }
 		public DbSet<Account> Accounts { get; set; }
 		public DbSet<RoomMember> RoomMembers { get; set; }
+		public DbSet<FileInfo> FileInfos { get; set; }
 
 		public DataContext(DbContextOptions<DataContext> options) : base(options)
 		{
