@@ -1,11 +1,52 @@
-using Collibri.Repositories.ExtensionMethods;
 using Microsoft.AspNetCore.Identity;
+using Collibri.Repositories.ExtensionMethods;
+using Serilog;
 
 namespace Collibri.Models
 {
+    public class CustomAccountException : Exception
+    {
+        public string InvalidField { get; }
+
+        public CustomAccountException(string message, string invalidField) : base(message)
+        {
+            InvalidField = invalidField;
+        }
+    }
+
     public class Account : IdentityUser<Guid>
     {
         public virtual ICollection<RoomMember> RoomMembers { get; set; }
+        
+        private string _email = "";
+
+        public string CustomProperty { get; set; }
+
+        public string Email
+        {
+            get => _email;
+            set
+            {
+                try
+                {
+                    ValidateEmail(value);
+                    _email = value;
+                }
+                catch (CustomAccountException ex)
+                {
+                    Log.Error(ex, "Error setting email: {ErrorMessage}, Invalid Field: {InvalidField}", ex.Message,
+                        ex.InvalidField);
+                }
+            }
+        }
+
+        private void ValidateEmail(string email)
+        {
+            if (!email.IsValidEmail())
+            {
+                throw new CustomAccountException("Invalid email address", nameof(Email));
+            }
+        }
         
         public Account()
         {
