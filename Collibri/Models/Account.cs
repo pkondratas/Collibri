@@ -4,11 +4,11 @@ using Serilog;
 
 namespace Collibri.Models
 {
-    public class CustomAccountException : Exception
+    public class AccountException : Exception
     {
         public string InvalidField { get; }
 
-        public CustomAccountException(string message, string invalidField) : base(message)
+        public AccountException(string message, string invalidField) : base(message)
         {
             InvalidField = invalidField;
         }
@@ -28,7 +28,7 @@ namespace Collibri.Models
                     ValidateEmail(value);
                     base.Email = value;
                 }
-                catch (CustomAccountException ex)
+                catch (AccountException ex)
                 {
                     Log.Error(ex, "Error setting email: {ErrorMessage}, Invalid Field: {InvalidField}", ex.Message,
                         ex.InvalidField);
@@ -40,7 +40,7 @@ namespace Collibri.Models
         {
             if (!email.IsValidEmail())
             {
-                throw new CustomAccountException("Invalid email address", nameof(Email));
+                throw new AccountException("Invalid email address", nameof(Email));
             }
         }
 
