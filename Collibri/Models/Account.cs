@@ -17,20 +17,17 @@ namespace Collibri.Models
     public class Account : IdentityUser<Guid>
     {
         public virtual ICollection<RoomMember> RoomMembers { get; set; }
-        
-        private string _email = "";
-
         public string CustomProperty { get; set; }
 
-        public string Email
+        public new string Email
         {
-            get => _email;
+            get => base.Email;
             set
             {
                 try
                 {
                     ValidateEmail(value);
-                    _email = value;
+                    base.Email = value;
                 }
                 catch (CustomAccountException ex)
                 {
@@ -47,10 +44,9 @@ namespace Collibri.Models
                 throw new CustomAccountException("Invalid email address", nameof(Email));
             }
         }
-        
+
         public Account()
         {
-            
         }
         // public int Id { get; set; }
         // private string _email = "";
