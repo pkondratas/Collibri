@@ -1,3 +1,4 @@
+using Collibri.Dtos;
 using Collibri.Models;
 using Collibri.Repositories.DataHandling;
 using Collibri.Repositories.FileBasedImplementation;
@@ -9,15 +10,15 @@ namespace Collibri.Tests.Repositories.Sections
         [Theory]
         [ClassData(typeof(CreateSectionTestData))]
         void CreateSection_Should_ReturnSection_WhenNonExistent(
-            Section section,
-            Section? expected,
-            List<Section> list)
+            SectionDTO section,
+            SectionDTO? expected,
+            List<SectionDTO> list)
         {   
             //Assign
             var dataHandler = new Mock<IDataHandler>();
             var repository = new FbSectionRepository(dataHandler.Object);
             dataHandler
-                .Setup(x => x.GetAllItems<Section>(ModelType.Sections)).Returns(list);
+                .Setup(x => x.GetAllItems<SectionDTO>(ModelType.Sections)).Returns(list);
 
             //Act
             var actual = repository.CreateSection(section);
@@ -35,13 +36,13 @@ namespace Collibri.Tests.Repositories.Sections
         [ClassData(typeof(GetAllSectionsTestData))]
         public void GetAllSection_Should_ReturnListOfSections(
             int roomId,
-            List<Section> list)
+            List<SectionDTO> list)
         {
             //Assign
             var dataHandler = new Mock<IDataHandler>();
             var repository = new FbSectionRepository(dataHandler.Object);
             dataHandler
-                .Setup(x => x.GetAllItems<Section>(ModelType.Sections)).Returns(list);
+                .Setup(x => x.GetAllItems<SectionDTO>(ModelType.Sections)).Returns(list);
             
             //Act
             var actual = repository.GetAllSections(roomId);
@@ -53,16 +54,16 @@ namespace Collibri.Tests.Repositories.Sections
         [Theory]
         [ClassData(typeof(UpdateSectionByIdTestData))]
         public void UpdateSectionById_Should_ReturnUpdatedSectionWhenExists(
-            Section section,
-            Section? expected,
+            SectionDTO section,
+            SectionDTO? expected,
             int sectionId,
-            List<Section> list)
+            List<SectionDTO> list)
         {
             //Assign
             var dataHandler = new Mock<IDataHandler>();
             var repository = new FbSectionRepository(dataHandler.Object);
             dataHandler
-                .Setup(x => x.GetAllItems<Section>(ModelType.Sections)).Returns(list);
+                .Setup(x => x.GetAllItems<SectionDTO>(ModelType.Sections)).Returns(list);
             
             //Act
             var actual = repository.UpdateSectionById(section, sectionId);
@@ -75,14 +76,14 @@ namespace Collibri.Tests.Repositories.Sections
         [ClassData(typeof(DeleteSectionByIdTestData))]
         public void DeleteSectionById_Should_ReturnDeletedSectionIfExists(
             int sectionId,
-            Section? expected,
-            List<Section> list)
+            SectionDTO? expected,
+            List<SectionDTO> list)
         {
             //Assign
             var dataHandler = new Mock<IDataHandler>();
             var repository = new FbSectionRepository(dataHandler.Object);
             dataHandler
-                .Setup(x => x.GetAllItems<Section>(ModelType.Sections)).Returns(list);
+                .Setup(x => x.GetAllItems<SectionDTO>(ModelType.Sections)).Returns(list);
             
             //Act
             var actual = repository.DeleteSectionById(sectionId);

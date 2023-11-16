@@ -1,4 +1,4 @@
-using Collibri.Models;
+using Collibri.Dtos;
 using Collibri.Repositories.DataHandling;
 using Collibri.Repositories.FileBasedImplementation;
 
@@ -29,7 +29,7 @@ namespace Collibri.Tests.Repositories.Rooms
             // Arrange
             var dataHandlerMock = new Mock<IDataHandler>();
             var repository = new FbRoomRepository(dataHandlerMock.Object);
-            dataHandlerMock.Setup(handler => handler.GetAllItems<Room>(ModelType.Rooms))
+            dataHandlerMock.Setup(handler => handler.GetAllItems<RoomDTO>(ModelType.Rooms))
                 .Returns(RoomRepositoryTestData.RoomsExist);
 
             // Act
@@ -49,8 +49,8 @@ namespace Collibri.Tests.Repositories.Rooms
             // Arrange
             var dataHandlerMock = new Mock<IDataHandler>();
             RoomRepositoryTestData.ExistingRoom.Id = 1;
-            var roomList = new List<Room> { RoomRepositoryTestData.ExistingRoom };
-            dataHandlerMock.Setup(handler => handler.GetAllItems<Room>(ModelType.Rooms))
+            var roomList = new List<RoomDTO> { RoomRepositoryTestData.ExistingRoom };
+            dataHandlerMock.Setup(handler => handler.GetAllItems<RoomDTO>(ModelType.Rooms))
                 .Returns(roomList);
 
             var repository = new FbRoomRepository(dataHandlerMock.Object);
@@ -75,7 +75,7 @@ namespace Collibri.Tests.Repositories.Rooms
             // Arrange
             var dataHandlerMock = new Mock<IDataHandler>();
             var repository = new FbRoomRepository(dataHandlerMock.Object);
-            dataHandlerMock.Setup(handler => handler.GetAllItems<Room>(ModelType.Rooms))
+            dataHandlerMock.Setup(handler => handler.GetAllItems<RoomDTO>(ModelType.Rooms))
                 .Returns(RoomRepositoryTestData.RoomsExist);
 
             // Act
@@ -91,7 +91,7 @@ namespace Collibri.Tests.Repositories.Rooms
             // Arrange
             var expectedRooms = RoomRepositoryTestData.RoomsExist; 
             var dataHandlerMock = new Mock<IDataHandler>();
-            dataHandlerMock.Setup(handler => handler.GetAllItems<Room>(ModelType.Rooms))
+            dataHandlerMock.Setup(handler => handler.GetAllItems<RoomDTO>(ModelType.Rooms))
                 .Returns(expectedRooms);
 
             var repository = new FbRoomRepository(dataHandlerMock.Object);

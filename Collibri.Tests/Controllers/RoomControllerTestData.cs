@@ -1,23 +1,23 @@
-using Collibri.Models;
+using Collibri.Dtos;
 
 namespace Collibri.Tests.Controllers
 {
     public class RoomControllerTestData
     {
-        public static Room ValidRoom => new Room("TestRoom");
+        public static RoomDTO ValidRoom => new RoomDTO("TestRoom");
 
-        public static Room ExistingRoom => new Room("TestRoom");
+        public static RoomDTO ExistingRoom => new RoomDTO("TestRoom");
 
-        public static List<Room> RoomsExist => new List<Room>
+        public static List<RoomDTO> RoomsExist => new List<RoomDTO>
         {
-            new Room("Room1"),
-            new Room("Room2")
+            new RoomDTO("Room1"),
+            new RoomDTO("Room2")
         };
 
         public static int ExistingRoomId => 1;
 
         public static int NonExistentRoomId => 3;
 
-        public static Room UpdatedRoom => new Room("UpdatedRoom");
+        public static RoomDTO UpdatedRoom => new RoomDTO("UpdatedRoom");
     }
 }

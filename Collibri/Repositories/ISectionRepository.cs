@@ -1,16 +1,16 @@
-using Collibri.Models;
+using Collibri.Dtos;
 
 namespace Collibri.Repositories
 {
     public interface ISectionRepository
     {
-        Section? CreateSection(Section section);
+        SectionDTO? CreateSection(SectionDTO section);
 
-        IEnumerable<Section> GetAllSections(int roomId);
+        IEnumerable<SectionDTO> GetAllSections(int roomId);
 
-        Section? UpdateSectionById(Section section, int sectionId);
+        SectionDTO? UpdateSectionById(SectionDTO section, int sectionId);
 
-        Section? DeleteSectionById(int sectionId);
+        SectionDTO? DeleteSectionById(int sectionId);
     }
 }
 

@@ -1,35 +1,38 @@
+using AutoMapper;
 using Collibri.Data;
+using Collibri.Dtos;
 using Collibri.Models;
 
 namespace Collibri.Repositories.DbImplementation
 {
     public class DbPostRepository : IPostRepository
     {
-    
         private readonly DataContext _context;
+        private readonly IMapper _mapper;
         
-        public DbPostRepository(DataContext dataContext)
+        public DbPostRepository(DataContext dataContext, IMapper mapper)
         {
             _context = dataContext;
+            _mapper = mapper;
         }
     
-        public Post CreatePost(Post post)
+        public PostDTO CreatePost(PostDTO post)
         {
             post.Id = Guid.NewGuid();
             post.CreationDate = DateTime.UtcNow;
             post.LastUpdatedDate = DateTime.UtcNow;
-            _context.Posts.Add(post);
+            _context.Posts.Add(_mapper.Map<Post>(post));
             _context.SaveChanges();
 
             return post;
         }
 
-        public IEnumerable<Post> GetAllPosts(int sectionId)
+        public IEnumerable<PostDTO> GetAllPosts(int sectionId)
         {
-            return _context.Posts.Where(x => x.SectionId == sectionId);
+            return _mapper.Map<List<PostDTO>>(_context.Posts.Where(x => x.SectionId == sectionId)).AsEnumerable();
         }
 
-        public Post? UpdatePostById(Guid postId, Post post)
+        public PostDTO? UpdatePostById(Guid postId, PostDTO post)
         {
             var postToUpdate = _context.Posts.SingleOrDefault(x => x.Id == postId);
             
@@ -46,10 +49,10 @@ namespace Collibri.Repositories.DbImplementation
             _context.Posts.Update(postToUpdate);
             _context.SaveChanges();
 
-            return postToUpdate;
+            return _mapper.Map<PostDTO>(postToUpdate);
         }
 
-        public Post? DeletePostById(Guid postId)
+        public PostDTO? DeletePostById(Guid postId)
         {
             var postToDelete = _context.Posts.SingleOrDefault(x => x.Id == postId);
 
@@ -61,10 +64,10 @@ namespace Collibri.Repositories.DbImplementation
             _context.Posts.Remove(postToDelete);
             _context.SaveChanges();
 
-            return postToDelete;
+            return _mapper.Map<PostDTO>(postToDelete);
         }
 
-        public IEnumerable<Post> DeleteAllPostsInSection(int sectionId)
+        public IEnumerable<PostDTO> DeleteAllPostsInSection(int sectionId)
         {
             var postsInSection = _context.Posts.Where(x => x.SectionId == sectionId);
 
@@ -75,7 +78,7 @@ namespace Collibri.Repositories.DbImplementation
 
             _context.SaveChanges();
 
-            return postsInSection;
+            return _mapper.Map<List<PostDTO>>(postsInSection).AsEnumerable();
         }
     }
 }

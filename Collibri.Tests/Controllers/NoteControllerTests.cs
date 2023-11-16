@@ -1,5 +1,5 @@
 using Collibri.Controllers;
-using Collibri.Models;
+using Collibri.Dtos;
 using Collibri.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,8 +10,8 @@ namespace Collibri.Tests.Controllers
         [Theory]
         [ClassData(typeof(CreateNoteTestData))]
         public void CreateNoteTest(
-            Note note,
-            Note? result,
+            NoteDTO note,
+            NoteDTO? result,
             int? statusCode    
             )
         { 
@@ -37,7 +37,7 @@ namespace Collibri.Tests.Controllers
         // [ClassData(typeof(GetAllNotesInSectionTestData))]
         // public void GetAllNotesInSectionTest(
         //     int id,
-        //     IEnumerable<Note> result
+        //     IEnumerable<NoteDTO> result
         //     )
         // {
         //     var repository = new Mock<INoteRepository>(); 
@@ -46,15 +46,15 @@ namespace Collibri.Tests.Controllers
         //
         //     var actual = controller.GetAllNotesInSection(id) as ObjectResult;
         //
-        //     Assert.IsType<List<Note>>(actual?.Value);
+        //     Assert.IsType<List<NoteDTO>>(actual?.Value);
         //     Assert.Equal(result, actual.Value);
         // }
         
         [Theory]
         [ClassData(typeof(UpdateNoteTestData))]
         public void UpdateNoteTest(
-            Note note,
-            Note? updatedNote,
+            NoteDTO note,
+            NoteDTO? updatedNote,
             int id,
             int statusCode
             )

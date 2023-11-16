@@ -1,3 +1,4 @@
+using Collibri.Dtos;
 using Collibri.Models;
 using Collibri.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,7 @@ namespace Collibri.Controllers
         }
 
         [HttpPost("")]
-        public IActionResult CreatePost([FromBody] Post post)
+        public IActionResult CreatePost([FromBody] PostDTO post)
         {
             return Ok(_postRepository.CreatePost(post));
         }
@@ -28,7 +29,7 @@ namespace Collibri.Controllers
         }
 
         [HttpPut("")]
-        public IActionResult UpdatePostById([FromQuery] Guid postId, [FromBody] Post post)
+        public IActionResult UpdatePostById([FromQuery] Guid postId, [FromBody] PostDTO post)
         {
             var updatedPost = _postRepository.UpdatePostById(postId, post);
 

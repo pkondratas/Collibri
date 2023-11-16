@@ -1,4 +1,4 @@
-using Collibri.Models;
+using Collibri.Dtos;
 using Collibri.Repositories.DataHandling;
 using Collibri.Repositories.ExtensionMethods;
 
@@ -13,9 +13,9 @@ namespace Collibri.Repositories.FileBasedImplementation
             _dataHandler = dataHandler;
         }
         
-        public Section? CreateSection(Section section)
+        public SectionDTO? CreateSection(SectionDTO section)
         {
-            var sectionList = _dataHandler.GetAllItems<Section>(ModelType.Sections);
+            var sectionList = _dataHandler.GetAllItems<SectionDTO>(ModelType.Sections);
             
             if (sectionList.Any(sections => sections.Equals(section)))
             {
@@ -30,17 +30,17 @@ namespace Collibri.Repositories.FileBasedImplementation
             return section;
         }
 
-        public IEnumerable<Section> GetAllSections(int roomId)
+        public IEnumerable<SectionDTO> GetAllSections(int roomId)
         {
-            var sectionList = _dataHandler.GetAllItems<Section>(ModelType.Sections);
+            var sectionList = _dataHandler.GetAllItems<SectionDTO>(ModelType.Sections);
             var queriedSection = sectionList.Where(section => section.RoomId == roomId);
             
             return queriedSection;
         }
 
-        public Section? UpdateSectionById(Section newSection, int sectionId)
+        public SectionDTO? UpdateSectionById(SectionDTO newSection, int sectionId)
         {
-            var sectionList = _dataHandler.GetAllItems<Section>(ModelType.Sections);
+            var sectionList = _dataHandler.GetAllItems<SectionDTO>(ModelType.Sections);
             var sectionToUpdate = sectionList.SingleOrDefault(x => x.Id == sectionId);
             
             //method 
@@ -56,9 +56,9 @@ namespace Collibri.Repositories.FileBasedImplementation
             return sectionToUpdate;
         }
 
-        public Section? DeleteSectionById(int sectionId)
+        public SectionDTO? DeleteSectionById(int sectionId)
         {
-            var sectionList = _dataHandler.GetAllItems<Section>(ModelType.Sections);
+            var sectionList = _dataHandler.GetAllItems<SectionDTO>(ModelType.Sections);
             var sectionToDelete = sectionList.SingleOrDefault(x => x.Id == sectionId);
             
             if(sectionToDelete == null || !sectionList.Remove(sectionToDelete))

@@ -1,32 +1,38 @@
+using AutoMapper;
 using Collibri.Data;
+using Collibri.Dtos;
 using Collibri.Models;
+using Collibri.Repositories.ExtensionMethods;
 
 namespace Collibri.Repositories.DbImplementation
 {
     public class DbDocumentRepository : IDocumentRepository
     {
-
         private readonly DataContext _context;
+        private readonly IMapper _mapper;
         
-        public DbDocumentRepository(DataContext dataContext)
+        public DbDocumentRepository(DataContext dataContext, IMapper mapper)
         {
             _context = dataContext;
+            _mapper = mapper;
         }
     
-        public Document? CreateDocument(Document document, string postId)
+        public DocumentDTO? CreateDocument(DocumentDTO document, string postId)
         {
-            _context.Documents.Add(document);
+            document.Id = new int().GenerateNewId(_context.Documents.Select(x => x.Id).ToList());
+            _context.Documents.Add(_mapper.Map<Document>(document));
             _context.SaveChanges();
 
             return document;
         }
 
-        public IEnumerable<Document> GetDocuments(string postId)
+        public IEnumerable<DocumentDTO> GetDocuments(string postId)
         {
-            return _context.Documents.Where(document => document.PostId.Equals(Guid.Parse(postId)));
+            return _mapper.Map<List<DocumentDTO>>(_context.Documents.Where(document =>
+                document.PostId.Equals(Guid.Parse(postId)))).AsEnumerable();
         }
 
-        public Document? DeleteById(int id)
+        public DocumentDTO? DeleteById(int id)
         {
             var documentToDelete = _context.Documents.SingleOrDefault(x => x.Id == id);
         
@@ -36,10 +42,10 @@ namespace Collibri.Repositories.DbImplementation
             _context.Documents.Remove(documentToDelete);
             _context.SaveChanges();
 
-            return documentToDelete;
+            return _mapper.Map<DocumentDTO>(documentToDelete);
         }
 
-        public Document? UpdateDocument(Document document, int id)
+        public DocumentDTO? UpdateDocument(DocumentDTO document, int id)
         {
             var documentToUpdate = _context.Documents.SingleOrDefault(x => x.Id == id);
             
@@ -53,7 +59,7 @@ namespace Collibri.Repositories.DbImplementation
             _context.Documents.Update(documentToUpdate);
             _context.SaveChanges();
 
-            return documentToUpdate;
+            return _mapper.Map<DocumentDTO>(documentToUpdate);
         }
     }
 }

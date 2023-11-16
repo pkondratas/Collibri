@@ -1,4 +1,4 @@
-using Collibri.Models;
+using Collibri.Dtos;
 using Collibri.Repositories.DataHandling;
 using Collibri.Repositories.FileBasedImplementation;
 
@@ -10,14 +10,14 @@ namespace Collibri.Tests.Repositories.Documents
         [ClassData(typeof(CreateDocumentTestData))]
         public void CreateDocument_Should_ReturnDocument_WhenIdIsUnique(
             string postId,
-            Document document,
-            List<Document> list)
+            DocumentDTO document,
+            List<DocumentDTO> list)
         {
             //Assign
-            Document? expected = null;
+            DocumentDTO? expected = null;
             var dataHandler = new Mock<IDataHandler>();
             var repository = new FbDocumentRepository(dataHandler.Object);
-            dataHandler.Setup(x => x.GetAllItems<Document>(ModelType.Documents)).Returns(list);
+            dataHandler.Setup(x => x.GetAllItems<DocumentDTO>(ModelType.Documents)).Returns(list);
 
             //Act
             var actual = repository.CreateDocument(document, postId);
@@ -36,13 +36,13 @@ namespace Collibri.Tests.Repositories.Documents
         [ClassData(typeof(GetDocumentsTestData))]
         public void GetDocuments_Should_ReturnDocumentsInSection(
             string postId,
-            List<Document> list)
+            List<DocumentDTO> list)
         {
             //Assign
-            Document? expected = null;
+            DocumentDTO? expected = null;
             var dataHandler = new Mock<IDataHandler>();
             var repository = new FbDocumentRepository(dataHandler.Object);
-            dataHandler.Setup(x => x.GetAllItems<Document>(ModelType.Documents)).Returns(list);
+            dataHandler.Setup(x => x.GetAllItems<DocumentDTO>(ModelType.Documents)).Returns(list);
 
             //Act
             var actual = repository.GetDocuments(postId);
@@ -55,15 +55,15 @@ namespace Collibri.Tests.Repositories.Documents
         [Theory]
         [ClassData(typeof(UpdateDocumentTestData))]
         public void UpdateDocument_Should_ReturnUpdatedDocument_IfExists(
-            Document document,
-            Document? expected,
+            DocumentDTO document,
+            DocumentDTO? expected,
             int documentId,
-            List<Document> list)
+            List<DocumentDTO> list)
         {
             //Assign
             var dataHandler = new Mock<IDataHandler>();
             var repository = new FbDocumentRepository(dataHandler.Object);
-            dataHandler.Setup(x => x.GetAllItems<Document>(ModelType.Documents)).Returns(list);
+            dataHandler.Setup(x => x.GetAllItems<DocumentDTO>(ModelType.Documents)).Returns(list);
 
             //Act
             var actual = repository.UpdateDocument(document, documentId);
@@ -76,13 +76,13 @@ namespace Collibri.Tests.Repositories.Documents
         [ClassData(typeof(DeleteDocumentTestData))]
         public void DeleteDocument_Should_ReturnDeletedDocument_IfExists(
             int documentId,
-            Document? expected,
-            List<Document> list)
+            DocumentDTO? expected,
+            List<DocumentDTO> list)
         {
             //Assign
             var dataHandler = new Mock<IDataHandler>();
             var repository = new FbDocumentRepository(dataHandler.Object);
-            dataHandler.Setup(x => x.GetAllItems<Document>(ModelType.Documents)).Returns(list);
+            dataHandler.Setup(x => x.GetAllItems<DocumentDTO>(ModelType.Documents)).Returns(list);
 
             //Act
             var actual = repository.DeleteById(documentId);

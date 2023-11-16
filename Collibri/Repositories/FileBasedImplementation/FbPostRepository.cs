@@ -1,4 +1,4 @@
-using Collibri.Models;
+using Collibri.Dtos;
 using Collibri.Repositories.DataHandling;
 
 namespace Collibri.Repositories.FileBasedImplementation
@@ -12,9 +12,9 @@ namespace Collibri.Repositories.FileBasedImplementation
             _dataHandler = dataHandler;
         }
 
-        public Post CreatePost(Post post)
+        public PostDTO CreatePost(PostDTO post)
         {
-            var postList = _dataHandler.GetAllItems<Post>(ModelType.Posts);
+            var postList = _dataHandler.GetAllItems<PostDTO>(ModelType.Posts);
 
             post.Id = Guid.NewGuid();
             post.CreationDate = DateTime.Now;
@@ -26,17 +26,17 @@ namespace Collibri.Repositories.FileBasedImplementation
             return post;
         }
 
-        public IEnumerable<Post> GetAllPosts(int sectionId)
+        public IEnumerable<PostDTO> GetAllPosts(int sectionId)
         {
-            var postList = _dataHandler.GetAllItems<Post>(ModelType.Posts);
+            var postList = _dataHandler.GetAllItems<PostDTO>(ModelType.Posts);
             var queriedPosts = postList.Where(x => x.SectionId == sectionId);
 
             return queriedPosts;
         }
 
-        public Post? UpdatePostById(Guid postId, Post post)
+        public PostDTO? UpdatePostById(Guid postId, PostDTO post)
         {
-            var postList = _dataHandler.GetAllItems<Post>(ModelType.Posts);
+            var postList = _dataHandler.GetAllItems<PostDTO>(ModelType.Posts);
             var postToUpdate = postList.SingleOrDefault(x => x.Id == postId);
             
             if (postToUpdate == null)
@@ -53,9 +53,9 @@ namespace Collibri.Repositories.FileBasedImplementation
             return postToUpdate;
         }
 
-        public Post? DeletePostById(Guid postId)
+        public PostDTO? DeletePostById(Guid postId)
         {
-            var postList = _dataHandler.GetAllItems<Post>(ModelType.Posts);
+            var postList = _dataHandler.GetAllItems<PostDTO>(ModelType.Posts);
             var postToDelete = postList.SingleOrDefault(x => x.Id == postId);
 
             if (postToDelete == null || !postList.Remove(postToDelete))
@@ -68,9 +68,9 @@ namespace Collibri.Repositories.FileBasedImplementation
             return postToDelete;
         }
         
-        public IEnumerable<Post> DeleteAllPostsInSection(int sectionId)
+        public IEnumerable<PostDTO> DeleteAllPostsInSection(int sectionId)
         {
-            var postList = _dataHandler.GetAllItems<Post>(ModelType.Posts);
+            var postList = _dataHandler.GetAllItems<PostDTO>(ModelType.Posts);
             var postsInSection = postList.Where(x => x.SectionId == sectionId).ToList();
 
             foreach (var post in postsInSection)
