@@ -1,8 +1,8 @@
 using System.IO.Abstractions;
+using Collibri.Dtos;
+using Collibri.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
-using Microsoft.Net.Http.Headers;
-using File = Collibri.Models.File;
 
 namespace Collibri.Repositories.FileBasedImplementation
 {
@@ -14,7 +14,7 @@ namespace Collibri.Repositories.FileBasedImplementation
 			_fileSystem = fileSystem;
 		}
 		
-		public File? CreateFile(IFormFile file, string postId)
+		public FileInfoDTO? CreateFile(IFormFile file, string postId)
 		{
 			var path = GetPath(postId);
 			var separator = _fileSystem.Path.DirectorySeparatorChar;
@@ -33,10 +33,10 @@ namespace Collibri.Repositories.FileBasedImplementation
 			{
 				file.CopyTo(fileStream);
 			}
-			return (File?) new File(path + separator + file.FileName, Guid.Parse(postId));
+			return (FileInfoDTO?) new FileInfoDTO(path + separator + file.FileName, Guid.Parse(postId));
 		}
 
-		public File? DeleteFile(string fileName, string postId)
+		public FileInfoDTO? DeleteFile(string fileName, string postId)
 		{
 			var path = GetPath(postId);
 			var separator = _fileSystem.Path.DirectorySeparatorChar;
@@ -47,7 +47,7 @@ namespace Collibri.Repositories.FileBasedImplementation
 			}
 			_fileSystem.File.Delete(path + separator + fileName);
 			
-			return (File?) new File(path + separator + fileName, Guid.Parse(postId));
+			return (FileInfoDTO?) new FileInfoDTO(path + separator + fileName, Guid.Parse(postId));
 		}
 
 		public FileContentResult? GetFile(string fileName, string postId)
@@ -66,7 +66,7 @@ namespace Collibri.Repositories.FileBasedImplementation
 			return new FileContentResult(bytes, contentType ?? "application/octet-stream");
 		}
 
-		public File? UpdateFileName(string fileName, string postId, string updatedName)
+		public FileInfoDTO? UpdateFileName(string fileName, string postId, string updatedName)
 		{
 			var path = GetPath(postId);
 			var separator = _fileSystem.Path.DirectorySeparatorChar;
@@ -77,7 +77,7 @@ namespace Collibri.Repositories.FileBasedImplementation
 				return null;
 			}
 			_fileSystem.File.Move(path + separator + fileName, path + separator + updatedName);
-			return (File?) new File(path + separator + updatedName, Guid.Parse(postId));
+			return (FileInfoDTO?) new FileInfoDTO(path + separator + updatedName, Guid.Parse(postId));
 		}
 
 		private string GetPath(string postId)

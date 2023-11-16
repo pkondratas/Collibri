@@ -1,8 +1,9 @@
 using Collibri.Controllers;
+using Collibri.Dtos;
+using Collibri.Models;
 using Collibri.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using File = Collibri.Models.File;
 
 namespace Collibri.Tests.Controllers
 {
@@ -10,7 +11,7 @@ namespace Collibri.Tests.Controllers
 	{
 		[Theory]
 		[ClassData(typeof(CreateFileData))]
-		public void CreateFile_Should_ReturnFileTest(IFormFile fileData, string postId, int statusCode, File? expected)
+		public void CreateFile_Should_ReturnFileTest(IFormFile fileData, string postId, int statusCode, FileInfoDTO? expected)
 		{
 			// Arrange
 			var repository = new Mock<IFileRepository>();
@@ -35,7 +36,7 @@ namespace Collibri.Tests.Controllers
 
 		[Theory]
 		[ClassData(typeof(DeleteFileData))]
-		public void DeleteFile_Should_ReturnFileTest(string fileName, string postId, int statusCode, File? expected)
+		public void DeleteFile_Should_ReturnFileTest(string fileName, string postId, int statusCode, FileInfoDTO? expected)
 		{
 			// Arrange
 			var repository = new Mock<IFileRepository>();
@@ -87,7 +88,7 @@ namespace Collibri.Tests.Controllers
 		[Theory]
 		[ClassData(typeof(UpdateFileNameData))]
 		public void UpdateFileName_Should_ReturnFileTest(string fileName, string postId,
-			string updatedName, int statusCode, File? expected)
+			string updatedName, int statusCode, FileInfoDTO? expected)
 		{
 			// Arrange
 			var repository = new Mock<IFileRepository>();

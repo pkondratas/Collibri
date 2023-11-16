@@ -1,11 +1,12 @@
 using System.IO.Abstractions.TestingHelpers;
+using Collibri.Dtos;
+using Collibri.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using File = Collibri.Models.File;
 
 namespace Collibri.Tests.Repositories.Files
 {
-    public class CreateFileData : TheoryData<MockFileSystem, IFormFile, string, File?>
+    public class CreateFileData : TheoryData<MockFileSystem, IFormFile, string, FileInfoDTO?>
     {
         public CreateFileData()
         {
@@ -19,20 +20,20 @@ namespace Collibri.Tests.Repositories.Files
             });
             
             Add(fileSystem, FileTestHelper.CreateTestFormFile("textFile1.txt", "Text file test data"), postId,
-                new File(path + "\\textFile1.txt", Guid.Parse(postId)));
+                new FileInfoDTO(path + "\\textFile1.txt", Guid.Parse(postId)));
             // Should return null
             Add(fileSystem, FileTestHelper.CreateTestFormFile("textFile.txt", "Text file test data"), postId,
                 null);
             // No extension
             Add(fileSystem, FileTestHelper.CreateTestFormFile("textFile", "Text file test data"), postId,
-                new File(path + "\\textFile", Guid.Parse(postId)));
+                new FileInfoDTO(path + "\\textFile", Guid.Parse(postId)));
             Add(fileSystem, FileTestHelper.CreateTestFormFile("pngFile2.png",
                     System.Text.Encoding.UTF8.GetString(new byte[] { 0x12, 0x34, 0x56, 0xd2 })), postId,
-                new File(path + "\\pngFile2.png", Guid.Parse(postId)));
+                new FileInfoDTO(path + "\\pngFile2.png", Guid.Parse(postId)));
         }
     }
 
-    public class DeleteFileData : TheoryData<MockFileSystem, string, string, File?>
+    public class DeleteFileData : TheoryData<MockFileSystem, string, string, FileInfoDTO?>
     {
         public DeleteFileData()
         {
@@ -45,11 +46,11 @@ namespace Collibri.Tests.Repositories.Files
                 { path + "\\pngFile.png", new MockFileData(new byte[] { 0x12, 0x34, 0x56, 0xd2 }) },
                 { path + "\\noExtension", new MockFileData("No extension file test data") }
             });
-            Add(fileSystem, "textFile.txt", postId, new File(path + "\\textFile.txt", Guid.Parse(postId)));
+            Add(fileSystem, "textFile.txt", postId, new FileInfoDTO(path + "\\textFile.txt", Guid.Parse(postId)));
             // Should return null
             Add(fileSystem, "noFile.txt", postId, null);
             // No extension
-            Add(fileSystem, "noExtension", postId, new File(path + "\\noExtension", Guid.Parse(postId)));
+            Add(fileSystem, "noExtension", postId, new FileInfoDTO(path + "\\noExtension", Guid.Parse(postId)));
         }
     }
 
@@ -77,7 +78,7 @@ namespace Collibri.Tests.Repositories.Files
         }
     }
     
-    public class UpdateFileNameData  : TheoryData<MockFileSystem, string, string, string, File?>
+    public class UpdateFileNameData  : TheoryData<MockFileSystem, string, string, string, FileInfoDTO?>
     {
         public UpdateFileNameData()
         {
@@ -91,7 +92,7 @@ namespace Collibri.Tests.Repositories.Files
                 { path + "\\noExtension", new MockFileData("No extension file test data") }
             });
             Add(fileSystem, "textFile.txt", postId, "anotherTextFile.txt",
-                new File(path + "\\anotherTextFile.txt", Guid.Parse(postId)));
+                new FileInfoDTO(path + "\\anotherTextFile.txt", Guid.Parse(postId)));
             // Should return null
             Add(fileSystem, "noFile.txt", postId, "anotherTextFile.txt", null);
         }

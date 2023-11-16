@@ -1,8 +1,9 @@
 using System.IO.Abstractions.TestingHelpers;
+using Collibri.Dtos;
+using Collibri.Models;
 using Collibri.Repositories.FileBasedImplementation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using File = Collibri.Models.File;
 
 namespace Collibri.Tests.Repositories.Files
 {
@@ -11,7 +12,7 @@ namespace Collibri.Tests.Repositories.Files
         [Theory]
         [ClassData(typeof(CreateFileData))]
         public void CreateFile_Should_ReturnFileTest(MockFileSystem fileSystem, IFormFile fileData,
-            string postId, File? expected)
+            string postId, FileInfoDTO? expected)
         {
             // Arrange
             var fileRepository = new FileRepository(fileSystem.FileSystem);
@@ -32,7 +33,7 @@ namespace Collibri.Tests.Repositories.Files
         [Theory]
         [ClassData(typeof(DeleteFileData))]
         public void DeleteFile_Should_ReturnFileTest(MockFileSystem fileSystem, string fileName,
-            string postId, File? expected)
+            string postId, FileInfoDTO? expected)
         {
             // Arrange
             var fileRepository = new FileRepository(fileSystem.FileSystem);
@@ -73,7 +74,7 @@ namespace Collibri.Tests.Repositories.Files
         [Theory]
         [ClassData(typeof(UpdateFileNameData))]
         public void UpdateFileName_Should_ReturnFileTest(MockFileSystem fileSystem, string fileName, string postId,
-            string updatedName, File? expected)
+            string updatedName, FileInfoDTO? expected)
         {
             // Arrange
             var path = FileTestHelper.GetPath(postId);
