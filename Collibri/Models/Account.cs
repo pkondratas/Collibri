@@ -17,7 +17,6 @@ namespace Collibri.Models
     public class Account : IdentityUser<Guid>
     {
         public virtual ICollection<RoomMember> RoomMembers { get; set; }
-        public string CustomProperty { get; set; }
 
         public new string Email
         {
