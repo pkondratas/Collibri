@@ -1,19 +1,10 @@
+using Collibri.CustomExceptions;
 using Microsoft.AspNetCore.Identity;
 using Collibri.Repositories.ExtensionMethods;
 using Serilog;
 
 namespace Collibri.Models
 {
-    public class AccountException : Exception
-    {
-        public string InvalidField { get; }
-
-        public AccountException(string message, string invalidField) : base(message)
-        {
-            InvalidField = invalidField;
-        }
-    }
-
     public class Account : IdentityUser<Guid>
     {
         public virtual ICollection<RoomMember> RoomMembers { get; set; }
