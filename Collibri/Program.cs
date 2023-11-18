@@ -23,12 +23,22 @@ builder.Services.AddScoped<IRoomRepository, DbRoomRepository>();
 builder.Services.AddScoped<IDocumentRepository, DbDocumentRepository>();
 builder.Services.AddScoped<IPostRepository, DbPostRepository>();
 // builder.Services.AddScoped<IAccountRepository, DbAccountRepository>();
+builder.Services.AddScoped<DbAccountRepository>();
+
 builder.Services.AddDbContext<DataContext>(options =>
 	options.UseNpgsql(builder.Configuration.GetConnectionString("LocalConnection")));
 
-builder.Services.AddIdentity<Account, IdentityRole<Guid>>()
+builder.Services.AddIdentity<IdentityUser<Guid>, IdentityRole<Guid>>()
 	.AddEntityFrameworkStores<DataContext>()
 	.AddDefaultTokenProviders();
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+	options.Password.RequireUppercase = true;
+	options.Password.RequireDigit = true;
+	options.Password.RequiredLength = 6;
+	options.Password.RequireNonAlphanumeric = false;
+});
 
 var app = builder.Build();
 
@@ -43,6 +53,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllerRoute(
 	name: "default",

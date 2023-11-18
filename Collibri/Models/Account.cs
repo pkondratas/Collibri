@@ -1,10 +1,14 @@
+using System.ComponentModel.DataAnnotations;
 using Collibri.Repositories.ExtensionMethods;
 using Microsoft.AspNetCore.Identity;
 
 namespace Collibri.Models
 {
-    public class Account : IdentityUser<Guid>
+    public class Account// : IdentityUser<Guid>
     {
+        [Key]
+        public Guid Id { get; set; }
+        
         public virtual ICollection<RoomMember> RoomMembers { get; set; }
         
         public Account()
@@ -25,20 +29,11 @@ namespace Collibri.Models
         //         }
         //         else
         //         {
-        //             throw new ArgumentException("Invalid email address");
+        // throw new ArgumentException("Invalid email address");
         //         }
         //     }
         // }
         //
         // public string Password { get; set; } = "";
-
-
-        // public Account(int id, string username, string email, string password)
-        // {
-        //     Id = id;
-        //     Username = username;
-        //     Email = email;
-        //     Password = password;
-        // }
     }
 }
