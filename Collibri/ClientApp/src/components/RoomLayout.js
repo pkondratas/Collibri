@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {Button, Grid, Paper} from '@mui/material';
-import ParentComponent from "./ParentComponent";
 import PostContainer from "./PostContainer";
 import Header from "./Header";
 import {postContainerStyle} from "../styles/RoomLayoutStyle";
@@ -9,12 +8,23 @@ import {RoomSettings} from "./RoomSettings";
 import {AddPostButton} from "./AddPostButton";
 import {SideRoomTable} from "./SideRooms";
 import SearchBar from "./SearchBar";
+import SectionsContainer from "./SectionsContainer";
+import {UserInfoContainer} from "./UserInfoContainer";
+import {useParams} from "react-router-dom";
+import {getSections} from "../api/SectionApi";
 
 
 const RoomLayout = () => {
     const [sectionId, setSectionId] = useState(0);
     const [sections, setSections] = useState([]);
     const [posts, setPosts] = useState([]);
+
+
+    const {roomId} = useParams()
+
+    useEffect(() => {
+        getSections(setSections, roomId);
+    }, [roomId]);
 
     return (
 
@@ -28,6 +38,7 @@ const RoomLayout = () => {
             <Grid item xs={1}>
                 <RoomSettings/>
                 <SideRoomTable/>
+
             </Grid>
             <Grid item md={4}>
                 <AddSection sections={sections} setSections={setSections}></AddSection>
@@ -43,7 +54,7 @@ const RoomLayout = () => {
                 ><AddPostButton sectionId={sectionId} setPosts={setPosts}/>
                     <SearchBar posts={posts} sectionId={sectionId} setPosts={setPosts}/>
                 </Grid>
-                
+
                 <Paper sx={postContainerStyle}>
                     <PostContainer sectionId={sectionId} posts={posts} setPosts={setPosts}/>
                 </Paper>
