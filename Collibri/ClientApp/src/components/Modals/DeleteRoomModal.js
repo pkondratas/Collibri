@@ -1,7 +1,8 @@
 import React from 'react';
-import CModal from './CModal';
+import CModal from "./CModal";
 import { Typography } from "@mui/material";
-import { deleteModalWarningStyle } from '../styles/DeleteModalStyle';
+import {deleteModalWarningStyle} from "../../styles/DeleteModalStyle";
+
 
 const DeleteRoomModal = (props) => {
     const handleClose = () => props.setDeleteModal(false);

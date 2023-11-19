@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import PostModal from "./PostModal";
+import PostModal from "./Modals/PostModal";
+
 
 export class Home extends Component {
     static displayName = Home.name;

@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import { TextField, Button, Typography, Container, Paper, Box } from '@mui/material';
 import { Tooltip } from '@mui/material';
 import { LoginPageStyles } from '../styles/LoginPageStyles.js';
-import ForgotPasswordModal from "./ForgotPasswordModal";
-import CreateAccountModal from "./CreateAccountModal";
+import ForgotPasswordModal from "./Modals/ForgotPasswordModal";
+import CreateAccountModal from "./Modals/CreateAccountModal";
+
 
 const LoginPage = () => {
     const [forgotPasswordModalOpen, setForgotPasswordModalOpen] = useState(false);

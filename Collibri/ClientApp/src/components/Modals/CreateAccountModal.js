@@ -1,6 +1,7 @@
 import {Box, Button, Modal, TextField, Tooltip, Typography} from "@mui/material";
 import React, {useState} from "react";
-import modalStyles from "../styles/ForgotPasswordModalStyles";
+import modalStyles from "../../styles/ForgotPasswordModalStyles";
+
 
 
 const CreateAccountModal = ({open, onClose}) => {

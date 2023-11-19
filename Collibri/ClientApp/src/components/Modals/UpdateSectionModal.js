@@ -1,8 +1,8 @@
 import React, {useRef, useState} from "react";
-import {createSection} from "../api/SectionApi";
-import CModal from "./CModal";
 import {TextField, Typography} from "@mui/material";
-import {modalTextField, modalTitleStyle} from "../styles/UpdatePostModalStyle";
+import CModal from "./CModal";
+import {modalTextField, modalTitleStyle} from "../../styles/UpdatePostModalStyle";
+
 
 
 const UpdateSectionModal = (props) => {

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Modal, TextField, Button, Box, Typography, Tooltip, IconButton } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close'; // Import the Close icon
-import modalStyles from '../styles/ForgotPasswordModalStyles';
+import CloseIcon from '@mui/icons-material/Close';
+import modalStyles from "../../styles/ForgotPasswordModalStyles"; // Import the Close icon
+
 
 const ForgotPasswordModal = ({ open, onClose }) => {
     const [email, setEmail] = useState('');
