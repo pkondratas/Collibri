@@ -1,7 +1,7 @@
 import React, {useRef, useState} from "react";
 import {TextField, Button, Typography, Divider} from "@mui/material";
 import CModal from "./CModal";
-import {createRoom} from "../api/LandingPageApi";
+import {createRoom} from "../api/RoomAPI";
 
 export const CreateRoom = ({setRooms}) => {
     const nameFieldRef = useRef(null);

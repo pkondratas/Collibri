@@ -1,13 +1,12 @@
 export const DocumentCardStyles = {
   generalText: {
     lineHeight: '1rem',
-    minWidth: '15.5rem',
-    maxWidth: '15.5rem',
+    minWidth: '15rem',
+    maxWidth: '15rem',
     wordBreak: 'break-all',
     overflow: 'hidden',
     display: '-webkit-box',
     WebkitBoxOrient: 'vertical',
-    marginRight: '0.5rem'
   },
 
   title: {
@@ -17,8 +16,8 @@ export const DocumentCardStyles = {
   },
 
   contentBox: {
+    minHeight: '6.4rem',
     display: 'flex',
-    minHeight: '6.4rem'
   },
 
   content: {
@@ -27,7 +26,9 @@ export const DocumentCardStyles = {
     // backgroundColor: 'red',
   },
 
-  card : {
+  card: {
+    display: 'flex',
+    flexDirection: 'row',
     minWidth: '20rem',
     maxWidth: '20rem',
     minHeight: '10rem',

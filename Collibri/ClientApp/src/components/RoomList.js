@@ -4,7 +4,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import UpdateRoomModal from "./UpdateRoomModal";
 import { useNavigate } from "react-router-dom";
-import {deleteRoom, getRooms, updateRoom} from "../api/LandingPageApi";
+import {deleteRoom, getRooms, updateRoom} from "../api/RoomAPI";
 import DeleteRoomModal from "./DeleteRoomModal";
 import {buttonStyle, nameCellStyle, tableRowStyle} from "../styles/tableListStyle";
 import '../styles/tableList.css';

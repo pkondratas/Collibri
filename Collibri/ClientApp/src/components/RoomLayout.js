@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Button, Grid, Paper} from '@mui/material';
 import ParentComponent from "./ParentComponent";
 import PostContainer from "./PostContainer";
@@ -31,8 +31,10 @@ const RoomLayout = () => {
             </Grid>
             <Grid item md={4}>
                 <AddSection sections={sections} setSections={setSections}></AddSection>
-                <Paper><ParentComponent sections={sections} setSections={setSections}
-                                        setSectionId={setSectionId}/></Paper>
+                <Paper><SectionsContainer sections={sections} setSections={setSections}
+                                          setSectionId={setSectionId}/>
+                </Paper>
+                <UserInfoContainer username={"Future User"}/>
             </Grid>
             <Grid  item xs={6}>
                 <Grid container
