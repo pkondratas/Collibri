@@ -5,6 +5,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { HeaderStyles } from '../styles/HeaderStyles'; 
 import {useNavigate} from "react-router-dom";
 import SearchBar from "./SearchBar";
+import {AboutUsButton} from "./Buttons/AboutUsButton";
 
 const Header = () => {
     
@@ -20,6 +21,7 @@ const Header = () => {
                         </IconButton>
                     </Tooltip>
                     <Typography variant="h4" style={HeaderStyles.title}>Collibri</Typography>
+                    <AboutUsButton />
                 </Box>
             </Toolbar>
         </AppBar>
