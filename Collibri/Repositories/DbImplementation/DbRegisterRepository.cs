@@ -9,16 +9,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Collibri.Repositories.DbImplementation
 {
-    public class DbAccountRepository
+    public class DbRegisterRepository
     {
         private readonly UserManager<IdentityUser<Guid>> _userManager;
 
-        public DbAccountRepository(UserManager<IdentityUser<Guid>> userManager)
+        public DbRegisterRepository(UserManager<IdentityUser<Guid>> userManager)
         {
             _userManager = userManager;
         }
         
-        public async Task<string?> CreateAccount(AccountDTO account)
+        public async Task<string?> CreateAccountAsync(AccountDTO account)
         {
             var user = new IdentityUser<Guid> { UserName = account.Username, Email = account.Email};
 
@@ -53,7 +53,7 @@ namespace Collibri.Repositories.DbImplementation
         
         // private readonly DataContext _context;
         //
-        // public DbAccountRepository(DataContext dataContext)
+        // public DbRegisterRepository(DataContext dataContext)
         // {
         //     _context = dataContext;
         // }

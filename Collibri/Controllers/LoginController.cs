@@ -1,0 +1,25 @@
+using Collibri.Dtos;
+using Collibri.Repositories.DbImplementation;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Collibri.Controllers
+{
+    [ApiController]
+    [Route("/v1/login")]
+    public class LoginController : Controller
+    {
+        private readonly DbLoginRepository _loginRepository;
+        
+        public LoginController(DbLoginRepository loginRepository)
+        {
+            _loginRepository = loginRepository;
+        }
+
+        public async Task<IActionResult> LoggingInRequestAsync([FromBody] LoginInfoDTO loginInfo)
+        {
+            var response = await _loginRepository.LoggingInRequestAsync(loginInfo);
+            Console.WriteLine("aa");
+            return response == null ? NotFound() : Ok(response);
+        }
+    }   
+}

@@ -1,13 +1,19 @@
 import React, {useState} from 'react';
-import { TextField, Button, Typography, Container, Paper, Box } from '@mui/material';
+import {TextField, Button, Typography, Container, Paper, Box, CircularProgress} from '@mui/material';
 import { Tooltip } from '@mui/material';
 import { LoginPageStyles } from '../styles/LoginPageStyles.js';
 import ForgotPasswordModal from "./ForgotPasswordModal";
 import CreateAccountModal from "./CreateAccountModal";
+import {loginUser} from "../api/LoginAPI";
+import modalStyles from "../styles/ForgotPasswordModalStyles";
 
 const LoginPage = () => {
     const [forgotPasswordModalOpen, setForgotPasswordModalOpen] = useState(false);
     const [isRegistrationModalOpen , setRegistrationModalOpen] = useState(false);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [processing, setProcessing] = useState(false);
+    const [fieldVisibility, setFieldVisibility] = useState(true);
 
     const handleForgotPasswordClick = () => {
         setForgotPasswordModalOpen(true);
@@ -24,6 +30,19 @@ const LoginPage = () => {
         setRegistrationModalOpen(false);
     }
     
+    const handleSubmit = async () => {
+        setFieldVisibility(false);
+        setProcessing(true);
+        
+        try {
+            const response = await loginUser({ "Username": username, "Password": password }); 
+            console.log(response);
+            return response;
+        } catch (err) {
+            console.log(err); 
+        }
+    }
+    
     return (
         <Box style={LoginPageStyles.container}>
             <Box style={LoginPageStyles.header}>
@@ -31,6 +50,16 @@ const LoginPage = () => {
                     Collibri
                 </Typography>
             </Box>
+            {/*<Box>*/}
+            {/*    <Box sx={{ fontSize: '3rem', position:'absolute', backdropFilter: 'blur(4px)'}}>a</Box>*/}
+            {/*    <Box sx={{ fontSize: '3rem'}}>O</Box>*/}
+            {/*</Box>*/}
+            {processing && (
+                <Box sx={LoginPageStyles.loadingContainer}>
+                    <Typography>Logging in...</Typography>
+                    <CircularProgress sx={modalStyles.progressIndicator} color="inherit" />
+                </Box>
+            )}
             <Container maxWidth="xs" style={LoginPageStyles.formContainer}>
                 <Paper elevation={0} style={LoginPageStyles.paper}>
                     <Typography variant="h5" gutterBottom style={LoginPageStyles.typography}>
@@ -42,38 +71,48 @@ const LoginPage = () => {
                                     &nbsp;Register
                                 </span>
                     </Typography>
-                    <Box component="form" noValidate sx={{ mt: 1 }}>
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="username"
-                            label="Username"
-                            name="username"
-                            autoComplete="username"
-                            sx={LoginPageStyles.input}
-                        />
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password"
-                            label="Password"
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
-                            sx={LoginPageStyles.input}
-                        />
+                    <Box sx={{ mt: 1 }}>
+                        <Box sx={LoginPageStyles.fieldContainer}>
+                            {fieldVisibility && <TextField
+                              margin="normal"
+                              required
+                              fullWidth
+                              id="username"
+                              label="Username"
+                              name="username"
+                              value={username}
+                              onChange={(e) => {
+                                  setUsername(e.target.value);
+                              }}
+                              autoComplete="username"
+                              sx={LoginPageStyles.input}
+                            />}
+                            {fieldVisibility && <TextField
+                              margin="normal"
+                              required
+                              fullWidth
+                              name="password"
+                              label="Password"
+                              type="password"
+                              id="password"
+                              value={password}
+                              onChange={(e) => {
+                                  setPassword(e.target.value);
+                              }}
+                              autoComplete="current-password"
+                              sx={LoginPageStyles.input}
+                            />}
+                        </Box>
                         <Typography variant="body2" style={LoginPageStyles.link}>
                                 <span style={{ cursor: 'pointer' }} onClick={handleForgotPasswordClick}>
                                     Forgot Password?
                                 </span>
                         </Typography>
-                        <Tooltip title="Functionality not implemented" arrow>
-                            <Button type="submit" fullWidth variant="contained" style={LoginPageStyles.button}>
-                                Login
-                            </Button>
-                        </Tooltip>
+                        {fieldVisibility && <Button fullWidth variant="contained" style={LoginPageStyles.button} onClick={() => {
+                            handleSubmit();
+                        }}>
+                            Login
+                        </Button>}
                     </Box>
                 </Paper>
             </Container>

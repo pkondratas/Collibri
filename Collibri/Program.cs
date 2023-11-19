@@ -22,8 +22,9 @@ builder.Services.AddScoped<INoteRepository, DbNoteRepository>();
 builder.Services.AddScoped<IRoomRepository, DbRoomRepository>();
 builder.Services.AddScoped<IDocumentRepository, DbDocumentRepository>();
 builder.Services.AddScoped<IPostRepository, DbPostRepository>();
-// builder.Services.AddScoped<IAccountRepository, DbAccountRepository>();
-builder.Services.AddScoped<DbAccountRepository>();
+// builder.Services.AddScoped<IAccountRepository, DbRegisterRepository>();
+builder.Services.AddScoped<DbRegisterRepository>();
+builder.Services.AddScoped<DbLoginRepository>();
 
 builder.Services.AddDbContext<DataContext>(options =>
 	options.UseNpgsql(builder.Configuration.GetConnectionString("LocalConnection")));
@@ -38,6 +39,16 @@ builder.Services.Configure<IdentityOptions>(options =>
 	options.Password.RequireDigit = true;
 	options.Password.RequiredLength = 6;
 	options.Password.RequireNonAlphanumeric = false;
+});
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+	options.Cookie.HttpOnly = true;
+	options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+	options.LoginPath = "/v1/login";
+	// options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+	options.SlidingExpiration = true;
 });
 
 var app = builder.Build();
