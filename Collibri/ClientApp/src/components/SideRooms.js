@@ -1,5 +1,5 @@
 import {Button, Paper, Table, TableBody, TableCell, TableContainer, TableRow} from "@mui/material";
-import {deleteRoom, getRooms} from "../api/LandingPageApi";
+import {deleteRoom, getRooms} from "../api/RoomAPI";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import React, {useEffect, useState} from "react";

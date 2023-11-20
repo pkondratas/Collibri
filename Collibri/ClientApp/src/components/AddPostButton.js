@@ -28,7 +28,7 @@ export const AddPostButton = (props) => {
                 disableHoverListener={!isDisabled}
             >
             <IconButton disabled={isDisabled} color="success" onClick={handleOpen}>
-                <AddBoxIcon/>
+                <AddBoxIcon fontSize={"large"} />
             </IconButton>
             <CreatePostModal sectionId={props.sectionId} showModal={open} setOpen={setOpen} postId={postId} handleSuccessfulClose={handleSuccessfulClose}/>
             </Tooltip>

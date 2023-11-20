@@ -41,7 +41,7 @@ namespace Collibri.Repositories.DbImplementation
             var sectionToUpdate = _context.Sections.SingleOrDefault(x => x.Id == sectionId);
             
             //method 
-            if (_context.Sections.Any(sections => sections.Equals(section)) || sectionToUpdate == null)
+            if (_context.Sections.Any(sections => sections.Equals(_mapper.Map<Section>(section))) || sectionToUpdate == null)
             {
                 return null;
             }
