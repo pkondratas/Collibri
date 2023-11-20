@@ -15,7 +15,7 @@ namespace Collibri.Tests.Repositories.Files
             string postId, FileInfoDTO? expected)
         {
             // Arrange
-            var fileRepository = new FileRepository(fileSystem.FileSystem);
+            var fileRepository = new FbFileRepository(fileSystem.FileSystem);
 
             // Act
             var actual = fileRepository.CreateFile(fileData, postId);
@@ -36,7 +36,7 @@ namespace Collibri.Tests.Repositories.Files
             string postId, FileInfoDTO? expected)
         {
             // Arrange
-            var fileRepository = new FileRepository(fileSystem.FileSystem);
+            var fileRepository = new FbFileRepository(fileSystem.FileSystem);
             
             // Act
             var actual = fileRepository.DeleteFile(fileName, postId);
@@ -57,7 +57,7 @@ namespace Collibri.Tests.Repositories.Files
             string postId, FileContentResult? expected)
         {
             // Arrange
-            var fileRepository = new FileRepository(fileSystem.FileSystem);
+            var fileRepository = new FbFileRepository(fileSystem.FileSystem);
             
             // Act
             var actual = fileRepository.GetFile(fileName, postId);
@@ -78,7 +78,7 @@ namespace Collibri.Tests.Repositories.Files
         {
             // Arrange
             var path = FileTestHelper.GetPath(postId);
-            var fileRepository = new FileRepository(fileSystem.FileSystem);
+            var fileRepository = new FbFileRepository(fileSystem.FileSystem);
             
             // Act
             var actual = fileRepository.UpdateFileName(fileName, postId, updatedName);
