@@ -1,6 +1,6 @@
-using System.ComponentModel.DataAnnotations;
-using Collibri.Repositories.ExtensionMethods;
+
 using Microsoft.AspNetCore.Identity;
+using Collibri.Repositories.ExtensionMethods;
 
 namespace Collibri.Models
 {
@@ -29,11 +29,20 @@ namespace Collibri.Models
         //         }
         //         else
         //         {
-        // throw new ArgumentException("Invalid email address");
+        //             throw new ArgumentException("Invalid email address");
         //         }
         //     }
         // }
         //
         // public string Password { get; set; } = "";
+
+
+        // public Account(int id, string username, string email, string password)
+        // {
+        //     Id = id;
+        //     Username = username;
+        //     Email = email;
+        //     Password = password;
+        // }
     }
 }

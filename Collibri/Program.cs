@@ -33,6 +33,8 @@ builder.Services.AddIdentity<IdentityUser<Guid>, IdentityRole<Guid>>()
 	.AddEntityFrameworkStores<DataContext>()
 	.AddDefaultTokenProviders();
 
+builder.Logging.AddSerilog();
+
 builder.Services.Configure<IdentityOptions>(options =>
 {
 	options.Password.RequireUppercase = true;

@@ -6,7 +6,7 @@ import { HeaderStyles } from '../styles/HeaderStyles';
 import {useNavigate} from "react-router-dom";
 import SearchBar from "./SearchBar";
 
-const Header = (props) => {
+const Header = () => {
     
     const navigate = useNavigate();
     
@@ -20,9 +20,6 @@ const Header = (props) => {
                         </IconButton>
                     </Tooltip>
                     <Typography variant="h4" style={HeaderStyles.title}>Collibri</Typography>
-                </Box>
-                <Box style={HeaderStyles.box}>
-                    <SearchBar posts={props.posts} sectionId={props.SectionId} setPosts={props.setPosts}/>
                 </Box>
             </Toolbar>
         </AppBar>
