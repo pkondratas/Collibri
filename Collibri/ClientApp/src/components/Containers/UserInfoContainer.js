@@ -1,6 +1,6 @@
 import {Avatar, Box, styled, Typography} from "@mui/material";
-import {UserInfoStyles} from "../styles/UserInfoStyles";
-import Badge from '@mui/material/Badge';
+import {UserInfoStyles} from "../../styles/UserInfoStyles";
+
 
 export const UserInfoContainer = (props) => {
     
