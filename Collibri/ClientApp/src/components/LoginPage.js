@@ -1,12 +1,8 @@
 import React, {useState} from 'react';
 import {TextField, Button, Typography, Container, Paper, Box, CircularProgress} from '@mui/material';
-import { Tooltip } from '@mui/material';
 import { LoginPageStyles } from '../styles/LoginPageStyles.js';
 import ForgotPasswordModal from "./Modals/ForgotPasswordModal";
 import CreateAccountModal from "./Modals/CreateAccountModal";
-
-import ForgotPasswordModal from "./ForgotPasswordModal";
-import CreateAccountModal from "./CreateAccountModal";
 import {loginUser} from "../api/LoginAPI";
 import modalStyles from "../styles/ForgotPasswordModalStyles";
 import {useNavigate} from "react-router-dom";
