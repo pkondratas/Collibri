@@ -1,11 +1,8 @@
-using Collibri.Data;
+using Collibri.CustomExceptions;
 using Collibri.Dtos;
-using Collibri.Models;
 using Collibri.Repositories.ExtensionMethods;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace Collibri.Repositories.DbImplementation
 {
@@ -22,26 +19,24 @@ namespace Collibri.Repositories.DbImplementation
         {
             var user = new IdentityUser<Guid> { UserName = account.Username, Email = account.Email};
 
-            if (user.Email.IsValidEmail())
+            try
             {
-                var result = await _userManager.CreateAsync(user, account.Password);
-                if (result.Succeeded)
-                {
-                    return account;
-                }
+                user.Email.IsValidEmail();
             }
+            catch (AccountException ex)
+            {
+                Log.Error(ex, "Error setting email: {ErrorMessage}, Invalid Field: {InvalidField}", ex.Message,
+                    ex.InvalidField);
 
-            return null;
+                return null;
+            }
+            
+            var result = await _userManager.CreateAsync(user, account.Password);
+            return result.Succeeded ? account : null;
         }
         
         // public Account? CreateAccount(Account account)
         // {
-        //     async Task CreateAccountAsync()
-        //     {
-        //         await _userManager.CreateAsync();
-        //         Console.WriteLine("ADDSDAD");
-        //         Console.WriteLine("aaa");
-        //     }
         //     
         //     // var createAccountTask = _registerTasks.CreateAccountAsync();
         //     var createAccountAsync = CreateAccountAsync();

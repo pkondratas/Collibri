@@ -1,12 +1,19 @@
 using System.IO.Abstractions;
 using Collibri.Data;
-using Collibri.Models;
 using Collibri.Repositories;
 // using Collibri.Repositories.DataHandling;
 using Collibri.Repositories.DbImplementation;
 using Collibri.Repositories.FileBasedImplementation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
+using Serilog.Events;
+
+Log.Logger = new LoggerConfiguration()
+	.MinimumLevel.Override("Microsoft", LogEventLevel.Information) // Adjust log levels as needed
+	.Enrich.FromLogContext()
+	.WriteTo.File("log.txt", rollingInterval: RollingInterval.Day)
+	.CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
 

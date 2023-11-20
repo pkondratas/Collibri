@@ -6,7 +6,6 @@ namespace Collibri.Models
 {
     public class Account// : IdentityUser<Guid>
     {
-        [Key]
         public Guid Id { get; set; }
         
         public virtual ICollection<RoomMember> RoomMembers { get; set; }

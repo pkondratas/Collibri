@@ -18,10 +18,9 @@ const CreateAccountModal = ({open, onClose}) => {
     const [passwordMatch, setPasswordMatch] = useState(false);
     const [success, setSuccess] = useState('waiting');
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]+$/;  //turi but bent 6 charai
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/;
     
     const handleSubmit = (e) => {
-        // e.preventDefault();
         if(!emailRegex.test(email)) {
             setIncorrectEmail(true);
         }
@@ -182,10 +181,10 @@ const CreateAccountModal = ({open, onClose}) => {
                       <Box sx={modalStyles.helperTextBox}>
                           { incorrectPassword ? (
                             <Typography sx={modalStyles.errorHelperText}>
-                                Password must contain at least one uppercase and one digit
+                                Password must have at least 6 characters, contain at least one uppercase and one digit
                             </Typography>) : (
                             <Typography sx={modalStyles.helperText}>
-                                Password must contain at least one uppercase and one digit
+                                Password must have at least 6 characters, contain at least one uppercase and one digit
                             </Typography>
                           )
                           }
