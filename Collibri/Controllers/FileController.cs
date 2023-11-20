@@ -28,14 +28,13 @@ namespace Collibri.Controllers
             return result == null ? Conflict("File does not exist") : Ok(result);
         }
 	    
-        [HttpGet("/info/{postId}")]
+        [HttpGet("info/{postId}")]
         public IActionResult GetAllFiles(string postId)
         {
-            var result = _fileRepository.GetAllFiles(postId);
-            return result == null ? Conflict("Files do not exist") : Ok(result);
+            return Ok(_fileRepository.GetAllFiles(postId));
         }
         
-        [HttpGet("/data/{id}")]
+        [HttpGet("data/{id}")]
         public IActionResult GetFile(string id)
         {
             var result = _fileRepository.GetFile(id);

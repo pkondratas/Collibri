@@ -35,7 +35,7 @@ namespace Collibri.Repositories.DbImplementation
 			}
 
 			var id = Guid.NewGuid();
-			var filePath = path + separator + id;
+			var filePath = path + separator + id + file.FileName[(file.FileName.IndexOf('.'))..];
 
 			if (_fileSystem.File.Exists(filePath))
 			{
@@ -45,7 +45,7 @@ namespace Collibri.Repositories.DbImplementation
 			var createdFileInfo = new FileInfoDTO(id, Guid.Parse(postId), filePath, file.FileName, file.ContentType, file.Length);
 			_context.FileInfos.Add(_mapper.Map<FileInfo>(createdFileInfo));
 			_context.SaveChanges();
-			using (var fileStream = _fileSystem.File.Create(path + separator + id))
+			using (var fileStream = _fileSystem.File.Create(filePath))
 			{
 				file.CopyTo(fileStream);
 			}
@@ -83,10 +83,10 @@ namespace Collibri.Repositories.DbImplementation
 			{
 				return null;
 			}
-			
+
 			var bytes = _fileSystem.File.ReadAllBytes(fileToGet.Path);
-			return new FileContentResult(bytes, fileToGet.ContentType);
-		}
+			return new FileContentResult(bytes, fileToGet.ContentType){FileDownloadName = fileToGet.Name};
+	}
 
 		public FileInfoDTO? UpdateFileName(string id, string updatedName)
 		{
