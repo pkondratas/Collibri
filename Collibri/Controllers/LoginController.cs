@@ -1,6 +1,7 @@
 using Collibri.Dtos;
 using Collibri.Repositories.DbImplementation;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Collibri.Controllers
 {
@@ -18,8 +19,8 @@ namespace Collibri.Controllers
         public async Task<IActionResult> LoggingInRequestAsync([FromBody] LoginInfoDTO loginInfo)
         {
             var response = await _loginRepository.LoggingInRequestAsync(loginInfo);
-            Console.WriteLine("aa");
-            return response == null ? NotFound() : Ok(response);
+
+            return response == null ? NotFound() : Ok(JsonConvert.SerializeObject(response));
         }
     }   
 }

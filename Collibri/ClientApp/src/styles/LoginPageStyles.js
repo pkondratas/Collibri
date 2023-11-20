@@ -18,12 +18,16 @@ export const LoginPageStyles = {
         borderRadius: '10px',
         textAlign: 'center',
         minWidth: '30rem',
-        minHeight: '29rem',
+        minHeight: '31rem',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         backdropFilter: 'blur(10px)'
+    },
+    wrongData: {
+        color: 'red',
+        fontSize: '0.75rem'
     },
     formContainer: {
         padding: '20px',
@@ -44,7 +48,7 @@ export const LoginPageStyles = {
         backgroundColor: '#d3d3d3',
     },
     fieldContainer: {
-        minHeight: '10rem'
+        minHeight: '12rem'
     },
     typography: {
         fontWeight: 'bold',

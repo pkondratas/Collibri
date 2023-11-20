@@ -18,7 +18,7 @@ namespace Collibri.Repositories.DbImplementation
             _userManager = userManager;
         }
         
-        public async Task<string?> CreateAccountAsync(AccountDTO account)
+        public async Task<AccountDTO?> CreateAccountAsync(AccountDTO account)
         {
             var user = new IdentityUser<Guid> { UserName = account.Username, Email = account.Email};
 
@@ -27,7 +27,7 @@ namespace Collibri.Repositories.DbImplementation
                 var result = await _userManager.CreateAsync(user, account.Password);
                 if (result.Succeeded)
                 {
-                    return account.Username;
+                    return account;
                 }
             }
 

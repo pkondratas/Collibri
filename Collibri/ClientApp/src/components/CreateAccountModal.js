@@ -41,7 +41,7 @@ const CreateAccountModal = ({open, onClose}) => {
             const response = 
                 registerUser({ "Username": username, "Email": email, "Password": password })
                     .then(data => {
-                        if(typeof data === 'string') {
+                        if(data.Username === username && data.Email === email) {
                             setSuccess('pass');
                         } else {
                             setSuccess('fail');
@@ -52,8 +52,6 @@ const CreateAccountModal = ({open, onClose}) => {
                         setSuccess('fail')
                     })
         }
-        
-        // must go here registration logic
     };
     
     const setAllToInitial = () => {

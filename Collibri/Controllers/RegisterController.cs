@@ -1,6 +1,8 @@
+using System.Text.Json;
 using Collibri.Dtos;
 using Collibri.Repositories.DbImplementation;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Collibri.Controllers
 {
@@ -20,7 +22,7 @@ namespace Collibri.Controllers
         {
             var response = await _registerRepository.CreateAccountAsync(newAccount);
 
-            return response == null ? BadRequest() : Ok(response);
+            return response == null ? BadRequest() : Ok(JsonConvert.SerializeObject(response));
         }
     }   
 }

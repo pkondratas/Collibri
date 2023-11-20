@@ -1,10 +1,15 @@
+using System.Runtime.Serialization;
+
 namespace Collibri.Dtos
 {
+    [DataContract]
     public class AccountDTO
-    {
+    {   
         public Guid Id { get; set; }
-        public string Email { get; set; }
+        [DataMember]
         public string Username { get; set; }
+        [DataMember]
+        public string Email { get; set; }
         public string Password { get; set; }
 
         public AccountDTO(string email, string username, string password)
