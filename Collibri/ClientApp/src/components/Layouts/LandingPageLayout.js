@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { CreateRoom } from "./CreateRoom";
-import { JoinRoom } from "./JoinRoom";
-import './LandingPage.css';
-import {RoomList} from "./RoomList";
 import {Grid, ThemeProvider, Typography} from "@mui/material";
-import {headerStyle, headerTextTheme} from "../styles/LandingPageStyle";
+import {headerStyle, headerTextTheme} from "../../styles/LandingPageStyle";
+import {CreateRoom} from "../Buttons/CreateRoom";
+import {JoinRoom} from "../Buttons/JoinRoom";
+import {RoomContainer} from "../Containers/RoomContainer";
+import '../../styles/tableList.css';
 
 export const LandingPageLayout = () => {
 
@@ -33,7 +33,7 @@ export const LandingPageLayout = () => {
 
                 {/*List*/}
                 <Grid item>
-                    <RoomList rooms={rooms} setRooms={setRooms}/>
+                    <RoomContainer rooms={rooms} setRooms={setRooms}/>
                 </Grid>
 
                 {/*Button grid*/}

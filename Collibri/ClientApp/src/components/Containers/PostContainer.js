@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { fetchPosts } from '../api/PostAPI';
 import { Box, List, ListItem } from '@mui/material';
-import Post from './Post';
-import { containerStyle } from "../styles/PostContainerStyle";
+import Post from "../Post";
+import {fetchPosts} from "../../api/PostAPI";
+import {containerStyle} from "../../styles/PostContainerStyle";
+
 
 const PostContainer = (props) => {
 

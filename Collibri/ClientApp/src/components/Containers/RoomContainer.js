@@ -2,14 +2,14 @@ import React, {useEffect, useState} from 'react';
 import {Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableRow} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import UpdateRoomModal from "./UpdateRoomModal";
 import { useNavigate } from "react-router-dom";
-import {deleteRoom, getRooms, updateRoom} from "../api/RoomAPI";
-import DeleteRoomModal from "./DeleteRoomModal";
-import {buttonStyle, nameCellStyle, tableRowStyle} from "../styles/tableListStyle";
-import '../styles/tableList.css';
+import {deleteRoom, getRooms, updateRoom} from "../../api/RoomAPI";
+import UpdateRoomModal from "../Modals/UpdateRoomModal";
+import DeleteRoomModal from "../Modals/DeleteRoomModal";
+import {buttonStyle, nameCellStyle, tableRowStyle} from "../../styles/tableListStyle";
+import '../../styles/tableList.css';
 
-export const RoomList = ({rooms, setRooms}) => {
+export const RoomContainer = ({rooms, setRooms}) => {
 
     const [updateModal, setUpdateModal] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false);

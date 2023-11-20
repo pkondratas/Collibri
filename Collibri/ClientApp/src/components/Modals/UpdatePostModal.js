@@ -1,7 +1,9 @@
 import React, { useState, useRef } from 'react';
 import { TextField, Typography } from '@mui/material';
-import { modalTitleStyle, modalTextField } from '../styles/UpdatePostModalStyle';
-import CModal from './CModal';
+import CModal from "./CModal";
+import {modalTextField, modalTitleStyle} from "../../styles/UpdatePostModalStyle";
+
+
 
 const UpdatePostModal = (props) => {
   const titleFieldRef = useRef(null);
