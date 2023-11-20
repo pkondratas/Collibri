@@ -35,7 +35,7 @@ namespace Collibri.Repositories.DbImplementation
 			}
 
 			var id = Guid.NewGuid();
-			var filePath = path + separator + id + file.FileName[(file.FileName.IndexOf('.'))..];
+			var filePath = path + separator + id + file.FileName[file.FileName.IndexOf('.')..];
 
 			if (_fileSystem.File.Exists(filePath))
 			{
@@ -83,10 +83,10 @@ namespace Collibri.Repositories.DbImplementation
 			{
 				return null;
 			}
-
+			
 			var bytes = _fileSystem.File.ReadAllBytes(fileToGet.Path);
-			return new FileContentResult(bytes, fileToGet.ContentType){FileDownloadName = fileToGet.Name};
-	}
+			return new FileContentResult(bytes, fileToGet.ContentType);
+		}
 
 		public FileInfoDTO? UpdateFileName(string id, string updatedName)
 		{

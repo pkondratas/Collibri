@@ -31,7 +31,8 @@ namespace Collibri.Controllers
         [HttpGet("info/{postId}")]
         public IActionResult GetAllFiles(string postId)
         {
-            return Ok(_fileRepository.GetAllFiles(postId));
+            var result = _fileRepository.GetAllFiles(postId);
+            return result == null ? Conflict("Files do not exist") : Ok(result);
         }
         
         [HttpGet("data/{id}")]

@@ -24,6 +24,8 @@ import { fetchNotes } from "../api/NoteAPI";
 import NoteCard from "./NoteCard";
 import {fetchDocuments} from "../api/DocumentAPI";
 import DocumentCard from "./DocumentCard";
+import {getAllFiles} from "../api/FileAPI";
+import FileCard from "./FileCard";
 
 const SELECTION = ['notes', 'documents', 'files']
 
@@ -42,6 +44,7 @@ const PostModal = (props) => {
   useEffect(() => {
     fetchNotes(props.id, setNotes);
     fetchDocuments(props.id, setDocuments);
+    getAllFiles(props.id, setFiles);
     setList(notes);
   }, []);
   
@@ -111,7 +114,7 @@ const PostModal = (props) => {
                 <List sx={PostModalStyles.list}>
                   {notes.map((note) => (
                     <ListItem>
-                      <NoteCard {...note} setNotes={setNotes}/>
+                      <NoteCard {...note} setNotes={setNotes} />
                     </ListItem>
                   ))}
                 </List> 
@@ -130,8 +133,19 @@ const PostModal = (props) => {
               ) : (
                 <Typography sx={PostModalStyles.emptyListMessage}>"무"(zero) documents so far. Be the first one!</Typography>
               )
-            ) : 
-              <Typography>files</Typography>
+            ) : (
+                files.length !== 0 ? (
+                    <List>
+                      {files.map((file) => (
+                          <ListItem>
+                            <FileCard {...file} setFiles={setFiles} />
+                          </ListItem>
+                      ))}
+                    </List>
+                ) : (
+                    <Typography>No files here :(</Typography>
+                )
+            )
             }
           </Box>
         </Box>
