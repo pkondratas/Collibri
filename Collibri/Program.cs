@@ -7,6 +7,14 @@ using Collibri.Repositories.DbImplementation;
 using Collibri.Repositories.FileBasedImplementation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
+using Serilog.Events;
+
+Log.Logger = new LoggerConfiguration()
+	.MinimumLevel.Override("Microsoft", LogEventLevel.Information) // Adjust log levels as needed
+	.Enrich.FromLogContext()
+	.WriteTo.File("log.txt", rollingInterval: RollingInterval.Day)
+	.CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +37,8 @@ builder.Services.AddDbContext<DataContext>(options =>
 builder.Services.AddIdentity<Account, IdentityRole<Guid>>()
 	.AddEntityFrameworkStores<DataContext>()
 	.AddDefaultTokenProviders();
+
+builder.Logging.AddSerilog();
 
 var app = builder.Build();
 

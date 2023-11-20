@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Collibri.Models
 {
-    public class Section
+    public class Section: IEquatable<Section>
     {
         [Key]
         public int Id { get; set; }
@@ -15,6 +15,16 @@ namespace Collibri.Models
         public Section()
         {
             
+        }
+        
+        public bool Equals(Section? other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+        
+            return this.RoomId.Equals(other.RoomId) && this.SectionName.Equals(other.SectionName);
         }
     }   
 }
