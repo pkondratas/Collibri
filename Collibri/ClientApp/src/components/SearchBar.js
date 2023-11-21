@@ -4,7 +4,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { useState, useEffect } from "react";
 import { fetchPosts } from "../api/PostAPI";
 import { createFilterOptions } from "@mui/material";
-import PostModal from "./PostModal";
+import PostModal from "./Modals/PostModal";
 
 export default function SearchBar(props) {
     const [selectedPost, setSelectedPost] = useState(null);
