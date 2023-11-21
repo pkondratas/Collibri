@@ -7,9 +7,6 @@ import {useParams} from "react-router-dom";
 import UpdateSectionModal from "./UpdateSectionModal";
 import '../styles/tableList.css';
 import {buttonStyle, nameCellStyle, tableRowStyle} from "../styles/tableListStyle";
-import {deleteAllPostsInSection} from "../api/PostAPI";
-import {deleteAllNotesInPost} from "../api/NoteAPI";
-import {deleteAllDocumentsInPost} from "../api/DocumentAPI";
 
 
 const SectionsContainer = ({sections, setSections, setSectionId}) => {
