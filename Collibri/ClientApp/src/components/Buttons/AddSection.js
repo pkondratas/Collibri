@@ -5,6 +5,7 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 import DeleteIcon from "@mui/icons-material/Delete";
 import CModal from "../Modals/CModal";
 import {createSection} from "../../api/SectionApi";
+import {RoomLayoutStyles} from "../../styles/RoomLayoutStyle";
 
 
 export const AddSection = ({setSections, sections}) => {
@@ -44,7 +45,7 @@ export const AddSection = ({setSections, sections}) => {
 
     return (
         <div>
-            <IconButton color="success" onClick={handleOpen}>
+            <IconButton sx={RoomLayoutStyles.addSettingsButtons} color="success" onClick={handleOpen}>
                 <AddBoxIcon fontSize="large"/>
             </IconButton>
             <CModal showModal={open} handleClose={handleClose} handleChanges={handleCreateSection}>

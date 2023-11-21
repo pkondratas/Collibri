@@ -1,42 +1,18 @@
-using Collibri.CustomExceptions;
+
 using Microsoft.AspNetCore.Identity;
 using Collibri.Repositories.ExtensionMethods;
-using Serilog;
 
 namespace Collibri.Models
 {
-    public class Account : IdentityUser<Guid>
+    public class Account// : IdentityUser<Guid>
     {
+        public Guid Id { get; set; }
+        
         public virtual ICollection<RoomMember> RoomMembers { get; set; }
-
-        public new string Email
-        {
-            get => base.Email;
-            set
-            {
-                try
-                {
-                    ValidateEmail(value);
-                    base.Email = value;
-                }
-                catch (AccountException ex)
-                {
-                    Log.Error(ex, "Error setting email: {ErrorMessage}, Invalid Field: {InvalidField}", ex.Message,
-                        ex.InvalidField);
-                }
-            }
-        }
-
-        private void ValidateEmail(string email)
-        {
-            if (!email.IsValidEmail())
-            {
-                throw new AccountException("Invalid email address", nameof(Email));
-            }
-        }
-
+        
         public Account()
         {
+            
         }
         // public int Id { get; set; }
         // private string _email = "";
