@@ -16,10 +16,11 @@ import {
   postNoteStyle, postReactionButtons
 } from '../styles/PostStyle';
 import { deletePost, updatePost } from '../api/PostAPI';
-import UpdatePostModal from './UpdatePostModal';
-import DeleteModal from "./DeleteModal";
 import '../styles/post.css';
-import PostModal from "./PostModal";
+import UpdatePostModal from "./Modals/UpdatePostModal";
+import DeleteModal from "./Modals/DeleteModal";
+import PostModal from "./Modals/PostModal";
+
 
 const Post = (props) => {
   const [liked, setLiked] = useState(false);

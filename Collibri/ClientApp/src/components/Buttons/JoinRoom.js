@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "@mui/material";
-import { JoinCreateRoomStyles } from "../styles/JoinCreateRoomStyles";
+import {JoinCreateRoomStyles} from "../../styles/JoinCreateRoomStyles";
+
 
 export const JoinRoom = () => {
     const handleJoinRoom = () => {

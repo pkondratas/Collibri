@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Box, Card, CardContent, Fade, IconButton, Tooltip, Typography} from "@mui/material";
-import {NoteCardStyles} from "../styles/NoteCardStyles";
+
 import {
   ThumbUp,
   ThumbUpAltOutlined,
@@ -9,7 +9,9 @@ import {
   Edit,
   Delete, CloseOutlined, MoreVertOutlined, FileDownloadOutlined
 } from "@mui/icons-material";
-import {deleteNote} from "../api/NoteAPI";
+import {NoteCardStyles} from "../../styles/NoteCardStyles";
+import {deleteNote} from "../../api/NoteAPI";
+
 
 const NoteCard = (props) => {
   const [moreButton, setMoreButton] = useState(false);

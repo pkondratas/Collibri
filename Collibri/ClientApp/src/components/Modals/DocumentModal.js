@@ -1,6 +1,7 @@
 import React from "react";
 import {Box, Modal, Typography} from "@mui/material";
-import  {DocumentModalStyles} from "../styles/DocumentModalStyles";
+import {DocumentModalStyles} from "../../styles/DocumentModalStyles";
+
 
 const DocumentModal = (props) => {
     const handleClose = () => {

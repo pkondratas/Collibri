@@ -1,8 +1,10 @@
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import {Box, IconButton, Tooltip} from "@mui/material";
 import React, {useState} from "react";
-import {CreatePostModal} from "./CreatePostModal";
-import {fetchPosts} from "../api/PostAPI";
+import {CreatePostModal} from "../Modals/CreatePostModal";
+import {fetchPosts} from "../../api/PostAPI";
+
+
 
 
 export const AddPostButton = (props) => {

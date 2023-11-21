@@ -1,17 +1,18 @@
 import React, {useEffect, useState} from "react";
 import {Button, Grid, Paper} from '@mui/material';
-import PostContainer from "./PostContainer";
-import Header from "./Header";
-import {postContainerStyle} from "../styles/RoomLayoutStyle";
-import {AddSection} from "./AddSection";
-import {RoomSettings} from "./RoomSettings";
-import {AddPostButton} from "./AddPostButton";
-import {SideRoomTable} from "./SideRooms";
-import SearchBar from "./SearchBar";
-import SectionsContainer from "./SectionsContainer";
-import {UserInfoContainer} from "./UserInfoContainer";
 import {useParams} from "react-router-dom";
-import {getSections} from "../api/SectionApi";
+import Header from "../Header";
+import {RoomSettings} from "../RoomSettings";
+import {SideRoomTable} from "../SideRooms";
+import {AddSection} from "../Buttons/AddSection";
+import SectionsContainer from "../Containers/SectionsContainer";
+import {UserInfoContainer} from "../Containers/UserInfoContainer";
+import {AddPostButton} from "../Buttons/AddPostButton";
+import SearchBar from "../SearchBar";
+import PostContainer from "../Containers/PostContainer";
+import {getSections} from "../../api/SectionApi";
+import {postContainerStyle} from "../../styles/RoomLayoutStyle";
+
 
 
 const RoomLayout = () => {
