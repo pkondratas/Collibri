@@ -12,19 +12,43 @@ export const LoginPageStyles = {
         padding: '20px',
         zIndex: 1,
     },
+    loadingContainer: {
+        position: 'absolute',
+        padding: '20px',
+        borderRadius: '10px',
+        textAlign: 'center',
+        minWidth: '30rem',
+        minHeight: '31rem',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backdropFilter: 'blur(10px)'
+    },
+    wrongData: {
+        color: 'red',
+        fontSize: '0.75rem'
+    },
     formContainer: {
         padding: '20px',
         borderRadius: '10px',
         textAlign: 'center',
-        position: 'relative',
-        zIndex: 0,
-    },
+        minWidth: '28rem',
+        minHeight: '27rem',
+        // position: 'relative',
+        // zIndex: 0,
+    },  
     paper: {
         padding: 20,
+        minWidth: '25.5rem',
+        minHeight: '24.5rem',
         marginBottom: 50,
         borderRadius: 12,
         width: '100%',
         backgroundColor: '#d3d3d3',
+    },
+    fieldContainer: {
+        minHeight: '12rem'
     },
     typography: {
         fontWeight: 'bold',

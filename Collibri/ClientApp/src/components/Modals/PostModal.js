@@ -1,4 +1,3 @@
-import { PostModalStyles } from "../styles/PostModalStyles";
 import {
   Box,
   Button,
@@ -20,10 +19,12 @@ import {
   AddBox
 } from '@mui/icons-material';
 import {useEffect, useState} from "react";
-import {createNote, fetchNotes} from "../api/NoteAPI";
-import NoteCard from "./NoteCard";
-import {createDocument, fetchDocuments} from "../api/DocumentAPI";
-import DocumentCard from "./DocumentCard";
+import {createNote, fetchNotes} from "../../api/NoteAPI";
+import NoteCard from "../Cards/NoteCard";
+import DocumentCard from "../Cards/DocumentCard";
+import {PostModalStyles} from "../../styles/PostModalStyles";
+import {createDocument, fetchDocuments} from "../../api/DocumentAPI";
+
 
 const SELECTION = ['notes', 'documents', 'files']
 

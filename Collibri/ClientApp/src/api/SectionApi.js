@@ -49,12 +49,19 @@ export const createSection = (newName, roomId, setSections) => {
         });
 }
 export const updateSection = (id, updatedSection, sections, setSections) => {
+    const { roomId, sectionName } = updatedSection;
+
+// Create a new object with only roomId and sectionName
+    const simplifiedSection = {
+        roomId,
+        sectionName,
+    };
     fetch(`/v1/sections?sectionId=${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(updatedSection), // Updated section data
+        body: JSON.stringify(simplifiedSection), // Updated section data
     })
         .then(response => response.json())
         .then((data) => {

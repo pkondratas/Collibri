@@ -1,8 +1,10 @@
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import {Box, IconButton, Tooltip} from "@mui/material";
 import React, {useState} from "react";
-import {CreatePostModal} from "./CreatePostModal";
-import {fetchPosts} from "../api/PostAPI";
+import {CreatePostModal} from "../Modals/CreatePostModal";
+import {fetchPosts} from "../../api/PostAPI";
+
+
 
 
 export const AddPostButton = (props) => {
@@ -28,7 +30,7 @@ export const AddPostButton = (props) => {
                 disableHoverListener={!isDisabled}
             >
             <IconButton disabled={isDisabled} color="success" onClick={handleOpen}>
-                <AddBoxIcon/>
+                <AddBoxIcon fontSize={"large"} />
             </IconButton>
             <CreatePostModal sectionId={props.sectionId} showModal={open} setOpen={setOpen} postId={postId} handleSuccessfulClose={handleSuccessfulClose}/>
             </Tooltip>

@@ -6,7 +6,7 @@ import { HeaderStyles } from '../styles/HeaderStyles';
 import {useNavigate} from "react-router-dom";
 import SearchBar from "./SearchBar";
 
-const Header = (props) => {
+const Header = () => {
     
     const navigate = useNavigate();
     
@@ -15,14 +15,11 @@ const Header = (props) => {
             <Toolbar style={HeaderStyles.toolbar}>
                 <Box style={HeaderStyles.box}>
                     <Tooltip title="Go back to room selection">
-                        <IconButton color="inherit" aria-label="Back" onClick={() => navigate("/")}>
+                        <IconButton color="inherit" aria-label="Back" onClick={() => navigate("/home")}>
                             <ArrowBackIcon style={HeaderStyles.backButton} />
                         </IconButton>
                     </Tooltip>
                     <Typography variant="h4" style={HeaderStyles.title}>Collibri</Typography>
-                </Box>
-                <Box style={HeaderStyles.box}>
-                    <SearchBar posts={props.posts} sectionId={props.SectionId} setPosts={props.setPosts}/>
                 </Box>
             </Toolbar>
         </AppBar>
