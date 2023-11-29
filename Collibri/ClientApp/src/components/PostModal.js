@@ -24,7 +24,7 @@ import { fetchNotes } from "../api/NoteAPI";
 import NoteCard from "./NoteCard";
 import {fetchDocuments} from "../api/DocumentAPI";
 import DocumentCard from "./DocumentCard";
-import {getAllFiles} from "../api/FileAPI";
+import {fetchFiles} from "../api/FileAPI";
 import FileCard from "./FileCard";
 
 const SELECTION = ['notes', 'documents', 'files']
@@ -44,7 +44,7 @@ const PostModal = (props) => {
   useEffect(() => {
     fetchNotes(props.id, setNotes);
     fetchDocuments(props.id, setDocuments);
-    getAllFiles(props.id, setFiles);
+    fetchFiles(props.id, setFiles);
     setList(notes);
   }, []);
   
@@ -138,7 +138,7 @@ const PostModal = (props) => {
                     <List>
                       {files.map((file) => (
                           <ListItem>
-                            <FileCard {...file} setFiles={setFiles} />
+                            <FileCard {...file} files={files} setFiles={setFiles} />
                           </ListItem>
                       ))}
                     </List>

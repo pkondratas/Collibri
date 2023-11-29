@@ -10,6 +10,7 @@ const context = [
   '/v1/rooms',
   '/v1/sections',
   '/v1/documents',
+  '/v1/files',
 ];
 
 const onError = (err, req, resp, target) => {
