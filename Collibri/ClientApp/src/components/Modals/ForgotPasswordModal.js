@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Modal, TextField, Button, Box, Typography, Tooltip, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import modalStyles from "../../styles/ForgotPasswordModalStyles"; // Import the Close icon
+import modalStyles from "../../styles/ForgotPasswordModalStyles";
+import {sendEmail} from "../../api/ResetPasswordAPI"; 
 
 
 const ForgotPasswordModal = ({ open, onClose }) => {
@@ -11,10 +12,15 @@ const ForgotPasswordModal = ({ open, onClose }) => {
         setEmail(e.target.value);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle the forgot password logic here (e.g., send a reset email)
-        onClose();
+
+        try {
+            await sendEmail({ "Email" : email });
+            onClose();
+        } catch (error) {
+            console.error('Password reset failed:', error);
+        }
     };
 
     return (
