@@ -17,4 +17,44 @@ export const deleteNote = async (noteId) => {
     console.log(err.message);
   }
 }
- 
+
+export const createNote = (note) => {
+  fetch(`/v1/notes`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    }, 
+    body: note
+  })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to create note');
+        }
+      })
+      .then(() => {
+        console.log('Note created successfully.');
+      })
+      .catch(error => {
+        console.error('Error creating note:', error.message);
+      });
+}
+
+export const deleteAllNotesInPost = (postId) => {
+  fetch(`/v1/notes/in-post?postId=${postId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to delete all notes');
+        }
+      })
+      .then(() => {
+        console.log('All notes deleted successfully in post:', postId);
+      })
+      .catch(error => {
+        console.error('Error deleting all notes:', error.message);
+      });
+}
