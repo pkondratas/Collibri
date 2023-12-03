@@ -1,10 +1,13 @@
-using Collibri.Repositories.ExtensionMethods;
+
 using Microsoft.AspNetCore.Identity;
+using Collibri.Repositories.ExtensionMethods;
 
 namespace Collibri.Models
 {
-    public class Account : IdentityUser<Guid>
+    public class Account// : IdentityUser<Guid>
     {
+        public Guid Id { get; set; }
+        
         public virtual ICollection<RoomMember> RoomMembers { get; set; }
         
         public Account()

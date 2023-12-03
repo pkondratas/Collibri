@@ -79,6 +79,20 @@ namespace Collibri.Repositories.FileBasedImplementation
             
             return null;
         }
+        
+        public IEnumerable<NoteDTO> DeleteAllNotesInPost(Guid postId)
+        {
+            var noteList = _dataHandler.GetAllItems<NoteDTO>(ModelType.Notes);
+            var notesInPost = noteList.Where(x => x.PostId == postId).ToList();
+
+            foreach (var note in notesInPost)
+            {
+                noteList.Remove(note);
+            }
+
+            _dataHandler.PostAllItems(noteList, ModelType.Notes);
+            return notesInPost;
+        }
 
         public NoteDTO? UpdateNote(NoteDTO note, int id)
         {

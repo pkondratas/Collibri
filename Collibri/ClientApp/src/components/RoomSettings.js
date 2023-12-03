@@ -4,6 +4,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import DeleteIcon from '@mui/icons-material/Delete';
+import {RoomLayoutStyles} from "../styles/RoomLayoutStyle";
 
 export const RoomSettings = () => {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -19,7 +20,7 @@ export const RoomSettings = () => {
 
     return (
         <>
-            <IconButton id="options-button"
+            <IconButton sx={RoomLayoutStyles.addSettingsButtons} id="options-button"
                     aria-controls={open ? 'basic-menu' : undefined}
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}

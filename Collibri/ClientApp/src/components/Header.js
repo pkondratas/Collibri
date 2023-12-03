@@ -16,7 +16,7 @@ const Header = () => {
             <Toolbar style={HeaderStyles.toolbar}>
                 <Box style={HeaderStyles.box}>
                     <Tooltip title="Go back to room selection">
-                        <IconButton color="inherit" aria-label="Back" onClick={() => navigate("/")}>
+                        <IconButton color="inherit" aria-label="Back" onClick={() => navigate("/home")}>
                             <ArrowBackIcon style={HeaderStyles.backButton} />
                         </IconButton>
                     </Tooltip>

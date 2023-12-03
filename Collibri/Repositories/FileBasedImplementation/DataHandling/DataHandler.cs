@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Collibri.Dtos;
 using Collibri.Repositories.DataHandling;
 
 namespace Collibri.Repositories.FileBasedImplementation.DataHandling
@@ -8,14 +9,14 @@ namespace Collibri.Repositories.FileBasedImplementation.DataHandling
         private readonly string _dataDirectory
             = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory())?.FullName, "Collibri", "Data");
 
-        public List<T> GetAllItems<T>(ModelType type)
+        public List<T> GetAllItems<T>(ModelType type) where T : class, new() 
         {
             string data = File.ReadAllText(Path.Combine(_dataDirectory, $"{type.ToString()}.json"));
             
             return JsonSerializer.Deserialize<List<T>>(data) ?? throw new InvalidOperationException();
         }
 
-        public void PostAllItems<T>(List<T> itemList, ModelType type)
+        public void PostAllItems<T>(List<T> itemList, ModelType type) where T : class, new() 
         {
             string data = JsonSerializer.Serialize(itemList, new JsonSerializerOptions
             {

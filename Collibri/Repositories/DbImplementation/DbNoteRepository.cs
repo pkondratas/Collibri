@@ -66,6 +66,20 @@ namespace Collibri.Repositories.DbImplementation
 
             return null;
         }
+        
+        public IEnumerable<NoteDTO> DeleteAllNotesInPost(Guid postId)
+        {
+            var notesInPost = _context.Notes.Where(x => x.PostId == postId);
+
+            foreach (var note in notesInPost)
+            {
+                _context.Notes.Remove(note);
+            }
+
+            _context.SaveChanges();
+
+            return _mapper.Map<List<NoteDTO>>(notesInPost).AsEnumerable();
+        }
 
         public NoteDTO? UpdateNote(NoteDTO note, int id)
         {
