@@ -135,7 +135,7 @@ const PostModal = (props) => {
               )
             ) : (
                 files.length !== 0 ? (
-                    <List>
+                    <List sx={PostModalStyles.list}>
                       {files.map((file) => (
                           <ListItem>
                             <FileCard {...file} files={files} setFiles={setFiles} />

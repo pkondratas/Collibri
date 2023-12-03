@@ -1,15 +1,18 @@
 import React from 'react';
-import {Card, CardContent, Typography} from "@mui/material";
+import {Box, Card, CardContent, Typography} from "@mui/material";
+import {FileCardStyles} from "../styles/FileCardStyles"
 
 const FileCard = (props) => {
     
     return (
         <>
-            <Card>
+            <Card sx={FileCardStyles.card}>
                 <CardContent>
-                    <Typography>
-                        {props.name}
-                    </Typography>
+                    <Box sx={FileCardStyles.contentBox}>
+                        <Typography>
+                            {props.name}
+                        </Typography>
+                    </Box>
                 </CardContent>
             </Card>
         </>
