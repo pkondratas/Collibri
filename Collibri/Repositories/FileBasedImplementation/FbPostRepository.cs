@@ -78,6 +78,7 @@ namespace Collibri.Repositories.FileBasedImplementation
                 postList.Remove(post);
             }
 
+            _dataHandler.PostAllItems(postList, ModelType.Posts);
             return postsInSection;
         }
     }

@@ -25,6 +25,7 @@ export const PostModalStyles = {
   },
 
   title: {
+    wordBreak: 'break-all',
     minWidth: '22rem',
     maxWidth: '22rem',
     lineHeight: '3.5rem',

@@ -23,8 +23,8 @@ import {fetchNotes} from "../../api/NoteAPI";
 import NoteCard from "../Cards/NoteCard";
 import DocumentCard from "../Cards/DocumentCard";
 import {PostModalStyles} from "../../styles/PostModalStyles";
-import {fetchDocuments} from "../../api/DocumentAPI";
 import { CreateNoteModal } from "./CreateNoteModal";
+import {createDocument, fetchDocuments} from "../../api/DocumentAPI";
 
 
 const SELECTION = ['notes', 'documents', 'files']
@@ -64,10 +64,22 @@ const PostModal = (props) => {
       setSelection(newValue);
     }
   }
-
   const handleAddNoteClick = () => {
     setCreateNoteModalOpen(true);
   };
+  
+  // const addTestingData = () => {
+  //   createNote(JSON.stringify({
+  //     Name: Math.random().toString(),
+  //     Text: "Testing text",
+  //     PostId: props.id
+  //   }));
+  //
+  //   createDocument(JSON.stringify({
+  //     Title: Math.random().toString(),
+  //     Text: "Testing text"
+  //   }), props.id.toString())
+  // }
 
   return (
       <>

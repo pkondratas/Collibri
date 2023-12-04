@@ -39,6 +39,12 @@ namespace Collibri.Controllers
             var result = _documentRepository.DeleteById(id);
             return result == null ? NotFound() : Ok(result);
         }
+        
+        [HttpDelete("in-post")]
+        public IActionResult DeleteAllDocumentsInPost([FromQuery] Guid postId)
+        {
+            return Ok(_documentRepository.DeleteAllDocumentsInPost(postId));
+        }
 
         [HttpPut("{id}")]
         public IActionResult UpdateDocument([FromBody] DocumentDTO input, int id)
