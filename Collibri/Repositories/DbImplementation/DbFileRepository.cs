@@ -75,7 +75,7 @@ namespace Collibri.Repositories.DbImplementation
 				.AsEnumerable();
 		}
 
-		public FileContentResult? GetFile(string id)
+		public FileStreamResult? GetFile(string id)
 		{
 			var fileToGet = _context.FileInfos.SingleOrDefault(i => i.Id == Guid.Parse(id));
 
@@ -83,9 +83,9 @@ namespace Collibri.Repositories.DbImplementation
 			{
 				return null;
 			}
-			
-			var bytes = _fileSystem.File.ReadAllBytes(fileToGet.Path);
-			return new FileContentResult(bytes, fileToGet.ContentType);
+
+			var fileStream = new FileStream(fileToGet.Path, FileMode.Open, FileAccess.Read);
+			return new FileStreamResult(fileStream, fileToGet.ContentType);
 		}
 
 		public FileInfoDTO? UpdateFileName(string id, string updatedName)

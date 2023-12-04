@@ -8,7 +8,7 @@ namespace Collibri.Repositories
         FileInfoDTO? CreateFile(IFormFile file, string postId);
         FileInfoDTO? DeleteFile(string id);
         IEnumerable<FileInfoDTO>? GetAllFiles(string postId);
-        FileContentResult? GetFile(string id);
+        FileStreamResult? GetFile(string id);
         FileInfoDTO? UpdateFileName(string fileName, string updatedName);
     }
 }

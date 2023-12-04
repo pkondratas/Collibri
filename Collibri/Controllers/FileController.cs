@@ -36,10 +36,9 @@ namespace Collibri.Controllers
         }
         
         [HttpGet("data/{id}")]
-        public IActionResult GetFile(string id)
+        public FileStreamResult GetFile(string id)
         {
-            var result = _fileRepository.GetFile(id);
-            return result == null ? Conflict("File does not exist") : Ok(result);
+            return _fileRepository.GetFile(id);
         }
 
         [HttpPut("{id}/{updatedName}")]

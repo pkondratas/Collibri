@@ -1,4 +1,3 @@
-import { PostModalStyles } from "../styles/PostModalStyles";
 import {
   Box,
   Button,
@@ -25,8 +24,9 @@ import NoteCard from "../Cards/NoteCard";
 import DocumentCard from "../Cards/DocumentCard";
 import {PostModalStyles} from "../../styles/PostModalStyles";
 import {createDocument, fetchDocuments} from "../../api/DocumentAPI";
-import {fetchFiles} from "../api/FileAPI";
-import FileCard from "./FileCard";
+import {fetchFiles} from "../../api/FileAPI";
+import FileCard from "../Cards/FileCard";
+import ImageCard from "../Cards/ImageCard";
 
 
 const SELECTION = ['notes', 'documents', 'files']
@@ -153,7 +153,9 @@ const PostModal = (props) => {
                     <List sx={PostModalStyles.list}>
                       {files.map((file) => (
                           <ListItem>
-                            <FileCard {...file} files={files} setFiles={setFiles} />
+                            {file.contentType.startsWith('image/')
+                                ? <ImageCard {...file} files={files} setFiles={setFiles}/>
+                                : <FileCard {...file} files={files} setFiles={setFiles} />}
                           </ListItem>
                       ))}
                     </List>

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Box, Card, CardContent, Typography} from "@mui/material";
-import {FileCardStyles} from "../styles/FileCardStyles"
+import {FileCardStyles} from "../../styles/FileCardStyles"
 
 const FileCard = (props) => {
     

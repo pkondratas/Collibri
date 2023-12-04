@@ -11,4 +11,7 @@ export const FileCardStyles = {
         minHeight: '6.4rem',
         display: 'flex',
     },
+    media: {
+        height: 140,
+    }
 }
