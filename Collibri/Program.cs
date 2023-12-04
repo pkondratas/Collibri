@@ -1,6 +1,5 @@
 using System.IO.Abstractions;
 using Collibri.Data;
-using Collibri.Models;
 using Collibri.Repositories;
 // using Collibri.Repositories.DataHandling;
 using Collibri.Repositories.DbImplementation;
@@ -30,15 +29,36 @@ builder.Services.AddScoped<INoteRepository, DbNoteRepository>();
 builder.Services.AddScoped<IRoomRepository, DbRoomRepository>();
 builder.Services.AddScoped<IDocumentRepository, DbDocumentRepository>();
 builder.Services.AddScoped<IPostRepository, DbPostRepository>();
-// builder.Services.AddScoped<IAccountRepository, DbAccountRepository>();
+// builder.Services.AddScoped<IAccountRepository, DbRegisterRepository>();
+builder.Services.AddScoped<DbRegisterRepository>();
+builder.Services.AddScoped<DbLoginRepository>();
+
 builder.Services.AddDbContext<DataContext>(options =>
 	options.UseNpgsql(builder.Configuration.GetConnectionString("LocalConnection")));
 
-builder.Services.AddIdentity<Account, IdentityRole<Guid>>()
+builder.Services.AddIdentity<IdentityUser<Guid>, IdentityRole<Guid>>()
 	.AddEntityFrameworkStores<DataContext>()
 	.AddDefaultTokenProviders();
 
 builder.Logging.AddSerilog();
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+	options.Password.RequireUppercase = true;
+	options.Password.RequireDigit = true;
+	options.Password.RequiredLength = 6;
+	options.Password.RequireNonAlphanumeric = false;
+});
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+	options.Cookie.HttpOnly = true;
+	options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+	options.LoginPath = "/v1/login";
+	// options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+	options.SlidingExpiration = true;
+});
 
 var app = builder.Build();
 
@@ -53,6 +73,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllerRoute(
 	name: "default",

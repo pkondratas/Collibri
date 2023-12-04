@@ -20,12 +20,14 @@ import {
   AddBox
 } from '@mui/icons-material';
 import {useEffect, useState} from "react";
-import { fetchNotes } from "../api/NoteAPI";
-import NoteCard from "./NoteCard";
-import {fetchDocuments} from "../api/DocumentAPI";
-import DocumentCard from "./DocumentCard";
+import {createNote, fetchNotes} from "../../api/NoteAPI";
+import NoteCard from "../Cards/NoteCard";
+import DocumentCard from "../Cards/DocumentCard";
+import {PostModalStyles} from "../../styles/PostModalStyles";
+import {createDocument, fetchDocuments} from "../../api/DocumentAPI";
 import {fetchFiles} from "../api/FileAPI";
 import FileCard from "./FileCard";
+
 
 const SELECTION = ['notes', 'documents', 'files']
 
@@ -63,6 +65,19 @@ const PostModal = (props) => {
     if(newValue != null) {
       setSelection(newValue);
     }
+  }
+  
+  const addTestingData = () => {
+    createNote(JSON.stringify({
+      Name: Math.random().toString(),
+      Text: "Testing text",
+      PostId: props.id
+    }));
+
+    createDocument(JSON.stringify({
+      Title: Math.random().toString(),
+      Text: "Testing text"
+    }), props.id.toString())
   }
   
   return (
@@ -106,7 +121,7 @@ const PostModal = (props) => {
         </Box>
         <Box sx={PostModalStyles.contentBoxContainer}>
           <Box sx={PostModalStyles.contentBox}>
-            <IconButton sx={PostModalStyles.addButton}>
+            <IconButton sx={PostModalStyles.addButton} onClick={addTestingData}>
               <AddBox sx={PostModalStyles.addIcon}/>
             </IconButton>
             {selection === 'notes' ? (

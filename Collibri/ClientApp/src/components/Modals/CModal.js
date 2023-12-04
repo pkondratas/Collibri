@@ -1,7 +1,8 @@
 import React from 'react';
 import { Box, Button, Modal} from '@mui/material';
 import { Check, Clear } from '@mui/icons-material';
-import { customModal, modalContent } from "../styles/CModalStyle";
+import {customModal, modalContent} from "../../styles/CModalStyle";
+
 
 // custom modal template for any modal with three props: showModal bool, handleClose and handleChanges function
 // can be used in any basic modal

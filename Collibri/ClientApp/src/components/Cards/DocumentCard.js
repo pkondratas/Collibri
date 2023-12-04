@@ -15,10 +15,11 @@ import {
   Edit,
   Delete, FileDownload, FileDownloadOutlined, MoreVertOutlined, Close, CloseOutlined
 } from "@mui/icons-material";
-import {deleteDocument} from "../api/DocumentAPI";
-import {DocumentCardStyles} from "../styles/DocumentCardStyles";
-import DeleteModal from "./DeleteModal";
-import DocumentModal from "./DocumentModal";
+import {deleteDocument} from "../../api/DocumentAPI";
+import DeleteModal from "../Modals/DeleteModal";
+import DocumentModal from "../Modals/DocumentModal";
+import {DocumentCardStyles} from "../../styles/DocumentCardStyles";
+
 const DocumentCard = (props) => {
   const [moreButton, setMoreButton] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);

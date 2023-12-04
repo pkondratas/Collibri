@@ -1,10 +1,11 @@
 import {Button, Divider, IconButton, TextField, Typography} from "@mui/material";
-import CModal from "./CModal";
 import React, {useRef, useState} from "react";
-import {createSection} from "../api/SectionApi";
 import {useParams} from "react-router-dom";
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import DeleteIcon from "@mui/icons-material/Delete";
+import CModal from "../Modals/CModal";
+import {createSection} from "../../api/SectionApi";
+import {RoomLayoutStyles} from "../../styles/RoomLayoutStyle";
 
 
 export const AddSection = ({setSections, sections}) => {
@@ -44,7 +45,7 @@ export const AddSection = ({setSections, sections}) => {
 
     return (
         <div>
-            <IconButton color="success" onClick={handleOpen}>
+            <IconButton sx={RoomLayoutStyles.addSettingsButtons} color="success" onClick={handleOpen}>
                 <AddBoxIcon fontSize="large"/>
             </IconButton>
             <CModal showModal={open} handleClose={handleClose} handleChanges={handleCreateSection}>

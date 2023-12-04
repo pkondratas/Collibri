@@ -54,6 +54,19 @@ namespace Collibri.Repositories.FileBasedImplementation
             return documentToDelete;
         }
         
+        public IEnumerable<DocumentDTO> DeleteAllDocumentsInPost(Guid postId)
+        {
+            var documentList = _dataHandler.GetAllItems<DocumentDTO>(ModelType.Documents);
+            var documentsInPost = documentList.Where(x => x.PostId == postId).ToList();
+
+            foreach (var document in documentsInPost)
+            {
+                documentList.Remove(document);
+            }
+
+            _dataHandler.PostAllItems(documentList, ModelType.Documents);
+            return documentsInPost;
+        }
 
         public DocumentDTO? UpdateDocument(DocumentDTO document, int id)
         {

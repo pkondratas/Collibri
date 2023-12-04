@@ -2,12 +2,12 @@ import React, {useEffect, useState} from 'react';
 import {Button, Paper, Table, TableRow, TableCell, TableBody, TableContainer} from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import {deleteSection, getSections, updateSection} from "../api/SectionApi";
 import {useParams} from "react-router-dom";
-import UpdateSectionModal from "./UpdateSectionModal";
-import '../styles/tableList.css';
-import {buttonStyle, nameCellStyle, tableRowStyle} from "../styles/tableListStyle";
-import {deleteAllPostsInSection} from "../api/PostAPI";
+import '../../styles/tableList.css';
+import {deleteSection, updateSection} from "../../api/SectionApi";
+import UpdateSectionModal from "../Modals/UpdateSectionModal";
+import {buttonStyle, nameCellStyle, tableRowStyle} from "../../styles/tableListStyle";
+
 
 
 const SectionsContainer = ({sections, setSections, setSectionId}) => {
@@ -28,7 +28,6 @@ const SectionsContainer = ({sections, setSections, setSectionId}) => {
     const handleDeleteSection = (row) => {
         deleteSection(row.id, setSections);
         setSectionId(0)
-        deleteAllPostsInSection(row.id);
     }
 
     useEffect(() => {
