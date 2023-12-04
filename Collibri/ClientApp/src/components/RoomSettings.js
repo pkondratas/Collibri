@@ -1,13 +1,15 @@
-import React from "react";
+import React, {useState} from "react";
 import {MenuItem, Menu, ListItemText, ListItemIcon, IconButton} from "@mui/material";
 import SettingsIcon from '@mui/icons-material/Settings';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {RoomLayoutStyles} from "../styles/RoomLayoutStyle";
+import RoomCodeModal from "./Modals/RoomCodeModal";
 
 export const RoomSettings = () => {
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [invModal, setInvModal] = useState(false);
     const open = Boolean(anchorEl);
 
     const handleClick = (event) => {
@@ -17,6 +19,10 @@ export const RoomSettings = () => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+    
+    const handleInvitation = () => {
+        setInvModal(true);
+    }
 
     return (
         <>
@@ -37,11 +43,11 @@ export const RoomSettings = () => {
                     </ListItemIcon>
                     <ListItemText>Change room name</ListItemText>
                 </MenuItem>
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={() => handleInvitation()}>
                     <ListItemIcon>
                         <PersonAddIcon fontSize="small" />
                     </ListItemIcon>
-                    <ListItemText>Add user</ListItemText>
+                    <ListItemText>Invitation code</ListItemText>
                 </MenuItem>
                 {/*<MenuItem onClick={handleClose}>*/}
                 {/*    <ListItemIcon>*/}
@@ -55,6 +61,7 @@ export const RoomSettings = () => {
                     </ListItemIcon>
                     <ListItemText style={{color: "red"}}>Delete room</ListItemText>
                 </MenuItem>
+                <RoomCodeModal invModal={invModal} setInvModal={setInvModal} anchorClose={handleClose}/>
             </Menu>
         </>
     );

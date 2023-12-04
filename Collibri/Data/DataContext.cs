@@ -13,6 +13,10 @@ namespace Collibri.Data
 		public DbSet<Section> Sections { get; set; }
 		public DbSet<RoomMember> RoomMembers { get; set; }
 
+		public DataContext()
+		{
+			
+		}
 		public DataContext(DbContextOptions<DataContext> options) : base(options)
 		{
 		}

@@ -9,8 +9,6 @@ import UpdateSectionModal from "../Modals/UpdateSectionModal";
 import {buttonStyle, nameCellStyle, tableRowStyle} from "../../styles/tableListStyle";
 import {deleteAllPostsInSection} from "../../api/PostAPI";
 
-
-
 const SectionsContainer = ({sections, setSections, setSectionId}) => {
     const [updateModal, setUpdateModal] = useState(false);
     const [section, setSection] = useState({"Id": 0, "Name": "default"});

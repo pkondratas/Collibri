@@ -24,9 +24,10 @@ namespace Collibri.Controllers
         }
 
         [HttpGet("")]
-        public IActionResult GetAllRooms()
+        public IActionResult GetAllRoomsByUsername([FromQuery] string username)
         {
-            List<RoomDTO> rooms = _roomRepository.GetAllRooms();
+            var rooms = _roomRepository.GetRoomsByUsername(username);
+            
             return rooms.Count == 0 ? NoContent() : Ok(rooms);
         }
 

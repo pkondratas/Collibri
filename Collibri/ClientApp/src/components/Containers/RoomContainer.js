@@ -7,14 +7,21 @@ import {deleteRoom, getRooms, updateRoom} from "../../api/RoomAPI";
 import UpdateRoomModal from "../Modals/UpdateRoomModal";
 import DeleteRoomModal from "../Modals/DeleteRoomModal";
 import {buttonStyle, nameCellStyle, tableRowStyle} from "../../styles/tableListStyle";
-import '../../styles/tableList.css';
+import {useDispatch, useSelector} from "react-redux";
+import {setCurrentRoom, setRoomsSlice} from "../../state/user/roomsSlice";
 
 export const RoomContainer = ({rooms, setRooms}) => {
 
     const [updateModal, setUpdateModal] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false);
     const [room, setRoom] = useState({ "Id": 0, "Name": "default"});
+    const userLogInInformation = useSelector((state) => state.user);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+    
+    const setRoomsSliceFunc = (fetchedData) => {
+        dispatch(setRoomsSlice(fetchedData));
+    }
     
     const handleOpenUpdateModal = (currentRoom) => {
         setRoom(currentRoom);    
@@ -35,7 +42,7 @@ export const RoomContainer = ({rooms, setRooms}) => {
     }
 
     useEffect(() => {
-            getRooms(setRooms)
+            getRooms(setRooms, userLogInInformation.username, setRoomsSliceFunc);
         }, []
     );
     
@@ -51,7 +58,10 @@ export const RoomContainer = ({rooms, setRooms}) => {
                             key={row.id}
                             sx={tableRowStyle}
                         >
-                            <TableCell sx={nameCellStyle} component="th" scope="row" onClick={() => navigate(`/${row.id}`)}> {row.name} </TableCell>
+                            <TableCell sx={nameCellStyle} component="th" scope="row" onClick={() => {
+                                dispatch(setCurrentRoom(row));
+                                navigate(`/${row.id}`)
+                            }}> {row.name} </TableCell>
                             
                             <TableCell align="center">
                                 <Button sx={buttonStyle} className="Button" onClick={() => {handleOpenDeleteModal(row)}} startIcon={<DeleteIcon style={{fontSize: 25}}/>}></Button>

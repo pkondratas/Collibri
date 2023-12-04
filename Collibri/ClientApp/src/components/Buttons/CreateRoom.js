@@ -2,18 +2,26 @@ import React, {useRef, useState} from "react";
 import {TextField, Button, Typography, Divider} from "@mui/material";
 import {createRoom} from "../../api/RoomAPI";
 import CModal from "../Modals/CModal";
+import {useDispatch, useSelector} from "react-redux";
+import {addRoomSlice, setRoomsSlice} from "../../state/user/roomsSlice";
 
 
 export const CreateRoom = ({setRooms}) => {
     const nameFieldRef = useRef(null);
     const [open, setOpen] = useState(false);
     const [error, setError] = useState(false);
+    const dispatch = useDispatch();
+    const userInformation = useSelector((state) => state.user);
     const handleOpen = () => setOpen(true);
     const handleClose = () => {
         setOpen(false);
         setError(false);
     }
-
+    
+    const handleNewRoom = (newRoom) => {
+        dispatch(addRoomSlice(newRoom));
+    }
+    
     const handleOnChange = () => {
         if (nameFieldRef.current.value.trim() !== '') {
             setError(false);
@@ -28,7 +36,7 @@ export const CreateRoom = ({setRooms}) => {
             return;
         } else {
             handleClose();
-            createRoom(nameFieldRef.current.value.trim(), setRooms);
+            createRoom(nameFieldRef.current.value.trim(), setRooms, userInformation.username, handleNewRoom);
         }
     }
 

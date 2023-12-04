@@ -24,6 +24,7 @@ import NoteCard from "../Cards/NoteCard";
 import DocumentCard from "../Cards/DocumentCard";
 import {PostModalStyles} from "../../styles/PostModalStyles";
 import {fetchDocuments} from "../../api/DocumentAPI";
+import {useSelector} from "react-redux";
 
 
 const SELECTION = ['notes', 'documents', 'files']
@@ -81,7 +82,7 @@ const PostModal = (props) => {
               {props.description}
             </Typography>
             <Box sx={PostModalStyles.userAndDateBox}>
-              <Typography variant="body1">By: </Typography>
+              <Typography variant="body1">By: {props.creatorUsername} </Typography>
               <Typography variant="body1">{formatDateTime(new Date(props.lastUpdatedDate))}</Typography>
             </Box>
           </Box>

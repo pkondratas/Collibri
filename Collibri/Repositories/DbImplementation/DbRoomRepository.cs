@@ -2,32 +2,49 @@ using AutoMapper;
 using Collibri.Data;
 using Collibri.Dtos;
 using Collibri.Models;
+using Collibri.Repositories.DbImplementation.UnitOfWork;
 using Collibri.Repositories.ExtensionMethods;
 
 namespace Collibri.Repositories.DbImplementation
 {
     public class DbRoomRepository : IRoomRepository
     {
-        private readonly DataContext _context;
+        private readonly IUnitOfWork<DataContext> _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly DataContext _context;
         
-        public DbRoomRepository(DataContext dataContext, IMapper mapper)
+        public DbRoomRepository(IUnitOfWork<DataContext> unitOfWork, IMapper mapper)
         {
-            _context = dataContext;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _context = unitOfWork.Context;
         }
     
         public RoomDTO? CreateRoom(RoomDTO room)
         {
             room.Id = new int().GenerateNewId(_context.Rooms.Select(x => x.Id).ToList());
+            room.InvitationCode = new int().GenerateNewId(_context.Rooms.Select(x => x.InvitationCode).ToList());
+            
+            _unitOfWork.CreateTransaction();
+            
             _context.Rooms.Add(_mapper.Map<Room>(room));
-            _context.SaveChanges();
+            _unitOfWork.Save();
+            
+            _context.RoomMembers.Add(new RoomMember(room.Id, room.CreatorUsername));
+            _unitOfWork.Save();
+            
+            _unitOfWork.Commit();
+            
             return room;
         }
 
-        public List<RoomDTO> GetAllRooms()
+        public List<RoomDTO> GetRoomsByUsername(string username)
         {
-            return _mapper.Map<List<RoomDTO>>(_context.Rooms.ToList());
+            var userRooms = 
+                _context.Rooms.Where(x => _context.RoomMembers.Any(y => y.Username == username && y.RoomId == x.Id))
+                              .ToList();
+            
+            return _mapper.Map<List<RoomDTO>>(userRooms);
         }
 
         public RoomDTO? UpdateRoom(int roomId, RoomDTO updatedRoom)
@@ -52,7 +69,9 @@ namespace Collibri.Repositories.DbImplementation
             var roomToRemove = _context.Rooms.FirstOrDefault(room => room.Id == roomId);
         
             if (roomToRemove == null)
+            {
                 return false;
+            }
         
             _context.Rooms.Remove(roomToRemove);
             _context.SaveChanges();

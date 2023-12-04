@@ -1,17 +1,19 @@
-import React from "react";
+import React, {useState} from "react";
 import { Button } from "@mui/material";
 import {JoinCreateRoomStyles} from "../../styles/JoinCreateRoomStyles";
-
+import JoinRoomModal from "../Modals/JoinRoomModal";
 
 export const JoinRoom = () => {
+    const [joinModal, setJoinModal] = useState(false);
+    
     const handleJoinRoom = () => {
-        // Implement join button
-        alert("Work in progress");
+        setJoinModal(true);
     }
-
+    
     return (
-        <div>
-            <Button sx={JoinCreateRoomStyles.button} size="large" onClick={handleJoinRoom} variant="contained">Join Room</Button>
-        </div>
+      <>
+          <Button sx={JoinCreateRoomStyles.button} size="large" onClick={() => handleJoinRoom()} variant="contained">Join Room</Button>
+          <JoinRoomModal showModal={joinModal} setModal={setJoinModal} />
+      </>
     );
 }

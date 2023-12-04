@@ -20,6 +20,7 @@ import '../styles/post.css';
 import UpdatePostModal from "./Modals/UpdatePostModal";
 import DeleteModal from "./Modals/DeleteModal";
 import PostModal from "./Modals/PostModal";
+import {useSelector} from "react-redux";
 
 
 const Post = (props) => {
@@ -29,6 +30,7 @@ const Post = (props) => {
   const [updateModal, setUpdateModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [postModal, setPostModal] = useState(false);
+  const userInformation = useSelector((state) => state.user);
     
   const handleDelete = (postId) => {
     deletePost(postId)

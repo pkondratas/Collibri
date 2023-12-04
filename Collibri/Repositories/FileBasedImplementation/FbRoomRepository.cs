@@ -23,7 +23,7 @@ namespace Collibri.Repositories.FileBasedImplementation
             return room;
         }
 
-        public List<RoomDTO> GetAllRooms()
+        public List<RoomDTO> GetRoomsByUsername(string username)
         {
             return _rooms;
         }

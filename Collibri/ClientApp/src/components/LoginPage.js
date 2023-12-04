@@ -6,6 +6,9 @@ import CreateAccountModal from "./Modals/CreateAccountModal";
 import {loginUser} from "../api/LoginAPI";
 import modalStyles from "../styles/ForgotPasswordModalStyles";
 import {useNavigate} from "react-router-dom";
+import { onLogin } from "../state/user/userSlice";
+import {useDispatch, useSelector} from "react-redux";
+
 
 const LoginPage = () => {
     const [forgotPasswordModalOpen, setForgotPasswordModalOpen] = useState(false);
@@ -18,6 +21,7 @@ const LoginPage = () => {
     const [emptyUsername, setEmptyUsername] = useState(false);
     const [emptyPassword, setEmptyPassword] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleForgotPasswordClick = () => {
@@ -54,8 +58,9 @@ const LoginPage = () => {
             setEmptyPassword(false);
 
             const response = await loginUser({ "Username": username, "Password": password });
-
-            if(typeof response === 'object' && response.Username === username) {
+            
+            if(typeof response === 'string' && response === username) {
+                dispatch(onLogin(response));
                 navigate('/home');
                 setProcessing(false);
                 setFieldVisibility(true);

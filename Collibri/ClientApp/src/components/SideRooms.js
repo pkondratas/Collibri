@@ -1,26 +1,19 @@
-import {Button, Paper, Table, TableBody, TableCell, TableContainer, TableRow} from "@mui/material";
-import {deleteRoom, getRooms} from "../api/RoomAPI";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import React, {useEffect, useState} from "react";
+import {Paper, Table, TableBody, TableCell, TableContainer, TableRow} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import {nameCellStyle} from "../styles/tableListStyle";
+import {useDispatch, useSelector} from "react-redux";
+import {setCurrentRoom} from "../state/user/roomsSlice";
 
 export const SideRoomTable = () => {
-
-    const [rooms, setRooms] = useState([]);
+    const rooms = useSelector((state) => state.rooms);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
-
-    useEffect(() => {
-        getRooms(setRooms)
-    }, []);
-
 
     return (
         <TableContainer component={Paper} style={{minHeight: "30rem", maxHeight: "30rem", overflowY: "auto", }}>
             <Table stickyHeader>
                 <TableBody>
-                    {rooms.map((row) => (
+                    {rooms.rooms.map((row) => (
                         <TableRow
                             hover
                             className="TableRow"
@@ -28,9 +21,10 @@ export const SideRoomTable = () => {
                             sx={nameCellStyle}
                         >
                             <TableCell component="th" scope="row"
-                                       onClick={() => navigate(`/${row.id}`)}> {row.name} </TableCell>
-
-
+                                       onClick={() => {
+                                         navigate(`/${row.id}`)
+                                         dispatch(setCurrentRoom(row));
+                                       }}> {row.name} </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
