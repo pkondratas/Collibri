@@ -21,6 +21,8 @@ const Header = () => {
                         </IconButton>
                     </Tooltip>
                     <Typography variant="h4" style={HeaderStyles.title}>Collibri</Typography>
+                </Box>
+                <Box>
                     <AboutUsButton />
                 </Box>
             </Toolbar>
