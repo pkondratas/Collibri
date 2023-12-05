@@ -55,8 +55,7 @@ export const LoginContainerStyles = {
         color: '#1D1E18',
     },
     input: {
-        backgroundColor: '#DEFEF5',
-        color: '#316C44',
+        backgroundColor: '#FFFFFF',
         borderRadius: '8px',
     },
     link: {

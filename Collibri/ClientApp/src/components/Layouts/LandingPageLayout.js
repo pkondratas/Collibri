@@ -48,7 +48,7 @@ export const LandingPageLayout = () => {
             </Grid>
 
             {/* Main Content */}
-            <Grid item xs={6} container direction="column" justifyContent="center" alignItems="center" style={{ minHeight: '100vh', backgroundColor: '#B9F5D8'}}>
+            <Grid item xs={6} container direction="column" justifyContent="center" alignItems="center" style={{ minHeight: '100vh', backgroundColor: '#DEFEF5'}}>
                 {loggedIn ? (
                     <Box>
                         <Box style={{ position: 'absolute', top: '5%', right: '5%', transform: 'translateX(50%)' }}>
