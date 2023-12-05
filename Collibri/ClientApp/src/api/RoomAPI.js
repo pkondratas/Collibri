@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const deleteRoom = (roomId, setRooms) => {
     fetch(`/v1/rooms/${roomId}`, { method: "DELETE" })
         .then((response) => response.text())
@@ -8,7 +10,7 @@ export const deleteRoom = (roomId, setRooms) => {
         .catch(error => console.error('Error deleting room:', error));
 };
 
-export const createRoom = (roomName, setRooms, username, handleNewRoom) => {
+export const createRoom = (roomName, username, handleNewRoom) => {
     fetch('/v1/rooms', {
         method: 'POST',
         headers: {
@@ -27,7 +29,6 @@ export const createRoom = (roomName, setRooms, username, handleNewRoom) => {
         })
         .then(data => {
             console.log('Room created successfully:', data);
-            setRooms((prevRooms) => [...prevRooms, data]);
             handleNewRoom(data);
         })
         .catch(error => {
@@ -54,15 +55,24 @@ export const updateRoom = (roomId, updatedRoom, rooms, setRooms) => {
         .catch(error => console.error('Error updating section:', error));
 };
 
-export const getRooms = (setRooms, username, setRoomsSlice) => {    
+export const getRooms = (username, setRoomsSlice) => {    
     fetch(`/v1/rooms?username=${username}`, { method: "GET" })
         .then((response) => response.json())
         .then((data) => {
             console.log(data);
-            setRooms(data);
             setRoomsSlice(data);
         })
         .catch(error => console.error('Error fetching data', error));
 }
 
-// export const createRoomMember 
+export const getRoomByCode = async (code) => {
+    try {
+        const response = await axios.get(`/v1/rooms/${code}`)
+        
+        return response.data;
+    } catch (err) {
+        console.log(err);
+        
+        return err.response.status;
+    }
+}

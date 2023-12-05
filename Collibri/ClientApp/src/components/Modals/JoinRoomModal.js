@@ -3,29 +3,53 @@ import {TextField, Typography} from "@mui/material";
 import {deleteModalWarningStyle} from "../../styles/DeleteModalStyle";
 import CModal from "./CModal";
 import {modalTextField} from "../../styles/UpdatePostModalStyle";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {createMember} from "../../api/RoomMemberAPI";
+import {addRoomSlice} from "../../state/user/roomsSlice";
+import {getRoomByCode} from "../../api/RoomAPI";
 
 const JoinRoomModal = (props) => {
   const textFieldRef = useRef(null);
-  const [error, setError] = useState(false);
-  const [invalidRoomError, setInvalidRoomError] = useState(false);
+  const [error, setError] = useState({
+    isError: false,
+    message: '',
+  });
   const rooms = useSelector((state) => state.rooms.rooms);
   const userInformation = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   
-  const handleClose = () => props.setModal(false);
+  const handleClose = () => {
+    setError({ isError: false, message: '' });
+    props.setModal(false);
+  }
   
   const handleChanges = async () => {
     const invitationCodes = rooms.map(x => x.invitationCode);
+    const code = parseInt(textFieldRef.current.value);
     
-    if (invitationCodes.includes(textFieldRef.current.value)) {
-      setError(true);
-      setInvalidRoomError(false);
+    if (!isNaN(code)) {
+      if (invitationCodes.includes(code)) {
+        setError({ isError: true, message: "You've already joined this room!" });
+      } else {
+        const data = await createMember({roomId: 0, username: userInformation.username}, textFieldRef.current.value); //gali mest null del missing field
+
+        if (data === 404) {
+          setError({ isError: true, message: "Room doesn't exist" });
+        } else {
+          const data = await getRoomByCode(code);
+          
+          if (data === 404) {
+            console.log("reikia kad rodytu erroras jei kazkas kazkaip feilina");
+            // reikia kad rodytu erroras jei kazkas kazkaip feilina
+          } else {
+            dispatch(addRoomSlice(data));
+          }
+          handleClose();
+        }
+      }
     } else {
-      const data = await createMember( { username: userInformation.username }, textFieldRef.current.value); //gali mest null del missing field
+      setError({ isError: true, message: "Code must be a number!" });
     }
-    
-    handleClose();
   };
 
   return(
@@ -35,11 +59,10 @@ const JoinRoomModal = (props) => {
           Enter the invitation code
         </Typography>
         <TextField
-          error={error}
+          error={error.isError}
           inputRef={textFieldRef}
           size='small'
-          label='Name'
-          helperText={error ? (invalidRoomError ? "Room doesn't exist" : "You've already joined this room!" ) : ' '}
+          helperText={error.isError ? error.message : ' '}
           sx={modalTextField}
         />
       </CModal>

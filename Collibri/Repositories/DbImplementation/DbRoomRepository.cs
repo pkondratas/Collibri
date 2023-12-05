@@ -19,7 +19,7 @@ namespace Collibri.Repositories.DbImplementation
             _mapper = mapper;
             _context = unitOfWork.Context;
         }
-    
+        
         public RoomDTO? CreateRoom(RoomDTO room)
         {
             room.Id = new int().GenerateNewId(_context.Rooms.Select(x => x.Id).ToList());
@@ -36,6 +36,18 @@ namespace Collibri.Repositories.DbImplementation
             _unitOfWork.Commit();
             
             return room;
+        }
+        
+        public RoomDTO? GetRoomByCode(int code)
+        {
+            var roomByCode = _context.Rooms.FirstOrDefault(x => x.InvitationCode == code);
+
+            if (roomByCode == null)
+            {
+                return null;
+            }
+
+            return _mapper.Map<RoomDTO>(roomByCode);
         }
 
         public List<RoomDTO> GetRoomsByUsername(string username)

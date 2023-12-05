@@ -8,7 +8,7 @@ const DeleteRoomModal = (props) => {
     const handleClose = () => props.setDeleteModal(false);
     
     const handleChanges = () => {
-        props.removeRoom(props.room.id);
+        // props.removeRoom(props.room.id);
         handleClose();
     };
 
@@ -19,7 +19,7 @@ const DeleteRoomModal = (props) => {
                     Are you sure you want to delete this room?
                 </Typography>
                 <Typography variant="h6">
-                    {props.room.name}
+                    {/*{props.room.name}*/}
                 </Typography>
                 <Typography variant="p" sx={deleteModalWarningStyle}>
                     Deleted rooms cannot be recovered.

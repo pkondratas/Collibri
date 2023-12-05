@@ -9,13 +9,15 @@ import DeleteRoomModal from "../Modals/DeleteRoomModal";
 import {buttonStyle, nameCellStyle, tableRowStyle} from "../../styles/tableListStyle";
 import {useDispatch, useSelector} from "react-redux";
 import {setCurrentRoom, setRoomsSlice} from "../../state/user/roomsSlice";
+import LeaveRoomModal from "../Modals/LeaveRoomModal";
 
-export const RoomContainer = ({rooms, setRooms}) => {
+export const RoomContainer = () => {
 
     const [updateModal, setUpdateModal] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false);
     const [room, setRoom] = useState({ "Id": 0, "Name": "default"});
     const userLogInInformation = useSelector((state) => state.user);
+    const rooms = useSelector((state) => state.rooms);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     
@@ -34,15 +36,11 @@ export const RoomContainer = ({rooms, setRooms}) => {
     }
     const updateRoomName = (newName) => {
         room.Name = newName;
-        updateRoom(room.id, room, rooms, setRooms);
-    }
-    
-    const removeRoom = (roomId) => {
-        deleteRoom(roomId, setRooms);
+        // updateRoom(room.id, room, rooms, setRooms);
     }
 
     useEffect(() => {
-            getRooms(setRooms, userLogInInformation.username, setRoomsSliceFunc);
+            getRooms(userLogInInformation.username, setRoomsSliceFunc);
         }, []
     );
     
@@ -51,7 +49,7 @@ export const RoomContainer = ({rooms, setRooms}) => {
         <TableContainer component={Paper} style={{ maxHeight: 400 }}>
             <Table stickyHeader sx={{ minWidth:300 }} aria-label="simple table">
                 <TableBody>
-                    {rooms.map((row) => (
+                    {rooms.rooms.map((row) => (
                         <TableRow
                             hover
                             className="TableRow"
@@ -78,7 +76,7 @@ export const RoomContainer = ({rooms, setRooms}) => {
             </Table>
         </TableContainer>
             <UpdateRoomModal room={room} updateModal={updateModal} setUpdateModal={setUpdateModal} updateRoomName={updateRoomName}/>
-            <DeleteRoomModal room={room} deleteModal={deleteModal} setDeleteModal={setDeleteModal} removeRoom={removeRoom}/>
+            <LeaveRoomModal deleteModal={deleteModal} setDeleteModal={setDeleteModal} />
         </Box>
     );
 }

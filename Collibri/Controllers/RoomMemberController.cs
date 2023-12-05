@@ -22,5 +22,13 @@ namespace Collibri.Controllers
 
             return result == null ? NotFound() : Ok(result);
         }
+
+        [HttpDelete("")]
+        public IActionResult DeleteRoomMember([FromQuery] int roomId, [FromQuery] string username)
+        {
+            var result = _roomMemberRepository.DeleteRoomMember(roomId, username);
+
+            return result == null ? NotFound() : Ok(result);
+        }
     }   
 }

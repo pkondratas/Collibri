@@ -7,7 +7,6 @@ import {RoomContainer} from "../Containers/RoomContainer";
 import '../../styles/tableList.css';
 
 export const LandingPageLayout = () => {
-    const [rooms, setRooms] = useState([]);
     
     return (
         <Grid container
@@ -32,7 +31,7 @@ export const LandingPageLayout = () => {
 
                 {/*List*/}
                 <Grid item>
-                    <RoomContainer rooms={rooms} setRooms={setRooms}/>
+                    <RoomContainer />
                 </Grid>
 
                 {/*Button grid*/}
@@ -42,7 +41,7 @@ export const LandingPageLayout = () => {
                       justifyContent="space-evenly"
                       alignItems="center">
                     <Grid item>
-                        <CreateRoom setRooms={setRooms} />
+                        <CreateRoom />
                     </Grid>
                     <Grid item>
                         <JoinRoom/>

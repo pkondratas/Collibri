@@ -23,6 +23,14 @@ namespace Collibri.Repositories.FileBasedImplementation
             return room;
         }
 
+        public RoomDTO? GetRoomByCode(int code)
+        {
+            var roomList = _dataHandler.GetAllItems<RoomDTO>(ModelType.Rooms);
+            var roomByCode = roomList.FirstOrDefault(x => x.InvitationCode == code);
+
+            return roomByCode;
+        }
+
         public List<RoomDTO> GetRoomsByUsername(string username)
         {
             return _rooms;

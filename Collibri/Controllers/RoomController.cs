@@ -23,6 +23,14 @@ namespace Collibri.Controllers
             return result == null ? Conflict() : Ok(result);
         }
 
+        [HttpGet("{code}")]
+        public IActionResult GetRoomByCode(int code)
+        {
+            var roomByCode = _roomRepository.GetRoomByCode(code);
+
+            return roomByCode == null ? NotFound() : Ok(roomByCode);
+        }
+
         [HttpGet("")]
         public IActionResult GetAllRoomsByUsername([FromQuery] string username)
         {

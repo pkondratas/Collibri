@@ -6,10 +6,15 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {RoomLayoutStyles} from "../styles/RoomLayoutStyle";
 import RoomCodeModal from "./Modals/RoomCodeModal";
+import {useSelector} from "react-redux";
+import DeleteRoomModal from "./Modals/DeleteRoomModal";
 
 export const RoomSettings = () => {
     const [anchorEl, setAnchorEl] = useState(null);
     const [invModal, setInvModal] = useState(false);
+    const [deleteModal, setDeleteModal] = useState(false);
+    const userInformation = useSelector((state) => state.user);
+    const rooms = useSelector((state) => state.rooms);
     const open = Boolean(anchorEl);
 
     const handleClick = (event) => {
@@ -23,7 +28,11 @@ export const RoomSettings = () => {
     const handleInvitation = () => {
         setInvModal(true);
     }
-
+    
+    const isOwner = () => {
+        console.log(rooms.currentRoom.creatorUsername === userInformation.username);
+    }
+    
     return (
         <>
             <IconButton sx={RoomLayoutStyles.addSettingsButtons} id="options-button"
@@ -37,12 +46,6 @@ export const RoomSettings = () => {
                   MenuListProps={{
                           'aria-labelledby': 'options-button',
                       }}>
-                <MenuItem onClick={handleClose}>
-                    <ListItemIcon>
-                        <DriveFileRenameOutlineIcon fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText>Change room name</ListItemText>
-                </MenuItem>
                 <MenuItem onClick={() => handleInvitation()}>
                     <ListItemIcon>
                         <PersonAddIcon fontSize="small" />
@@ -55,13 +58,20 @@ export const RoomSettings = () => {
                 {/*    </ListItemIcon>*/}
                 {/*    <ListItemText>Room settings</ListItemText>*/}
                 {/*</MenuItem>*/}
-                <MenuItem onClick={handleClose}>
+                <MenuItem disabled={rooms.currentRoom.creatorUsername !== userInformation.username}>
+                    <ListItemIcon>
+                        <DriveFileRenameOutlineIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText>Change room name</ListItemText>
+                </MenuItem>
+                <MenuItem disabled={rooms.currentRoom.creatorUsername !== userInformation.username}>
                     <ListItemIcon>
                         <DeleteIcon fontSize="small" style={{color: "red"}} />
                     </ListItemIcon>
                     <ListItemText style={{color: "red"}}>Delete room</ListItemText>
                 </MenuItem>
                 <RoomCodeModal invModal={invModal} setInvModal={setInvModal} anchorClose={handleClose}/>
+                <DeleteRoomModal deleteModal={deleteModal} setDeleteModal={setDeleteModal} />
             </Menu>
         </>
     );

@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {addRoomSlice, setRoomsSlice} from "../../state/user/roomsSlice";
 
 
-export const CreateRoom = ({setRooms}) => {
+export const CreateRoom = () => {
     const nameFieldRef = useRef(null);
     const [open, setOpen] = useState(false);
     const [error, setError] = useState(false);
@@ -36,7 +36,7 @@ export const CreateRoom = ({setRooms}) => {
             return;
         } else {
             handleClose();
-            createRoom(nameFieldRef.current.value.trim(), setRooms, userInformation.username, handleNewRoom);
+            createRoom(nameFieldRef.current.value.trim(), userInformation.username, handleNewRoom);
         }
     }
 
