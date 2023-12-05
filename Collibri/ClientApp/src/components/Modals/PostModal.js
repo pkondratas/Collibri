@@ -27,6 +27,7 @@ import {createDocument, fetchDocuments} from "../../api/DocumentAPI";
 import {fetchFiles} from "../../api/FileAPI";
 import FileCard from "../Cards/FileCard";
 import ImageCard from "../Cards/ImageCard";
+import AddFileButton from "../Buttons/AddFileButton";
 
 
 const SELECTION = ['notes', 'documents', 'files']
@@ -84,7 +85,7 @@ const PostModal = (props) => {
     <Modal
       open={props.postModal}
       onClose={handleClose}
-    >
+    > 
       <Box sx={PostModalStyles.modalStyle}>
         <Box sx={PostModalStyles.info}>
           <Typography sx={PostModalStyles.title} variant="h2">
@@ -121,6 +122,7 @@ const PostModal = (props) => {
         </Box>
         <Box sx={PostModalStyles.contentBoxContainer}>
           <Box sx={PostModalStyles.contentBox}>
+            <AddFileButton postId={props.post.id} setFiles={setFiles}/>
             <IconButton sx={PostModalStyles.addButton} onClick={addTestingData}>
               <AddBox sx={PostModalStyles.addIcon}/>
             </IconButton>
