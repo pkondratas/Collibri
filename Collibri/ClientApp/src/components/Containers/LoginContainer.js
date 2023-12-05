@@ -70,7 +70,7 @@ const LoginContainer = ({ onLoginStatusChange }) => {
     }
     
     return (
-        <Box>
+        <Box sx={LoginContainerStyles.container}>
             {/*<Box>*/}
             {/*    <Box sx={{ fontSize: '3rem', position:'absolute', backdropFilter: 'blur(4px)'}}>a</Box>*/}
             {/*    <Box sx={{ fontSize: '3rem'}}>O</Box>*/}
@@ -82,67 +82,65 @@ const LoginContainer = ({ onLoginStatusChange }) => {
                 </Box>
             )}
             <Container maxWidth="xs" style={LoginContainerStyles.formContainer}>
-                <Paper elevation={0} style={LoginContainerStyles.paper}>
-                    <Typography variant="h5" gutterBottom style={LoginContainerStyles.typography}>
-                        Login
-                    </Typography>
-                    <Typography variant="body2" style={LoginContainerStyles.link} >
-                        Need an account?            
-                        <span style={{ cursor: 'pointer', color:"black" }} onClick={handleRegistrationClick}>
-                                    &nbsp;Register
-                                </span>
-                    </Typography>
-                    <Box sx={{ mt: 1 }}>
-                        <Box sx={LoginContainerStyles.fieldContainer}>
-                            {fieldVisibility && <TextField
-                              error={emptyUsername}
-                              margin="normal"
-                              required
-                              fullWidth
-                              id="username"
-                              label="Username"
-                              name="username"
-                              value={username}
-                              onChange={(e) => {
-                                  setEmptyUsername(false);
-                                  setUsername(e.target.value);
-                              }}
-                              autoComplete="username"
-                              sx={LoginContainerStyles.input}
-                            />}
-                            {fieldVisibility && <TextField
-                              error={emptyPassword}
-                              margin="normal"
-                              required
-                              fullWidth
-                              name="password"
-                              label="Password"
-                              type="password"
-                              id="password"
-                              value={password}
-                              onChange={(e) => {
-                                  setEmptyPassword(false);
-                                  setPassword(e.target.value);
-                              }}
-                              autoComplete="current-password"
-                              sx={LoginContainerStyles.input}
-                            />}
-                            {wrongData && <Typography sx={LoginContainerStyles.wrongData}>
-                                {errorMessage}
-                            </Typography>}
-                        </Box>
-                        <Typography variant="body2" style={LoginContainerStyles.link}>
-                                <span style={{ cursor: 'pointer' }} onClick={handleForgotPasswordClick}>
-                                    Forgot Password?
-                                </span>
-                        </Typography>
-                        {fieldVisibility && <Button fullWidth variant="contained" style={LoginContainerStyles.button} onClick={() => {
-                            handleSubmit();
-                        }}>
-                            Login
-                        </Button>}
+                <Typography variant="h5" gutterBottom style={LoginContainerStyles.typography}>
+                    Login
+                </Typography>
+                <Typography variant="body2" style={LoginContainerStyles.link} >
+                    Need an account?            
+                    <span style={{ cursor: 'pointer', color:"black" }} onClick={handleRegistrationClick}>
+                        &nbsp;Register
+                    </span>
+                </Typography>
+                <Box sx={{ mt: 1 }}>
+                    <Box sx={LoginContainerStyles.fieldContainer}>
+                        {fieldVisibility && <TextField
+                            error={emptyUsername}
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="username"
+                            label="Username"
+                            name="username"
+                            value={username}
+                            onChange={(e) => {
+                                setEmptyUsername(false);
+                                setUsername(e.target.value);
+                            }}
+                            autoComplete="username"
+                            sx={LoginContainerStyles.input}
+                        />}
+                        {fieldVisibility && <TextField
+                            error={emptyPassword}
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="password"
+                            label="Password"
+                            type="password"
+                            id="password"
+                            value={password}
+                            onChange={(e) => {
+                                setEmptyPassword(false);
+                                setPassword(e.target.value);
+                            }}
+                            autoComplete="current-password"
+                            sx={LoginContainerStyles.input}
+                        />}
+                        {wrongData && <Typography sx={LoginContainerStyles.wrongData}>
+                            {errorMessage}
+                        </Typography>}
                     </Box>
-                </Paper>
+                    <Typography variant="body2" style={LoginContainerStyles.link}>
+                        <span style={{ cursor: 'pointer' }} onClick={handleForgotPasswordClick}>
+                            Forgot Password?
+                        </span>
+                    </Typography>
+                    {fieldVisibility && <Button fullWidth variant="contained" style={LoginContainerStyles.button} onClick={() => {
+                        handleSubmit();
+                    }}>
+                        Login
+                    </Button>}
+                </Box>
             </Container>
             <ForgotPasswordModal
                 open={forgotPasswordModalOpen}

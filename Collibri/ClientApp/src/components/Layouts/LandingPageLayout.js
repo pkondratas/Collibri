@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { Grid, ThemeProvider, Typography, Button } from "@mui/material";
-import { headerStyle, headerTextTheme } from "../../styles/LandingPageStyle";
-import { CreateRoom } from "../Buttons/CreateRoom";
-import { JoinRoom } from "../Buttons/JoinRoom";
-import { RoomContainer } from "../Containers/RoomContainer";
-import { AboutUsButton } from "../Buttons/AboutUsButton";
-import LoginContainer from "../Containers/LoginContainer";
+import React, { useState, useEffect } from 'react';
+import {Grid, ThemeProvider, Typography, Button, Box, IconButton} from '@mui/material';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import { headerStyle, headerTextTheme } from '../../styles/LandingPageStyle';
+import { CreateRoom } from '../Buttons/CreateRoom';
+import { JoinRoom } from '../Buttons/JoinRoom';
+import { RoomContainer } from '../Containers/RoomContainer';
+import { AboutUsButton } from '../Buttons/AboutUsButton';
+import LoginContainer from '../Containers/LoginContainer';
 
 export const LandingPageLayout = () => {
     const [rooms, setRooms] = useState([]);
@@ -13,7 +14,7 @@ export const LandingPageLayout = () => {
 
     useEffect(() => {
         // Check for stored login status on page load
-        const storedLoginStatus = localStorage.getItem("loggedIn");
+        const storedLoginStatus = localStorage.getItem('loggedIn');
 
         if (storedLoginStatus) {
             setLoggedIn(JSON.parse(storedLoginStatus));
@@ -25,20 +26,20 @@ export const LandingPageLayout = () => {
         setLoggedIn(status);
 
         // Store the login status in localStorage
-        localStorage.setItem("loggedIn", JSON.stringify(status));
+        localStorage.setItem('loggedIn', JSON.stringify(status));
     };
 
     // Function to handle logout
     const handleLogout = () => {
         // Clear login status from localStorage
-        localStorage.removeItem("loggedIn");
+        localStorage.removeItem('loggedIn');
 
         // Update the loggedIn state
         setLoggedIn(false);
     };
 
     return (
-        <Grid container style={{ width: "100vw", height: "100vh" }}>
+        <Grid container style={{ width: '100vw', height: '100vh' }}>
             {/* Header */}
             <Grid item xs={6} style={headerStyle}>
                 <ThemeProvider theme={headerTextTheme}>
@@ -47,62 +48,34 @@ export const LandingPageLayout = () => {
             </Grid>
 
             {/* Main Content */}
-            <Grid
-                item
-                xs={6}
-                container
-                direction="column"
-                justifyContent="space-between"
-                alignItems="center"
-                style={{ paddingTop: "2em", paddingBottom: "9em" }}
-            >
+            <Grid item xs={6} container direction="column" justifyContent="center" alignItems="center" style={{ minHeight: '100vh' }}>
                 {loggedIn ? (
-                    // Render main content when logged in
-                    <Grid
-                        item
-                        xs={6}
-                        container
-                        direction="column"
-                        justifyContent="space-between"
-                        alignItems="center"
-                        style={{ paddingTop: "2em", paddingBottom: "9em" }}
-                    >
-                        {/* List */}
-                        <Grid item>
+                    <Box>
+                        <Box style={{ position: 'absolute', top: '5%', right: '5%', transform: 'translateX(50%)' }}>
+                            <IconButton color="secondary" onClick={handleLogout}>
+                                <ExitToAppIcon />
+                            </IconButton>
+                        </Box>
+
+                        <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" >
                             <RoomContainer rooms={rooms} setRooms={setRooms} />
-                        </Grid>
 
-                        {/* Button grid */}
-                        <Grid
-                            item
-                            container
-                            direction="row"
-                            justifyContent="space-evenly"
-                            alignItems="center"
-                            sx={{ mt: "45rem" }}
-                        >
-                            <Grid item>
-                                <CreateRoom setRooms={setRooms} />
-                            </Grid>
-                            <Grid item>
+                            <Box display="flex" justifyContent="space-between" width="25rem" mt={5}>
+                                <CreateRoom />
                                 <JoinRoom />
-                            </Grid>
-                        </Grid>
-                        <Grid item>
-                            <AboutUsButton />
-                        </Grid>
-
-                        {/* Logout Button */}
-                        <Grid item>
-                            <Button variant="contained" color="secondary" onClick={handleLogout}>
-                                Logout
-                            </Button>
-                        </Grid>
-                    </Grid>
+                            </Box>
+                        </Box>
+                    </Box>
                 ) : (
-                    // Render login page when not logged in
-                    <LoginContainer onLoginStatusChange={handleLoginStatus} />
+                    <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" >
+                        <LoginContainer onLoginStatusChange={handleLoginStatus} />
+                    </Box>
                 )}
+
+                {/* About Us button placed in the footer */}
+                <Box style={{ position: 'absolute', bottom: '5rem', right: '25%', transform: 'translateX(50%)' }}>
+                    <AboutUsButton />
+                </Box>
             </Grid>
         </Grid>
     );

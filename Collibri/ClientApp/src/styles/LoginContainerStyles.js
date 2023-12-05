@@ -1,9 +1,8 @@
 export const LoginContainerStyles = {
     container: {
-        display: 'grid',
-        placeItems: 'center',
-        height: '100vh',
-        backgroundColor: '#ababab',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     header: {
         position: 'absolute',
@@ -37,7 +36,7 @@ export const LoginContainerStyles = {
         minHeight: '27rem',
         // position: 'relative',
         // zIndex: 0,
-    },  
+    },
     paper: {
         padding: 20,
         minWidth: '25.5rem',
@@ -69,4 +68,3 @@ export const LoginContainerStyles = {
         color: '#FFFFFF',
     },
 };
-
