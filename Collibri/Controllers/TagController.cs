@@ -54,17 +54,17 @@ namespace Collibri.Controllers
         }
         
         // PostTags Repository
-        // [HttpPost("add-to-post")]
-        // public IActionResult AddToPost(Guid tagId, Guid postId)
-        // {
-        //     return _postTagsRepository.AddTagToPost(tagId, postId) ? Ok() : Conflict();
-        // }
-        //
-        // [HttpDelete("remove-from-post")]
-        // public IActionResult RemoveFromPost(Guid tagId, Guid postId)
-        // {
-        //     return _postTagsRepository.RemoveTagFromPost(tagId, postId) ? Ok() : NotFound();
-        // }
+        [HttpPost("add-to-post")]
+        public IActionResult AddToPost(Guid tagId, Guid postId)
+        {
+            return _postTagsRepository.AddTagToPost(tagId, postId) ? Ok() : Conflict();
+        }
+        
+        [HttpDelete("remove-from-post")]
+        public IActionResult RemoveFromPost(Guid tagId, Guid postId)
+        {
+            return _postTagsRepository.RemoveTagFromPost(tagId, postId) ? Ok() : NotFound();
+        }
     }
 }
 
