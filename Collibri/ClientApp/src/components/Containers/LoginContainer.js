@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
 import {TextField, Button, Typography, Container, Paper, Box, CircularProgress} from '@mui/material';
-import { LoginPageStyles } from '../styles/LoginPageStyles.js';
-import ForgotPasswordModal from "./Modals/ForgotPasswordModal";
-import CreateAccountModal from "./Modals/CreateAccountModal";
-import {loginUser} from "../api/LoginAPI";
-import modalStyles from "../styles/ForgotPasswordModalStyles";
+import { LoginPageStyles } from '../../styles/LoginPageStyles.js';
+import ForgotPasswordModal from "../Modals/ForgotPasswordModal";
+import CreateAccountModal from "../Modals/CreateAccountModal";
+import {loginUser} from "../../api/LoginAPI";
+import modalStyles from "../../styles/ForgotPasswordModalStyles";
 import {useNavigate} from "react-router-dom";
 
-const LoginPage = () => {
+const LoginContainer = ({ onLoginStatusChange }) => {
     const [forgotPasswordModalOpen, setForgotPasswordModalOpen] = useState(false);
     const [isRegistrationModalOpen , setRegistrationModalOpen] = useState(false);
     const [username, setUsername] = useState('');
@@ -59,6 +59,7 @@ const LoginPage = () => {
                 navigate('/home');
                 setProcessing(false);
                 setFieldVisibility(true);
+                onLoginStatusChange(true);
             } else if(typeof response === 'number' && response === 404) {
                 setErrorMessage('Incorrect username or password. Please try again');
                 setProcessing(false);
@@ -69,12 +70,7 @@ const LoginPage = () => {
     }
     
     return (
-        <Box style={LoginPageStyles.container}>
-            <Box style={LoginPageStyles.header}>
-                <Typography variant="h4" gutterBottom style={{ ...LoginPageStyles.typography, color: '#000000' }}>
-                    Collibri
-                </Typography>
-            </Box>
+        <Box>
             {/*<Box>*/}
             {/*    <Box sx={{ fontSize: '3rem', position:'absolute', backdropFilter: 'blur(4px)'}}>a</Box>*/}
             {/*    <Box sx={{ fontSize: '3rem'}}>O</Box>*/}
@@ -160,6 +156,6 @@ const LoginPage = () => {
     );
 };
 
-export default LoginPage;
+export default LoginContainer;
 
 
