@@ -43,7 +43,7 @@ export const RoomContainer = ({rooms, setRooms}) => {
     
     return (
         <Box>
-        <TableContainer component={Paper} style={{minHeight: "15rem", maxHeight: "25rem", overflowY: "auto", }}>
+        <TableContainer component={Paper} style={{minHeight: "25rem", maxHeight: "25rem", overflowY: "auto", minWidth:"25rem" }}>
             <Table stickyHeader sx={{ minWidth:300 }} aria-label="simple table">
                 <TableBody>
                     {rooms.map((row) => (

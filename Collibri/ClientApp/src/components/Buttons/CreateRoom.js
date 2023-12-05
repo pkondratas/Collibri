@@ -4,7 +4,7 @@ import {createRoom} from "../../api/RoomAPI";
 import CModal from "../Modals/CModal";
 
 
-export const CreateRoom = ({setRooms}) => {
+export const CreateRoom = ({setRooms,closeMenuItem}) => {
     const nameFieldRef = useRef(null);
     const [open, setOpen] = useState(false);
     const [error, setError] = useState(false);
@@ -28,13 +28,14 @@ export const CreateRoom = ({setRooms}) => {
             return;
         } else {
             handleClose();
+            closeMenuItem();
             createRoom(nameFieldRef.current.value.trim(), setRooms);
         }
     }
 
     return (
         <>
-            <Button size="large" onClick={handleOpen} variant="contained">Create Room</Button>
+            <Typography size="large" onClick={handleOpen} variant="text">Create Room</Typography>
             <CModal showModal={open} handleClose={handleClose} handleChanges={handleCreateRoom}>
                 <Typography variant="h5">
                     Create a new room

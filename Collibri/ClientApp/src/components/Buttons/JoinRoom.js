@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@mui/material";
+import {Button, Typography} from "@mui/material";
 import {JoinCreateRoomStyles} from "../../styles/JoinCreateRoomStyles";
 
 
@@ -11,7 +11,7 @@ export const JoinRoom = () => {
 
     return (
         <div>
-            <Button sx={JoinCreateRoomStyles.button} size="large" onClick={handleJoinRoom} variant="contained">Join Room</Button>
+            <Typography sx={JoinCreateRoomStyles.button} size="large" onClick={handleJoinRoom} variant="contained">Join Room</Typography>
         </div>
     );
 }

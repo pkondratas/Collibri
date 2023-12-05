@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {
     Box,
     Button,
-    Grid, IconButton,
+    Grid, Icon, IconButton,
     Link,
     styled,
     ThemeProvider,
@@ -18,8 +18,10 @@ import {JoinRoom} from "../Buttons/JoinRoom";
 import {RoomContainer} from "../Containers/RoomContainer";
 import '../../styles/tableList.css';
 import {AboutUsButton} from "../Buttons/AboutUsButton";
-import {Info} from "@mui/icons-material";
+import {Add, Info} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import {RoomOptions} from "../Buttons/RoomOptions";
 import {UserInfoContainer} from "../Containers/UserInfoContainer";
 
 export const LandingPageLayout = () => {
@@ -41,17 +43,9 @@ export const LandingPageLayout = () => {
             {/*Header*/}
             <Grid item xs={6} style={headerStyle}>
 
-                <Box sx={{fontSize: '7.8rem'}}>
+                <Typography sx={{fontSize: '7.8rem'}}>
                     Collibri
-                    <TextOnlyTooltip placement="right-end" title="More About Us"
-                                     sx={{fontSize: '1.1rem', backgroundColor: 'white'}}>
-                        <IconButton>
-                            <InfoIcon onClick={() => navigate("/about")} color="success" />
-                        </IconButton>
-                    </TextOnlyTooltip>
-
-
-                </Box>
+                </Typography>
                 
 
             </Grid>
@@ -60,33 +54,43 @@ export const LandingPageLayout = () => {
             <Grid item xs={6}
                   container
                   direction="column"
-                  justifyContent="space-between"
+                  justifyContent="flex-start"
                   alignItems="center"
                   style={{paddingTop: "2em", paddingBottom: "2em"}}>
 
+                <Typography variant={"h4"} sx={{paddingBottom:'2rem'}}>Your Rooms  
+                    
+                </Typography>
+                
+                
                 {/*List*/}
-                <Grid item>
+                <Grid item >
                     <RoomContainer rooms={rooms} setRooms={setRooms}/>
                 </Grid>
 
-                {/*Button grid*/}
-                <Grid item
-                      container
-                      direction="row"
-                      justifyContent="space-evenly"
-                      alignItems="center"
-                      sx={{mt: '45rem'}}>
-                    <Grid item>
-                        <CreateRoom setRooms={setRooms}/>
-                    </Grid>
-                    <Grid item>
-                        <JoinRoom/>
-                    </Grid>
+                <RoomOptions setRooms={setRooms} />
 
-                </Grid>
-                <Grid item>
-                    <AboutUsButton/>
-                </Grid>
+                {/*Button grid*/}
+                <Box sx={{paddingRight:'65%', paddingTop:'20%'}}>
+                    
+                    <UserInfoContainer username={"Future User"}/>
+                </Box>
+                <Box
+                    position="fixed" // or "absolute" based on your requirements
+                    top={0}
+                    right={0}
+                    margin={2} // Optional margin to add space from the edges
+                    zIndex={9999}
+                >
+                    
+                    <TextOnlyTooltip placement="right-end" title="More About Us"
+                                     sx={{fontSize: '1.1rem', backgroundColor: 'white'}}>
+                        <IconButton>
+                            <InfoIcon onClick={() => navigate("/about")}  fontSize="large" color="success" />
+                        </IconButton>
+                    </TextOnlyTooltip>
+                </Box>
+
                
 
             </Grid>
