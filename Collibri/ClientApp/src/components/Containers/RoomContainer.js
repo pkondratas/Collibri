@@ -8,12 +8,14 @@ import UpdateRoomModal from "../Modals/UpdateRoomModal";
 import DeleteRoomModal from "../Modals/DeleteRoomModal";
 import {buttonStyle, nameCellStyle, tableRowStyle} from "../../styles/tableListStyle";
 import '../../styles/tableList.css';
+import Skeleton from '@mui/material/Skeleton';
 
 export const RoomContainer = ({rooms, setRooms}) => {
 
     const [updateModal, setUpdateModal] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false);
     const [room, setRoom] = useState({ "Id": 0, "Name": "default"});
+    const [skeleton, setSkeleton] = useState(true);
     const navigate = useNavigate();
     
     const handleOpenUpdateModal = (currentRoom) => {
@@ -35,13 +37,13 @@ export const RoomContainer = ({rooms, setRooms}) => {
     }
 
     useEffect(() => {
-            getRooms(setRooms)
+            getRooms(setRooms,setSkeleton)
         }, []
     );
     
     return (
         <Box>
-        <TableContainer component={Paper} style={{minHeight: "15rem", maxHeight: "15rem", overflowY: "auto", }}>
+        <TableContainer component={Paper} style={{minHeight: "15rem", maxHeight: "25rem", overflowY: "auto", }}>
             <Table stickyHeader sx={{ minWidth:300 }} aria-label="simple table">
                 <TableBody>
                     {rooms.map((row) => (
@@ -66,9 +68,11 @@ export const RoomContainer = ({rooms, setRooms}) => {
                     ))}
                 </TableBody>
             </Table>
+            { skeleton ? <Skeleton animation="wave" variant="rectangular" height="25rem" /> : ''}
         </TableContainer>
             <UpdateRoomModal room={room} updateModal={updateModal} setUpdateModal={setUpdateModal} updateRoomName={updateRoomName}/>
             <DeleteRoomModal room={room} deleteModal={deleteModal} setDeleteModal={setDeleteModal} removeRoom={removeRoom}/>
         </Box>
+    
     );
 }

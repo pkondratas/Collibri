@@ -53,11 +53,12 @@ export const updateRoom = (roomId, updatedRoom, rooms, setRooms) => {
         .catch(error => console.error('Error updating section:', error));
 };
 
-export const getRooms = (setRooms) => {
+export const getRooms = (setRooms,setSkeleton) => {
     fetch('/v1/rooms', { method: "GET" })
         .then((response) => response.json())
         .then((data) => {
             console.log(data);
+            setSkeleton(false);
             setRooms(data);
         })
         .catch(error => console.error('Error fetching data', error));

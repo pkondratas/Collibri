@@ -8,6 +8,7 @@ export const HeaderStyles = {
     box: {
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'space-between',
     },
     backButton: {
         color: 'black',
