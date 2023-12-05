@@ -36,7 +36,7 @@ namespace Collibri.Controllers
         }
         
         [HttpGet("data/{id}")]
-        public FileStreamResult GetFile(string id)
+        public FileStreamResult? GetFile(string id)
         {
             return _fileRepository.GetFile(id);
         }
