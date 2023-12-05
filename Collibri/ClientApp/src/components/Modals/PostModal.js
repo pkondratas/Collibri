@@ -1,6 +1,6 @@
 import {
   Box,
-  Button,
+  Button, Chip,
   IconButton,
   List,
   ListItem,
@@ -24,6 +24,7 @@ import NoteCard from "../Cards/NoteCard";
 import DocumentCard from "../Cards/DocumentCard";
 import {PostModalStyles} from "../../styles/PostModalStyles";
 import {createDocument, fetchDocuments} from "../../api/DocumentAPI";
+import {fetchTags} from "../../api/TagAPI";
 
 
 const SELECTION = ['notes', 'documents', 'files']
@@ -31,6 +32,7 @@ const SELECTION = ['notes', 'documents', 'files']
 const PostModal = (props) => {
   const [notes, setNotes] = useState([]);
   const [documents, setDocuments] = useState([]);
+  const [tags, setTags] = useState([])
   const [files, setFiles] = useState([]);
   const [list, setList] = useState([]);
   const [selection, setSelection] = useState(SELECTION[0]);
@@ -43,6 +45,7 @@ const PostModal = (props) => {
   useEffect(() => {
     fetchNotes(props.id, setNotes);
     fetchDocuments(props.id, setDocuments);
+    fetchTags(props.id, setTags);
     setList(notes);
   }, []);
   
@@ -157,6 +160,15 @@ const PostModal = (props) => {
             <Button onClick={props.handleDislike}>
               {props.dislikeCount} {props.disliked ? <ThumbDown sx={PostModalStyles.reactionButton} /> : <ThumbDownOffAltOutlined sx={PostModalStyles.reactionButton} />}
             </Button>
+          </Box>
+          <Box sx={PostModalStyles.tagBox}>
+            <List sx={PostModalStyles.tagList}>
+              {tags.map((tag) => (
+                  <ListItem>
+                    <Chip sx={PostModalStyles.tagChip} label={tag.name} />
+                  </ListItem>
+              ))}
+            </List>
           </Box>
           <Box>
             <IconButton sx={PostModalStyles.editDeleteButtons}>

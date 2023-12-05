@@ -18,6 +18,7 @@ namespace Collibri.Models
         public virtual Section Section { get; set; }
         public virtual ICollection<Note> Notes { get; set; }
         public virtual ICollection<Document> Documents { get; set; }
+        public virtual ICollection<PostTags> PostTags { get; set; }
 
         public Post()
         {

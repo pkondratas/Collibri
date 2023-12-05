@@ -136,6 +136,21 @@ namespace Collibri.Migrations
                     b.ToTable("Posts");
                 });
 
+            modelBuilder.Entity("Collibri.Models.PostTags", b =>
+                {
+                    b.Property<Guid>("TagId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("PostId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("TagId", "PostId");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("PostTags");
+                });
+
             modelBuilder.Entity("Collibri.Models.Room", b =>
                 {
                     b.Property<int>("Id")
@@ -188,6 +203,26 @@ namespace Collibri.Migrations
                     b.HasIndex("RoomId");
 
                     b.ToTable("Sections");
+                });
+
+            modelBuilder.Entity("Collibri.Models.Tag", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -418,6 +453,25 @@ namespace Collibri.Migrations
                     b.Navigation("Section");
                 });
 
+            modelBuilder.Entity("Collibri.Models.PostTags", b =>
+                {
+                    b.HasOne("Collibri.Models.Post", "Post")
+                        .WithMany("PostTags")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Collibri.Models.Tag", "Tag")
+                        .WithMany("PostTags")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+
+                    b.Navigation("Tag");
+                });
+
             modelBuilder.Entity("Collibri.Models.RoomMember", b =>
                 {
                     b.HasOne("Collibri.Models.Account", "Account")
@@ -441,6 +495,17 @@ namespace Collibri.Migrations
                 {
                     b.HasOne("Collibri.Models.Room", "Room")
                         .WithMany("Sections")
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Room");
+                });
+
+            modelBuilder.Entity("Collibri.Models.Tag", b =>
+                {
+                    b.HasOne("Collibri.Models.Room", "Room")
+                        .WithMany()
                         .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -509,6 +574,8 @@ namespace Collibri.Migrations
                     b.Navigation("Documents");
 
                     b.Navigation("Notes");
+
+                    b.Navigation("PostTags");
                 });
 
             modelBuilder.Entity("Collibri.Models.Room", b =>
@@ -521,6 +588,11 @@ namespace Collibri.Migrations
             modelBuilder.Entity("Collibri.Models.Section", b =>
                 {
                     b.Navigation("Posts");
+                });
+
+            modelBuilder.Entity("Collibri.Models.Tag", b =>
+                {
+                    b.Navigation("PostTags");
                 });
 #pragma warning restore 612, 618
         }

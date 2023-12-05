@@ -11,7 +11,8 @@ const context = [
   '/v1/sections',
   '/v1/documents',
   '/v1/register',
-  '/v1/login'
+  '/v1/login',
+  '/v1/tags'
 ];
 
 const onError = (err, req, resp, target) => {

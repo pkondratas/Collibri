@@ -12,6 +12,8 @@ namespace Collibri.Data
 		public DbSet<Room> Rooms { get; set; }
 		public DbSet<Section> Sections { get; set; }
 		public DbSet<RoomMember> RoomMembers { get; set; }
+		public DbSet<Tag> Tags { get; set; }
+		public DbSet<PostTags> PostTags { get; set; }
 
 		public DataContext(DbContextOptions<DataContext> options) : base(options)
 		{
@@ -20,6 +22,17 @@ namespace Collibri.Data
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
 			base.OnModelCreating(builder);
+
+			builder.Entity<PostTags>()
+				.HasKey(pt => new { pt.TagId, pt.PostId });
+			builder.Entity<PostTags>()
+				.HasOne(pt => pt.Post)
+				.WithMany(post => post.PostTags)
+				.HasForeignKey(pt => pt.PostId);
+			builder.Entity<PostTags>()
+				.HasOne(pt => pt.Tag)
+				.WithMany(tag => tag.PostTags)
+				.HasForeignKey(pt => pt.TagId);
 			
 			builder.HasPostgresExtension("uuid-ossp");
 		}

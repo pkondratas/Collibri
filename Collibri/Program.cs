@@ -29,6 +29,8 @@ builder.Services.AddScoped<INoteRepository, DbNoteRepository>();
 builder.Services.AddScoped<IRoomRepository, DbRoomRepository>();
 builder.Services.AddScoped<IDocumentRepository, DbDocumentRepository>();
 builder.Services.AddScoped<IPostRepository, DbPostRepository>();
+builder.Services.AddScoped<ITagRepository, DbTagRepository>();
+builder.Services.AddScoped<IPostTagsRepository, DbPostTagsRepository>();
 // builder.Services.AddScoped<IAccountRepository, DbRegisterRepository>();
 builder.Services.AddScoped<DbRegisterRepository>();
 builder.Services.AddScoped<DbLoginRepository>();
