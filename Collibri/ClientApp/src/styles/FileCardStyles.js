@@ -24,6 +24,7 @@ export const FileCardStyles = {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
+        height: '4rem',
         width: '20rem'
     },
     buttons: {

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import AddFileModal from "../Modals/AddFileModal";
-import AddBoxIcon from "@mui/icons-material/AddBox";
+import UploadFileIcon from '@mui/icons-material/UploadFile';
 import {IconButton} from "@mui/material";
 
 const AddFileButton = (props) => {
@@ -12,7 +12,7 @@ const AddFileButton = (props) => {
     return(
         <>
             <IconButton onClick={handleOpen}>
-                <AddBoxIcon />
+                <UploadFileIcon />
             </IconButton>
             <AddFileModal open={open} setOpen={setOpen} setFiles={props.setFiles} postId={props.postId}/>
         </>

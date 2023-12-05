@@ -32,7 +32,7 @@ const AddFileModal = (props) => {
         if (uploadedFile === undefined || uploadedFile === null) {
             setError(true);
             return;
-        } else if (uploadedFile.size > 10e6) {
+        } else if (uploadedFile.size > 5e6) {
             setSizeError(true);
         } else {
             setError(false);
@@ -45,7 +45,7 @@ const AddFileModal = (props) => {
         <Modal open={props.open} onClose={handleClose}>
             <Box sx={AddFileStyle.modal}>
                 <TextField error={sizeError} 
-                           helperText={sizeError === true ? "Files must be under 10 MB" : (error === true ? "File not selected" : "")}
+                           helperText={sizeError === true ? "Files must be under 5 MB" : (error === true ? "File not selected" : "")}
                            type="file" onChange={handleOnChange}/>
                 <Tooltip
                     title={sizeError === true ? "Files must be under 10 MB" : (error === true ? "File not selected" : "")}

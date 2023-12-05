@@ -32,3 +32,11 @@ export const getFile = async (id) => {
 
     return await response.blob();
 }
+
+export const deleteFile = async (id) => {
+    try {
+        const response = await axios.delete(`/v1/files/${id}`);
+    } catch (error) {
+        console.log(error.message);
+    }
+}
