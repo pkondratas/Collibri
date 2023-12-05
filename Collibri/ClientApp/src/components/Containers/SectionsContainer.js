@@ -8,11 +8,12 @@ import {deleteSection, updateSection} from "../../api/SectionApi";
 import UpdateSectionModal from "../Modals/UpdateSectionModal";
 import {buttonStyle, nameCellStyle, tableRowStyle} from "../../styles/tableListStyle";
 import {deleteAllPostsInSection} from "../../api/PostAPI";
+import {useSelector} from "react-redux";
 
 const SectionsContainer = ({sections, setSections, setSectionId}) => {
     const [updateModal, setUpdateModal] = useState(false);
     const [section, setSection] = useState({"Id": 0, "Name": "default"});
-    const {roomId} = useParams()
+    const currentRoom = useSelector((state) => state.rooms.currentRoom);
 
     const handleOpenModal = (currentSection) => {
         setSection(currentSection);
@@ -32,7 +33,7 @@ const SectionsContainer = ({sections, setSections, setSectionId}) => {
 
     useEffect(() => {
         setSectionId(0);
-    }, [roomId]);
+    }, [currentRoom.id]);
 
     return (
         <>

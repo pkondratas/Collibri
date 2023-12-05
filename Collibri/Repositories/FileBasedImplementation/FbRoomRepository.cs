@@ -53,16 +53,16 @@ namespace Collibri.Repositories.FileBasedImplementation
             return existingRoom;
         }
 
-        public bool DeleteRoom(int roomId)
+        public RoomDTO? DeleteRoom(int roomId)
         {
             var roomToRemove = _rooms.Find(room => room.Id == roomId);
             if (roomToRemove != null)
             {
                 _rooms.Remove(roomToRemove);
                 _dataHandler.PostAllItems(_rooms, ModelType.Rooms);
-                return true;
+                return roomToRemove;
             }
-            return false;
+            return null;
         }
     }
 }

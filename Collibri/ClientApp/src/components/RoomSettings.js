@@ -29,10 +29,6 @@ export const RoomSettings = () => {
         setInvModal(true);
     }
     
-    const isOwner = () => {
-        console.log(rooms.currentRoom.creatorUsername === userInformation.username);
-    }
-    
     return (
         <>
             <IconButton sx={RoomLayoutStyles.addSettingsButtons} id="options-button"
@@ -64,7 +60,7 @@ export const RoomSettings = () => {
                     </ListItemIcon>
                     <ListItemText>Change room name</ListItemText>
                 </MenuItem>
-                <MenuItem disabled={rooms.currentRoom.creatorUsername !== userInformation.username}>
+                <MenuItem onClick={() => setDeleteModal(true)} disabled={rooms.currentRoom.creatorUsername !== userInformation.username}>
                     <ListItemIcon>
                         <DeleteIcon fontSize="small" style={{color: "red"}} />
                     </ListItemIcon>

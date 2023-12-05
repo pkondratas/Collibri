@@ -2,13 +2,37 @@ import React from 'react';
 import CModal from "./CModal";
 import { Typography } from "@mui/material";
 import {deleteModalWarningStyle} from "../../styles/DeleteModalStyle";
-
+import {useDispatch, useSelector} from "react-redux";
+import {deleteRoom} from "../../api/RoomAPI";
+import {setCurrentRoom, setRoomsSlice} from "../../state/user/roomsSlice";
 
 const DeleteRoomModal = (props) => {
+    const rooms = useSelector((state) => state.rooms);
+    const dispatch = useDispatch();
+    
     const handleClose = () => props.setDeleteModal(false);
     
+    const handleDeleteRoom = (deletedRoom) => {
+        const filteredRooms = rooms.rooms.filter(x => x.id !== deletedRoom.id);
+        
+        dispatch(setRoomsSlice(filteredRooms));
+        if (filteredRooms.length > 0) {
+            dispatch(setCurrentRoom(filteredRooms[0]));
+            console.log(filteredRooms[0]);
+        } else {
+            dispatch(setCurrentRoom({
+                id: 0,
+                name: "",
+                invitationCode: 0,
+                creatorUsername: ""
+            }));
+        }
+        
+        handleClose();
+    }
+    
     const handleChanges = () => {
-        // props.removeRoom(props.room.id);
+        deleteRoom(rooms.currentRoom.id, handleDeleteRoom);
         handleClose();
     };
 
@@ -19,7 +43,7 @@ const DeleteRoomModal = (props) => {
                     Are you sure you want to delete this room?
                 </Typography>
                 <Typography variant="h6">
-                    {/*{props.room.name}*/}
+                    {rooms.currentRoom.name}
                 </Typography>
                 <Typography variant="p" sx={deleteModalWarningStyle}>
                     Deleted rooms cannot be recovered.

@@ -59,7 +59,7 @@ namespace Collibri.Tests.Repositories.Rooms
             var result = repository.DeleteRoom(RoomRepositoryTestData.ExistingRoom.Id);
 
             // Assert
-            Assert.True(result);
+            Assert.NotNull(result);
 
             // Additional verification
             var deletedRoom = roomList.Find(room => room.Id == RoomRepositoryTestData.ExistingRoomId);
@@ -82,7 +82,7 @@ namespace Collibri.Tests.Repositories.Rooms
             var result = repository.DeleteRoom(RoomRepositoryTestData.NonExistentRoomId);
 
             // Assert
-            Assert.False(result);
+            Assert.Null(result);
         }
         
         // sutvarkyti testa pagal unit of work

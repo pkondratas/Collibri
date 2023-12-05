@@ -1,11 +1,11 @@
 import axios from "axios";
 
-export const deleteRoom = (roomId, setRooms) => {
+export const deleteRoom = (roomId, handleSetRooms) => {
     fetch(`/v1/rooms/${roomId}`, { method: "DELETE" })
-        .then((response) => response.text())
+        .then((response) => response.json())
         .then((data) => {
             console.log(data);
-            setRooms((prevRooms) => prevRooms.filter(room => room.id !== roomId));
+            handleSetRooms(data);
         })
         .catch(error => console.error('Error deleting room:', error));
 };

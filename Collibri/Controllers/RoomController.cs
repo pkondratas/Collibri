@@ -50,8 +50,9 @@ namespace Collibri.Controllers
         [HttpDelete("{roomId}")]
         public IActionResult DeleteRoom(int roomId)
         {
-            var deleted = _roomRepository.DeleteRoom(roomId);
-            return deleted ? NoContent() : NotFound();
+            var deletedRoom = _roomRepository.DeleteRoom(roomId);
+            
+            return deletedRoom == null ? NotFound() : Ok(deletedRoom);
         }
     }
 }

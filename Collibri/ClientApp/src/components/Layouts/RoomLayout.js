@@ -12,16 +12,17 @@ import SearchBar from "../SearchBar";
 import PostContainer from "../Containers/PostContainer";
 import {getSections} from "../../api/SectionApi";
 import {postContainerStyle} from "../../styles/RoomLayoutStyle";
+import {useSelector} from "react-redux";
 
 const RoomLayout = () => {
     const [sectionId, setSectionId] = useState(0);
     const [sections, setSections] = useState([]);
     const [posts, setPosts] = useState([]);
-    const {roomId} = useParams()
+    const currentRoom = useSelector((state) => state.rooms.currentRoom);
 
     useEffect(() => {
-        getSections(setSections, roomId);
-    }, [roomId]);
+        getSections(setSections, currentRoom.id);
+    }, [currentRoom.id]);
 
     return (
 
@@ -33,7 +34,6 @@ const RoomLayout = () => {
                 <Paper><Header/></Paper>
             </Grid>
             <Grid item xs={1}>
-                <RoomSettings />
                 <SideRoomTable/>
             </Grid>
             <Grid item md={4}>

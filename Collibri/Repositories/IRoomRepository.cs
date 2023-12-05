@@ -8,7 +8,7 @@ namespace Collibri.Repositories
         public RoomDTO? GetRoomByCode(int code);
         public List<RoomDTO> GetRoomsByUsername(string username);
         public RoomDTO? UpdateRoom(int roomId, RoomDTO updatedRoom);
-        public bool DeleteRoom(int roomId);
+        public RoomDTO? DeleteRoom(int roomId);
     }
 }
 

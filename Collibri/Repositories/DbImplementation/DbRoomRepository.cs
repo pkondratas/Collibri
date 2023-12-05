@@ -76,19 +76,19 @@ namespace Collibri.Repositories.DbImplementation
             return _mapper.Map<RoomDTO>(roomToUpdate);
         }
 
-        public bool DeleteRoom(int roomId)
+        public RoomDTO? DeleteRoom(int roomId)
         {
             var roomToRemove = _context.Rooms.FirstOrDefault(room => room.Id == roomId);
         
             if (roomToRemove == null)
             {
-                return false;
+                return null;
             }
         
             _context.Rooms.Remove(roomToRemove);
             _context.SaveChanges();
 
-            return true;
+            return _mapper.Map<RoomDTO>(roomToRemove);
         }
     }
 }
