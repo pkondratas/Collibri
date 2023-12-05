@@ -1,4 +1,4 @@
-export const LoginPageStyles = {
+export const LoginContainerStyles = {
     container: {
         display: 'grid',
         placeItems: 'center',

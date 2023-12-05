@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {TextField, Button, Typography, Container, Paper, Box, CircularProgress} from '@mui/material';
-import { LoginPageStyles } from '../../styles/LoginPageStyles.js';
+import { LoginContainerStyles } from '../../styles/LoginContainerStyles.js';
 import ForgotPasswordModal from "../Modals/ForgotPasswordModal";
 import CreateAccountModal from "../Modals/CreateAccountModal";
 import {loginUser} from "../../api/LoginAPI";
@@ -76,24 +76,24 @@ const LoginContainer = ({ onLoginStatusChange }) => {
             {/*    <Box sx={{ fontSize: '3rem'}}>O</Box>*/}
             {/*</Box>*/}
             {processing && (
-                <Box sx={LoginPageStyles.loadingContainer}>
+                <Box sx={LoginContainerStyles.loadingContainer}>
                     <Typography>Logging in...</Typography>
                     <CircularProgress sx={modalStyles.progressIndicator} color="inherit" />
                 </Box>
             )}
-            <Container maxWidth="xs" style={LoginPageStyles.formContainer}>
-                <Paper elevation={0} style={LoginPageStyles.paper}>
-                    <Typography variant="h5" gutterBottom style={LoginPageStyles.typography}>
+            <Container maxWidth="xs" style={LoginContainerStyles.formContainer}>
+                <Paper elevation={0} style={LoginContainerStyles.paper}>
+                    <Typography variant="h5" gutterBottom style={LoginContainerStyles.typography}>
                         Login
                     </Typography>
-                    <Typography variant="body2" style={LoginPageStyles.link} >
+                    <Typography variant="body2" style={LoginContainerStyles.link} >
                         Need an account?            
                         <span style={{ cursor: 'pointer', color:"black" }} onClick={handleRegistrationClick}>
                                     &nbsp;Register
                                 </span>
                     </Typography>
                     <Box sx={{ mt: 1 }}>
-                        <Box sx={LoginPageStyles.fieldContainer}>
+                        <Box sx={LoginContainerStyles.fieldContainer}>
                             {fieldVisibility && <TextField
                               error={emptyUsername}
                               margin="normal"
@@ -108,7 +108,7 @@ const LoginContainer = ({ onLoginStatusChange }) => {
                                   setUsername(e.target.value);
                               }}
                               autoComplete="username"
-                              sx={LoginPageStyles.input}
+                              sx={LoginContainerStyles.input}
                             />}
                             {fieldVisibility && <TextField
                               error={emptyPassword}
@@ -125,18 +125,18 @@ const LoginContainer = ({ onLoginStatusChange }) => {
                                   setPassword(e.target.value);
                               }}
                               autoComplete="current-password"
-                              sx={LoginPageStyles.input}
+                              sx={LoginContainerStyles.input}
                             />}
-                            {wrongData && <Typography sx={LoginPageStyles.wrongData}>
+                            {wrongData && <Typography sx={LoginContainerStyles.wrongData}>
                                 {errorMessage}
                             </Typography>}
                         </Box>
-                        <Typography variant="body2" style={LoginPageStyles.link}>
+                        <Typography variant="body2" style={LoginContainerStyles.link}>
                                 <span style={{ cursor: 'pointer' }} onClick={handleForgotPasswordClick}>
                                     Forgot Password?
                                 </span>
                         </Typography>
-                        {fieldVisibility && <Button fullWidth variant="contained" style={LoginPageStyles.button} onClick={() => {
+                        {fieldVisibility && <Button fullWidth variant="contained" style={LoginContainerStyles.button} onClick={() => {
                             handleSubmit();
                         }}>
                             Login
