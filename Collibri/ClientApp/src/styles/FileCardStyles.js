@@ -1,17 +1,35 @@
 export const FileCardStyles = {
     card: {
         display: 'flex',
-        flexDirection: 'row',
-        minWidth: '20rem',
-        maxWidth: '20rem',
-        minHeight: '10rem',
-        maxHeight: '10rem'
+        flexDirection: 'column',
+        justifyContent: 'center',
+        height: '10rem',
+        width: '20rem',
     },
-    contentBox: {
-        minHeight: '6.4rem',
-        display: 'flex',
+    imageBox: {
+        display: 'block',
+        margin: 'auto',
+        position: 'relative',
     },
     media: {
-        height: 140,
+        height: '7rem',
+        width: '20rem',
+        objectFit: 'scale-down'
+    },
+    content: {
+        ':hover': {
+            opacity: 0.8
+        },
+        backgroundColor: "#d5d5d5",
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '20rem'
+    },
+    buttons: {
+        
+    },
+    name: {
+        
     }
 }

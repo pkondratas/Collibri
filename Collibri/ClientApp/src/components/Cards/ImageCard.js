@@ -1,5 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {Card, CardContent, CardMedia, Typography} from "@mui/material";
+import {
+    Box,
+    Button,
+    Card,
+    CardActions, CardContent,
+    CardMedia,
+    CircularProgress,
+    IconButton, Typography,
+} from "@mui/material";
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import DeleteIcon from '@mui/icons-material/Delete';
 import {getFile} from "../../api/FileAPI";
 import {FileCardStyles} from "../../styles/FileCardStyles"
 
@@ -23,12 +33,24 @@ const ImageCard = (props) => {
     return(
         <>
             <Card sx={FileCardStyles.card}>
-                <CardMedia component="img" alt={props.name} sx={FileCardStyles.media} image={imageURL} />
-                {/*<CardContent>*/}
-                {/*    <Typography>*/}
-                {/*        {props.name}*/}
-                {/*    </Typography>*/}
-                {/*</CardContent>*/}
+                {imageURL === ''
+                    ? <CircularProgress />
+                    : <Box>
+                        <Box sx={FileCardStyles.imageBox}>
+                            <CardMedia component="img" alt={props.name} sx={FileCardStyles.media} image={imageURL} />
+                        </Box>
+                        <CardContent sx={FileCardStyles.content}>
+                            <Typography sx={FileCardStyles.name}>{props.name}</Typography>
+                            <Box sx={FileCardStyles.buttons}>
+                                <IconButton>
+                                    <FileDownloadIcon />
+                                </IconButton>
+                                <IconButton>
+                                    <DeleteIcon />
+                                </IconButton>
+                            </Box>
+                        </CardContent>
+                    </Box>}
             </Card>
         </>
     );

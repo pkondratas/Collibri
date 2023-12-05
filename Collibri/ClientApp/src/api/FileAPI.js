@@ -2,8 +2,17 @@ import axios from 'axios';
 
 export const fetchFiles = async (postId, setFiles) => {
     try {
-        const response = await axios.get(`/v1/files/info/${postId}`)
+        const response = await axios.get(`/v1/files/info/${postId}`);
         setFiles(response.data);
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+export const uploadFile = async (postId, formData, setFiles) => {
+    try {
+        const response = await axios.post(`/v1/files/${postId}`, formData);
+        setFiles((prevFiles) => [...prevFiles, response.data]);
     } catch (error) {
         console.log(error.message);
     }
