@@ -48,7 +48,7 @@ export const LandingPageLayout = () => {
             </Grid>
 
             {/* Main Content */}
-            <Grid item xs={6} container direction="column" justifyContent="center" alignItems="center" style={{ minHeight: '100vh' }}>
+            <Grid item xs={6} container direction="column" justifyContent="center" alignItems="center" style={{ minHeight: '100vh', backgroundColor: '#B9F5D8'}}>
                 {loggedIn ? (
                     <Box>
                         <Box style={{ position: 'absolute', top: '5%', right: '5%', transform: 'translateX(50%)' }}>
@@ -58,6 +58,13 @@ export const LandingPageLayout = () => {
                         </Box>
 
                         <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" >
+                            <Typography sx={{
+                                fontWeight: 'bold',
+                                marginBottom: 5,
+                            }}>
+                                Your rooms: 
+                            </Typography>
+                            
                             <RoomContainer rooms={rooms} setRooms={setRooms} />
 
                             <Box display="flex" justifyContent="space-between" width="25rem" mt={5}>

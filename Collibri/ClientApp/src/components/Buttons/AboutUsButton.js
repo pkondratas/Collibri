@@ -11,7 +11,11 @@ export const AboutUsButton = () => {
     
     return (
        
-            <Button sx={JoinCreateRoomStyles.button} size="large" onClick={() => navigate("/about")} variant="outlined">About us</Button>
+            <Button sx={{
+                         ...JoinCreateRoomStyles.button, 
+                         color: '#80CB9E',
+                         borderColor: '#80CB9E'}} 
+                    size="large" onClick={() => navigate("/about")} variant="outlined">About us</Button>
         
     );
 }

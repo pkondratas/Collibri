@@ -87,7 +87,7 @@ const LoginContainer = ({ onLoginStatusChange }) => {
                 </Typography>
                 <Typography variant="body2" style={LoginContainerStyles.link} >
                     Need an account?            
-                    <span style={{ cursor: 'pointer', color:"black" }} onClick={handleRegistrationClick}>
+                    <span style={{ cursor: 'pointer', color:"#1D1E18" }} onClick={handleRegistrationClick}>
                         &nbsp;Register
                     </span>
                 </Typography>

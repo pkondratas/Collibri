@@ -52,19 +52,21 @@ export const LoginContainerStyles = {
     typography: {
         fontWeight: 'bold',
         marginBottom: 20,
+        color: '#1D1E18',
     },
     input: {
-        backgroundColor: '#ffffff',
+        backgroundColor: '#DEFEF5',
+        color: '#316C44',
         borderRadius: '8px',
     },
     link: {
         textDecoration: 'none',
-        color: '#757575',
+        color: '#316C44',
         fontWeight: 'bold',
         marginBottom: 20,
     },
     button: {
-        backgroundColor: '#757575',
-        color: '#FFFFFF',
+        backgroundColor: '#316C44',
+        color: '#DEFEF5',
     },
 };

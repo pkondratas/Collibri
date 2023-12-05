@@ -10,7 +10,7 @@ export const headerStyle = {
     height: "100%",
     width: "100%",
     textAlign: "center",
-    color: "#ffffff",
-    backgroundColor: "#62fc9e",
+    color: "#B9F5D8",
+    backgroundColor: "#316c44",
     paddingTop: "20%",
 }
