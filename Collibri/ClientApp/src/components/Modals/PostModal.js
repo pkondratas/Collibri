@@ -23,8 +23,6 @@ import {fetchNotes} from "../../api/NoteAPI";
 import NoteCard from "../Cards/NoteCard";
 import DocumentCard from "../Cards/DocumentCard";
 import {PostModalStyles} from "../../styles/PostModalStyles";
-import {fetchDocuments} from "../../api/DocumentAPI";
-import UpdatePostModal from "./UpdatePostModal";
 import { CreateNoteModal } from "./CreateNoteModal";
 import {createDocument, fetchDocuments} from "../../api/DocumentAPI";
 
@@ -156,9 +154,9 @@ const PostModal = (props) => {
                 </Button>
               </Box>
               <Box>
-                <IconButton sx={PostModalStyles.editDeleteButtons} <IconButton sx={PostModalStyles.editDeleteButtons} onClick={() => {
+                <IconButton sx={PostModalStyles.editDeleteButtons} onClick={() => {
                   setUpdate(true);
-                }}>>
+                }}>
                   <Edit />
                 </IconButton>
                 <IconButton sx={PostModalStyles.editDeleteButtons} onClick={() => {
