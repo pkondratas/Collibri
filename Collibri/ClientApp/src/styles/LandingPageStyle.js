@@ -12,6 +12,5 @@ export const headerStyle = {
     width: "100%",
     textAlign: "center",
     color: "#DEFEF5",
-    //backgroundColor: "#316c44",
     paddingTop: "20%",
 }

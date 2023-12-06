@@ -43,12 +43,10 @@ export const LandingPageLayout = () => {
             {/* Header */}
             <Grid item xs={6} style={{
                 ...headerStyle,
-                backgroundImage: 'url("/background5.svg")', 
+                backgroundImage: `url("${loggedIn ? '/background5_recolored.svg' : '/background5.svg'}")`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
-                //background.jpg
-                //backgroundSize: '150% 150%',
-                //backgroundPosition: '56% 42%',
+                transition: 'background-image 0.5s ease-in-out',
             }}>
                 <ThemeProvider theme={headerTextTheme}>
                     <Typography>Collibri</Typography>
@@ -58,40 +56,42 @@ export const LandingPageLayout = () => {
             {/* Main Content */}
             <Grid item xs={6} container direction="column" justifyContent="center" alignItems="center" style={{ minHeight: '100vh', backgroundColor: '#DEFEF5'}}>
                 <Box>
-                    <img src="/logo.png" alt="Collibri Logo" style={{ position: 'absolute', top: '5rem', right: '21%',height: '15%', width: 'auto' }} />
+                    <img src="/logo.png" alt="Collibri Logo" style={{ height: '20%', width: 'auto', marginBottom: '3rem' }} />
                 </Box>
-                {loggedIn ? (
-                    <Box>
-                        <Box style={{ position: 'absolute', top: '5%', right: '5%', transform: 'translateX(50%)' }}>
-                            <IconButton color="secondary" onClick={handleLogout}>
-                                <ExitToAppIcon />
-                            </IconButton>
-                        </Box>
+                <Box sx={{marginTop: '-25rem', marginBottom: '5rem', minHeight: '30rem'}}>
+                    {loggedIn ? (
+                        <Box>
+                            <Box style={{ position: 'absolute', top: '5%', right: '5%', transform: 'translateX(50%)' }}>
+                                <IconButton color="secondary" onClick={handleLogout}>
+                                    <ExitToAppIcon />
+                                </IconButton>
+                            </Box>
 
-                        <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" >
-                            <Typography sx={{
-                                fontWeight: 'bold',
-                                marginBottom: 5,
-                            }}>
-                                Your rooms: 
-                            </Typography>
-                            
-                            <RoomContainer rooms={rooms} setRooms={setRooms} />
+                            <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" >
+                                <Typography sx={{
+                                    fontWeight: 'bold',
+                                    marginBottom: 5,
+                                }}>
+                                    Your rooms:
+                                </Typography>
 
-                            <Box display="flex" justifyContent="space-between" width="25rem" mt={5}>
-                                <CreateRoom />
-                                <JoinRoom />
+                                <RoomContainer rooms={rooms} setRooms={setRooms} />
+
+                                <Box display="flex" justifyContent="space-between" width="25rem" mt={5}>
+                                    <CreateRoom />
+                                    <JoinRoom />
+                                </Box>
                             </Box>
                         </Box>
-                    </Box>
-                ) : (
-                    <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" >
-                        <LoginContainer onLoginStatusChange={handleLoginStatus} />
-                    </Box>
-                )}
-
+                    ) : (
+                        <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
+                            <LoginContainer onLoginStatusChange={handleLoginStatus} />
+                        </Box>
+                    )}
+                </Box>
+                
                 {/* About Us button placed in the footer */}
-                <Box style={{ position: 'absolute', bottom: '5rem', right: '25%', transform: 'translateX(50%)' }}>
+                <Box >
                     <AboutUsButton />
                 </Box>
             </Grid>

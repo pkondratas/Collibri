@@ -132,7 +132,7 @@ const LoginContainer = ({ onLoginStatusChange }) => {
                             {errorMessage}
                         </Typography>}
                     </Box>
-                    <Typography variant="body2" style={{ ...LoginContainerStyles.link, textAlign: 'right' }}>
+                    <Typography variant="body2" style={{ ...LoginContainerStyles.link, textAlign: 'right' , marginTop: '-1.5rem'}}>
                         <span style={{ cursor: 'pointer' }} onClick={handleForgotPasswordClick}>
                             Forgot Password?
                         </span>
@@ -140,12 +140,12 @@ const LoginContainer = ({ onLoginStatusChange }) => {
                     {fieldVisibility && <Button variant="contained" style={LoginContainerStyles.button} onClick={() => {
                         handleSubmit();
                     }}>
-                        Login
+                        Log in
                     </Button>}
                     <Typography variant="body2" style={{...LoginContainerStyles.link, marginTop: 40}} >
                         Need an account?
                         <span style={{ cursor: 'pointer', color:"#1D1E18" }} onClick={handleRegistrationClick}>
-                        &nbsp;Register
+                        &nbsp;Sign up
                     </span>
                     </Typography>
                 </Box>
