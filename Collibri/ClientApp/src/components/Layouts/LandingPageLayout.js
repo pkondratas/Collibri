@@ -41,7 +41,15 @@ export const LandingPageLayout = () => {
     return (
         <Grid container style={{ width: '100vw', height: '100vh' }}>
             {/* Header */}
-            <Grid item xs={6} style={headerStyle}>
+            <Grid item xs={6} style={{
+                ...headerStyle,
+                backgroundImage: 'url("/background5.svg")', 
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                //background.jpg
+                //backgroundSize: '150% 150%',
+                //backgroundPosition: '56% 42%',
+            }}>
                 <ThemeProvider theme={headerTextTheme}>
                     <Typography>Collibri</Typography>
                 </ThemeProvider>
@@ -49,6 +57,9 @@ export const LandingPageLayout = () => {
 
             {/* Main Content */}
             <Grid item xs={6} container direction="column" justifyContent="center" alignItems="center" style={{ minHeight: '100vh', backgroundColor: '#DEFEF5'}}>
+                <Box>
+                    <img src="/logo.png" alt="Collibri Logo" style={{ position: 'absolute', top: '5rem', right: '21%',height: '15%', width: 'auto' }} />
+                </Box>
                 {loggedIn ? (
                     <Box>
                         <Box style={{ position: 'absolute', top: '5%', right: '5%', transform: 'translateX(50%)' }}>

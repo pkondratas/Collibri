@@ -85,22 +85,20 @@ const LoginContainer = ({ onLoginStatusChange }) => {
                 <Typography variant="h5" gutterBottom style={LoginContainerStyles.typography}>
                     Login
                 </Typography>
-                <Typography variant="body2" style={LoginContainerStyles.link} >
-                    Need an account?            
-                    <span style={{ cursor: 'pointer', color:"#1D1E18" }} onClick={handleRegistrationClick}>
-                        &nbsp;Register
-                    </span>
-                </Typography>
                 <Box sx={{ mt: 1 }}>
                     <Box sx={LoginContainerStyles.fieldContainer}>
                         {fieldVisibility && <TextField
                             error={emptyUsername}
                             margin="normal"
-                            required
                             fullWidth
                             id="username"
-                            label="Username"
+                            label={
+                                <Typography variant="body1" style={{ fontFamily: 'Segoe UI' }}>
+                                    Username
+                                </Typography>
+                            }
                             name="username"
+                            variant="standard"
                             value={username}
                             onChange={(e) => {
                                 setEmptyUsername(false);
@@ -112,12 +110,16 @@ const LoginContainer = ({ onLoginStatusChange }) => {
                         {fieldVisibility && <TextField
                             error={emptyPassword}
                             margin="normal"
-                            required
                             fullWidth
                             name="password"
-                            label="Password"
+                            label={
+                                <Typography variant="body1" style={{ fontFamily: 'Segoe UI' }}>
+                                    Password
+                                </Typography>
+                            }
                             type="password"
                             id="password"
+                            variant="standard"
                             value={password}
                             onChange={(e) => {
                                 setEmptyPassword(false);
@@ -130,16 +132,22 @@ const LoginContainer = ({ onLoginStatusChange }) => {
                             {errorMessage}
                         </Typography>}
                     </Box>
-                    <Typography variant="body2" style={LoginContainerStyles.link}>
+                    <Typography variant="body2" style={{ ...LoginContainerStyles.link, textAlign: 'right' }}>
                         <span style={{ cursor: 'pointer' }} onClick={handleForgotPasswordClick}>
                             Forgot Password?
                         </span>
                     </Typography>
-                    {fieldVisibility && <Button fullWidth variant="contained" style={LoginContainerStyles.button} onClick={() => {
+                    {fieldVisibility && <Button variant="contained" style={LoginContainerStyles.button} onClick={() => {
                         handleSubmit();
                     }}>
                         Login
                     </Button>}
+                    <Typography variant="body2" style={{...LoginContainerStyles.link, marginTop: 40}} >
+                        Need an account?
+                        <span style={{ cursor: 'pointer', color:"#1D1E18" }} onClick={handleRegistrationClick}>
+                        &nbsp;Register
+                    </span>
+                    </Typography>
                 </Box>
             </Container>
             <ForgotPasswordModal

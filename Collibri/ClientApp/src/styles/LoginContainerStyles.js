@@ -47,25 +47,31 @@ export const LoginContainerStyles = {
         backgroundColor: '#d3d3d3',
     },
     fieldContainer: {
-        minHeight: '12rem'
+        minHeight: '11rem'
     },
     typography: {
-        fontWeight: 'bold',
-        marginBottom: 20,
-        color: '#1D1E18',
+        marginBottom: 50,
+        color: 'rgba(29, 30, 24, 0.7)',
+        fontFamily: 'Segoe UI Semibold'
     },
     input: {
-        backgroundColor: '#FFFFFF',
         borderRadius: '8px',
+        fontFamily: 'Segoe UI',
     },
     link: {
         textDecoration: 'none',
         color: '#316C44',
-        fontWeight: 'bold',
+        fontWeight: 600,
         marginBottom: 20,
+        fontFamily: 'Segoe UI',
     },
     button: {
+        textTransform: 'none',
         backgroundColor: '#316C44',
+        fontSize: '1rem',
+        borderRadius: 28,
+        width: '8rem',
         color: '#DEFEF5',
+        fontFamily: 'Segoe UI Semibold'
     },
 };

@@ -3,6 +3,7 @@ import {createTheme} from "@mui/material";
 export const headerTextTheme = createTheme({
     typography: {
         fontSize: 110,
+        fontFamily: 'Segoe UI Semibold',
     },
 })
 
@@ -11,6 +12,6 @@ export const headerStyle = {
     width: "100%",
     textAlign: "center",
     color: "#DEFEF5",
-    backgroundColor: "#316c44",
+    //backgroundColor: "#316c44",
     paddingTop: "20%",
 }

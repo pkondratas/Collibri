@@ -13,7 +13,7 @@ export const AboutUsButton = () => {
        
             <Button sx={{
                          ...JoinCreateRoomStyles.button, 
-                         color: '#80CB9E',
+                         color: '#316c44',
                          borderColor: '#80CB9E'}} 
                     size="large" onClick={() => navigate("/about")} variant="outlined">About us</Button>
         
