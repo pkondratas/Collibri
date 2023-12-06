@@ -1,7 +1,6 @@
 using System.IO.Abstractions.TestingHelpers;
 using Collibri.Dtos;
-using Collibri.Models;
-using Collibri.Repositories.FileBasedImplementation;
+using Collibri.Repositories.DbImplementation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,7 +14,7 @@ namespace Collibri.Tests.Repositories.Files
             string postId, FileInfoDTO? expected)
         {
             // Arrange
-            var fileRepository = new FbFileRepository(fileSystem.FileSystem);
+            var fileRepository = new DbFileRepository(fileSystem.FileSystem);
 
             // Act
             var actual = fileRepository.CreateFile(fileData, postId);

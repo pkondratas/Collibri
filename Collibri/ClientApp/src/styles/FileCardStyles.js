@@ -26,11 +26,5 @@ export const FileCardStyles = {
         justifyContent: 'space-between',
         height: '4rem',
         width: '20rem'
-    },
-    buttons: {
-        
-    },
-    name: {
-        
     }
 }
