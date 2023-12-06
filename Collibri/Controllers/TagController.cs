@@ -9,12 +9,10 @@ namespace Collibri.Controllers
     public class TagController : ControllerBase
     {
         private readonly ITagRepository _tagRepository;
-        private readonly IPostTagsRepository _postTagsRepository;
 
-        public TagController(ITagRepository tagRepository, IPostTagsRepository postTagsRepository)
+        public TagController(ITagRepository tagRepository)
         {
             _tagRepository = tagRepository;
-            _postTagsRepository = postTagsRepository;
         }
         
         [HttpPost("")]
@@ -51,19 +49,6 @@ namespace Collibri.Controllers
         public IActionResult GetTagsOnPost([FromQuery] Guid postId)
         {
             return Ok(_tagRepository.GetTagsOnPost(postId));
-        }
-        
-        // PostTags Repository
-        [HttpPost("add-to-post")]
-        public IActionResult AddToPost(Guid tagId, Guid postId)
-        {
-            return _postTagsRepository.AddTagToPost(tagId, postId) ? Ok() : Conflict();
-        }
-        
-        [HttpDelete("remove-from-post")]
-        public IActionResult RemoveFromPost(Guid tagId, Guid postId)
-        {
-            return _postTagsRepository.RemoveTagFromPost(tagId, postId) ? Ok() : NotFound();
         }
     }
 }

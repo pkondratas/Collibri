@@ -10,6 +10,7 @@ namespace Collibri.Models
         
         public virtual ICollection<RoomMember> RoomMembers { get; set; }
         public virtual ICollection<Section> Sections { get; set; } 
+        public virtual ICollection<Tag> Tags { get; set; }
         
         public Room()
         {

@@ -505,7 +505,7 @@ namespace Collibri.Migrations
             modelBuilder.Entity("Collibri.Models.Tag", b =>
                 {
                     b.HasOne("Collibri.Models.Room", "Room")
-                        .WithMany()
+                        .WithMany("Tags")
                         .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -583,6 +583,8 @@ namespace Collibri.Migrations
                     b.Navigation("RoomMembers");
 
                     b.Navigation("Sections");
+
+                    b.Navigation("Tags");
                 });
 
             modelBuilder.Entity("Collibri.Models.Section", b =>
