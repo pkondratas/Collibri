@@ -9,6 +9,9 @@ import UpdateSectionModal from "../Modals/UpdateSectionModal";
 import {buttonStyle, nameCellStyle, sectionCellStyle, tableRowStyle} from "../../styles/tableListStyle";
 import {deleteAllPostsInSection} from "../../api/PostAPI";
 import {useSelector} from "react-redux";
+import {buttonStyle, nameCellStyle, tableRowStyle} from "../../styles/tableListStyle";
+
+
 
 const SectionsContainer = ({sections, setSections, setSectionId}) => {
     const [updateModal, setUpdateModal] = useState(false);
@@ -33,7 +36,6 @@ const SectionsContainer = ({sections, setSections, setSectionId}) => {
     const handleDeleteSection = (row) => {
         deleteSection(row.id, setSections);
         setSectionId(0)
-        deleteAllPostsInSection(row.id);
     }
 
     useEffect(() => {

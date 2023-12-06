@@ -20,6 +20,7 @@ namespace Collibri.Repositories.DbImplementation
         public DocumentDTO? CreateDocument(DocumentDTO document, string postId)
         {
             document.Id = new int().GenerateNewId(_context.Documents.Select(x => x.Id).ToList());
+            document.PostId = Guid.Parse(postId);
             _context.Documents.Add(_mapper.Map<Document>(document));
             _context.SaveChanges();
 
@@ -43,6 +44,20 @@ namespace Collibri.Repositories.DbImplementation
             _context.SaveChanges();
 
             return _mapper.Map<DocumentDTO>(documentToDelete);
+        }
+        
+        public IEnumerable<DocumentDTO> DeleteAllDocumentsInPost(Guid postId)
+        {
+            var documentsInPost = _context.Documents.Where(x => x.PostId == postId);
+
+            foreach (var document in documentsInPost)
+            {
+                _context.Documents.Remove(document);
+            }
+
+            _context.SaveChanges();
+
+            return _mapper.Map<List<DocumentDTO>>(documentsInPost).AsEnumerable();
         }
 
         public DocumentDTO? UpdateDocument(DocumentDTO document, int id)

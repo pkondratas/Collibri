@@ -24,8 +24,9 @@ import NoteCard from "../Cards/NoteCard";
 import DocumentCard from "../Cards/DocumentCard";
 import {PostModalStyles} from "../../styles/PostModalStyles";
 import {fetchDocuments} from "../../api/DocumentAPI";
-import {useSelector} from "react-redux";
 import UpdatePostModal from "./UpdatePostModal";
+import { CreateNoteModal } from "./CreateNoteModal";
+import {createDocument, fetchDocuments} from "../../api/DocumentAPI";
 
 
 const SELECTION = ['notes', 'documents', 'files']
@@ -37,7 +38,8 @@ const PostModal = (props) => {
   const [list, setList] = useState([]);
   const [update, setUpdate] = useState(false);
   const [selection, setSelection] = useState(SELECTION[0]);
-  
+  const [createNoteModalOpen, setCreateNoteModalOpen] = useState(false);
+
   const handleClose = () => {
     props.setPostModal(false);
     setSelection(SELECTION[0]);
@@ -66,108 +68,118 @@ const PostModal = (props) => {
     }
   }
   
+  const handleAddNoteClick = () => {
+    setCreateNoteModalOpen(true);
+  };
+  
   return (
-    <Modal
-      open={props.postModal}
-      onClose={handleClose}
-    >
-      <Box sx={PostModalStyles.modalStyle}>
-        <Box sx={PostModalStyles.info}>
-          <Typography sx={PostModalStyles.title} variant="h2">
-            {props.title}
-          </Typography>
-          <Box sx={PostModalStyles.descriptionBox}>
-            <Typography>
-              Description:
-            </Typography>
-            <Typography sx={PostModalStyles.description} variant="body1">
-              {props.description}
-            </Typography>
-            <Box sx={PostModalStyles.userAndDateBox}>
-              <Typography variant="body1">
-                By: {props.creatorUsername} 
+      <>
+        <Modal
+            open={props.postModal}
+            onClose={handleClose}
+        >
+          <Box sx={PostModalStyles.modalStyle}>
+            <Box sx={PostModalStyles.info}>
+              <Typography sx={PostModalStyles.title} variant="h2">
+                {props.title}
               </Typography>
-              <Typography variant="body1">
-                {formatDateTime(new Date(props.lastUpdatedDate))}
-              </Typography>
+              <Box sx={PostModalStyles.descriptionBox}>
+                <Typography>
+                  Description:
+                </Typography>
+                <Typography sx={PostModalStyles.description} variant="body1">
+                  {props.description}
+                </Typography>
+                <Box sx={PostModalStyles.userAndDateBox}>
+                  <Typography variant="body1">By: </Typography>
+                  <Typography variant="body1">{formatDateTime(new Date(props.lastUpdatedDate))}</Typography>
+                </Box>
+              </Box>
+              <Box>
+                <Button sx={PostModalStyles.closeButton} onClick={handleClose}>
+                  <Close />
+                </Button>
+              </Box>
+            </Box>
+            <Box sx={PostModalStyles.optionButtonBox}>
+              <ToggleButtonGroup
+                  exclusive
+                  value={selection}
+                  onChange={handleValueChange}
+              >
+                <ToggleButton value="notes" sx={PostModalStyles.optionButtons} >Notes</ToggleButton>
+                <ToggleButton value="documents" sx={PostModalStyles.optionButtons} >Documents</ToggleButton>
+                <ToggleButton value="files" sx={PostModalStyles.optionButtons} >Files</ToggleButton>
+              </ToggleButtonGroup>
+            </Box>
+            <Box sx={PostModalStyles.contentBoxContainer}>
+              <Box sx={PostModalStyles.contentBox}>
+                <IconButton sx={PostModalStyles.addButton} onClick={handleAddNoteClick}>
+                  <AddBox sx={PostModalStyles.addIcon}/>
+                </IconButton>
+                {selection === 'notes' ? (
+                    notes.length !== 0 ? (
+                        <List sx={PostModalStyles.list}>
+                          {notes.map((note) => (
+                              <ListItem>
+                                <NoteCard {...note} setNotes={setNotes}/>
+                              </ListItem>
+                          ))}
+                        </List>
+                    ) : (
+                        <Typography sx={PostModalStyles.emptyListMessage}>"Nula"(zero) notes so far. Be the first one!</Typography>
+                    )
+                ) : selection === 'documents' ? (
+                        documents.length !== 0 ? (
+                            <List sx={PostModalStyles.list}>
+                              {documents.map((doc) => (
+                                  <ListItem>
+                                    <DocumentCard {...doc} documents={documents} setDocuments={setDocuments} />
+                                  </ListItem>
+                              ))}
+                            </List>
+                        ) : (
+                            <Typography sx={PostModalStyles.emptyListMessage}>"무"(zero) documents so far. Be the first one!</Typography>
+                        )
+                    ) :
+                    <Typography>files</Typography>
+                }
+              </Box>
+            </Box>
+            <Box sx={PostModalStyles.buttonBox}>
+              <Box>
+                <Button onClick={props.handleLike}>
+                  {props.likeCount} {props.liked ? <ThumbUp sx={PostModalStyles.reactionButton} /> : <ThumbUpOffAltOutlined sx={PostModalStyles.reactionButton} />}
+                </Button>
+                <Button onClick={props.handleDislike}>
+                  {props.dislikeCount} {props.disliked ? <ThumbDown sx={PostModalStyles.reactionButton} /> : <ThumbDownOffAltOutlined sx={PostModalStyles.reactionButton} />}
+                </Button>
+              </Box>
+              <Box>
+                <IconButton sx={PostModalStyles.editDeleteButtons} <IconButton sx={PostModalStyles.editDeleteButtons} onClick={() => {
+                  setUpdate(true);
+                }}>>
+                  <Edit />
+                </IconButton>
+                <IconButton sx={PostModalStyles.editDeleteButtons} onClick={() => {
+                  props.setDeleteModal(true)
+                }}>
+                  <Delete />
+                </IconButton>
+              </Box>
             </Box>
           </Box>
-          <Box>
-            <Button sx={PostModalStyles.closeButton} onClick={handleClose}>
-              <Close />
-            </Button>
-          </Box>
-        </Box>
-        <Box sx={PostModalStyles.optionButtonBox}>
-          <ToggleButtonGroup
-            exclusive
-            value={selection}
-            onChange={handleValueChange}
-          >
-            <ToggleButton value="notes" sx={PostModalStyles.optionButtons} >Notes</ToggleButton>
-            <ToggleButton value="documents" sx={PostModalStyles.optionButtons} >Documents</ToggleButton>
-            <ToggleButton value="files" sx={PostModalStyles.optionButtons} >Files</ToggleButton>
-          </ToggleButtonGroup>
-        </Box>
-        <Box sx={PostModalStyles.contentBoxContainer}>
-          <Box sx={PostModalStyles.contentBox}>
-            <IconButton sx={PostModalStyles.addButton}>
-              <AddBox sx={PostModalStyles.addIcon}/>
-            </IconButton>
-            {selection === 'notes' ? (
-              notes.length !== 0 ? (
-                <List sx={PostModalStyles.list}>
-                  {notes.map((note) => (
-                    <ListItem>
-                      <NoteCard {...note} setNotes={setNotes}/>
-                    </ListItem>
-                  ))}
-                </List> 
-              ) : (
-                <Typography sx={PostModalStyles.emptyListMessage}>"Nula"(zero) notes so far. Be the first one!</Typography>
-              )
-            ) : selection === 'documents' ? (
-              documents.length !== 0 ? (
-                <List sx={PostModalStyles.list}>
-                  {documents.map((doc) => (
-                    <ListItem>
-                      <DocumentCard {...doc} documents={documents} setDocuments={setDocuments} />
-                    </ListItem>
-                  ))}
-                </List>
-              ) : (
-                <Typography sx={PostModalStyles.emptyListMessage}>"무"(zero) documents so far. Be the first one!</Typography>
-              )
-            ) : 
-              <Typography>files</Typography>
-            }
-          </Box>
-        </Box>
-        <Box sx={PostModalStyles.buttonBox}>
-          <Box>
-            <Button onClick={props.handleLike}>
-              {props.likeCount} {props.liked ? <ThumbUp sx={PostModalStyles.reactionButton} /> : <ThumbUpOffAltOutlined sx={PostModalStyles.reactionButton} />}
-            </Button>
-            <Button onClick={props.handleDislike}>
-              {props.dislikeCount} {props.disliked ? <ThumbDown sx={PostModalStyles.reactionButton} /> : <ThumbDownOffAltOutlined sx={PostModalStyles.reactionButton} />}
-            </Button>
-          </Box>
-          <Box>
-            <IconButton sx={PostModalStyles.editDeleteButtons} onClick={() => {
-              setUpdate(true);
-            }}>
-              <Edit />
-            </IconButton>
-            <IconButton sx={PostModalStyles.editDeleteButtons} onClick={() => {
-              props.setDeleteModal(true)
-            }}>
-              <Delete />
-            </IconButton>
-          </Box>
-        </Box>
-        <UpdatePostModal setUpdateModal={setUpdate} updateModal={update} updatePostContent={props.updatePostContent} title={props.title} />
-      </Box>
-    </Modal>
+        </Modal>
+        <CreateNoteModal
+            showModal={createNoteModalOpen}
+            setOpen={setCreateNoteModalOpen}
+            postId={props.id}
+            handleSuccessfulClose={() => {
+              setCreateNoteModalOpen(false);
+              fetchNotes(props.id, setNotes);
+            }}
+        />
+      </>
   )
 }
 
