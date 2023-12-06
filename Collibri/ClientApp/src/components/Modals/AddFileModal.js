@@ -20,7 +20,7 @@ const AddFileModal = (props) => {
     
     const handleClose = () => {
         props.setOpen(false);
-        setError(false);
+        setError(true);
         setSizeError(false);
         setFile(null);
     }
@@ -68,14 +68,9 @@ const AddFileModal = (props) => {
                 <TextField error={sizeError} 
                            helperText={sizeError === true ? "Files must be under 5 MB" : (error === true ? "File not selected" : "")}
                            type="file" onChange={handleOnChange}/>
-                <Tooltip
-                    title={sizeError === true ? "Files must be under 5 MB" : (error === true ? "File not selected" : "")}
-                    arrow
-                    disableHoverListener={!(error || sizeError)}>
-                    <IconButton disabled={error || sizeError} onClick={handleUpload}>
-                        <AddBoxIcon />
-                    </IconButton>
-                </Tooltip>
+                <IconButton disabled={error || sizeError} onClick={handleUpload}>
+                    <AddBoxIcon />
+                </IconButton>
             </Box>
         </Modal>
     );
