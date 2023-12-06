@@ -35,7 +35,7 @@ namespace Collibri.Repositories.DbImplementation
 			}
 
 			var id = Guid.NewGuid();
-			var filePath = path + separator + id + file.FileName[file.FileName.IndexOf('.')..];
+			var filePath = path + separator + id + _fileSystem.Path.GetExtension(file.FileName);
 
 			if (_fileSystem.File.Exists(filePath))
 			{
