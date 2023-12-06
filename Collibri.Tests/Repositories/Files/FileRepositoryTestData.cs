@@ -20,16 +20,25 @@ namespace Collibri.Tests.Repositories.Files
             });
             
             Add(fileSystem, FileTestHelper.CreateTestFormFile("textFile1.txt", "Text file test data"), postId,
-                new FileInfoDTO(path + "\\textFile1.txt", Guid.Parse(postId)));
+                new FileInfoDTO(Guid.Parse("00000000000000000000000000000000"),
+                    Guid.Parse(postId),
+                    @"C:\Files\00000000000000000000000000000000\textFile.txt",
+                    "textFile.txt", "text/plain", 1));
             // Should return null
             Add(fileSystem, FileTestHelper.CreateTestFormFile("textFile.txt", "Text file test data"), postId,
                 null);
             // No extension
             Add(fileSystem, FileTestHelper.CreateTestFormFile("textFile", "Text file test data"), postId,
-                new FileInfoDTO(path + "\\textFile", Guid.Parse(postId)));
+                new FileInfoDTO(Guid.Parse("00000000000000000000000000000000"),
+                    Guid.Parse(postId),
+                    @"C:\Files\00000000000000000000000000000000\textFile.txt",
+                    "textFile.txt", "text/plain", 1));
             Add(fileSystem, FileTestHelper.CreateTestFormFile("pngFile2.png",
                     System.Text.Encoding.UTF8.GetString(new byte[] { 0x12, 0x34, 0x56, 0xd2 })), postId,
-                new FileInfoDTO(path + "\\pngFile2.png", Guid.Parse(postId)));
+                new FileInfoDTO(Guid.Parse("00000000000000000000000000000000"),
+                    Guid.Parse(postId),
+                    @"C:\Files\00000000000000000000000000000000\textFile.txt",
+                    "textFile.txt", "text/plain", 1));
         }
     }
 
@@ -46,15 +55,21 @@ namespace Collibri.Tests.Repositories.Files
                 { path + "\\pngFile.png", new MockFileData(new byte[] { 0x12, 0x34, 0x56, 0xd2 }) },
                 { path + "\\noExtension", new MockFileData("No extension file test data") }
             });
-            Add(fileSystem, "textFile.txt", postId, new FileInfoDTO(path + "\\textFile.txt", Guid.Parse(postId)));
+            Add(fileSystem, "textFile.txt", postId, new FileInfoDTO(Guid.Parse("00000000000000000000000000000000"),
+                Guid.Parse(postId),
+                @"C:\Files\00000000000000000000000000000000\textFile.txt",
+                "textFile.txt", "text/plain", 1));
             // Should return null
             Add(fileSystem, "noFile.txt", postId, null);
             // No extension
-            Add(fileSystem, "noExtension", postId, new FileInfoDTO(path + "\\noExtension", Guid.Parse(postId)));
+            Add(fileSystem, "noExtension", postId, new FileInfoDTO(Guid.Parse("00000000000000000000000000000000"),
+                Guid.Parse(postId),
+                @"C:\Files\00000000000000000000000000000000\textFile.txt",
+                "textFile.txt", "text/plain", 1));
         }
     }
 
-    public class GetFileData : TheoryData<MockFileSystem, string, string, FileContentResult?>
+    public class GetFileData : TheoryData<MockFileSystem, string, string, FileStreamResult?>
     {
         public GetFileData()
         {
@@ -68,13 +83,13 @@ namespace Collibri.Tests.Repositories.Files
                 { path + "\\noExtension", new MockFileData("No extension file test data") }
             });
             Add(fileSystem, "textFile.txt", postId,
-                FileTestHelper.CreateTestFileContentResult(fileSystem, path, "textFile.txt"));
+                FileTestHelper.CreateTestFileStreamResult(fileSystem, path, "textFile.txt"));
             // Should return null
             Add(fileSystem, "noFile.txt", postId, null);
             Add(fileSystem, "noExtension", postId,
-                FileTestHelper.CreateTestFileContentResult(fileSystem, path, "noExtension"));
+                FileTestHelper.CreateTestFileStreamResult(fileSystem, path, "noExtension"));
             Add(fileSystem, "pngFile.png", postId,
-                FileTestHelper.CreateTestFileContentResult(fileSystem, path, "pngFile.png"));
+                FileTestHelper.CreateTestFileStreamResult(fileSystem, path, "pngFile.png"));
         }
     }
     
@@ -92,7 +107,10 @@ namespace Collibri.Tests.Repositories.Files
                 { path + "\\noExtension", new MockFileData("No extension file test data") }
             });
             Add(fileSystem, "textFile.txt", postId, "anotherTextFile.txt",
-                new FileInfoDTO(path + "\\anotherTextFile.txt", Guid.Parse(postId)));
+                new FileInfoDTO(Guid.Parse("00000000000000000000000000000000"),
+                    Guid.Parse(postId),
+                    @"C:\Files\00000000000000000000000000000000\textFile.txt",
+                    "textFile.txt", "text/plain", 1));
             // Should return null
             Add(fileSystem, "noFile.txt", postId, "anotherTextFile.txt", null);
         }

@@ -34,7 +34,7 @@ namespace Collibri.Tests.Controllers
 		}
 	}
 
-	public class GetFileData : TheoryData<string, FileContentResult?>
+	public class GetFileData : TheoryData<string, FileStreamResult?>
 	{
 		public GetFileData()
 		{
@@ -47,7 +47,7 @@ namespace Collibri.Tests.Controllers
 			});
 
 			Add("00000000000000000000000000000000",
-				FileTestHelper.CreateTestFileContentResult(fileSystem, @"C:\Files\00000000000000000000000000000000",
+				FileTestHelper.CreateTestFileStreamResult(fileSystem, @"C:\Files\00000000000000000000000000000000",
 					"textFile.txt"));
 			Add("00000000000000000000000000000000", null);
 		}
