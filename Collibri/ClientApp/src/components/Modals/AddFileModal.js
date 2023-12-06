@@ -12,7 +12,7 @@ const AddFileModal = (props) => {
 
     const handleUpload = () => {
         const formData = new FormData();
-        formData.append('file', file);
+        formData.append('file', file, file.name);
         uploadFile(props.postId, formData, props.setFiles);
 
         props.setOpen(false);
