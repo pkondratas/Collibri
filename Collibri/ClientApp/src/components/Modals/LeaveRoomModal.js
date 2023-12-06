@@ -28,7 +28,7 @@ const LeaveRoomModal = (props) => {
     <>
       <CModal handleChanges={handleChanges} handleClose={handleClose} showModal={props.deleteModal} >
         <Typography variant="h5">
-          Are you sure you want to leave legendary "{rooms.currentRoom.name}"?
+          Are you sure you want to leave legendary "{props.name}"?
         </Typography>
       </CModal>
     </>

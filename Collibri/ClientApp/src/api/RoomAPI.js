@@ -36,7 +36,7 @@ export const createRoom = (roomName, username, handleNewRoom) => {
         });
 }
 
-export const updateRoom = (roomId, updatedRoom, rooms, setRooms) => {
+export const updateRoom = (roomId, updatedRoom, updateRoom) => {
     fetch(`/v1/rooms/${roomId}`, {
         method: 'PUT',
         headers: {
@@ -47,10 +47,7 @@ export const updateRoom = (roomId, updatedRoom, rooms, setRooms) => {
         .then((response) => response.json())
         .then((data) => {
             console.log(data);
-            const updatedRooms = [...rooms];
-            const roomIndex = updatedRooms.findIndex(room => room.id === roomId);
-            updatedRooms[roomIndex] = data;
-            setRooms(updatedRooms);
+            updateRoom(data);
         })
         .catch(error => console.error('Error updating section:', error));
 };

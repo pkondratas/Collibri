@@ -3,7 +3,6 @@ import {useNavigate} from "react-router-dom";
 import {nameCellStyle} from "../styles/tableListStyle";
 import {useDispatch, useSelector} from "react-redux";
 import {setCurrentRoom} from "../state/user/roomsSlice";
-import {RoomSettings} from "./RoomSettings";
 import React from "react";
 
 export const SideRoomTable = () => {
@@ -13,7 +12,6 @@ export const SideRoomTable = () => {
 
     return (
       <>
-        <RoomSettings />
         <TableContainer component={Paper} style={{minHeight: "30rem", maxHeight: "30rem", overflowY: "auto", }}>
           <Table stickyHeader>
             <TableBody>

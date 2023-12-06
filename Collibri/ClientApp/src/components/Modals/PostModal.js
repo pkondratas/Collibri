@@ -25,6 +25,7 @@ import DocumentCard from "../Cards/DocumentCard";
 import {PostModalStyles} from "../../styles/PostModalStyles";
 import {fetchDocuments} from "../../api/DocumentAPI";
 import {useSelector} from "react-redux";
+import UpdatePostModal from "./UpdatePostModal";
 
 
 const SELECTION = ['notes', 'documents', 'files']
@@ -34,6 +35,7 @@ const PostModal = (props) => {
   const [documents, setDocuments] = useState([]);
   const [files, setFiles] = useState([]);
   const [list, setList] = useState([]);
+  const [update, setUpdate] = useState(false);
   const [selection, setSelection] = useState(SELECTION[0]);
   
   const handleClose = () => {
@@ -82,8 +84,12 @@ const PostModal = (props) => {
               {props.description}
             </Typography>
             <Box sx={PostModalStyles.userAndDateBox}>
-              <Typography variant="body1">By: {props.creatorUsername} </Typography>
-              <Typography variant="body1">{formatDateTime(new Date(props.lastUpdatedDate))}</Typography>
+              <Typography variant="body1">
+                By: {props.creatorUsername} 
+              </Typography>
+              <Typography variant="body1">
+                {formatDateTime(new Date(props.lastUpdatedDate))}
+              </Typography>
             </Box>
           </Box>
           <Box>
@@ -147,7 +153,9 @@ const PostModal = (props) => {
             </Button>
           </Box>
           <Box>
-            <IconButton sx={PostModalStyles.editDeleteButtons}>
+            <IconButton sx={PostModalStyles.editDeleteButtons} onClick={() => {
+              setUpdate(true);
+            }}>
               <Edit />
             </IconButton>
             <IconButton sx={PostModalStyles.editDeleteButtons} onClick={() => {
@@ -157,6 +165,7 @@ const PostModal = (props) => {
             </IconButton>
           </Box>
         </Box>
+        <UpdatePostModal setUpdateModal={setUpdate} updateModal={update} updatePostContent={props.updatePostContent} title={props.title} />
       </Box>
     </Modal>
   )

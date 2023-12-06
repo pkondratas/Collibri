@@ -34,6 +34,7 @@ const RoomLayout = () => {
                 <Paper><Header/></Paper>
             </Grid>
             <Grid item xs={1}>
+                <RoomSettings />
                 <SideRoomTable/>
             </Grid>
             <Grid item md={4}>

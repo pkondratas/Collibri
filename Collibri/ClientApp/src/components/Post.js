@@ -31,6 +31,7 @@ const Post = (props) => {
   const [deleteModal, setDeleteModal] = useState(false);
   const [postModal, setPostModal] = useState(false);
   const userInformation = useSelector((state) => state.user);
+  const rooms = useSelector((state) => state.rooms);
     
   const handleDelete = (postId) => {
     deletePost(postId)
@@ -39,6 +40,14 @@ const Post = (props) => {
       })
   }
 
+  const isRoomOwner = () => {
+    return userInformation.username === rooms.currentRoom.creatorUsername;
+  }
+  
+  const isPostCreator = (creatorUsername) => {
+    return userInformation.username === creatorUsername;
+  }
+  
   const updatePostContent = (propertyToUpdate, value) => {
     const updatedPost = {
       ...post,
@@ -106,7 +115,7 @@ const Post = (props) => {
         }}>
           <CardContent>
             <Typography gutterBottom variant="h5">
-              {props.title}
+              {post.title}
             </Typography>
             <Box sx={postContentBoxStyle}>
               <Typography 
@@ -117,18 +126,22 @@ const Post = (props) => {
                 {post.description}
               </Typography>
               <Box sx={postEditingBox}>
-                <Button sx={postEditingButtons} className="Button" onClick={(event) => {
-                  event.stopPropagation();
-                  setDeleteModal(true);
-                }}>
-                  <DeleteOutline fontSize="small" />
-                </Button>
-                <Button sx={postEditingButtons} className="Button" onClick={(event) => {
-                  event.stopPropagation();
-                  setUpdateModal(true);
-                }}>
-                  <EditOutlined fontSize="small" />
-                </Button>
+                {(isRoomOwner() || isPostCreator(post.creatorUsername)) && (
+                  <Button sx={postEditingButtons} className="Button" onClick={(event) => {
+                    event.stopPropagation();
+                    setDeleteModal(true);
+                  }}>
+                    <DeleteOutline fontSize="small" />
+                  </Button>
+                )}
+                {(isPostCreator(post.creatorUsername)) && (
+                  <Button sx={postEditingButtons} className="Button" onClick={(event) => {
+                    event.stopPropagation();
+                    setUpdateModal(true);
+                  }}>
+                    <EditOutlined fontSize="small" />
+                  </Button>
+                )}
               </Box>
             </Box>
             <Typography>
@@ -149,7 +162,7 @@ const Post = (props) => {
       <DeleteModal id={props.id} deleteModal={deleteModal} setDeleteModal={setDeleteModal} handleDelete={handleDelete} />
       <PostModal 
         post={post} 
-        {...post} 
+        {...post}
         postModal={postModal} 
         setPostModal={setPostModal} 
         liked={liked}
@@ -158,6 +171,7 @@ const Post = (props) => {
         handleDislike={handleDislike}
         deleteModal={deleteModal}
         setDeleteModal={setDeleteModal}
+        updatePostContent={updatePostContent}
       />
     </>
   )

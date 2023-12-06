@@ -24,8 +24,8 @@ const roomsSlice = createSlice({
     setCurrentRoom: (state, action) => {
       state.currentRoom = action.payload;
     }
-  }
+  }  
 });
 
-export const { setRoomsSlice, addRoomSlice, setCurrentRoom } = roomsSlice.actions;
+export const { setRoomsSlice, addRoomSlice, setCurrentRoom, updateRoomSlice } = roomsSlice.actions;
 export default roomsSlice;
