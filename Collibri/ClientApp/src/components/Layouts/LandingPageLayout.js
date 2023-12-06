@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import {Grid, ThemeProvider, Typography} from "@mui/material";
+import {Button, Grid, ThemeProvider, Typography} from "@mui/material";
 import {headerStyle, headerTextTheme} from "../../styles/LandingPageStyle";
 import {CreateRoom} from "../Buttons/CreateRoom";
 import {JoinRoom} from "../Buttons/JoinRoom";
 import {RoomContainer} from "../Containers/RoomContainer";
 import '../../styles/tableList.css';
+import {AboutUsButton} from "../Buttons/AboutUsButton";
 
 export const LandingPageLayout = () => {
 
@@ -41,13 +42,18 @@ export const LandingPageLayout = () => {
                       container
                       direction="row"
                       justifyContent="space-evenly"
-                      alignItems="center">
-                    <Grid item>
+                      alignItems="center"
+                sx={{mt:'45rem'}}>
+                    <Grid item >
                         <CreateRoom setRooms={setRooms}/>
                     </Grid>
-                    <Grid item>
+                    <Grid item >
                         <JoinRoom/>
                     </Grid>
+                    
+                </Grid>
+                <Grid item  >
+                    <AboutUsButton/>
                 </Grid>
 
             </Grid>

@@ -42,6 +42,7 @@ export const deleteAllPostsInSection = (sectionId) => {
             console.error('Error deleting all posts:', error.message);
         });
 }
+
 export const fetchPosts = (sectionId, setPosts) => {
   axios.get(`/v1/posts?sectionId=${sectionId}`)
     .then(response => setPosts(response.data))

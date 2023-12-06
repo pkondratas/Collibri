@@ -49,6 +49,12 @@ namespace Collibri.Controllers
             var result = _noteRepository.DeleteNote(id);
             return result == null ? Conflict() : Ok(result);
         }
+        
+        [HttpDelete("in-post")]
+        public IActionResult DeleteAllNotesInPost([FromQuery] Guid postId)
+        {
+            return Ok(_noteRepository.DeleteAllNotesInPost(postId));
+        }
 
         [HttpPut("{id:int}")]
         public IActionResult UpdateNote([FromBody] NoteDTO note, int id)
