@@ -43,7 +43,7 @@ export const LandingPageLayout = () => {
                       alignItems="center"
                       sx={{mt:'45rem'}}>
                     <Grid item >
-                        <CreateRoom setRooms={setRooms}/>
+                        <CreateRoom/>
                     </Grid>
                     <Grid item>
                         <JoinRoom/>

@@ -38,27 +38,6 @@ export const deleteNote = async (noteId) => {
   }
 }
 
-export const createNote = (note) => {
-  fetch(`/v1/notes`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    }, 
-    body: note
-  })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Failed to create note');
-        }
-      })
-      .then(() => {
-        console.log('Note created successfully.');
-      })
-      .catch(error => {
-        console.error('Error creating note:', error.message);
-      });
-}
-
 export const deleteAllNotesInPost = (postId) => {
   fetch(`/v1/notes/in-post?postId=${postId}`, {
     method: 'DELETE',

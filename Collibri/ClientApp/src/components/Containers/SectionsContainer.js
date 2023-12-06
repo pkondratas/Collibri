@@ -7,9 +7,7 @@ import '../../styles/tableList.css';
 import {deleteSection, updateSection} from "../../api/SectionApi";
 import UpdateSectionModal from "../Modals/UpdateSectionModal";
 import {buttonStyle, nameCellStyle, sectionCellStyle, tableRowStyle} from "../../styles/tableListStyle";
-import {deleteAllPostsInSection} from "../../api/PostAPI";
 import {useSelector} from "react-redux";
-import {buttonStyle, nameCellStyle, tableRowStyle} from "../../styles/tableListStyle";
 
 
 
