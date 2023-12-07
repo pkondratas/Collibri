@@ -50,7 +50,7 @@ export const LoginContainerStyles = {
         minHeight: '11rem'
     },
     typography: {
-        marginBottom: 50,
+        //marginBottom: 50,
         color: 'rgba(29, 30, 24, 0.7)',
         fontFamily: 'Segoe UI Semibold'
     },

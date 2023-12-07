@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import {Grid, ThemeProvider, Typography, Button, Box, IconButton} from '@mui/material';
+import { useNavigate, useLocation } from 'react-router-dom';
+import {Grid, ThemeProvider, Typography, Box, IconButton} from '@mui/material';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { headerStyle, headerTextTheme } from '../../styles/LandingPageStyle';
+import { RoomContainer } from '../Containers/RoomContainer';
 import { CreateRoom } from '../Buttons/CreateRoom';
 import { JoinRoom } from '../Buttons/JoinRoom';
-import { RoomContainer } from '../Containers/RoomContainer';
 import { AboutUsButton } from '../Buttons/AboutUsButton';
 import LoginContainer from '../Containers/LoginContainer';
+import ResetPasswordContainer from '../Containers/ResetPasswordContainer';
 
 export const LandingPageLayout = () => {
     const [rooms, setRooms] = useState([]);
     const [loggedIn, setLoggedIn] = useState(false);
+    const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         // Check for stored login status on page load
@@ -37,6 +41,9 @@ export const LandingPageLayout = () => {
         // Update the loggedIn state
         setLoggedIn(false);
     };
+
+    // Check if the current route matches "/reset-password/:token"
+    const isResetPasswordPage = location.pathname.startsWith('/reset-password/');
 
     return (
         <Grid container style={{ width: '100vw', height: '100vh' }}>
@@ -84,12 +91,15 @@ export const LandingPageLayout = () => {
                             </Box>
                         </Box>
                     ) : (
-                        <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
+                        // Use ResetPasswordPage component only when the route matches "/reset-password/:token"
+                        isResetPasswordPage ? (
+                            <ResetPasswordContainer />
+                        ) : (
                             <LoginContainer onLoginStatusChange={handleLoginStatus} />
-                        </Box>
+                        )
                     )}
                 </Box>
-                
+
                 {/* About Us button placed in the footer */}
                 <Box >
                     <AboutUsButton />
