@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Box, IconButton, Modal, TextField, Tooltip} from "@mui/material";
+import {Box, CircularProgress, IconButton, Modal, TextField, Tooltip} from "@mui/material";
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import {uploadFile} from "../../api/FileAPI";
 import {AddFileStyle} from "../../styles/AddFileStyle";
@@ -9,13 +9,14 @@ const AddFileModal = (props) => {
     const [file, setFile] = useState(null);
     const [error, setError] = useState(true);
     const [sizeError, setSizeError] = useState(false);
-
+    const [progress, setProgress] = useState(0);
+    
     const handleUpload = () => {
         const formData = new FormData();
         formData.append('file', file, file.name);
         uploadFile(props.postId, formData, props.setFiles);
 
-        props.setOpen(false);
+        handleClose();
     }
     
     const handleClose = () => {
@@ -23,14 +24,13 @@ const AddFileModal = (props) => {
         setError(true);
         setSizeError(false);
         setFile(null);
+        setProgress(0);
     }
     
-    const handleOnChange = (event) => {
+    const handleOnChange = async (event) => {
         const uploadedFile = event.target.files[0];
-        setError(false);
-        setSizeError(false);
         
-        if (uploadedFile === undefined || uploadedFile === null) {
+        if (uploadedFile === null) {
             setError(true);
             return;
         } else if (uploadedFile.size > 5e6) {
@@ -45,21 +45,26 @@ const AddFileModal = (props) => {
             const options = {
                 maxSizeMB: 2,
                 maxWidthOrHeight: 720,
-                useWebWorker: true
+                useWebWorker: true,
+                onProgress: setCurrentProgress
             }
             
             try {
-                imageCompression(uploadedFile, options)
-                    .then(function (compressedFile) {
-                        console.log(`${compressedFile.name} compressedFile size ${compressedFile.size / 1024} KB`);
-                        setFile(compressedFile);
-                });
+                const compressedFile = await imageCompression(uploadedFile, options);
+                console.log(`${compressedFile.name} compressedFile size ${compressedFile.size / 1024} KB`);
+                setFile(compressedFile);
             } catch (error) {
                 console.log(error);
             }
         } else {
             setFile(uploadedFile);
+            setError(false);
+            setSizeError(false);
         }
+    }
+    
+    const setCurrentProgress = (progressValue) => {
+        setProgress(progressValue);
     }
     
     return(
@@ -68,9 +73,10 @@ const AddFileModal = (props) => {
                 <TextField error={sizeError} 
                            helperText={sizeError === true ? "Files must be under 5 MB" : (error === true ? "File not selected" : "")}
                            type="file" onChange={handleOnChange}/>
-                <IconButton disabled={error || sizeError} onClick={handleUpload}>
+                <IconButton disabled={error || sizeError || progress !== 100} onClick={handleUpload}>
                     <AddBoxIcon />
                 </IconButton>
+                <CircularProgress variant="determinate" value={progress} />
             </Box>
         </Modal>
     );
