@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {Button, Grid, ThemeProvider, Typography} from "@mui/material";
+import {Grid, ThemeProvider, Typography} from "@mui/material";
 import {headerStyle, headerTextTheme} from "../../styles/LandingPageStyle";
 import {CreateRoom} from "../Buttons/CreateRoom";
 import {JoinRoom} from "../Buttons/JoinRoom";
@@ -8,9 +8,7 @@ import '../../styles/tableList.css';
 import {AboutUsButton} from "../Buttons/AboutUsButton";
 
 export const LandingPageLayout = () => {
-
-    const [rooms, setRooms] = useState([]);
-
+    
     return (
         <Grid container
               style={{width: "100vw", height: "100vh"}}>
@@ -34,7 +32,7 @@ export const LandingPageLayout = () => {
 
                 {/*List*/}
                 <Grid item>
-                    <RoomContainer rooms={rooms} setRooms={setRooms}/>
+                    <RoomContainer />
                 </Grid>
 
                 {/*Button grid*/}
@@ -43,11 +41,11 @@ export const LandingPageLayout = () => {
                       direction="row"
                       justifyContent="space-evenly"
                       alignItems="center"
-                sx={{mt:'45rem'}}>
+                      sx={{mt:'45rem'}}>
                     <Grid item >
-                        <CreateRoom setRooms={setRooms}/>
+                        <CreateRoom/>
                     </Grid>
-                    <Grid item >
+                    <Grid item>
                         <JoinRoom/>
                     </Grid>
                     
