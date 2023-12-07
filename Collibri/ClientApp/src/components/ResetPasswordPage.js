@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { TextField, Button, Typography, Container, Paper, CircularProgress } from '@mui/material';
 import { resetPassword } from '../api/ResetPasswordAPI';
+import { LoginContainerStyles } from '../styles/LoginContainerStyles.js';
+
 
 const ResetPasswordPage = () => {
     const { token } = useParams();
@@ -55,13 +57,17 @@ const ResetPasswordPage = () => {
     };
 
     return (
-        <Container maxWidth="xs">
+        <Container maxWidth="xs" sx={LoginContainerStyles.container}>
             <Paper elevation={0} style={{ padding: 16, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <Typography variant="h5" gutterBottom>
+                <Typography variant="h5" gutterBottom sx={LoginContainerStyles.typography}>
                     Reset Password
                 </Typography>
                 <TextField
-                    label="Email"
+                    label={
+                        <Typography variant="body1" style={{ fontFamily: 'Segoe UI' }}>
+                            Email
+                        </Typography>
+                    }
                     type="email"
                     fullWidth
                     margin="normal"
@@ -69,9 +75,15 @@ const ResetPasswordPage = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     error={emailError !== ''}
                     helperText={emailError}
+                    variant="standard"
+                    sx={LoginContainerStyles.input}
                 />
                 <TextField
-                    label="New Password"
+                    label={
+                        <Typography variant="body1" style={{ fontFamily: 'Segoe UI' }}>
+                            New Password
+                        </Typography>
+                    }
                     type="password"
                     fullWidth
                     margin="normal"
@@ -79,9 +91,15 @@ const ResetPasswordPage = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     error={error !== '' && error !== 'Passwords do not match.'}
                     helperText={error !== 'Passwords do not match.' && error}
+                    variant="standard"
+                    sx={LoginContainerStyles.input}
                 />
                 <TextField
-                    label="Confirm Password"
+                    label={
+                        <Typography variant="body1" style={{ fontFamily: 'Segoe UI' }}>
+                            Confirm Password
+                        </Typography>
+                    }
                     type="password"
                     fullWidth
                     margin="normal"
@@ -89,10 +107,12 @@ const ResetPasswordPage = () => {
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     error={error === 'Passwords do not match.'}
                     helperText={error === 'Passwords do not match.' && error}
+                    variant="standard"
+                    sx={LoginContainerStyles.input}
                 />
                 {processing && <CircularProgress style={{ margin: '16px 0' }} />}
-                <Button variant="contained" color="primary" fullWidth onClick={handleSubmit}>
-                    Reset Password
+                <Button variant="contained" color="primary" fullWidth onClick={handleSubmit} sx={LoginContainerStyles.button}>
+                    Submit
                 </Button>
             </Paper>
         </Container>
