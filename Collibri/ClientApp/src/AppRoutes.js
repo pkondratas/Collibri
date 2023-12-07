@@ -2,6 +2,9 @@ import LoginPage from "./components/LoginPage";
 import {Navigate} from "react-router-dom";
 import {LandingPageLayout} from "./components/Layouts/LandingPageLayout";
 import RoomLayout from "./components/Layouts/RoomLayout";
+import ResetPasswordPage from "./components/ResetPasswordPage";
+import AboutPage from "./components/AboutPage";
+
 
 const AppRoutes = [
   {
@@ -19,7 +22,16 @@ const AppRoutes = [
   {
     path: '/login',
     element: <LoginPage />
+  },
+  {
+    path : '/reset-password/:token', 
+    element: <ResetPasswordPage />
+  },
+  {
+    path: '/about',
+    element: <AboutPage />
   }
+    
 ];
 
 export default AppRoutes;
