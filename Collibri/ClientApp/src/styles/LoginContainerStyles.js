@@ -1,9 +1,8 @@
-export const LoginPageStyles = {
+export const LoginContainerStyles = {
     container: {
-        display: 'grid',
-        placeItems: 'center',
-        height: '100vh',
-        backgroundColor: '#ababab',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     header: {
         position: 'absolute',
@@ -37,7 +36,7 @@ export const LoginPageStyles = {
         minHeight: '27rem',
         // position: 'relative',
         // zIndex: 0,
-    },  
+    },
     paper: {
         padding: 20,
         minWidth: '25.5rem',
@@ -48,25 +47,31 @@ export const LoginPageStyles = {
         backgroundColor: '#d3d3d3',
     },
     fieldContainer: {
-        minHeight: '12rem'
+        minHeight: '11rem'
     },
     typography: {
-        fontWeight: 'bold',
-        marginBottom: 20,
+        marginBottom: 50,
+        color: 'rgba(29, 30, 24, 0.7)',
+        fontFamily: 'Segoe UI Semibold'
     },
     input: {
-        backgroundColor: '#ffffff',
         borderRadius: '8px',
+        fontFamily: 'Segoe UI',
     },
     link: {
         textDecoration: 'none',
-        color: '#757575',
-        fontWeight: 'bold',
+        color: '#316C44',
+        fontWeight: 600,
         marginBottom: 20,
+        fontFamily: 'Segoe UI',
     },
     button: {
-        backgroundColor: '#757575',
-        color: '#FFFFFF',
+        textTransform: 'none',
+        backgroundColor: '#316C44',
+        fontSize: '1rem',
+        borderRadius: 28,
+        width: '8rem',
+        color: '#DEFEF5',
+        fontFamily: 'Segoe UI Semibold'
     },
 };
-

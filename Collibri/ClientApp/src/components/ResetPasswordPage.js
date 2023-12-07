@@ -22,7 +22,7 @@ const ResetPasswordPage = () => {
 
     useEffect(() => {
         if (resetSuccess) {
-            navigate('/login');
+            navigate('/home');
         }
     }, [resetSuccess, navigate]);
 

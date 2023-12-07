@@ -12,9 +12,10 @@ const userSlice = createSlice({
     onLogin: (state, action) => {
       state.username = action.payload;
       state.loggedIn = true;
-    }
+    },
+    onLogout: () => initialState,
   }
 });
 
-export const { onLogin } = userSlice.actions;
+export const { onLogin, onLogout } = userSlice.actions;
 export default userSlice;
