@@ -22,7 +22,7 @@ export const UserInfoStyles = {
         minWidth: '14rem',
         paddingTop: '1.25rem',
         paddingRight:'1.5rem',
-        textAlign: 'center'
+        textAlign: 'center',
     },
     StyledBadge:  styled(Badge)(({ theme }) => ({
         '& .MuiBadge-badge': {

@@ -58,7 +58,7 @@ export const getRooms = (setRooms,setSkeleton) => {
         .then((response) => response.json())
         .then((data) => {
             console.log(data);
-            setSkeleton(false);
+            // setSkeleton(false);
             setRooms(data);
         })
         .catch(error => console.error('Error fetching data', error));
