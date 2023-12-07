@@ -29,6 +29,7 @@ import {fetchFiles} from "../../api/FileAPI";
 import FileCard from "../Cards/FileCard";
 import ImageCard from "../Cards/ImageCard";
 import AddFileButton from "../Buttons/AddFileButton";
+import UpdatePostModal from "./UpdatePostModal";
 
 
 const SELECTION = ['notes', 'documents', 'files']
