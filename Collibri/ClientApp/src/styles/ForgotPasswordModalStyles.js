@@ -1,6 +1,5 @@
 const modalStyles = {
     container: {
-        position: 'absolute',
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
@@ -9,6 +8,31 @@ const modalStyles = {
         p: 2,
         bgcolor: '#d3d3d3',
         borderRadius: 3,
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    container2: {
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 275,
+        height: '13.75rem',
+        p: 2,
+        bgcolor: '#d3d3d3',
+        borderRadius: 3,
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    centered: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     inputField: {
         backgroundColor: '#ffffff',
@@ -34,9 +58,10 @@ const modalStyles = {
     errorHelperText: {
         color: 'red',
         fontSize: '12px',
+        backgroundColor: 'none',
     },
     helperTextBox: {
-        minHeight: '1.2rem'
+        minHeight: '1.5rem'
     },
     processing: {
         display: 'flex',
