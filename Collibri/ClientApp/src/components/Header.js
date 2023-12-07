@@ -20,7 +20,6 @@ const Header = () => {
                             <ArrowBackIcon style={HeaderStyles.backButton} />
                         </IconButton>
                     </Tooltip>
-                    <Typography variant="h4" style={HeaderStyles.title}>Collibri</Typography>
                 </Box>
                 <Box>
                     <AboutUsButton />

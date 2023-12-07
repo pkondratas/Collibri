@@ -3,12 +3,12 @@ import Badge from "@mui/material/Badge";
 
 export const UserInfoStyles = {
     mainBox: {
-        mt:'13vh',
+        // mt:'13vh',
         display:'flex',
-        boxShadow: 12,
-        minHeight:'4rem',
-        minWidth:'19rem',
-        maxWidth:'15rem'
+        boxShadow: 1,
+        minHeight: '11%',
+        // minWidth:'19rem',
+        // maxWidth:'15rem'
     },
     iconBox: {
         bgcolor: 'background.paper',

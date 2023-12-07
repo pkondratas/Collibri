@@ -89,8 +89,12 @@ const PostModal = (props) => {
                   {props.description}
                 </Typography>
                 <Box sx={PostModalStyles.userAndDateBox}>
-                  <Typography variant="body1">By: </Typography>
-                  <Typography variant="body1">{formatDateTime(new Date(props.lastUpdatedDate))}</Typography>
+                  <Typography variant="body1">
+                    By: {props.creatorUsername}
+                  </Typography>
+                  <Typography variant="body1">
+                    {formatDateTime(new Date(props.lastUpdatedDate))}
+                  </Typography>
                 </Box>
               </Box>
               <Box>

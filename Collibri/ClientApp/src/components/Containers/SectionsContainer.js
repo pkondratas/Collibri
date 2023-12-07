@@ -42,7 +42,6 @@ const SectionsContainer = ({sections, setSections, setSectionId}) => {
 
     return (
         <>
-
             <TableContainer component={Paper} style={{minHeight: "30rem", maxHeight: "30rem", overflowY: "auto", }}>
                 <Table stickyHeader sx={{minWidth: 400}} aria-label="simple table">
                     <TableBody>

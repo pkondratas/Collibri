@@ -4,6 +4,9 @@ import {nameCellStyle} from "../styles/tableListStyle";
 import {useDispatch, useSelector} from "react-redux";
 import {setCurrentRoom} from "../state/user/roomsSlice";
 import React from "react";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
 
 export const SideRoomTable = () => {
     const rooms = useSelector((state) => state.rooms);
@@ -12,26 +15,42 @@ export const SideRoomTable = () => {
 
     return (
       <>
-        <TableContainer component={Paper} style={{minHeight: "30rem", maxHeight: "30rem", overflowY: "auto", }}>
-          <Table stickyHeader>
-            <TableBody>
-              {rooms.rooms.map((row) => (
-                <TableRow
-                  hover
-                  className="TableRow"
-                  key={row.id}
-                  sx={nameCellStyle}
-                >
-                  <TableCell component="th" scope="row"
-                             onClick={() => {
-                               navigate(`/${row.id}`)
-                               dispatch(setCurrentRoom(row));
-                             }}> {row.name} </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <List>
+          {rooms.rooms.map((row) => (
+            <ListItem
+              // hover
+              // className="TableRow"
+              key={row.id}
+              // sx={nameCellStyle}
+            >
+              <ListItemText
+                         onClick={() => {
+                           navigate(`/${row.id}`)
+                           dispatch(setCurrentRoom(row));
+                         }}> {row.name} </ListItemText>
+            </ListItem>
+          ))}
+        </List>
+        {/*<TableContainer component={Paper} style={{minHeight: "30rem", maxHeight: "30rem", overflowY: "auto", }}>*/}
+        {/*  <Table stickyHeader>*/}
+        {/*    <TableBody>*/}
+        {/*      {rooms.rooms.map((row) => (*/}
+        {/*        <TableRow*/}
+        {/*          hover*/}
+        {/*          className="TableRow"*/}
+        {/*          key={row.id}*/}
+        {/*          sx={nameCellStyle}*/}
+        {/*        >*/}
+        {/*          <TableCell component="th" scope="row"*/}
+        {/*                     onClick={() => {*/}
+        {/*                       navigate(`/${row.id}`)*/}
+        {/*                       dispatch(setCurrentRoom(row));*/}
+        {/*                     }}> {row.name} </TableCell>*/}
+        {/*        </TableRow>*/}
+        {/*      ))}*/}
+        {/*    </TableBody>*/}
+        {/*  </Table>*/}
+        {/*</TableContainer>*/}
       </>
     );
 }

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Button, Grid, Paper} from '@mui/material';
+import {Button, Grid, Paper, Typography} from '@mui/material';
 import {useParams} from "react-router-dom";
 import Header from "../Header";
 import {RoomSettings} from "../RoomSettings";
@@ -13,6 +13,20 @@ import PostContainer from "../Containers/PostContainer";
 import {getSections} from "../../api/SectionApi";
 import {postContainerStyle} from "../../styles/RoomLayoutStyle";
 import {useSelector} from "react-redux";
+import Drawer from '@mui/material/Drawer';
+import Toolbar from '@mui/material/Toolbar';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
+import {HeaderStyles} from "../../styles/HeaderStyles";
+
+
+const drawerWidth = 240;
 
 const RoomLayout = () => {
     const [sectionId, setSectionId] = useState(0);
@@ -26,37 +40,75 @@ const RoomLayout = () => {
 
     return (
 
-        <Grid container spacing={2}
+        <Grid //container
               direction="row"
-              justifyContent="space-evenly"
-              alignItems="strech">
-            <Grid item xs={12}>
-                <Paper><Header/></Paper>
+              sx={{display:'flex'}}
+              // justifyContent="space-evenly"
+              // alignItems="strech"
+        >
+            <Grid sx={{width:'17%'}}>
+              <Drawer
+                sx={{
+                  width: '17%',
+                  flexShrink: 0,
+                  '& .MuiDrawer-paper': {
+                    width: '17%',
+                    boxSizing: 'border-box',
+                  },
+                }}
+                variant="permanent"
+                anchor="left"
+              >
+                <Toolbar>
+                  <Typography variant="h4" style={{color: 'black', fontWeight: 'bold',}}>
+                    Collibri
+                  </Typography>
+                </Toolbar>
+                <Divider /> 
+                  <SideRoomTable/>
+                  <RoomSettings />
+                <Divider />
+              </Drawer>
+                {/*<RoomSettings />*/}
+                {/*<SideRoomTable/>*/}
             </Grid>
-            <Grid item xs={1}>
-                <RoomSettings />
-                <SideRoomTable/>
+            <Grid direction="column" sx={{width:'83%'}}>
+              <Grid sx={{ height: '20%'}}>
+                <Header/>
+              </Grid>
+              <Grid direction="row" sx={{display: 'flex', height: '80%'}}>
+                  <Grid direction="column" sx={{display:'flex',width:'32%'}}>
+                    <AddSection sections={sections} setSections={setSections}></AddSection>
+                    <SectionsContainer sections={sections} setSections={setSections} setSectionId={setSectionId}/>
+                    <UserInfoContainer />
+                  </Grid>
+                  <Grid direction="column" sx={{display:'flex',width:'68%'}}>
+                      <AddPostButton sectionId={sectionId} setPosts={setPosts}/>
+                      <SearchBar posts={posts} sectionId={sectionId} setPosts={setPosts}/>
+                      <PostContainer sectionId={sectionId} posts={posts} setPosts={setPosts}/>
+                  </Grid>
+              </Grid>
             </Grid>
-            <Grid item md={4}>
-                <AddSection sections={sections} setSections={setSections}></AddSection>
-                <Paper><SectionsContainer sections={sections} setSections={setSections}
-                                          setSectionId={setSectionId}/>
-                </Paper>
-                <UserInfoContainer />
-            </Grid>
-            <Grid  item xs={6}>
-                <Grid container
-                      direction="row"
-                      sx={{mb:'0.5rem'}}
-                >
-                    <AddPostButton sectionId={sectionId} setPosts={setPosts}/>
-                    <SearchBar posts={posts} sectionId={sectionId} setPosts={setPosts}/>
-                </Grid>
-
-                <Paper sx={postContainerStyle}>
-                    <PostContainer sectionId={sectionId} posts={posts} setPosts={setPosts}/>
-                </Paper>
-            </Grid>
+            {/*<Grid item md={4}>*/}
+            {/*    <AddSection sections={sections} setSections={setSections}></AddSection>*/}
+            {/*    <Paper>*/}
+            {/*      <SectionsContainer sections={sections} setSections={setSections} setSectionId={setSectionId}/>*/}
+            {/*    </Paper>*/}
+            {/*    <UserInfoContainer />*/}
+            {/*</Grid>*/}
+            {/*<Grid  item xs={6}>*/}
+            {/*    <Grid container*/}
+            {/*          direction="row"*/}
+            {/*          sx={{mb:'0.5rem'}}*/}
+            {/*    >*/}
+            {/*        <AddPostButton sectionId={sectionId} setPosts={setPosts}/>*/}
+            {/*        <SearchBar posts={posts} sectionId={sectionId} setPosts={setPosts}/>*/}
+            {/*    </Grid>*/}
+            
+            {/*    <Paper sx={postContainerStyle}>*/}
+            {/*        <PostContainer sectionId={sectionId} posts={posts} setPosts={setPosts}/>*/}
+            {/*    </Paper>*/}
+            {/*</Grid>*/}
         </Grid>
 
     );
