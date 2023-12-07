@@ -23,10 +23,19 @@ namespace Collibri.Controllers
             return result == null ? Conflict() : Ok(result);
         }
 
-        [HttpGet("")]
-        public IActionResult GetAllRooms()
+        [HttpGet("{code}")]
+        public IActionResult GetRoomByCode(int code)
         {
-            List<RoomDTO> rooms = _roomRepository.GetAllRooms();
+            var roomByCode = _roomRepository.GetRoomByCode(code);
+
+            return roomByCode == null ? NotFound() : Ok(roomByCode);
+        }
+
+        [HttpGet("")]
+        public IActionResult GetAllRoomsByUsername([FromQuery] string username)
+        {
+            var rooms = _roomRepository.GetRoomsByUsername(username);
+            
             return rooms.Count == 0 ? NoContent() : Ok(rooms);
         }
 
@@ -41,8 +50,9 @@ namespace Collibri.Controllers
         [HttpDelete("{roomId}")]
         public IActionResult DeleteRoom(int roomId)
         {
-            var deleted = _roomRepository.DeleteRoom(roomId);
-            return deleted ? NoContent() : NotFound();
+            var deletedRoom = _roomRepository.DeleteRoom(roomId);
+            
+            return deletedRoom == null ? NotFound() : Ok(deletedRoom);
         }
     }
 }

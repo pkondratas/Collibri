@@ -12,11 +12,11 @@ namespace Collibri.Repositories.DbImplementation
             _signInManager = signInManager;
         }
 
-        public async Task<LoginInfoDTO?> LoggingInRequestAsync(LoginInfoDTO loginInfo)
+        public async Task<string?> LoggingInRequestAsync(LoginInfoDTO loginInfo)
         {
             var result = await _signInManager.PasswordSignInAsync(loginInfo.Username, loginInfo.Password, false, false);
             
-            return result.Succeeded ? loginInfo : null;
+            return result.Succeeded ? loginInfo.Username : null;
         }
     }
 }

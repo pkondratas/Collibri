@@ -16,6 +16,10 @@ namespace Collibri.Data
 		public DbSet<RoomMember> RoomMembers { get; set; }
 		public DbSet<FileInfo> FileInfos { get; set; }
 
+		public DataContext()
+		{
+			
+		}
 		public DataContext(DbContextOptions<DataContext> options) : base(options)
 		{
 		}

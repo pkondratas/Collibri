@@ -3,9 +3,10 @@ export const buttonStyle = {
 }
 
 export const tableRowStyle = {
-    '&:last-child td, &:last-child th': { border: 0 }
+    '&:last-child td, &:last-child th': { border: 0 },
+    height: '5rem',
 }
 
 export const nameCellStyle = {
-    cursor: 'pointer'
+    cursor: 'pointer',
 }

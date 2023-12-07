@@ -29,6 +29,7 @@ import {fetchFiles} from "../../api/FileAPI";
 import FileCard from "../Cards/FileCard";
 import ImageCard from "../Cards/ImageCard";
 import AddFileButton from "../Buttons/AddFileButton";
+import UpdatePostModal from "./UpdatePostModal";
 
 
 const SELECTION = ['notes', 'documents', 'files']
@@ -40,7 +41,8 @@ const PostModal = (props) => {
     const [list, setList] = useState([]);
     const [selection, setSelection] = useState(SELECTION[0]);
     const [createNoteModalOpen, setCreateNoteModalOpen] = useState(false);
-
+    const [update, setUpdate] = useState(false);
+  
     const handleClose = () => {
         props.setPostModal(false);
         setSelection(SELECTION[0]);
@@ -189,7 +191,9 @@ const PostModal = (props) => {
                             </Button>
                         </Box>
                         <Box>
-                            <IconButton sx={PostModalStyles.editDeleteButtons}>
+                            <IconButton sx={PostModalStyles.editDeleteButtons} onClick={() => {
+                              setUpdate(true);
+                            }}>
                                 <Edit />
                             </IconButton>
                             <IconButton sx={PostModalStyles.editDeleteButtons} onClick={() => {

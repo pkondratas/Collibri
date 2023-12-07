@@ -6,6 +6,8 @@ import CreateAccountModal from "../Modals/CreateAccountModal";
 import {loginUser} from "../../api/LoginAPI";
 import modalStyles from "../../styles/ForgotPasswordModalStyles";
 import {useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {onLogin} from "../../state/user/userSlice";
 
 const LoginContainer = ({ onLoginStatusChange }) => {
     const [forgotPasswordModalOpen, setForgotPasswordModalOpen] = useState(false);
@@ -19,6 +21,7 @@ const LoginContainer = ({ onLoginStatusChange }) => {
     const [emptyPassword, setEmptyPassword] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleForgotPasswordClick = () => {
         setForgotPasswordModalOpen(true);
@@ -54,12 +57,12 @@ const LoginContainer = ({ onLoginStatusChange }) => {
             setEmptyPassword(false);
 
             const response = await loginUser({ "Username": username, "Password": password });
-
-            if(typeof response === 'object' && response.Username === username) {
-                navigate('/home');
+            
+            if(typeof response === 'string' && response === username) {
+                dispatch(onLogin(response));
                 setProcessing(false);
                 setFieldVisibility(true);
-                onLoginStatusChange(true);
+                onLoginStatusChange(true, response);
             } else if(typeof response === 'number' && response === 404) {
                 setErrorMessage('Incorrect username or password. Please try again');
                 setProcessing(false);
