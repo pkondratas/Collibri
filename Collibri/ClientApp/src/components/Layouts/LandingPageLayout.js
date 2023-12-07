@@ -63,12 +63,12 @@ export const LandingPageLayout = () => {
             {/* Main Content */}
             <Grid item xs={6} container direction="column" justifyContent="center" alignItems="center" style={{ minHeight: '100vh', backgroundColor: '#DEFEF5'}}>
                 <Box>
-                    <img src="/logo.png" alt="Collibri Logo" style={{ height: '20%', width: 'auto', marginBottom: '3rem' }} />
+                    <img src="/logo.png" alt="Collibri Logo" style={{ height: '15vh', width: 'auto', marginBottom: '50vh' }} />
                 </Box>
-                <Box sx={{marginTop: '-25rem', marginBottom: '5rem', minHeight: '30rem'}}>
+                <Box sx={{marginTop: '-45vh', marginBottom: '3vh', minHeight: '50vh'}}>
                     {loggedIn ? (
                         <Box>
-                            <Box style={{ position: 'absolute', top: '5%', right: '5%', transform: 'translateX(50%)' }}>
+                            <Box style={{ position: 'absolute', top: '5vh', right: '5vh' }}>
                                 <IconButton color="secondary" onClick={handleLogout}>
                                     <ExitToAppIcon />
                                 </IconButton>
@@ -77,7 +77,7 @@ export const LandingPageLayout = () => {
                             <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" >
                                 <Typography sx={{
                                     fontWeight: 'bold',
-                                    marginBottom: 5,
+                                    marginBottom: '2vh',
                                 }}>
                                     Your rooms:
                                 </Typography>

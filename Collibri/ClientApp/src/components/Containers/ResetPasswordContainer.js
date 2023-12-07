@@ -119,7 +119,7 @@ const ResetPasswordContainer = () => {
                             sx={LoginContainerStyles.input}
                         />
                     </Box>
-                        <Button variant="contained" color="primary" fullWidth onClick={handleSubmit} sx={{...LoginContainerStyles.button, marginTop: '2.5rem'}}>
+                        <Button variant="contained" color="primary" fullWidth onClick={handleSubmit} sx={{...LoginContainerStyles.button, marginTop: '5vh'}}>
                             Submit
                         </Button>
                 </Box>
