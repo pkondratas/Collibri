@@ -1,13 +1,14 @@
+using Collibri.Dtos;
 using Microsoft.AspNetCore.Mvc;
-using File = Collibri.Models.File;
 
 namespace Collibri.Repositories
 {
     public interface IFileRepository
     {
-        File? CreateFile(IFormFile file, string postId);
-        File? DeleteFile(string fileName, string postId);
-        FileStreamResult? GetFile(string fileName, string postId);
-        File? UpdateFileName(string fileName, string postId, string updatedName);
+        FileInfoDTO? CreateFile(IFormFile file, string postId);
+        FileInfoDTO? DeleteFile(string id);
+        IEnumerable<FileInfoDTO>? GetAllFiles(string postId);
+        FileStreamResult? GetFile(string id);
+        FileInfoDTO? UpdateFileName(string fileName, string updatedName);
     }
 }

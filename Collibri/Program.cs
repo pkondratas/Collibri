@@ -22,19 +22,19 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<IFileRepository, FileRepository>();
+builder.Services.AddScoped<IFileRepository, DbFileRepository>();
 builder.Services.AddScoped<IFileSystem, FileSystem>();
 //builder.Services.AddScoped<IDataHandler, DataHandler>();
 builder.Services.AddScoped<ISectionRepository, DbSectionRepository>();
 builder.Services.AddScoped<INoteRepository, DbNoteRepository>();
 builder.Services.AddScoped<IRoomRepository, DbRoomRepository>();
 builder.Services.AddScoped<IDocumentRepository, DbDocumentRepository>();
-builder.Services.AddScoped<IRoomMemberRepository, DbRoomMemberRepository>();
 builder.Services.AddScoped<IPostRepository, DbPostRepository>();
 // builder.Services.AddScoped<IAccountRepository, DbRegisterRepository>();
 builder.Services.AddScoped<DbRegisterRepository>();
 builder.Services.AddScoped<DbLoginRepository>();
-builder.Services.AddScoped<IUnitOfWork<DataContext>, UnitOfWork<DataContext>>();
+builder.Services.AddScoped<DbResetPasswordRepository>();
+
 
 builder.Services.AddDbContext<DataContext>(options =>
 	options.UseNpgsql(builder.Configuration.GetConnectionString("LocalConnection")));
