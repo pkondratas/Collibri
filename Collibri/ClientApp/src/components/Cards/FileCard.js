@@ -42,10 +42,12 @@ const FileCard = (props) => {
         <>
             <Card sx={FileCardStyles.card}>
                 <Box sx={FileCardStyles.imageBox}>
-                    <DescriptionIcon sx={FileCardStyles.media} />
+                    <DescriptionIcon sx={FileCardStyles.fileImage} />
                 </Box>
                 <CardContent sx={FileCardStyles.content}>
-                    <Typography sx={FileCardStyles.name}>{props.name}</Typography>
+                    <Box sx={FileCardStyles.nameBox}>
+                        <Typography sx={FileCardStyles.fileName}>{props.name}</Typography>
+                    </Box>
                     <Box sx={FileCardStyles.buttons}>
                         <IconButton onClick={handleDownload}>
                             <FileDownloadIcon />

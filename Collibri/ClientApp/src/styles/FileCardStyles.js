@@ -14,17 +14,43 @@ export const FileCardStyles = {
     media: {
         width: '20rem',
         aspectRatio: 3,
-        objectFit: 'contain'
-    },
-    content: {
+        objectFit: 'contain',
         ':hover': {
             opacity: 0.8
         },
+    },
+    fileImage: {
+        //color: 'green', cia bus galima pakeist pagal musu stiliu
+        height: '6rem',
+        width: '20rem',
+    },
+    content: {
         backgroundColor: "#d5d5d5",
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
         height: '4rem',
         width: '20rem'
+    },
+    nameBox: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        height: '100%',
+        width: '74%',
+    },
+    fileName: {
+        overflow: 'hidden',
+        whiteSpace: 'nowrap',
+        textOverflow: 'ellipsis'
+    },
+    buttons: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100%',
+        width: '20%',
+        marginLeft: '1rem'
     }
 }

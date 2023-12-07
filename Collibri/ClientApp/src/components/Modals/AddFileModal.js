@@ -31,13 +31,15 @@ const AddFileModal = (props) => {
     const handleOnChange = async (event) => {
         const uploadedFile = event.target.files[0];
         
-        if (uploadedFile === null) {
+        if (uploadedFile === null || uploadedFile === undefined) {
             setError(true);
             return;
         } else if (uploadedFile.size > 5e6) {
             setSizeError(true);
+            return;
         } else {
             setError(false);
+            setSizeError(false);
         }
         
         if (uploadedFile.name.match(/\.(jpg|jpeg|png)$/i)) {
@@ -59,8 +61,7 @@ const AddFileModal = (props) => {
             }
         } else {
             setFile(uploadedFile);
-            setError(false);
-            setSizeError(false);
+            setProgress(100);
         }
     }
     

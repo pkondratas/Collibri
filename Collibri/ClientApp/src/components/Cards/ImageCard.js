@@ -71,8 +71,10 @@ const ImageCard = (props) => {
                             </CardActionArea>
                         </Box>
                         <CardContent sx={FileCardStyles.content}>
-                            <Typography>{props.name}</Typography>
-                            <Box>
+                            <Box sx={FileCardStyles.nameBox}>
+                                <Typography sx={FileCardStyles.fileName}>{props.name}</Typography>
+                            </Box>
+                            <Box sx={FileCardStyles.buttons}>
                                 <IconButton onClick={handleDownload}>
                                     <FileDownloadIcon />
                                 </IconButton>
