@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {Box, CircularProgress, IconButton, Modal, TextField, Tooltip} from "@mui/material";
-import AddBoxIcon from '@mui/icons-material/AddBox';
+import {Box, CircularProgress, Grid, IconButton, Modal, TextField, Typography} from "@mui/material";
+import CheckIcon from '@mui/icons-material/Check';
+import FileUploadIcon from '@mui/icons-material/FileUpload';
 import {uploadFile} from "../../api/FileAPI";
 import {AddFileStyle} from "../../styles/AddFileStyle";
 import imageCompression from 'browser-image-compression';
@@ -70,13 +71,23 @@ const AddFileModal = (props) => {
     return(
         <Modal open={props.open} onClose={handleClose}>
             <Box sx={AddFileStyle.modal}>
-                <TextField error={sizeError} 
-                           helperText={sizeError === true ? "Files must be under 5 MB" : (error === true ? "File not selected" : "")}
-                           type="file" onChange={handleOnChange}/>
-                <IconButton disabled={error || sizeError || progress !== 100} onClick={handleUpload}>
-                    <AddBoxIcon />
-                </IconButton>
-                <CircularProgress variant="determinate" value={progress} />
+                <Typography sx={AddFileStyle.headerText}>
+                    Select a file to add to this post:
+                </Typography>
+                <Grid sx={AddFileStyle.uploadBox}>
+                    <TextField error={sizeError}
+                               helperText={sizeError === true ? "Files must be under 5 MB" : (error === true ? "File not selected" : "")}
+                               type="file" onChange={handleOnChange}
+                    />
+                    <IconButton disabled={error || sizeError || progress !== 100} onClick={handleUpload}>
+                        <FileUploadIcon fontSize="large" />
+                    </IconButton>
+                </Grid>
+                <Box sx={AddFileStyle.progressBox}>
+                    {progress === 100
+                        ? <CheckIcon fontSize="large" color="success" />
+                        : <CircularProgress variant="determinate" value={progress} />}
+                </Box>
             </Box>
         </Modal>
     );
