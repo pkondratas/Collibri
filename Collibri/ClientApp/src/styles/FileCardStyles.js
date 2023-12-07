@@ -12,9 +12,9 @@ export const FileCardStyles = {
         position: 'relative',
     },
     media: {
-        height: '7rem',
         width: '20rem',
-        objectFit: 'scale-down'
+        aspectRatio: 3,
+        objectFit: 'contain'
     },
     content: {
         ':hover': {

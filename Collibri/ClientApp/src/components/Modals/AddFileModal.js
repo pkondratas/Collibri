@@ -45,7 +45,7 @@ const AddFileModal = (props) => {
             //Compress image
             const options = {
                 maxSizeMB: 2,
-                maxWidthOrHeight: 720,
+                maxWidthOrHeight: 1080,
                 useWebWorker: true,
                 onProgress: setCurrentProgress
             }

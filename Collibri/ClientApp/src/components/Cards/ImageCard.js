@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {
     Box,
     Button,
-    Card,
+    Card, CardActionArea,
     CardContent,
     CardMedia,
     IconButton, Skeleton, Typography,
@@ -12,10 +12,12 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import {deleteFile, getFile} from "../../api/FileAPI";
 import {FileCardStyles} from "../../styles/FileCardStyles"
 import DeleteModal from "../Modals/DeleteModal";
+import ImageModal from "../Modals/ImageModal";
 
 const ImageCard = (props) => {
     const [imageURL, setImageURL] = useState('');
     const [deleteModal, setDeleteModal] = useState(false);
+    const [imageModal, setImageModal] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -53,6 +55,9 @@ const ImageCard = (props) => {
             });
     }
     
+    const handleOpenImage = () => {
+        setImageModal(true);
+    }
     
     return(
         <>
@@ -61,11 +66,13 @@ const ImageCard = (props) => {
                     ? <Skeleton />
                     : <Box>
                         <Box sx={FileCardStyles.imageBox}>
-                            <CardMedia component="img" alt={props.name} sx={FileCardStyles.media} image={imageURL} />
+                            <CardActionArea onClick={handleOpenImage}>
+                                <CardMedia component="img" alt={props.name} sx={FileCardStyles.media} image={imageURL} />
+                            </CardActionArea>
                         </Box>
                         <CardContent sx={FileCardStyles.content}>
-                            <Typography sx={FileCardStyles.name}>{props.name}</Typography>
-                            <Box sx={FileCardStyles.buttons}>
+                            <Typography>{props.name}</Typography>
+                            <Box>
                                 <IconButton onClick={handleDownload}>
                                     <FileDownloadIcon />
                                 </IconButton>
@@ -79,6 +86,7 @@ const ImageCard = (props) => {
                         </CardContent>
                     </Box>}
             </Card>
+            <ImageModal open={imageModal} setOpen={setImageModal} imageURL={imageURL} />
             <DeleteModal id={props.id} deleteModal={deleteModal} setDeleteModal={setDeleteModal} handleDelete={handleDelete} />
         </>
     );
