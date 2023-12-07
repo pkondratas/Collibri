@@ -1,5 +1,5 @@
 export const postCardStyle = { 
-  minWidth: "40rem", 
+  minWidth: "41rem", 
   maxHeight: "10.5rem", 
   border: '2px solid #ffaaff' 
 }

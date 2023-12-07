@@ -3,6 +3,7 @@ import {useRef, useState} from "react";
 import {Check, Clear} from "@mui/icons-material";
 import {CreatePostStyle} from "../../styles/CreatePostStyle";
 import {createPost} from "../../api/PostAPI";
+import {useSelector} from "react-redux";
 
 export const CreatePostModal = (props) => {
 
@@ -12,6 +13,7 @@ export const CreatePostModal = (props) => {
     const [isDescEmptyError, setIsDescEmptyError] = useState(false);
     const [isTitleTooLongError, setIsTitleTooLongError] = useState(false);
     const [isDescTooLongError, setIsDescTooLongError] = useState(false);
+    const userInformation = useSelector((state) => state.user);
     
     const handleOnChangeTitle = () => {
         setIsTitleEmptyError(false);
@@ -22,7 +24,6 @@ export const CreatePostModal = (props) => {
         else {
             setIsTitleTooLongError(false);
         }
-        
     }
 
     const handleOnChangeDesc = () => {
@@ -58,7 +59,8 @@ export const CreatePostModal = (props) => {
             createPost(JSON.stringify({
                 Title: titleFieldRef.current.value.trim(),
                 Description: descFieldRef.current.value.trim(),
-                SectionId: props.sectionId
+                SectionId: props.sectionId,
+                CreatorUsername: userInformation.username
             }))
             props.handleSuccessfulClose();
         }
