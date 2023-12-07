@@ -5,6 +5,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import ErrorIcon from '@mui/icons-material/Error';
 import modalStyles from '../../styles/ForgotPasswordModalStyles';
 import { sendEmail } from '../../api/ResetPasswordAPI';
+import {Close} from "@mui/icons-material";
 
 const ForgotPasswordModal = ({ open, onClose }) => {
     const [email, setEmail] = useState('');
@@ -53,11 +54,14 @@ const ForgotPasswordModal = ({ open, onClose }) => {
 
     return (
         <Modal open={open} onClose={onClose} centered>
-            <Box sx={modalStyles.container2}>
+            <Box sx={modalStyles.container}>
                 {!loading && !success && (
-                    <Box sx={modalStyles.closeButtonContainer}>
-                        <IconButton edge="end" color="inherit" onClick={onClose} aria-label="close">
-                            <CloseIcon />
+                    <Box sx={modalStyles.topContainer}>
+                        <Typography variant="h6" gutterBottom sx={modalStyles.title}>
+                            Reset password
+                        </Typography>
+                        <IconButton onClick={onClose}>
+                            <Close />
                         </IconButton>
                     </Box>
                 )}
@@ -88,14 +92,11 @@ const ForgotPasswordModal = ({ open, onClose }) => {
                             </Box>
                         ) : (
                             <>
-                                <Typography variant="h6" gutterBottom>
-                                    Forgot Password
-                                </Typography>
                                 <TextField
                                     fullWidth
                                     margin="normal"
                                     label="Email"
-                                    variant="outlined"
+                                    variant="standard"
                                     value={email}
                                     onChange={handleEmailChange}
                                     sx={modalStyles.inputField}
@@ -112,9 +113,9 @@ const ForgotPasswordModal = ({ open, onClose }) => {
                                     type="submit"
                                     fullWidth
                                     variant="contained"
-                                    sx={modalStyles.resetButton}
+                                    sx={modalStyles.button}
                                 >
-                                    Reset Password
+                                    Send email
                                 </Button>
                             </>
                         )}

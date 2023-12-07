@@ -114,7 +114,7 @@ const CreateAccountModal = ({open, onClose}) => {
                   <Box>
                       <Box sx={modalStyles.topContainer}>
                           <Typography sx={modalStyles.title} variant="h6" gutterBottom>
-                              Create User
+                              Create an account
                           </Typography>
                           <IconButton onClick={() => {
                               handleClose()

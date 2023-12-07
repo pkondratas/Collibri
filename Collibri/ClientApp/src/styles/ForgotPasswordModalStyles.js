@@ -4,26 +4,11 @@ const modalStyles = {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: 300,
-        height: '34rem',
+        width: '18rem',
+        height: '14rem',
         p: 2,
-        bgcolor: '#d3d3d3',
+        bgcolor: '#DEFEF5',
         borderRadius: 3,
-    },
-    container2: {
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: 275,
-        height: '13.75rem',
-        p: 2,
-        bgcolor: '#d3d3d3',
-        borderRadius: 3,
-        position: 'relative',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
     },
     centered: {
         display: 'flex',
@@ -42,7 +27,7 @@ const modalStyles = {
         borderRadius: 3,
     },
     topContainer: {
-        padding: '0.3rem',
+        padding: '0.15rem',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -52,14 +37,6 @@ const modalStyles = {
         borderRadius: '8px',
         fontFamily: 'Segoe UI',
         width: '15rem'
-    },
-    resetButton: {
-        mt: 2,
-        backgroundColor: '#757575',
-        color: '#FFFFFF',
-        '&:hover': {
-            backgroundColor: '#757575', // Set your custom hover color here
-        },
     },
     closeButtonContainer: {
         position: 'absolute', 
