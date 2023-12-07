@@ -7,26 +7,27 @@ import { JoinRoom } from '../Buttons/JoinRoom';
 import { RoomContainer } from '../Containers/RoomContainer';
 import { AboutUsButton } from '../Buttons/AboutUsButton';
 import LoginContainer from '../Containers/LoginContainer';
+import {useDispatch, useSelector} from "react-redux";
+import {onLogin, onLogout} from "../../state/user/userSlice";
 
 export const LandingPageLayout = () => {
+    const userInformation = useSelector((state) => state.user);
     const [rooms, setRooms] = useState([]);
-    const [loggedIn, setLoggedIn] = useState(false);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         // Check for stored login status on page load
         const storedLoginStatus = localStorage.getItem('loggedIn');
-
+        
         if (storedLoginStatus) {
-            setLoggedIn(JSON.parse(storedLoginStatus));
+            dispatch(onLogin(JSON.parse(storedLoginStatus).username));
         }
     }, []);
 
     // Callback function to update login status
-    const handleLoginStatus = (status) => {
-        setLoggedIn(status);
-
+    const handleLoginStatus = (status, response) => {
         // Store the login status in localStorage
-        localStorage.setItem('loggedIn', JSON.stringify(status));
+        localStorage.setItem('loggedIn', JSON.stringify({ username: response, loggedIn: status }));
     };
 
     // Function to handle logout
@@ -35,7 +36,7 @@ export const LandingPageLayout = () => {
         localStorage.removeItem('loggedIn');
 
         // Update the loggedIn state
-        setLoggedIn(false);
+        dispatch(onLogout());
     };
 
     return (
@@ -43,7 +44,7 @@ export const LandingPageLayout = () => {
             {/* Header */}
             <Grid item xs={6} style={{
                 ...headerStyle,
-                backgroundImage: `url("${loggedIn ? '/background5_recolored.svg' : '/background5.svg'}")`,
+                backgroundImage: `url("${userInformation.loggedIn ? '/background5_recolored.svg' : '/background5.svg'}")`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 transition: 'background-image 0.5s ease-in-out',
@@ -59,7 +60,7 @@ export const LandingPageLayout = () => {
                     <img src="/logo.png" alt="Collibri Logo" style={{ height: '20%', width: 'auto', marginBottom: '3rem' }} />
                 </Box>
                 <Box sx={{marginTop: '-25rem', marginBottom: '5rem', minHeight: '30rem'}}>
-                    {loggedIn ? (
+                    {userInformation.loggedIn ? (
                         <Box>
                             <Box style={{ position: 'absolute', top: '5%', right: '5%', transform: 'translateX(50%)' }}>
                                 <IconButton color="secondary" onClick={handleLogout}>
