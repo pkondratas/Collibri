@@ -49,7 +49,6 @@ const PostModal = (props) => {
     useEffect(() => {
         fetchNotes(props.id, setNotes);
         fetchDocuments(props.id, setDocuments);
-        fetchFiles(props.id, setFiles);
         setList(notes);
     }, []);
 

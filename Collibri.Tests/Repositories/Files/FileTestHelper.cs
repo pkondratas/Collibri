@@ -1,7 +1,6 @@
 using System.IO.Abstractions.TestingHelpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.StaticFiles;
 
 namespace Collibri.Tests.Repositories.Files
 {
@@ -12,15 +11,6 @@ namespace Collibri.Tests.Repositories.Files
 			var fileStream = fileSystem.FileStream.New(
 				path + Path.DirectorySeparatorChar + fileName, FileMode.Open, FileAccess.Read);
 			return new FileStreamResult(fileStream, "application/octet-stream");
-		}
-
-		public static FileContentResult CreateTestFileContentResult(MockFileSystem fileSystem, string path,
-			string fileName)
-		{
-			string? contentType;
-			new FileExtensionContentTypeProvider().TryGetContentType(fileName, out contentType);
-			var bytes = fileSystem.File.ReadAllBytes(path + Path.DirectorySeparatorChar + fileName);
-			return new FileContentResult(bytes, contentType ?? "application/octet-stream");
 		}
         
 		public static IFormFile CreateTestFormFile(string fileName, string content)
