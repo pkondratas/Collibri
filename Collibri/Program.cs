@@ -21,7 +21,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<IFileRepository, FileRepository>();
+builder.Services.AddScoped<IFileRepository, DbFileRepository>();
 builder.Services.AddScoped<IFileSystem, FileSystem>();
 //builder.Services.AddScoped<IDataHandler, DataHandler>();
 builder.Services.AddScoped<ISectionRepository, DbSectionRepository>();

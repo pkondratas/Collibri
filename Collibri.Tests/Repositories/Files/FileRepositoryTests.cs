@@ -1,8 +1,8 @@
 using System.IO.Abstractions.TestingHelpers;
-using Collibri.Repositories.FileBasedImplementation;
+using Collibri.Dtos;
+using Collibri.Repositories.DbImplementation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using File = Collibri.Models.File;
 
 namespace Collibri.Tests.Repositories.Files
 {
@@ -11,10 +11,10 @@ namespace Collibri.Tests.Repositories.Files
         [Theory]
         [ClassData(typeof(CreateFileData))]
         public void CreateFile_Should_ReturnFileTest(MockFileSystem fileSystem, IFormFile fileData,
-            string postId, File? expected)
+            string postId, FileInfoDTO? expected)
         {
             // Arrange
-            var fileRepository = new FileRepository(fileSystem.FileSystem);
+            var fileRepository = new DbFileRepository(fileSystem.FileSystem);
 
             // Act
             var actual = fileRepository.CreateFile(fileData, postId);
@@ -31,14 +31,13 @@ namespace Collibri.Tests.Repositories.Files
 
         [Theory]
         [ClassData(typeof(DeleteFileData))]
-        public void DeleteFile_Should_ReturnFileTest(MockFileSystem fileSystem, string fileName,
-            string postId, File? expected)
+        public void DeleteFile_Should_ReturnFileTest(MockFileSystem fileSystem, string id, FileInfoDTO? expected)
         {
             // Arrange
-            var fileRepository = new FileRepository(fileSystem.FileSystem);
+            var fileRepository = new DbFileRepository(fileSystem.FileSystem);
             
             // Act
-            var actual = fileRepository.DeleteFile(fileName, postId);
+            var actual = fileRepository.DeleteFile(id);
             
             // Assert
             if(expected == null)
@@ -52,14 +51,13 @@ namespace Collibri.Tests.Repositories.Files
 
         [Theory]
         [ClassData(typeof(GetFileData))]
-        public void GetFile_Should_ReturnFileStreamResultTest(MockFileSystem fileSystem, string fileName,
-            string postId, FileStreamResult? expected)
+        public void GetFile_Should_ReturnFileStreamResultTest(MockFileSystem fileSystem, string id, FileStreamResult? expected)
         {
             // Arrange
-            var fileRepository = new FileRepository(fileSystem.FileSystem);
+            var fileRepository = new DbFileRepository(fileSystem.FileSystem);
             
             // Act
-            var actual = fileRepository.GetFile(fileName, postId);
+            var actual = fileRepository.GetFile(id);
             
             // Assert
             if(expected == null)
@@ -72,15 +70,15 @@ namespace Collibri.Tests.Repositories.Files
 
         [Theory]
         [ClassData(typeof(UpdateFileNameData))]
-        public void UpdateFileName_Should_ReturnFileTest(MockFileSystem fileSystem, string fileName, string postId,
-            string updatedName, File? expected)
+        public void UpdateFileName_Should_ReturnFileTest(MockFileSystem fileSystem, string id,
+            string updatedName, FileInfoDTO? expected)
         {
             // Arrange
-            var path = FileTestHelper.GetPath(postId);
-            var fileRepository = new FileRepository(fileSystem.FileSystem);
+            //var path = FileTestHelper.GetPath(postId);
+            var fileRepository = new DbFileRepository(fileSystem.FileSystem);
             
             // Act
-            var actual = fileRepository.UpdateFileName(fileName, postId, updatedName);
+            var actual = fileRepository.UpdateFileName(id,  updatedName);
             
             // Assert
             if(expected == null)
@@ -88,7 +86,7 @@ namespace Collibri.Tests.Repositories.Files
             else
             {
                 Assert.Equivalent(expected, actual);
-                Assert.True(!fileSystem.FileExists(path + fileName));
+                Assert.True(!fileSystem.FileExists(actual.Path));
                 Assert.True(fileSystem.FileExists(expected.Path));
             }
         }
