@@ -7,11 +7,17 @@ import { JoinRoom } from '../Buttons/JoinRoom';
 import { RoomContainer } from '../Containers/RoomContainer';
 import { AboutUsButton } from '../Buttons/AboutUsButton';
 import LoginContainer from '../Containers/LoginContainer';
+import ResetPasswordContainer from '../Containers/ResetPasswordContainer';
+import {onLogin, onLogout} from "../../state/user/userSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {useLocation} from "react-router-dom";
 
 export const LandingPageLayout = () => {
     const userInformation = useSelector((state) => state.user);
     const [rooms, setRooms] = useState([]);
     const dispatch = useDispatch();
+    const location = useLocation();
+
 
     useEffect(() => {
         // Check for stored login status on page load
@@ -36,6 +42,8 @@ export const LandingPageLayout = () => {
         // Update the loggedIn state
         dispatch(onLogout());
     };
+
+    const isResetPasswordPage = location.pathname.startsWith('/reset-password/');
 
     return (
         <Grid container style={{ width: '100vw', height: '100vh' }}>
