@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Button, Grid, Paper, Typography} from '@mui/material';
+import {Box, Button, Grid, Paper, Typography} from '@mui/material';
 import {useParams} from "react-router-dom";
 import Header from "../Header";
 import {RoomSettings} from "../RoomSettings";
@@ -11,7 +11,7 @@ import {AddPostButton} from "../Buttons/AddPostButton";
 import SearchBar from "../SearchBar";
 import PostContainer from "../Containers/PostContainer";
 import {getSections} from "../../api/SectionApi";
-import {postContainerStyle} from "../../styles/RoomLayoutStyle";
+import {RoomLayoutStyle} from "../../styles/RoomLayoutStyle";
 import {useSelector} from "react-redux";
 import Drawer from '@mui/material/Drawer';
 import Toolbar from '@mui/material/Toolbar';
@@ -42,29 +42,24 @@ const RoomLayout = () => {
 
         <Grid //container
               direction="row"
-              sx={{display:'flex'}}
+              sx={RoomLayoutStyle.grid}
               // justifyContent="space-evenly"
               // alignItems="strech"
         >
-            <Grid sx={{width:'17%'}}>
+            <Grid sx={RoomLayoutStyle.roomGrid}>
               <Drawer
-                sx={{
-                  width: '17%',
-                  flexShrink: 0,
-                  '& .MuiDrawer-paper': {
-                    width: '17%',
-                    boxSizing: 'border-box',
-                  },
-                }}
+                sx={RoomLayoutStyle.roomDrawer}
                 variant="permanent"
                 anchor="left"
               >
-                <Toolbar>
-                  <Typography variant="h4" style={{color: 'black', fontWeight: 'bold',}}>
-                    Collibri
-                  </Typography>
-                </Toolbar>
-                <Divider /> 
+                <Box sx={RoomLayoutStyle.titleBox}>
+                  <Toolbar>
+                    <Typography variant="h4" style={RoomLayoutStyle.title}>
+                      Collibri
+                    </Typography>
+                  </Toolbar>
+                </Box>
+                <Divider />   
                   <SideRoomTable/>
                   <RoomSettings />
                 <Divider />
