@@ -23,17 +23,6 @@ namespace Collibri.Migrations
             NpgsqlModelBuilderExtensions.HasPostgresExtension(modelBuilder, "uuid-ossp");
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Collibri.Models.Account", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Account");
-                });
-
             modelBuilder.Entity("Collibri.Models.Document", b =>
                 {
                     b.Property<int>("Id")
@@ -159,6 +148,13 @@ namespace Collibri.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("CreatorUsername")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("InvitationCode")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
@@ -173,12 +169,10 @@ namespace Collibri.Migrations
                     b.Property<int>("RoomId")
                         .HasColumnType("integer");
 
-                    b.Property<Guid>("AccountId")
-                        .HasColumnType("uuid");
+                    b.Property<string>("Username")
+                        .HasColumnType("text");
 
-                    b.HasKey("RoomId", "AccountId");
-
-                    b.HasIndex("AccountId");
+                    b.HasKey("RoomId", "Username");
 
                     b.ToTable("RoomMembers");
                 });
@@ -474,19 +468,11 @@ namespace Collibri.Migrations
 
             modelBuilder.Entity("Collibri.Models.RoomMember", b =>
                 {
-                    b.HasOne("Collibri.Models.Account", "Account")
-                        .WithMany("RoomMembers")
-                        .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Collibri.Models.Room", "Room")
                         .WithMany("RoomMembers")
                         .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Account");
 
                     b.Navigation("Room");
                 });
@@ -562,11 +548,6 @@ namespace Collibri.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Collibri.Models.Account", b =>
-                {
-                    b.Navigation("RoomMembers");
                 });
 
             modelBuilder.Entity("Collibri.Models.Post", b =>

@@ -4,9 +4,6 @@ import React, {useState} from "react";
 import {CreatePostModal} from "../Modals/CreatePostModal";
 import {fetchPosts} from "../../api/PostAPI";
 
-
-
-
 export const AddPostButton = (props) => {
     const [open, setOpen] = useState(false);
     const [postId, setPostId] = useState(0)

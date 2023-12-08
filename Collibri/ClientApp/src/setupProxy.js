@@ -10,10 +10,14 @@ const context = [
   '/v1/rooms',
   '/v1/sections',
   '/v1/documents',
+  '/v1/member',
   '/v1/register',
   '/v1/login',
   '/v1/tags',
-  '/v1/post-tags'
+  '/v1/post-tags',
+  '/v1/login',
+  '/v1/resetPassword',
+  '/v1/files'
 ];
 
 const onError = (err, req, resp, target) => {
