@@ -15,6 +15,7 @@ namespace Collibri.Repositories.DbImplementation.Mapper
             CreateMap<Section, SectionDTO>().ReverseMap();
             CreateMap<RoomMember, RoomMemberDTO>().ReverseMap();
             CreateMap<Document, DocumentDTO>().ReverseMap();
+            CreateMap<Tag, TagDTO>().ReverseMap();
             CreateMap<FileInfo, FileInfoDTO>().ReverseMap();
         }
     }
