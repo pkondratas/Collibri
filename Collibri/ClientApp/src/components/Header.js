@@ -1,10 +1,8 @@
-// Header.js
 import React from 'react';
 import { AppBar, Toolbar, Box, IconButton, Typography, Tooltip } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { HeaderStyles } from '../styles/HeaderStyles';
 import { useNavigate } from 'react-router-dom';
-import { AboutUsButton } from './Buttons/AboutUsButton';
 
 const Header = ({ roomSettings }) => {
     const navigate = useNavigate();
@@ -18,10 +16,11 @@ const Header = ({ roomSettings }) => {
                             <ArrowBackIcon style={HeaderStyles.backButton} />
                         </IconButton>
                     </Tooltip>
+                    <Tooltip title="View room settings">
+                        {roomSettings}
+                    </Tooltip>
                 </Box>
-                <Box>
-                    {roomSettings} {/* Render RoomSettings component here */}
-                </Box>
+                <img src="/logo.png" alt="Logo" style={{ height: '7vh', width: '7vh', marginLeft: 'auto' }} />
             </Toolbar>
         </AppBar>
     );

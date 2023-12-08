@@ -3,7 +3,7 @@ export const HeaderStyles = {
         background: 'white',
     },
     toolbar: {
-        justifyContent: 'space-between',
+       
     },
     box: {
         display: 'flex',
