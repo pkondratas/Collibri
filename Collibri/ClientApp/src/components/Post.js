@@ -92,7 +92,7 @@ const Post = (props) => {
   function displayDate(dateString) {
     const [fullDate, time] = dateString.split('T');
     const [hour, minute, second] = time.split(':');
-    return hour + ':' + minute + ', ' +  fullDate;
+    return fullDate + ', ' + hour + ':' + minute;
   }
   
   return(
