@@ -13,15 +13,20 @@ import PostContainer from "../Containers/PostContainer";
 import {getSections} from "../../api/SectionApi";
 import {postContainerStyle} from "../../styles/RoomLayoutStyle";
 import {useSelector} from "react-redux";
+import {getRoomTags} from "../../api/TagAPI";
+
 
 const RoomLayout = () => {
     const [sectionId, setSectionId] = useState(0);
     const [sections, setSections] = useState([]);
     const [posts, setPosts] = useState([]);
+    const [tags, setTags] = useState([]);
     const currentRoom = useSelector((state) => state.rooms.currentRoom);
+    
 
     useEffect(() => {
         getSections(setSections, currentRoom.id);
+        getRoomTags(currentRoom.id, setTags);
     }, [currentRoom.id]);
 
     return (
@@ -34,7 +39,7 @@ const RoomLayout = () => {
                 <Paper><Header/></Paper>
             </Grid>
             <Grid item xs={1}>
-                <RoomSettings />
+                <RoomSettings tags={tags} roomId={roomId}/>
                 <SideRoomTable/>
             </Grid>
             <Grid item md={4}>

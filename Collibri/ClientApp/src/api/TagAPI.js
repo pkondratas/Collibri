@@ -10,6 +10,16 @@ export const fetchTags = async (postId, setTags) => {
     }
 }
 
+export const getRoomTags = async (roomId, setTags) => {
+    try {
+        const response = await axios.get(`/v1/tags/?roomId=${roomId}`)
+        console.log(response.data);
+        setTags(response.data);
+    } catch (err) {
+        console.log(err.message);
+    }
+}
+
 // export const fetchTags = (postId, setTags) => {
 //     fetch(`/v1/tags/on-post?postId=${postId}`, { 
 //         method: "GET",

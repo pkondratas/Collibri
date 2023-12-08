@@ -4,6 +4,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import DeleteIcon from '@mui/icons-material/Delete';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import {RoomLayoutStyles} from "../styles/RoomLayoutStyle";
 import RoomCodeModal from "./Modals/RoomCodeModal";
 import {useDispatch, useSelector} from "react-redux";
@@ -11,8 +12,10 @@ import DeleteRoomModal from "./Modals/DeleteRoomModal";
 import UpdateRoomModal from "./Modals/UpdateRoomModal";
 import {updateRoom} from "../api/RoomAPI";
 import {setRoomsSlice, updateRoomSlice} from "../state/user/roomsSlice";
+import {CreatePostModal} from "./Modals/CreatePostModal";
+import {ManageTagsModal} from "./Modals/ManageTagsModal";
 
-export const RoomSettings = () => {
+export const RoomSettings = (props) => {
     const [updateModal, setUpdateModal] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const [invModal, setInvModal] = useState(false);
@@ -21,6 +24,7 @@ export const RoomSettings = () => {
     const rooms = useSelector((state) => state.rooms);
     const dispatch = useDispatch();
     const open = Boolean(anchorEl);
+    const [tagOpen, setTagOpen] = useState(false);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -80,6 +84,12 @@ export const RoomSettings = () => {
                     </ListItemIcon>
                     <ListItemText>Change room name</ListItemText>
                 </MenuItem>
+                <MenuItem onClick={() => {setTagOpen(true); handleClose()}}>
+                    <ListItemIcon>
+                        <LocalOfferIcon fontSize="small"/>
+                    </ListItemIcon>
+                    <ListItemText>Manage tags</ListItemText>
+                </MenuItem>
                 <MenuItem onClick={() => setDeleteModal(true)} disabled={rooms.currentRoom.creatorUsername !== userInformation.username}>
                     <ListItemIcon>
                         <DeleteIcon fontSize="small" style={{color: "red"}} />
@@ -90,6 +100,7 @@ export const RoomSettings = () => {
                 <UpdateRoomModal room={rooms.currentRoom} updateModal={updateModal} setUpdateModal={setUpdateModal} updateRoomName={handleUpdateRoom}/>
                 <DeleteRoomModal deleteModal={deleteModal} setDeleteModal={setDeleteModal} />
             </Menu>
+            <ManageTagsModal showModal={tagOpen} setOpen={setTagOpen} tags={props.tags} roomId={props.roomId}/>
         </>
     );
 }
