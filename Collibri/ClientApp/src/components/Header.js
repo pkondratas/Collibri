@@ -11,7 +11,7 @@ const Header = ({ roomSettings }) => {
         <AppBar position="static" elevation={0}  style={HeaderStyles.appBar}>
             <Toolbar style={HeaderStyles.toolbar}>
                 <Box style={HeaderStyles.box}>
-                    <Tooltip title="Go back to room selection">
+                    <Tooltip title="Go back to room selection"  style={{ marginRight: '1.5rem' }}>
                         <IconButton aria-label="Back" onClick={() => navigate('/home')}>
                             <ArrowBackIcon />
                         </IconButton>
