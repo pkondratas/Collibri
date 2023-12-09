@@ -66,13 +66,15 @@ export const RoomSettings = (props) => {
 
     return (
         <>
-            <IconButton
-                sx={RoomLayoutStyles.addSettingsButtons}
-                aria-label="Toggle Settings"
-                onClick={toggleSettings}
-            >
-                <MoreVertRoundedIcon />
-            </IconButton>
+            <Tooltip title="Room settings">
+                <IconButton
+                    sx={RoomLayoutStyles.addSettingsButtons}
+                    aria-label="Toggle Settings"
+                    onClick={toggleSettings}
+                >
+                    <MoreVertRoundedIcon />
+                </IconButton>
+            </Tooltip>
 
             <Collapse
                 in={showSettings}
@@ -83,9 +85,9 @@ export const RoomSettings = (props) => {
                 }}
             >
                 <Box sx={RoomLayoutStyles.addSettingsButtons}>
-                    <Tooltip title="Room Settings">
+                    <Tooltip title="Get invitation code">
                         <IconButton
-                            aria-label="Room Settings"
+                            aria-label="Get invitation code"
                             onClick={() => handleInvitation()}
                         >
                             <PersonAddIcon />
@@ -121,7 +123,7 @@ export const RoomSettings = (props) => {
                             }
                             onClick={() => handleDeleteRoom()}
                         >
-                            <DeleteIcon style={{ color: "red" }} />
+                            <DeleteIcon />
                         </IconButton>
                     </Tooltip>
                 </Box>

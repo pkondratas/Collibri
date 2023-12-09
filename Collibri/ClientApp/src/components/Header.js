@@ -8,12 +8,12 @@ const Header = ({ roomSettings }) => {
     const navigate = useNavigate();
 
     return (
-        <AppBar position="static" style={HeaderStyles.appBar}>
+        <AppBar position="static" elevation={0}  style={HeaderStyles.appBar}>
             <Toolbar style={HeaderStyles.toolbar}>
                 <Box style={HeaderStyles.box}>
                     <Tooltip title="Go back to room selection">
-                        <IconButton color="inherit" aria-label="Back" onClick={() => navigate('/home')}>
-                            <ArrowBackIcon style={HeaderStyles.backButton} />
+                        <IconButton aria-label="Back" onClick={() => navigate('/home')}>
+                            <ArrowBackIcon />
                         </IconButton>
                     </Tooltip>
                     <Tooltip title="View room settings">
