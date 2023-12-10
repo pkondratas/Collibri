@@ -159,7 +159,7 @@ const Post = (props) => {
                 </Button>
               </Box>
               <Typography variant="caption">
-                {'User: ' + props.creatorUsername}
+                {'User: ' + post.creatorUsername}
               </Typography>
               <Typography variant="caption" sx={PostStyle.updated}>
                 {post.lastUpdatedDate ? 'Last edited: ' + displayDate(post.lastUpdatedDate.toLocaleString()) : ''}
