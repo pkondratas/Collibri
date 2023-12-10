@@ -45,6 +45,7 @@ export default function SearchBar(props) {
             />
             {selectedPost && (
                 <PostModal
+                    post={selectedPost}
                     {...selectedPost} 
                     postModal={true}
                     setPostModal={setSelectedPost}
