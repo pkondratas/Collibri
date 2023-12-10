@@ -1,5 +1,8 @@
 using System.IO.Abstractions;
+using Collibri.Controllers;
 using Collibri.Data;
+using Collibri.Middleware;
+// using Collibri.Middleware;
 using Collibri.Repositories;
 // using Collibri.Repositories.DataHandling;
 using Collibri.Repositories.DbImplementation;
@@ -9,11 +12,15 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Events;
+using Serilog.Filters;
 
 Log.Logger = new LoggerConfiguration()
 	.MinimumLevel.Override("Microsoft", LogEventLevel.Information) // Adjust log levels as needed
 	.Enrich.FromLogContext()
-	.WriteTo.File("log.txt", rollingInterval: RollingInterval.Day)
+	.WriteTo.File("logs\\log.log", rollingInterval: RollingInterval.Day)
+	.WriteTo.Logger(lc => lc
+		.Filter.ByIncludingOnly(Matching.FromSource<RequestResponseMiddleware>())
+		.WriteTo.File("logs\\requests-responses.log", rollingInterval: RollingInterval.Day))
 	.CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
@@ -69,6 +76,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 var app = builder.Build();
 
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -79,6 +87,8 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+
+app.UseRequestResponseLogging();
 
 app.UseAuthentication();
 app.UseAuthorization();
