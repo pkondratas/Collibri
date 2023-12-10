@@ -8,7 +8,7 @@ export const PostStyle = {
     }
   },
   contentBox: {
-    display: "flex",
+    display: 'flex',
     flexDirection: 'row'
   },
   title: {
@@ -35,10 +35,33 @@ export const PostStyle = {
     display: "flex",
     flexDirection: "column"
   },
-  editingButtons: {
+  baseEditButton: {
     color: '#316C44',
-    visibility: 'hidden',
     marginBottom: '3%',
+    cursor: 'pointer'
+  },
+  deleteButton: {
+    backgroundSize: '700% 100%',
+    transition: '0.2s ease',
+    '&:hover': {
+      color: '#80CB9E',
+      backgroundImage: 'linear-gradient(45deg, #cc0000, #e60000, #ff0000, #ff1a1a, #ff0000, #e60000, #cc0000)',
+      boxShadow: 2,
+      animation: 'glowing 20s linear infinite'
+    },
+    "@keyframes glowing": {
+      "0%": {
+        backgroundPosition: '0 0'
+      },
+      "50%": {
+        backgroundPosition: '400% 0'
+      },
+      "100%": {
+        backgroundPosition: '0 0'
+      }
+    }
+  },
+  editButton: {
     ':hover': {
       boxShadow: 2,
       backgroundColor: '#80CB9E',
@@ -48,10 +71,10 @@ export const PostStyle = {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   },
   buttonComponent: {
-    //marginRight: '0%',
+    marginRight: "2%",
     backgroundColor: '#B9F5D9',
     ':hover': {
       boxShadow: 2,
@@ -60,8 +83,12 @@ export const PostStyle = {
   },
   reactionButtons: {
     color: '#316C44',
-    marginLeft: "5%",
     marginBottom: "5%",
+  },
+  selected: {
+    marginRight: "2%",
+    boxShadow: 2,
+    backgroundColor: '#80CB9E'
   },
   likeCount: {
     color: '#1D1E18',

@@ -126,7 +126,7 @@ const Post = (props) => {
               </Typography>
               <Box sx={PostStyle.editingBox}>
                   {(isRoomOwner() || isPostCreator(post.creatorUsername)) && (
-                      <Button sx={PostStyle.editingButtons} className="Button" onClick={(event) => {
+                      <Button sx={[PostStyle.baseEditButton, PostStyle.deleteButton]} className="Button" onClick={(event) => {
                           event.stopPropagation();
                           setDeleteModal(true);
                       }}>
@@ -134,7 +134,7 @@ const Post = (props) => {
                       </Button>
                   )}
                   {(isPostCreator(post.creatorUsername)) && (
-                      <Button sx={PostStyle.editingButtons} className="Button" onClick={(event) => {
+                      <Button sx={[PostStyle.baseEditButton, PostStyle.editButton]} className="Button" onClick={(event) => {
                           event.stopPropagation();
                           setUpdateModal(true);
                       }}>
@@ -144,23 +144,23 @@ const Post = (props) => {
               </Box>
             </Box>
             <Box sx={PostStyle.buttonBox}>
-              <Box>
-                <Button onClick={handleLike} sx={PostStyle.buttonComponent}>
+              <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+                <Button onClick={handleLike} sx={liked ? PostStyle.selected : PostStyle.buttonComponent}>
                   <Typography sx={PostStyle.likeCount}>
                     {post.likeCount}
                   </Typography>
                   {liked ? <ThumbUp fontSize="small" sx={PostStyle.reactionButtons} /> : <ThumbUpAltOutlined fontSize="small" sx={PostStyle.reactionButtons}/>}
                 </Button>
-                <Button onClick={handleDislike} sx={PostStyle.buttonComponent}>
+                <Button onClick={handleDislike} sx={disliked ? PostStyle.selected : PostStyle.buttonComponent}>
                   <Typography sx={PostStyle.likeCount}>
                     {post.dislikeCount}
                   </Typography>
                   {disliked ? <ThumbDown fontSize="small" sx={PostStyle.reactionButtons} /> : <ThumbDownOffAltOutlined fontSize="small" sx={PostStyle.reactionButtons} />}
                 </Button>
+                <Typography variant="caption" sx={{textWrap: 'nowrap'}}>
+                  {'User: ' + post.creatorUsername}
+                </Typography>
               </Box>
-              <Typography variant="caption">
-                {'User: ' + post.creatorUsername}
-              </Typography>
               <Typography variant="caption" sx={PostStyle.updated}>
                 {post.lastUpdatedDate ? 'Last edited: ' + displayDate(post.lastUpdatedDate.toLocaleString()) : ''}
               </Typography>
