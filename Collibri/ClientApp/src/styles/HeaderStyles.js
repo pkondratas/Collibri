@@ -1,9 +1,9 @@
 export const HeaderStyles = {
     appBar: {
-        background: 'white',
+        background: '#80CB9E',
     },
     toolbar: {
-        justifyContent: 'space-between',
+       
     },
     box: {
         display: 'flex',
