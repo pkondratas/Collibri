@@ -23,17 +23,6 @@ namespace Collibri.Migrations
             NpgsqlModelBuilderExtensions.HasPostgresExtension(modelBuilder, "uuid-ossp");
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Collibri.Models.Account", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Account");
-                });
-
             modelBuilder.Entity("Collibri.Models.Document", b =>
                 {
                     b.Property<int>("Id")
@@ -58,6 +47,36 @@ namespace Collibri.Migrations
                     b.HasIndex("PostId");
 
                     b.ToTable("Documents");
+                });
+
+            modelBuilder.Entity("Collibri.Models.FileInfo", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Lenght")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("PostId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FileInfos");
                 });
 
             modelBuilder.Entity("Collibri.Models.Note", b =>
@@ -136,6 +155,21 @@ namespace Collibri.Migrations
                     b.ToTable("Posts");
                 });
 
+            modelBuilder.Entity("Collibri.Models.PostTags", b =>
+                {
+                    b.Property<Guid>("TagId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("PostId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("TagId", "PostId");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("PostTags");
+                });
+
             modelBuilder.Entity("Collibri.Models.Room", b =>
                 {
                     b.Property<int>("Id")
@@ -143,6 +177,13 @@ namespace Collibri.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CreatorUsername")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("InvitationCode")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -158,12 +199,10 @@ namespace Collibri.Migrations
                     b.Property<int>("RoomId")
                         .HasColumnType("integer");
 
-                    b.Property<Guid>("AccountId")
-                        .HasColumnType("uuid");
+                    b.Property<string>("Username")
+                        .HasColumnType("text");
 
-                    b.HasKey("RoomId", "AccountId");
-
-                    b.HasIndex("AccountId");
+                    b.HasKey("RoomId", "Username");
 
                     b.ToTable("RoomMembers");
                 });
@@ -188,6 +227,26 @@ namespace Collibri.Migrations
                     b.HasIndex("RoomId");
 
                     b.ToTable("Sections");
+                });
+
+            modelBuilder.Entity("Collibri.Models.Tag", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -418,21 +477,32 @@ namespace Collibri.Migrations
                     b.Navigation("Section");
                 });
 
-            modelBuilder.Entity("Collibri.Models.RoomMember", b =>
+            modelBuilder.Entity("Collibri.Models.PostTags", b =>
                 {
-                    b.HasOne("Collibri.Models.Account", "Account")
-                        .WithMany("RoomMembers")
-                        .HasForeignKey("AccountId")
+                    b.HasOne("Collibri.Models.Post", "Post")
+                        .WithMany("PostTags")
+                        .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Collibri.Models.Tag", "Tag")
+                        .WithMany("PostTags")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+
+                    b.Navigation("Tag");
+                });
+
+            modelBuilder.Entity("Collibri.Models.RoomMember", b =>
+                {
                     b.HasOne("Collibri.Models.Room", "Room")
                         .WithMany("RoomMembers")
                         .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Account");
 
                     b.Navigation("Room");
                 });
@@ -441,6 +511,17 @@ namespace Collibri.Migrations
                 {
                     b.HasOne("Collibri.Models.Room", "Room")
                         .WithMany("Sections")
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Room");
+                });
+
+            modelBuilder.Entity("Collibri.Models.Tag", b =>
+                {
+                    b.HasOne("Collibri.Models.Room", "Room")
+                        .WithMany("Tags")
                         .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -499,16 +580,13 @@ namespace Collibri.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Collibri.Models.Account", b =>
-                {
-                    b.Navigation("RoomMembers");
-                });
-
             modelBuilder.Entity("Collibri.Models.Post", b =>
                 {
                     b.Navigation("Documents");
 
                     b.Navigation("Notes");
+
+                    b.Navigation("PostTags");
                 });
 
             modelBuilder.Entity("Collibri.Models.Room", b =>
@@ -516,11 +594,18 @@ namespace Collibri.Migrations
                     b.Navigation("RoomMembers");
 
                     b.Navigation("Sections");
+
+                    b.Navigation("Tags");
                 });
 
             modelBuilder.Entity("Collibri.Models.Section", b =>
                 {
                     b.Navigation("Posts");
+                });
+
+            modelBuilder.Entity("Collibri.Models.Tag", b =>
+                {
+                    b.Navigation("PostTags");
                 });
 #pragma warning restore 612, 618
         }

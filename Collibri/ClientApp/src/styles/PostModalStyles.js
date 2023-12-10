@@ -13,7 +13,8 @@ export const PostModalStyles = {
 
   info: {
     display: 'flex',
-    backgroundColor: '#CDCDCD',
+    backgroundColor: '#D9FFF5',
+    //backgroundColor: '#B9F5D8',
     paddingTop: '2rem',
     paddingRight: '2rem',
     paddingLeft: '2rem',
@@ -61,7 +62,7 @@ export const PostModalStyles = {
   contentBoxContainer: {
     minHeight: '15.5rem',
     maxHeight: '15.5rem',
-    backgroundColor: '#bebbbb',
+    backgroundColor: '#6B8F71',
   },
   
   buttonBox: {
@@ -71,7 +72,21 @@ export const PostModalStyles = {
     paddingRight: '2rem',
     paddingLeft: '2rem',
     paddingBottom: '1.5rem',
-    backgroundColor: '#afacac',
+    backgroundColor: '#D9FFF5',
+  },
+  
+  tagBox: {
+    display: 'flex',
+    backgroundColor: '#97C4B8',
+    boxShadow: 1,
+    borderRadius: 2,
+    //minWidth: 300,
+  },
+  
+  tagChip: {
+    display: 'flex',
+    boxShadow: 1,
+    backgroundColor: '#AAD2BA',
   },
 
   closeButton: {
@@ -104,6 +119,11 @@ export const PostModalStyles = {
     overflowX: 'auto',
   },
   
+  tagList: {
+    display: 'flex',
+    overflowX: 'auto',
+  },
+  
   editDeleteButtons: {
     marginRight: '2rem' 
   },
@@ -119,7 +139,7 @@ export const PostModalStyles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#bebbbb',
+    backgroundColor: '#AAD2BA',
     paddingTop: '1rem',
     paddingBottom: '0.5rem',
   },

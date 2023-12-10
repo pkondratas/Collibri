@@ -12,20 +12,22 @@ import SearchBar from "../SearchBar";
 import PostContainer from "../Containers/PostContainer";
 import {getSections} from "../../api/SectionApi";
 import {postContainerStyle} from "../../styles/RoomLayoutStyle";
-
+import {useSelector} from "react-redux";
+import {getRoomTags} from "../../api/TagAPI";
 
 
 const RoomLayout = () => {
     const [sectionId, setSectionId] = useState(0);
     const [sections, setSections] = useState([]);
     const [posts, setPosts] = useState([]);
-
-
-    const {roomId} = useParams()
+    const [tags, setTags] = useState([]);
+    const currentRoom = useSelector((state) => state.rooms.currentRoom);
+    
 
     useEffect(() => {
-        getSections(setSections, roomId);
-    }, [roomId]);
+        getSections(setSections, currentRoom.id);
+        getRoomTags(currentRoom.id, setTags);
+    }, [currentRoom.id]);
 
     return (
 
@@ -37,22 +39,22 @@ const RoomLayout = () => {
                 <Paper><Header/></Paper>
             </Grid>
             <Grid item xs={1}>
-                <RoomSettings/>
+                <RoomSettings tags={tags} roomId={currentRoom.id}/>
                 <SideRoomTable/>
-
             </Grid>
             <Grid item md={4}>
                 <AddSection sections={sections} setSections={setSections}></AddSection>
                 <Paper><SectionsContainer sections={sections} setSections={setSections}
                                           setSectionId={setSectionId}/>
                 </Paper>
-                <UserInfoContainer username={"Future User"}/>
+                <UserInfoContainer />
             </Grid>
             <Grid  item xs={6}>
                 <Grid container
                       direction="row"
                       sx={{mb:'0.5rem'}}
-                ><AddPostButton sectionId={sectionId} setPosts={setPosts}/>
+                >
+                    <AddPostButton sectionId={sectionId} setPosts={setPosts}/>
                     <SearchBar posts={posts} sectionId={sectionId} setPosts={setPosts}/>
                 </Grid>
 

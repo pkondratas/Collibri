@@ -23,7 +23,15 @@ namespace Collibri.Repositories.FileBasedImplementation
             return room;
         }
 
-        public List<RoomDTO> GetAllRooms()
+        public RoomDTO? GetRoomByCode(int code)
+        {
+            var roomList = _dataHandler.GetAllItems<RoomDTO>(ModelType.Rooms);
+            var roomByCode = roomList.FirstOrDefault(x => x.InvitationCode == code);
+
+            return roomByCode;
+        }
+
+        public List<RoomDTO> GetRoomsByUsername(string username)
         {
             return _rooms;
         }
@@ -45,16 +53,16 @@ namespace Collibri.Repositories.FileBasedImplementation
             return existingRoom;
         }
 
-        public bool DeleteRoom(int roomId)
+        public RoomDTO? DeleteRoom(int roomId)
         {
             var roomToRemove = _rooms.Find(room => room.Id == roomId);
             if (roomToRemove != null)
             {
                 _rooms.Remove(roomToRemove);
                 _dataHandler.PostAllItems(_rooms, ModelType.Rooms);
-                return true;
+                return roomToRemove;
             }
-            return false;
+            return null;
         }
     }
 }

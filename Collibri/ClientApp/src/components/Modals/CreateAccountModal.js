@@ -1,4 +1,4 @@
-import {Box, Button, CircularProgress, IconButton, Modal, TextField, Tooltip, Typography} from "@mui/material";
+import {Grid, Box, Button, CircularProgress, IconButton, Modal, TextField, Tooltip, Typography} from "@mui/material";
 import React, {useState} from "react";
 import modalStyles from "../../styles/ForgotPasswordModalStyles";
 import {Check, Close, Replay} from "@mui/icons-material";
@@ -74,11 +74,11 @@ const CreateAccountModal = ({open, onClose}) => {
     
     return (
         <Modal open={open} onClose={() =>  handleClose()} centered>
-            <Box sx={modalStyles.container}>
+            <Box sx={modalStyles.registerContainer}>
                 { processing ? (
                     success === 'pass' ? (
                       <Box sx={modalStyles.processing}>
-                          <Typography>
+                          <Typography sx={{ fontFamily: 'Segoe UI' }}>
                               Account created successfully
                           </Typography>
                           <IconButton sx={modalStyles.progressIndicator} onClick={() => {
@@ -89,8 +89,8 @@ const CreateAccountModal = ({open, onClose}) => {
                       </Box>
                     ) : success === 'fail' ? (
                       <Box sx={modalStyles.processing}>
-                          <Typography>Oops! Something went wrong...</Typography>
-                          <Typography>Please try again!</Typography>
+                          <Typography sx={{ fontFamily: 'Segoe UI' }}>Oops! Something went wrong...</Typography>
+                          <Typography sx={{ fontFamily: 'Segoe UI' }}>Please try again!</Typography>
                           <Box sx={modalStyles.closeRepeatContainer}>
                               <IconButton onClick={() => {
                                   handleClose();
@@ -114,7 +114,7 @@ const CreateAccountModal = ({open, onClose}) => {
                   <Box>
                       <Box sx={modalStyles.topContainer}>
                           <Typography sx={modalStyles.title} variant="h6" gutterBottom>
-                              Create User
+                              Create an account
                           </Typography>
                           <IconButton onClick={() => {
                               handleClose()
@@ -122,105 +122,132 @@ const CreateAccountModal = ({open, onClose}) => {
                               <Close />
                           </IconButton>
                       </Box>
-                      <TextField
-                        fullWidth
-                        error={incorrectUsername}
-                        margin="normal"
-                        onEmptied="Field cannot be empty!"
-                        label="Username"
-                        variant="filled"
-                        value={username}
-                        onChange={(e) => {
-                            setIncorrectUsername(false);
-                            setUsername(e.target.value)
-                        }}
-                        sx={modalStyles.inputField}
-                      />
-                      <Box sx={modalStyles.helperTextBox}>
-                          { incorrectUsername && (
-                            <Typography sx={modalStyles.errorHelperText}>
-                                Username field cannot be empty!
-                            </Typography>)
-                          }
-                      </Box>
-                      <TextField
-                        fullWidth
-                        error={incorrectEmail}
-                        margin="normal"
-                        label="Email"
-                        variant="filled"
-                        value={email}
-                        onChange={(e) => {
-                            setIncorrectEmail(false);
-                            setEmail(e.target.value)
-                        }}
-                        sx={modalStyles.inputField}
-                      />
-                      <Box sx={modalStyles.helperTextBox}>
-                          { incorrectEmail && (
-                            <Typography sx={modalStyles.errorHelperText}>
-                                Incorrect format (ex: something@smth.com)
-                            </Typography>)
-                          }
-                      </Box>
-                      <TextField
-                        fullWidth
-                        error={incorrectPassword}
-                        margin="normal"
-                        label="Password"
-                        variant="filled"
-                        value={password}
-                        type="password"
-                        onChange={(e) => {
-                            setIncorrectPassword(false);
-                            setPassword(e.target.value)
-                        }}
-                        sx={modalStyles.inputField}
-                      />
-                      <Box sx={modalStyles.helperTextBox}>
-                          { incorrectPassword ? (
-                            <Typography sx={modalStyles.errorHelperText}>
-                                Password must have at least 6 characters, contain at least one uppercase and one digit
-                            </Typography>) : (
-                            <Typography sx={modalStyles.helperText}>
-                                Password must have at least 6 characters, contain at least one uppercase and one digit
-                            </Typography>
-                          )
-                          }
-                      </Box>
-                      <TextField
-                        fullWidth
-                        error={passwordMatch}
-                        margin="normal"
-                        label="Confirm password"
-                        variant="filled"
-                        value={passwordValidation}
-                        type="password"
-                        onChange={(e) => {
-                            setPasswordMatch(false);
-                            setPasswordValidation(e.target.value)
-                        }}
-                        sx={modalStyles.inputField}
-                      />
-                      <Box sx={modalStyles.helperTextBox}>
-                          { passwordMatch && (
-                            <Typography sx={modalStyles.errorHelperText}>
-                                Passwords must match!
-                            </Typography>)
-                          }
-                      </Box>
+                      <Grid container spacing={2}>
+                          {/* Left column */}
+                          <Grid item xs={12} sm={6}>
+                              <TextField
+                                  fullWidth
+                                  error={incorrectUsername}
+                                  margin="normal"
+                                  onEmptied="Field cannot be empty!"
+                                  label={
+                                      <Typography variant="body1" style={{ fontFamily: 'Segoe UI' }}>
+                                          Username
+                                      </Typography>
+                                  }
+                                  variant="standard"
+                                  value={username}
+                                  onChange={(e) => {
+                                      setIncorrectUsername(false);
+                                      setUsername(e.target.value);
+                                  }}
+                                  sx={modalStyles.inputField}
+                              />
+                              <Box sx={modalStyles.helperTextBox}>
+                                  {incorrectUsername && (
+                                      <Typography sx={modalStyles.errorHelperText}>
+                                          Username field cannot be empty!
+                                      </Typography>
+                                  )}
+                              </Box>
+                              <TextField
+                                  fullWidth
+                                  error={incorrectEmail}
+                                  margin="normal"
+                                  label={
+                                      <Typography variant="body1" style={{ fontFamily: 'Segoe UI' }}>
+                                          Email
+                                      </Typography>
+                                  }
+                                  variant="standard"
+                                  value={email}
+                                  onChange={(e) => {
+                                      setIncorrectEmail(false);
+                                      setEmail(e.target.value);
+                                  }}
+                                  sx={{...modalStyles.inputField, marginTop: '2.01rem'}}
+                              />
+                              <Box sx={modalStyles.helperTextBox}>
+                                  {incorrectEmail && (
+                                      <Typography sx={modalStyles.errorHelperText}>
+                                          Incorrect format (ex: something@smth.com)
+                                      </Typography>
+                                  )}
+                              </Box>
+                          </Grid>
+                          {/* Right column */}
+                          <Grid item xs={12} sm={6}>
+                              <TextField
+                                  fullWidth
+                                  error={incorrectPassword}
+                                  margin="normal"
+                                  label={
+                                      <Typography variant="body1" style={{ fontFamily: 'Segoe UI' }}>
+                                          Password
+                                      </Typography>
+                                  }
+                                  variant="standard"
+                                  value={password}
+                                  type="password"
+                                  onChange={(e) => {
+                                      setIncorrectPassword(false);
+                                      setPassword(e.target.value);
+                                  }}
+                                  sx={modalStyles.inputField}
+                              />
+                              <Box sx={modalStyles.helperTextBox}>
+                                  {incorrectPassword ? (
+                                      <Typography sx={modalStyles.errorHelperText}>
+                                          Password must have at least 6 characters, contain at least one uppercase and one digit
+                                      </Typography>
+                                  ) : (
+                                      <Typography sx={modalStyles.helperText}>
+                                          Password must have at least 6 characters, contain at least one uppercase and one digit
+                                      </Typography>
+                                  )}
+                              </Box>
+                              <TextField
+                                  fullWidth
+                                  error={passwordMatch}
+                                  margin="normal"
+                                  label={
+                                      <Typography variant="body1" style={{ fontFamily: 'Segoe UI' }}>
+                                          Confirm password
+                                      </Typography>
+                                  }
+                                  variant="standard"
+                                  value={passwordValidation}
+                                  type="password"
+                                  onChange={(e) => {
+                                      setPasswordMatch(false);
+                                      setPasswordValidation(e.target.value);
+                                  }}
+                                  sx={modalStyles.inputField}
+                              />
+                              <Box sx={modalStyles.helperTextBox}>
+                                  {passwordMatch && (
+                                      <Typography sx={modalStyles.errorHelperText}>
+                                          Passwords must match!
+                                      </Typography>
+                                  )}
+                              </Box>
+                          </Grid>
+                      </Grid>
                       <Button
-                        fullWidth
-                        sx={modalStyles.resetButton}
-                        onClick={() => handleSubmit()}
+                          variant="contained"
+                          sx={{
+                              ...modalStyles.button,
+                              '&:hover': {
+                                  backgroundColor: modalStyles.button.backgroundColor,
+                              },
+                          }} onClick={() => handleSubmit()}
                       >
                           Register
                       </Button>
                   </Box>
-                )
-                }
+                )}
             </Box>
         </Modal>
     );
-}
+};
 export default CreateAccountModal;
