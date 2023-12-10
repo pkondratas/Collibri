@@ -7,16 +7,6 @@ export const RoomListStyles = {
     },
     scrollbarWidth: 'none',
     msOverflowStyle: 'none',
-    // backgroundColor: 'red',
-    // '&::before': {
-    //   content: '""',
-    //   width: '100%',
-    //   height: '100%',
-    //   position: 'absolute',
-    //   left: '0',
-    //   top: '0',
-    //   // background: 'linear-gradient(transparent 80%, #20d957)',
-    // },
   },
   roomItemButton: {
     // backgroundColor: 'yellow',

@@ -1,12 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableRow} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from "react-router-dom";
 import {deleteRoom, getRooms, updateRoom} from "../../api/RoomAPI";
-import UpdateRoomModal from "../Modals/UpdateRoomModal";
-import DeleteRoomModal from "../Modals/DeleteRoomModal";
-import {buttonStyle, nameCellStyle, SectionsContainerStyles, tableRowStyle} from "../../styles/tableListStyle";
+import {
+    buttonStyle,
+    deleteButtonStyle,
+    nameCellStyle,
+    SectionsContainerStyles,
+    tableRowStyle
+} from "../../styles/tableListStyle";
 import {useDispatch, useSelector} from "react-redux";
 import {setCurrentRoom, setRoomsSlice, updateRoomsSlice} from "../../state/user/roomsSlice";
 import LeaveRoomModal from "../Modals/LeaveRoomModal";
@@ -55,7 +58,7 @@ export const RoomContainer = () => {
                             </TableCell>
                             
                             <TableCell align="center">
-                                <Button sx={buttonStyle} className="Button" onClick={(event) => {
+                                <Button sx={deleteButtonStyle} className="Button" onClick={(event) => {
                                     event.stopPropagation();
                                     handleOpenDeleteModal(row)
                                 }} startIcon={<DeleteIcon style={{fontSize: 25}}/>}

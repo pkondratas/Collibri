@@ -1,6 +1,6 @@
 export const RoomLayoutStyle = {
   grid: {
-    bgcolor: '#f3faf5',
+    bgcolor: '#ebf8f2',
     display: 'flex',
     height: '100vh',
     width: '100vw',
@@ -64,6 +64,8 @@ export const postContainerStyle = {
 
 export const RoomLayoutStyles = {
   addSettingsButtons: {
+    display: 'flex',
+    marginLeft: '1rem',
     width: '3rem',
     height: '3rem',
   }

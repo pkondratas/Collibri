@@ -1,4 +1,4 @@
-import {Button, Box, Divider, IconButton, TextField, Typography} from "@mui/material";
+import {Button, Box, Divider, IconButton, TextField, Typography, Tooltip} from "@mui/material";
 import React, {useRef, useState} from "react";
 import {useParams} from "react-router-dom";
 import AddBoxIcon from '@mui/icons-material/AddBox';
@@ -47,9 +47,11 @@ export const AddSection = ({setSections, sections}) => {
     return (
         <Box sx={{ height: '11%', display: 'flex', }}>
             <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '15%', height: '100%'}}>
-                <IconButton sx={RoomLayoutStyles.addSettingsButtons} color="success" onClick={handleOpen}>
-                    <AddBoxIcon fontSize="large"/>
-                </IconButton>
+                <Tooltip title="Add section">
+                    <IconButton sx={RoomLayoutStyles.addSettingsButtons} color="success" onClick={handleOpen}>
+                        <AddBoxIcon fontSize="large"/>
+                    </IconButton>
+                </Tooltip>
             </Box>
             <Box sx={{ display: 'flex', marginLeft: '1rem', alignItems: 'center', width: '85%', height: '100%'}}>
                 <Typography variant="h4" style={RoomLayoutStyle.roomName}>

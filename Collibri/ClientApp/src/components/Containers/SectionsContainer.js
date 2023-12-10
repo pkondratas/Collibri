@@ -18,7 +18,7 @@ import '../../styles/tableList.css';
 import {deleteSection, updateSection} from "../../api/SectionApi";
 import UpdateSectionModal from "../Modals/UpdateSectionModal";
 import {
-    buttonStyle,
+    deleteButtonStyle, editButtonStyle,
     nameCellStyle,
     SectionsContainerStyles,
 } from "../../styles/tableListStyle";
@@ -100,14 +100,14 @@ const SectionsContainer = ({sections, setSections, setSectionId}) => {
                                     }}
                                   >
                                       {(isOwner() && isHovered === row.id) && (
-                                          <IconButton sx={buttonStyle} onClick={() => {
+                                          <IconButton sx={editButtonStyle} onClick={() => {
                                               handleOpenModal(row)
                                           }}>
                                               <EditIcon style={{fontSize: 25}}/>
                                           </IconButton>
                                         )}
                                       {(isOwner() && isHovered === row.id) && (
-                                          <IconButton sx={buttonStyle} onClick={() => handleDeleteSection(row)}>
+                                          <IconButton sx={deleteButtonStyle} onClick={() => handleDeleteSection(row)}>
                                                   <DeleteIcon style={{fontSize: 25}}/>
                                           </IconButton>
                                       )}

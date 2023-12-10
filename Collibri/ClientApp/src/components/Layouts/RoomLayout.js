@@ -33,10 +33,12 @@ const RoomLayout = () => {
     const [sectionId, setSectionId] = useState(0);
     const [sections, setSections] = useState([]);
     const [posts, setPosts] = useState([]);
+    const [tags, setTags] = useState([]);
     const currentRoom = useSelector((state) => state.rooms.currentRoom);
 
     useEffect(() => {
         getSections(setSections, currentRoom.id);
+        getRoomTags(currentRoom.id, setTags);
     }, [currentRoom.id]);
 
     return (
@@ -69,7 +71,11 @@ const RoomLayout = () => {
             </Grid>
             <Grid direction="column" sx={{width:'83%', height: '100%',}}>
               <Grid sx={{ height: '10%'}}>
-                <Header/>
+                <Header 
+                  roomSettings={
+                    <RoomSettings tags={tags} roomId={currentRoom.id} />
+                  } 
+                />
               </Grid>
               <Grid direction="row" sx={{display: 'flex', height: '90%',}}>
                   <Grid direction="column" sx={{display:'flex',width:'32%', bgcolor: '#d8f3e2',}}>
@@ -80,8 +86,10 @@ const RoomLayout = () => {
                     </Box>
                   </Grid>
                   <Grid direction="column" sx={{display:'flex',width:'68%'}}>
+                    <Box sx={{ height: '11%', display: 'flex', }}>
                       <AddPostButton sectionId={sectionId} setPosts={setPosts}/>
                       <SearchBar posts={posts} sectionId={sectionId} setPosts={setPosts}/>
+                    </Box>
                       <PostContainer sectionId={sectionId} posts={posts} setPosts={setPosts}/>
                   </Grid>
               </Grid>

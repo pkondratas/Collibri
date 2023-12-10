@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { useState, useEffect } from "react";
 import { fetchPosts } from "../api/PostAPI";
-import { createFilterOptions } from "@mui/material";
+import {Box, createFilterOptions} from "@mui/material";
 import PostModal from "./Modals/PostModal";
 
 export default function SearchBar(props) {
@@ -25,31 +25,36 @@ export default function SearchBar(props) {
 
     const handlePostSelection = (event, value) => {
         if (value) {
+            console.log("aaaa");
             const selectedPost = props.posts.find(post => post.id === value.value);
+            console.log("bb");
             setSelectedPost(selectedPost);
         }
     };
 
     return (
         <>
-            <Autocomplete
-                filterOptions={filterOptions}
-                disablePortal
-                id="combo-box-demo"
-                options={options}
-                getOptionLabel={(option) => option.label}
-                sx={{ width: 300 }}
-                renderInput={(params) => <TextField {...params} label="Enter post title" variant="filled" />}
-                noOptionsText={"There are no posts"}
-                onChange={handlePostSelection} 
-            />
-            {selectedPost && (
-                <PostModal
-                    {...selectedPost} 
-                    postModal={true}
-                    setPostModal={setSelectedPost}
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
+                <Autocomplete
+                    filterOptions={filterOptions}
+                    disablePortal
+                    id="combo-box-demo"
+                    options={options}
+                    getOptionLabel={(option) => option.label}
+                    sx={{ width: 300 }}
+                    renderInput={(params) => <TextField {...params} label="Enter post title" variant="filled" />}
+                    noOptionsText={"There are no posts"}
+                    onChange={handlePostSelection} 
                 />
-            )}
+                {selectedPost && (
+                    <PostModal
+                        post={selectedPost}
+                        {...selectedPost} 
+                        postModal={true}
+                        setPostModal={setSelectedPost}
+                    />
+                )}
+            </Box>
         </>
     );
 }

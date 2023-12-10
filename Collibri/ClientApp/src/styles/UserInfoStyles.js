@@ -4,7 +4,7 @@ import Badge from "@mui/material/Badge";
 export const UserInfoStyles = {
     mainBox: {
         // mt:'13vh',
-        bgcolor: '#a5dcbe',
+        bgcolor: '#b0e7c8',//a5dcbe
         display:'flex',
         boxShadow: 1,
         height: '10.5%',

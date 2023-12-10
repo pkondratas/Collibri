@@ -42,8 +42,8 @@ const PostModal = (props) => {
   const [files, setFiles] = useState([]);
   const [list, setList] = useState([]);
   const [selection, setSelection] = useState(SELECTION[0]);
-    const [createNoteModalOpen, setCreateNoteModalOpen] = useState(false);
-    const [update, setUpdate] = useState(false);
+  const [createNoteModalOpen, setCreateNoteModalOpen] = useState(false);
+  const [update, setUpdate] = useState(false);
     
   const handleClose = () => {
     props.setPostModal(false);
@@ -76,25 +76,7 @@ const PostModal = (props) => {
     const handleAddNoteClick = () => {
         setCreateNoteModalOpen(true);
     };
-
-    // const addTestingData = () => {
-    //   createNote(JSON.stringify({
-    //     Name: Math.random().toString(),
-    //     Text: "Testing text",
-    //     PostId: props.id
-    //   }));
-    //
-    //   createDocument(JSON.stringify({
-    //     Title: Math.random().toString(),
-    //     Text: "Testing text"
-    //   }), props.id.toString())
-    // }
-    //
-    //   createDocument(JSON.stringify({
-    //     Title: Math.random().toString(),
-    //     Text: "Testing text"
-    //   }), props.id.toString())
-    // }
+  
     return (
         <>
             <Modal

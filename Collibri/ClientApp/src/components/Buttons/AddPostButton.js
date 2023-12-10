@@ -20,16 +20,18 @@ export const AddPostButton = (props) => {
     }
     
     return (
-        <Box>
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '9%', height: '100%'}}>
             <Tooltip
                 title={isDisabled ? 'Error: no section present' : ''}
                 arrow
                 disableHoverListener={!isDisabled}
             >
-            <IconButton disabled={isDisabled} color="success" onClick={handleOpen}>
-                <AddBoxIcon fontSize={"large"} />
-            </IconButton>
-            <CreatePostModal sectionId={props.sectionId} showModal={open} setOpen={setOpen} postId={postId} handleSuccessfulClose={handleSuccessfulClose}/>
+              <Tooltip title="Add post">
+                  <IconButton disabled={isDisabled} color="success" onClick={handleOpen}>
+                      <AddBoxIcon fontSize={"large"} />
+                  </IconButton>
+              </Tooltip>
+              <CreatePostModal sectionId={props.sectionId} showModal={open} setOpen={setOpen} postId={postId} handleSuccessfulClose={handleSuccessfulClose}/>
             </Tooltip>
         </Box>
     );
