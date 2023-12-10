@@ -17,17 +17,19 @@ export const PostStyle = {
     //color: '#B9F5D9'
     //color: '#80CB9E'
     color: '#1D1E18',
-    fontSize: '250%'
+    fontSize: '250%',
+    fontFamily: 'Segoe UI semibold'
   },
   description: {
     color: '#1D1E18',
+    fontFamily: 'Segoe UI semibold',
     wordBreak: "break-all",
     overflow: "hidden",
     textOverflow: "ellipsis",
     display: "-webkit-box",
     WebkitLineClamp: "2",
     WebkitBoxOrient: "vertical",
-    height: '10%',
+    height: '5%',
     minWidth: "90%",
     lineHeight: "1rem"
   },
@@ -38,7 +40,8 @@ export const PostStyle = {
   baseEditButton: {
     color: '#316C44',
     marginBottom: '3%',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    borderRadius: 3
   },
   deleteButton: {
     backgroundSize: '700% 100%',
@@ -62,6 +65,7 @@ export const PostStyle = {
     }
   },
   editButton: {
+    borderRadius: 3,
     ':hover': {
       boxShadow: 2,
       backgroundColor: '#80CB9E',
@@ -76,6 +80,7 @@ export const PostStyle = {
   buttonComponent: {
     marginRight: "2%",
     backgroundColor: '#B9F5D9',
+    borderRadius: 3,
     ':hover': {
       boxShadow: 2,
       backgroundColor: '#80CB9E',
@@ -92,9 +97,12 @@ export const PostStyle = {
   },
   likeCount: {
     color: '#1D1E18',
+    marginRight: "5%",
+    fontFamily: 'Segoe UI semibold'
   },
   updated: {
     color: '#1D1E18',
+    fontFamily: 'Segoe UI semibold'
     //textShadow: '1px 1px 2px gray'
   }
 }

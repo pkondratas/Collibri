@@ -4,6 +4,7 @@ import {createRoom} from "../../api/RoomAPI";
 import CModal from "../Modals/CModal";
 import {useDispatch, useSelector} from "react-redux";
 import {addRoomSlice, setRoomsSlice} from "../../state/user/roomsSlice";
+import {CModalStyle} from "../../styles/CModalStyle";
 
 
 export const CreateRoom = () => {
@@ -44,7 +45,7 @@ export const CreateRoom = () => {
         <>
             <Button size="large" onClick={handleOpen} variant="contained">Create Room</Button>
             <CModal showModal={open} handleClose={handleClose} handleChanges={handleCreateRoom}>
-                <Typography variant="h5">
+                <Typography variant="h5" sx={CModalStyle.text}>
                     Create a new room
                 </Typography>
                 <TextField fullWidth id="roomName" label="Room name" variant="outlined" error={error}

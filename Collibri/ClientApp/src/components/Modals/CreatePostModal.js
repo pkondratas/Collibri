@@ -4,6 +4,7 @@ import {Check, Clear} from "@mui/icons-material";
 import {CreatePostStyle} from "../../styles/CreatePostStyle";
 import {createPost} from "../../api/PostAPI";
 import {useSelector} from "react-redux";
+import {CModalStyle} from "../../styles/CModalStyle";
 
 export const CreatePostModal = (props) => {
 
@@ -80,6 +81,9 @@ export const CreatePostModal = (props) => {
             <Box sx={CreatePostStyle.modalWindow}
                  align="center"
             >
+                <Typography variant='h4' sx={[CModalStyle.text, {marginBottom: '5%'}]}>
+                    Create a post
+                </Typography>
                 <Box sx={CreatePostStyle.textFieldBox}>
                     <TextField id="outlined-basic" label="Post title" variant="outlined" multiline
                                error={isTitleEmptyError || isTitleTooLongError}
@@ -110,12 +114,12 @@ export const CreatePostModal = (props) => {
                                }
                                sx={CreatePostStyle.descriptionTextField}/>
                 </Box>
-                <Typography sx={CreatePostStyle.warningNote}>
+                <Typography sx={[CreatePostStyle.warningNote, CModalStyle.text]}>
                     Creating the post will then open it and allow you to add documents, notes and files.
                 </Typography>
-                <Box sx={CreatePostStyle.buttonBox}>
-                    <Button onClick={handleClose}><Clear/></Button>
-                    <Button onClick={handleCreatePost}><Check/></Button>
+                <Box>
+                    <Button onClick={handleClose} sx={CreatePostStyle.button}><Clear/></Button>
+                    <Button onClick={handleCreatePost} sx={CreatePostStyle.button}><Check/></Button>
                 </Box>
             </Box>
         </Modal>

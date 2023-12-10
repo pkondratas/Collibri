@@ -157,8 +157,8 @@ const Post = (props) => {
                   </Typography>
                   {disliked ? <ThumbDown fontSize="small" sx={PostStyle.reactionButtons} /> : <ThumbDownOffAltOutlined fontSize="small" sx={PostStyle.reactionButtons} />}
                 </Button>
-                <Typography variant="caption" sx={{textWrap: 'nowrap'}}>
-                  {'User: ' + post.creatorUsername}
+                <Typography variant="caption" sx={{textWrap: 'nowrap', fontFamily: 'Segoe UI semibold'}}>
+                  {'By: ' + post.creatorUsername}
                 </Typography>
               </Box>
               <Typography variant="caption" sx={PostStyle.updated}>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Button, Modal} from '@mui/material';
 import { Check, Clear } from '@mui/icons-material';
-import {customModal, modalContent} from "../../styles/CModalStyle";
+import {CModalStyle, customModal, modalContent} from "../../styles/CModalStyle";
 
 
 // custom modal template for any modal with three props: showModal bool, handleClose and handleChanges function
@@ -11,13 +11,13 @@ const CModal = (props) => {
   return (
     <>
       <Modal open={props.showModal} onClose={props.handleClose}>
-        <Box sx={customModal} align="center">
+        <Box sx={CModalStyle.modal} align="center">
           {props.children}
-          <Box sx={modalContent}>
-            <Button onClick={props.handleClose}>
+          <Box sx={CModalStyle.content}>
+            <Button onClick={props.handleClose} sx={CModalStyle.buttons}>
               <Clear />
             </Button>
-            <Button onClick={props.handleChanges}>
+            <Button onClick={props.handleChanges} sx={CModalStyle.buttons}>
               <Check />
             </Button>
           </Box>

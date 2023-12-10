@@ -3,6 +3,7 @@ import {Box, Button, Modal, TextField, Typography} from "@mui/material";
 import { Check, Clear } from "@mui/icons-material";
 import { createNote } from "../../api/NoteAPI"; 
 import { CreateNoteStyle } from "../../styles/CreateNoteStyle";
+import {CModalStyle} from "../../styles/CModalStyle";
 
 export const CreateNoteModal = (props) => {
     const titleFieldRef = useRef(null);
@@ -70,6 +71,9 @@ export const CreateNoteModal = (props) => {
     return (
         <Modal open={props.showModal} onClose={() => handleClose()}>
             <Box sx={CreateNoteStyle.modalWindow} align="center">
+                <Typography variant='h4' sx={[CModalStyle.text, {marginBottom: '5%'}]}>
+                    Create a post
+                </Typography>
                 <Box sx={CreateNoteStyle.textFieldBox}>
                     <TextField
                         id="outlined-basic"
@@ -110,10 +114,10 @@ export const CreateNoteModal = (props) => {
                     />
                 </Box>
                 <Box sx={CreateNoteStyle.buttonBox}>
-                    <Button onClick={handleClose}>
+                    <Button onClick={handleClose} sx={CModalStyle.buttons}>
                         <Clear />
                     </Button>
-                    <Button onClick={handleCreateNote}>
+                    <Button onClick={handleCreateNote} sx={CModalStyle.buttons}>
                         <Check />
                     </Button>
                 </Box>

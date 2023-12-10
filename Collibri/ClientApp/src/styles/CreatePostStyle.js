@@ -6,8 +6,9 @@ export const CreatePostStyle = {
         left: '50%',
         transform: 'translate(-50%, -50%)',
         border: '2px solid #000',
-        boxShadow: 24,
-        p: 4,
+        p: 2,
+        bgcolor: '#DEFEF5',
+        borderRadius: 3,
         display: 'flex',
         flexDirection: 'column'
     },
@@ -34,7 +35,10 @@ export const CreatePostStyle = {
         width: 600
     },
     
-    buttonBox: {
-        margin: 'auto'
+    button: {
+        color: '#316C44',
+        backgroundColor: '#B9F5D9',
+        margin: '2%',
+        borderRadius: 3,
     }
 }

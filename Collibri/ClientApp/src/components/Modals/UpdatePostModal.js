@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { TextField, Typography } from '@mui/material';
 import CModal from "./CModal";
 import {modalTextField, modalTitleStyle} from "../../styles/UpdatePostModalStyle";
+import {CModalStyle} from "../../styles/CModalStyle";
 
 
 
@@ -34,7 +35,7 @@ const UpdatePostModal = (props) => {
   return (
     <>
       <CModal showModal={props.updateModal} handleClose={handleClose} handleChanges={handleChanges} >
-        <Typography id='modal-modal-title' variant='h5' component='h5' sx={modalTitleStyle}>
+        <Typography id='modal-modal-title' variant='h5' component='h5' sx={[CModalStyle.text, modalTitleStyle]}>
           Update title of '{props.title}'
         </Typography>
         <TextField
