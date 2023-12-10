@@ -22,6 +22,8 @@ import {AboutUsButton} from '../Buttons/AboutUsButton';
 import LoginContainer from '../Containers/LoginContainer';
 import ResetPasswordContainer from '../Containers/ResetPasswordContainer';
 import {onLogin, onLogout} from "../../state/user/userSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {useLocation} from "react-router-dom";
 import {LoginContainerStyles} from "../../styles/LoginContainerStyles";
 import {useNavigate} from "react-router-dom";
 
@@ -29,6 +31,7 @@ export const LandingPageLayout = () => {
     const userInformation = useSelector((state) => state.user);
     const [rooms, setRooms] = useState([]);
     const dispatch = useDispatch();
+    const location = useLocation();
     const navigate = useNavigate();
     const [isGreen, setIsGreen] = useState(false);
 
@@ -73,9 +76,9 @@ export const LandingPageLayout = () => {
         localStorage.removeItem('loggedIn');
 
         // Update the loggedIn state
-        
-            dispatch(onLogout());
-        
+
+        dispatch(onLogout());
+
     };
 
     const isResetPasswordPage = location.pathname.startsWith('/reset-password/');
@@ -151,20 +154,16 @@ export const LandingPageLayout = () => {
                             </Box>
                         </Fade>
                     ) : (
-                        // Use ResetPasswordPage component only when the route matches "/reset-password/:token"
                         isResetPasswordPage ? (
                             <ResetPasswordContainer />
                         ) : (
-                            <LoginContainer onLoginStatusChange={handleLoginStatus} handleColor={handleColor}/>
-                        )
-                    )}
-                </Box>
-
-                {/* About Us button placed in the footer */}
-                <Box >
-                    <AboutUsButton />
-                </Box>
-            </Grid>
+                            <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
+                                <LoginContainer onLoginStatusChange={handleLoginStatus} handleColor={handleColor}/>
+                            </Box>
+                )
+                )}
+            </Box>
         </Grid>
-    );
+</Grid>
+);
 };
