@@ -55,41 +55,41 @@ export const RoomSettings = () => {
     
     return (
         <>
-            <IconButton sx={RoomLayoutStyles.addSettingsButtons} id="options-button"
+            <IconButton sx={{height: '100%'}} id="options-button"
                     aria-controls={open ? 'basic-menu' : undefined}
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}
                     onClick={handleClick}>
                 <SettingsIcon fontSize="large" />
             </IconButton>
-            <Menu id="options-menu" anchorEl={anchorEl} open={open} onClose={handleClose}
-                  MenuListProps={{
-                          'aria-labelledby': 'options-button',
-                      }}>
-                <MenuItem onClick={() => handleInvitation()}>
-                    <ListItemIcon>
-                        <PersonAddIcon fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText>Invitation code</ListItemText>
-                </MenuItem>
-                <MenuItem disabled={rooms.currentRoom.creatorUsername !== userInformation.username} onClick={() => {
-                    setUpdateModal(true);
-                }}>
-                    <ListItemIcon>
-                        <DriveFileRenameOutlineIcon fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText>Change room name</ListItemText>
-                </MenuItem>
-                <MenuItem onClick={() => setDeleteModal(true)} disabled={rooms.currentRoom.creatorUsername !== userInformation.username}>
-                    <ListItemIcon>
-                        <DeleteIcon fontSize="small" style={{color: "red"}} />
-                    </ListItemIcon>
-                    <ListItemText style={{color: "red"}}>Delete room</ListItemText>
-                </MenuItem>
-                <RoomCodeModal invModal={invModal} setInvModal={setInvModal} anchorClose={handleClose}/>
-                <UpdateRoomModal room={rooms.currentRoom} updateModal={updateModal} setUpdateModal={setUpdateModal} updateRoomName={handleUpdateRoom}/>
-                <DeleteRoomModal deleteModal={deleteModal} setDeleteModal={setDeleteModal} />
-            </Menu>
+            {/*<Menu id="options-menu" anchorEl={anchorEl} open={open} onClose={handleClose}*/}
+            {/*      MenuListProps={{*/}
+            {/*              'aria-labelledby': 'options-button',*/}
+            {/*          }}>*/}
+            {/*    <MenuItem onClick={() => handleInvitation()}>*/}
+            {/*        <ListItemIcon>*/}
+            {/*            <PersonAddIcon fontSize="small" />*/}
+            {/*        </ListItemIcon>*/}
+            {/*        <ListItemText>Invitation code</ListItemText>*/}
+            {/*    </MenuItem>*/}
+            {/*    <MenuItem disabled={rooms.currentRoom.creatorUsername !== userInformation.username} onClick={() => {*/}
+            {/*        setUpdateModal(true);*/}
+            {/*    }}>*/}
+            {/*        <ListItemIcon>*/}
+            {/*            <DriveFileRenameOutlineIcon fontSize="small" />*/}
+            {/*        </ListItemIcon>*/}
+            {/*        <ListItemText>Change room name</ListItemText>*/}
+            {/*    </MenuItem>*/}
+            {/*    <MenuItem onClick={() => setDeleteModal(true)} disabled={rooms.currentRoom.creatorUsername !== userInformation.username}>*/}
+            {/*        <ListItemIcon>*/}
+            {/*            <DeleteIcon fontSize="small" style={{color: "red"}} />*/}
+            {/*        </ListItemIcon>*/}
+            {/*        <ListItemText style={{color: "red"}}>Delete room</ListItemText>*/}
+            {/*    </MenuItem>*/}
+            {/*    <RoomCodeModal invModal={invModal} setInvModal={setInvModal} anchorClose={handleClose}/>*/}
+            {/*    <UpdateRoomModal room={rooms.currentRoom} updateModal={updateModal} setUpdateModal={setUpdateModal} updateRoomName={handleUpdateRoom}/>*/}
+            {/*    <DeleteRoomModal deleteModal={deleteModal} setDeleteModal={setDeleteModal} />*/}
+            {/*</Menu>*/}
         </>
     );
 }

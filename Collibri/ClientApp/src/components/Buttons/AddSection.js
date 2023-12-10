@@ -1,11 +1,12 @@
-import {Button, Divider, IconButton, TextField, Typography} from "@mui/material";
+import {Button, Box, Divider, IconButton, TextField, Typography} from "@mui/material";
 import React, {useRef, useState} from "react";
 import {useParams} from "react-router-dom";
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import DeleteIcon from "@mui/icons-material/Delete";
 import CModal from "../Modals/CModal";
 import {createSection} from "../../api/SectionApi";
-import {RoomLayoutStyles} from "../../styles/RoomLayoutStyle";
+import {RoomLayoutStyle, RoomLayoutStyles} from "../../styles/RoomLayoutStyle";
+import {useSelector} from "react-redux";
 
 
 export const AddSection = ({setSections, sections}) => {
@@ -13,7 +14,7 @@ export const AddSection = ({setSections, sections}) => {
     const [open, setOpen] = useState(false);
     const [isEmptyError, setIsEmptyError] = useState(false);
     const [isAlreadyUsedError, setIsAlreadyUsedError] = useState(false);
-
+    const rooms = useSelector((state) => state.rooms);
     const {roomId} = useParams()
 
 
@@ -44,10 +45,17 @@ export const AddSection = ({setSections, sections}) => {
     }
 
     return (
-        <div>
-            <IconButton sx={RoomLayoutStyles.addSettingsButtons} color="success" onClick={handleOpen}>
-                <AddBoxIcon fontSize="large"/>
-            </IconButton>
+        <Box sx={{ height: '11%', display: 'flex', }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '15%', height: '100%'}}>
+                <IconButton sx={RoomLayoutStyles.addSettingsButtons} color="success" onClick={handleOpen}>
+                    <AddBoxIcon fontSize="large"/>
+                </IconButton>
+            </Box>
+            <Box sx={{ display: 'flex', marginLeft: '1rem', alignItems: 'center', width: '85%', height: '100%'}}>
+                <Typography variant="h4" style={RoomLayoutStyle.roomName}>
+                    {rooms.currentRoom.name}
+                </Typography>
+            </Box>
             <CModal showModal={open} handleClose={handleClose} handleChanges={handleCreateSection}>
                 <Typography variant="h5">
                     Create a new Section
@@ -65,6 +73,6 @@ export const AddSection = ({setSections, sections}) => {
                            onChange={handleOnChange} margin="normal"/>
                 <Divider/>
             </CModal>
-        </div>
+        </Box>
     );
 }

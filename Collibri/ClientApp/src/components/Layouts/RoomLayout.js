@@ -50,7 +50,6 @@ const RoomLayout = () => {
               <Drawer
                 sx={RoomLayoutStyle.roomDrawer}
                 variant="permanent"
-                anchor="left"
               >
                 <Box sx={RoomLayoutStyle.titleBox}>
                   <Toolbar>
@@ -59,23 +58,25 @@ const RoomLayout = () => {
                     </Typography>
                   </Toolbar>
                 </Box>
-                <Divider />   
-                  <SideRoomTable/>
-                  <RoomSettings />
-                <Divider />
+                <Box sx={RoomLayoutStyle.dividerBox}>
+                  <Divider variant="middle">
+                    <Typography sx={RoomLayoutStyle.roomsDivider}>ROOMS</Typography>
+                  </Divider>
+                </Box>
+                <SideRoomTable/>
               </Drawer>
-                {/*<RoomSettings />*/}
-                {/*<SideRoomTable/>*/}
             </Grid>
-            <Grid direction="column" sx={{width:'83%'}}>
-              <Grid sx={{ height: '20%'}}>
+            <Grid direction="column" sx={{width:'83%', height: '100%',}}>
+              <Grid sx={{ height: '10%'}}>
                 <Header/>
               </Grid>
-              <Grid direction="row" sx={{display: 'flex', height: '80%'}}>
-                  <Grid direction="column" sx={{display:'flex',width:'32%'}}>
-                    <AddSection sections={sections} setSections={setSections}></AddSection>
-                    <SectionsContainer sections={sections} setSections={setSections} setSectionId={setSectionId}/>
-                    <UserInfoContainer />
+              <Grid direction="row" sx={{display: 'flex', height: '90%',}}>
+                  <Grid direction="column" sx={{display:'flex',width:'32%', bgcolor: '#d8f3e2',}}>
+                    <Box sx={{height: '100%'}}>
+                      <AddSection sections={sections} setSections={setSections}></AddSection>
+                      <SectionsContainer sections={sections} setSections={setSections} setSectionId={setSectionId}/>
+                      <UserInfoContainer />
+                    </Box>
                   </Grid>
                   <Grid direction="column" sx={{display:'flex',width:'68%'}}>
                       <AddPostButton sectionId={sectionId} setPosts={setPosts}/>

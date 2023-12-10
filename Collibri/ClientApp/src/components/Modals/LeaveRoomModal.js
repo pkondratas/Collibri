@@ -14,6 +14,7 @@ const LeaveRoomModal = (props) => {
   const handleClose = () => props.setDeleteModal(false);
 
   const handleChanges = async () => {
+    console.log(rooms.currentRoom.id, userInformation.username);
     const data = await deleteMember(rooms.currentRoom.id, userInformation.username)
 
     if (data === 404) {

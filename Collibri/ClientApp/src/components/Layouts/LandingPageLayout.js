@@ -50,7 +50,7 @@ export const LandingPageLayout = () => {
                 transition: 'background-image 0.5s ease-in-out',
             }}>
                 <ThemeProvider theme={headerTextTheme}>
-                    <Typography>Collibri</Typography>
+                    <Typography sx={{fontFamily: 'cursive'}}>Collibri</Typography>
                 </ThemeProvider>
             </Grid>
 

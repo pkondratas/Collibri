@@ -1,9 +1,9 @@
-import {Box, Paper, Table, TableBody, TableCell, TableContainer, TableRow} from "@mui/material";
+import {Box, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import {nameCellStyle} from "../styles/tableListStyle";
 import {useDispatch, useSelector} from "react-redux";
 import {setCurrentRoom} from "../state/user/roomsSlice";
-import React from "react";
+import React, {useState} from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
@@ -13,6 +13,7 @@ import {RoomListStyles} from "../styles/RoomListStyles";
 export const SideRoomTable = () => {
     const rooms = useSelector((state) => state.rooms);
     const dispatch = useDispatch();
+    const [selectedRoom, setSelectedRoom] = useState(null);
     const navigate = useNavigate();
 
     return (
@@ -21,18 +22,28 @@ export const SideRoomTable = () => {
             <List>
               {rooms.rooms.map((row) => (
                 <ListItemButton
-                  // hover
-                  // className="TableRow"
                   key={row.id}
                   divider="true"
                   onClick={() => {
                       navigate(`/${row.id}`)
                       dispatch(setCurrentRoom(row));
+                      setSelectedRoom(row.id);
                   }}
-                  // sx={nameCellStyle}
+                  sx={{
+                      ...RoomListStyles.roomItemButton, 
+                      ...(selectedRoom === row.id ? RoomListStyles.roomClicked : {}),
+                      // Add other styles as needed
+                  }}
                 >
-                  <ListItemText> 
-                      {row.name} 
+                  <ListItemText>
+                    <Typography 
+                      sx={{
+                          color: '#314231',
+                          ...(selectedRoom === row.id ? RoomListStyles.roomClickedtext : {}),
+                      }}
+                    >
+                      {row.name}
+                    </Typography>    
                   </ListItemText>
                 </ListItemButton>
               ))}

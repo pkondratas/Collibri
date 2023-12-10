@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import {deleteRoom, getRooms, updateRoom} from "../../api/RoomAPI";
 import UpdateRoomModal from "../Modals/UpdateRoomModal";
 import DeleteRoomModal from "../Modals/DeleteRoomModal";
-import {buttonStyle, nameCellStyle, tableRowStyle} from "../../styles/tableListStyle";
+import {buttonStyle, nameCellStyle, SectionsContainerStyles, tableRowStyle} from "../../styles/tableListStyle";
 import {useDispatch, useSelector} from "react-redux";
 import {setCurrentRoom, setRoomsSlice, updateRoomsSlice} from "../../state/user/roomsSlice";
 import LeaveRoomModal from "../Modals/LeaveRoomModal";
@@ -24,6 +24,7 @@ export const RoomContainer = () => {
     }
     
     const handleOpenDeleteModal = (currentRoom) => {
+        dispatch(setCurrentRoom(currentRoom));
         setRoom(currentRoom);
         setDeleteModal(true);
     }
@@ -43,15 +44,24 @@ export const RoomContainer = () => {
                             hover
                             className="TableRow"
                             key={row.id}
-                            sx={tableRowStyle}
-                        >
-                            <TableCell sx={nameCellStyle} component="th" scope="row" onClick={() => {
+                            sx={SectionsContainerStyles.tableBody}
+                            onClick={() => {
                                 dispatch(setCurrentRoom(row));
                                 navigate(`/${row.id}`)
-                            }}> {row.name} </TableCell>
+                            }}
+                        >
+                            <TableCell sx={nameCellStyle} component="th" scope="row"> 
+                                {row.name} 
+                            </TableCell>
                             
                             <TableCell align="center">
-                                <Button sx={buttonStyle} className="Button" onClick={() => {handleOpenDeleteModal(row)}} startIcon={<DeleteIcon style={{fontSize: 25}}/>}></Button>
+                                <Button sx={buttonStyle} className="Button" onClick={(event) => {
+                                    event.stopPropagation();
+                                    handleOpenDeleteModal(row)
+                                }} startIcon={<DeleteIcon style={{fontSize: 25}}/>}
+                                >
+                                    
+                                </Button>
                             </TableCell>
                         </TableRow>
                     ))}

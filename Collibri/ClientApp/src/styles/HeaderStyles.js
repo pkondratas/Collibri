@@ -1,6 +1,7 @@
 export const HeaderStyles = {
     appBar: {
         background: 'white',
+        height: '100%', 
     },
     toolbar: {
         justifyContent: 'space-between',
