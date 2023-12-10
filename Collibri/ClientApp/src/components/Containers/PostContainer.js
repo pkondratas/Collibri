@@ -43,7 +43,8 @@ const PostContainer = (props) => {
           <>
               <Box sx={containerStyle.container}>
                   <List>
-                      {props.posts.map(item => (
+                      {props.posts.sort((a, b) => (a.likeCount - a.dislikeCount) > (b.likeCount - b.dislikeCount) ? -1 : 1)
+                          .map(item => (
                           <ListItem key={item.id}>
                               <Post post={item} {...item} setPosts={props.setPosts}/>
                           </ListItem>
