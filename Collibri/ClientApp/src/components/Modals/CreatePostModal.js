@@ -85,7 +85,7 @@ export const CreatePostModal = (props) => {
                     Create a post
                 </Typography>
                 <Box sx={CreatePostStyle.textFieldBox}>
-                    <TextField id="outlined-basic" label="Post title" variant="outlined" multiline
+                    <TextField label="Post title" variant="standard" multiline
                                error={isTitleEmptyError || isTitleTooLongError}
                                inputRef={titleFieldRef}
                                onChange={handleOnChangeTitle}

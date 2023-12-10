@@ -76,9 +76,8 @@ export const CreateNoteModal = (props) => {
                 </Typography>
                 <Box sx={CreateNoteStyle.textFieldBox}>
                     <TextField
-                        id="outlined-basic"
                         label="Note title"
-                        variant="outlined"
+                        variant="standard"
                         multiline
                         error={isTitleEmptyError || isTitleTooLongError}
                         inputRef={titleFieldRef}

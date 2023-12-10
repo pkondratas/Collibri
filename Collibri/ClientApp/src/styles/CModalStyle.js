@@ -7,7 +7,7 @@ export const CModalStyle = {
     width: '25%',
     p: 2,
     bgcolor: '#DEFEF5',
-    borderRadius: 3,
+    borderRadius: 2,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -26,5 +26,14 @@ export const CModalStyle = {
   },
   text: {
     fontFamily: 'Segoe UI semibold'
+  },
+  alert: {
+    position: 'fixed',
+    //transform: 'translate(30vw, -15vh)',
+    top: '2%',
+    right: '44%',
+    borderRadius: 2,
+    backgroundColor: '#80CB9E',
+    color: '#DEFEF5'
   }
 };

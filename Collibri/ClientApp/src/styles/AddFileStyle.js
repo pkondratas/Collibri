@@ -7,7 +7,7 @@ export const AddFileStyle = {
         border: '2px solid #000',
         p: 2,
         bgcolor: '#DEFEF5',
-        borderRadius: 3,
+        borderRadius: 2,
     },
     headerText: {
         textAlign: 'center',
