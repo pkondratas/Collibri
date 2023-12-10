@@ -45,7 +45,7 @@ const tabStyles = {
         padding: '1rem',
         marginRight: '1rem',
         backgroundColor: '#B9F5D9',
-        border: '1px solid #80CB9E',
+        border: '3px solid #80CB9E',
         borderRadius: 3,
         width: '30rem',
         height: '20rem'
@@ -54,7 +54,7 @@ const tabStyles = {
         height:'auto',
         backgroundColor: '#B9F5D9', 
         borderRadius: '10px', 
-        border: '1px solid #80CB9E', 
+        border: '3px solid #80CB9E', 
         padding: '1rem', 
         marginBottom: '0.5rem'
     }
