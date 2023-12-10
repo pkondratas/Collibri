@@ -1,5 +1,7 @@
 using System.IO.Abstractions;
 using Collibri.Data;
+using Collibri.Middleware;
+// using Collibri.Middleware;
 using Collibri.Repositories;
 // using Collibri.Repositories.DataHandling;
 using Collibri.Repositories.DbImplementation;
@@ -69,6 +71,8 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 var app = builder.Build();
 
+
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -79,6 +83,8 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+
+ app.UseRequestResponseLogging();
 
 app.UseAuthentication();
 app.UseAuthorization();
