@@ -13,6 +13,9 @@ const context = [
   '/v1/member',
   '/v1/register',
   '/v1/login',
+  '/v1/tags',
+  '/v1/post-tags',
+  '/v1/login',
   '/v1/resetPassword',
   '/v1/files'
 ];
