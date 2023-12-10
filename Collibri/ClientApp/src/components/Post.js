@@ -143,6 +143,9 @@ const Post = (props) => {
                   {disliked ? <ThumbDown fontSize="small" sx={PostStyle.reactionButtons} /> : <ThumbDownOffAltOutlined fontSize="small" sx={PostStyle.reactionButtons} />}
                 </Button>
               </Box>
+              <Typography variant="caption">
+                {'User: ' + props.creatorUsername}
+              </Typography>
               <Typography variant="caption" sx={PostStyle.updated}>
                 {post.lastUpdatedDate ? 'Last edited: ' + displayDate(post.lastUpdatedDate.toLocaleString()) : ''}
               </Typography>

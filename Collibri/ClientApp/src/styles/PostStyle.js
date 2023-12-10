@@ -17,7 +17,7 @@ export const PostStyle = {
     //color: '#B9F5D9'
     //color: '#80CB9E'
     color: '#1D1E18',
-    fontSize: '200%'
+    fontSize: '250%'
   },
   description: {
     color: '#1D1E18',
@@ -52,6 +52,7 @@ export const PostStyle = {
   },
   buttonComponent: {
     //marginRight: '0%',
+    backgroundColor: '#B9F5D9',
     ':hover': {
       boxShadow: 2,
       backgroundColor: '#80CB9E',
