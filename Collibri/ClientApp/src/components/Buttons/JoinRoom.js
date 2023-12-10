@@ -13,7 +13,7 @@ export const JoinRoom = () => {
     
     return (
       <>
-          <Button style={LoginContainerStyles.button} size="large" onClick={() => handleJoinRoom()} variant="contained">Join Room</Button>
+          <Button style={{...LoginContainerStyles.button, minWidth:'9rem', maxWidth:'9rem'}} size="large" onClick={() => handleJoinRoom()} variant="contained">Join Room</Button>
           <JoinRoomModal showModal={joinModal} setModal={setJoinModal} />
       </>
     );

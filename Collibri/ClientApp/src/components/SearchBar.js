@@ -3,8 +3,9 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { useState, useEffect } from "react";
 import { fetchPosts } from "../api/PostAPI";
-import { createFilterOptions } from "@mui/material";
+import {Box, createFilterOptions, IconButton} from "@mui/material";
 import PostModal from "./Modals/PostModal";
+import ArticleIcon from '@mui/icons-material/Article';
 
 export default function SearchBar(props) {
     const [selectedPost, setSelectedPost] = useState(null);
@@ -39,13 +40,24 @@ export default function SearchBar(props) {
                 options={options}
                 getOptionLabel={(option) => option.label}
                 sx={{ width: 300 }}
-                renderInput={(params) => <TextField {...params} label="Enter post title" variant="filled" />}
+                renderOption={(props, option, { selected }) => (
+                    <Box
+                        component="li"
+                        {...props}
+                    >
+                        <IconButton color="success" size="small">
+                            <ArticleIcon />
+                        </IconButton>
+                        {option.label}
+                    </Box>
+                )}
+                renderInput={(params) => <TextField {...params} label="Enter post title" variant="filled" color="success" />}
                 noOptionsText={"There are no posts"}
-                onChange={handlePostSelection} 
+                onChange={handlePostSelection}
             />
             {selectedPost && (
                 <PostModal
-                    {...selectedPost} 
+                    {...selectedPost}
                     postModal={true}
                     setPostModal={setSelectedPost}
                 />

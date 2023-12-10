@@ -55,7 +55,7 @@ export const LandingPageLayout = () => {
 
         setTimeout(() => {
             setIsGreen(false);
-        }, 800);
+        }, 500);
 
 
     };
@@ -90,7 +90,7 @@ export const LandingPageLayout = () => {
             }}>
                 <ThemeProvider theme={headerTextTheme}>
                     <Typography style={{
-                        color: isGreen ? 'green' : 'white',
+                        color: isGreen ? '#6ada91' : 'white',
                         transition: 'color 0.5s ease-in-out', // Optional: Add a transition effect
                     }}
                     >Collibri

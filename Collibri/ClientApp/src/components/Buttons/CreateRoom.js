@@ -43,7 +43,7 @@ export const CreateRoom = () => {
 
     return (
         <>
-            <Button size="large" onClick={handleOpen} variant="contained" sx={{...LoginContainerStyles.button, minWidth:'9rem'}}>Create Room</Button>
+            <Button size="large" onClick={handleOpen} variant="contained" style={{...LoginContainerStyles.button, minWidth:'9rem', maxWidth:'9rem'}}>Create Room</Button>
             <CModal showModal={open} handleClose={handleClose} handleChanges={handleCreateRoom}>
                 <Typography variant="h5">
                     Create a new room
