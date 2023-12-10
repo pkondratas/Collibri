@@ -15,6 +15,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import {headerStyle, headerTextTheme} from '../../styles/LandingPageStyle';
 import {CreateRoom} from '../Buttons/CreateRoom';
+import LogoutIcon from '@mui/icons-material/Logout';
 import {JoinRoom} from '../Buttons/JoinRoom';
 import {RoomContainer} from '../Containers/RoomContainer';
 import {AboutUsButton} from '../Buttons/AboutUsButton';
@@ -29,6 +30,7 @@ export const LandingPageLayout = () => {
     const [rooms, setRooms] = useState([]);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [isGreen, setIsGreen] = useState(false);
 
     useEffect(() => {
         // Check for stored login status on page load
@@ -45,6 +47,19 @@ export const LandingPageLayout = () => {
     color: black;
     background-color: transparent;
 `);
+    const handleColor = () => {
+        // Change color to green when logging in
+        setIsGreen(true);
+
+        // Reset the color back to white after a brief delay (e.g., 1 second)
+
+        setTimeout(() => {
+            setIsGreen(false);
+        }, 800);
+
+
+    };
+
 
     // Callback function to update login status
     const handleLoginStatus = (status, response) => {
@@ -58,7 +73,9 @@ export const LandingPageLayout = () => {
         localStorage.removeItem('loggedIn');
 
         // Update the loggedIn state
-        dispatch(onLogout());
+        
+            dispatch(onLogout());
+        
     };
 
     return (
@@ -72,7 +89,12 @@ export const LandingPageLayout = () => {
                 transition: 'background-image 0.5s ease-in-out',
             }}>
                 <ThemeProvider theme={headerTextTheme}>
-                    <Typography>Collibri</Typography>
+                    <Typography style={{
+                        color: isGreen ? 'green' : 'white',
+                        transition: 'color 0.5s ease-in-out', // Optional: Add a transition effect
+                    }}
+                    >Collibri
+                    </Typography>
                 </ThemeProvider>
             </Grid>
 
@@ -85,30 +107,28 @@ export const LandingPageLayout = () => {
                 </Box>
                 <Box sx={{marginTop: '-25rem', marginBottom: '5rem', minHeight: '30rem'}}>
                     {userInformation.loggedIn ? (
-                        <Box>
-                            <Box style={{position: 'absolute', top: '5%', right: '5%', transform: 'translateX(50%)'}}>
-                                <TextOnlyTooltip placement="bottom" title="Sign Out"
-                                                 sx={{fontSize: '1.1rem', backgroundColor: 'white'}}>
-                                    <IconButton color="secondary" onClick={handleLogout}>
-                                        <ExitToAppIcon/>
-                                    </IconButton>
-                                </TextOnlyTooltip>
-                            </Box>
-
-                            <Fade in={true} {...({timeout: 1500})}>
-                                <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-                                    <Typography variant="h5" gutterBottom
-                                                style={{...LoginContainerStyles.typography, paddingTop: '1.2rem'}}>
-                                        Your rooms
-                                    </Typography>
-
-                                    <RoomContainer rooms={rooms} setRooms={setRooms}/>
-
-                                    <Box display="flex" justifyContent="space-between" width="25rem" mt={5}>
-                                        <CreateRoom/>
-                                        <JoinRoom/>
-                                    </Box>
-                                    <TextOnlyTooltip placement="right-end" title="More About Us"
+                        <Fade in={true} {...({timeout: 1500})}>
+                            <Box>
+                                <Box style={{
+                                    position: 'absolute',
+                                    top: '5%',
+                                    right: '5%',
+                                    transform: 'translateX(50%)'
+                                }}>
+                                    <TextOnlyTooltip placement="bottom" title="Sign Out"
+                                                     sx={{fontSize: '1.1rem', backgroundColor: 'white'}}>
+                                        <IconButton color="success" onClick={handleLogout}>
+                                            <LogoutIcon fontSize="large"/>
+                                        </IconButton>
+                                    </TextOnlyTooltip>
+                                </Box>
+                                <Box style={{
+                                    position: 'absolute',
+                                    bottom: '5%',
+                                    right: '5%',
+                                    transform: 'translateX(50%)'
+                                }}>
+                                    <TextOnlyTooltip placement="left-start" title="More About Us"
                                                      sx={{fontSize: '1.1rem', backgroundColor: 'white'}}>
                                         <IconButton>
                                             <InfoIcon onClick={() => navigate("/about")} fontSize="large"
@@ -116,16 +136,24 @@ export const LandingPageLayout = () => {
                                         </IconButton>
                                     </TextOnlyTooltip>
                                 </Box>
-
-
-                            </Fade>
-
-
-                        </Box>
+                                <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
+                                    <Typography variant="h5" gutterBottom
+                                                style={{...LoginContainerStyles.typography, paddingTop: '1.2rem'}}>
+                                        Your rooms
+                                    </Typography>
+                                    <RoomContainer rooms={rooms} setRooms={setRooms}/>
+                                    <Box display="flex" justifyContent="space-between" width="25rem" mt={5}>
+                                        <CreateRoom/>
+                                        <JoinRoom/>
+                                    </Box>
+                                </Box>
+                            </Box>
+                        </Fade>
                     ) : (
-                        <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-                            <LoginContainer onLoginStatusChange={handleLoginStatus}/>
-                        </Box>
+                            <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
+                                <LoginContainer onLoginStatusChange={handleLoginStatus} handleColor={handleColor}/>
+                            </Box>
+                       
                     )}
                 </Box>
 

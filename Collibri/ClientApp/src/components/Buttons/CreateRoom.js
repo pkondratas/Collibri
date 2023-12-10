@@ -4,6 +4,7 @@ import {createRoom} from "../../api/RoomAPI";
 import CModal from "../Modals/CModal";
 import {useDispatch, useSelector} from "react-redux";
 import {addRoomSlice, setRoomsSlice} from "../../state/user/roomsSlice";
+import {LoginContainerStyles} from "../../styles/LoginContainerStyles";
 
 
 export const CreateRoom = () => {
@@ -42,7 +43,7 @@ export const CreateRoom = () => {
 
     return (
         <>
-            <Button size="large" onClick={handleOpen} variant="contained">Create Room</Button>
+            <Button size="large" onClick={handleOpen} variant="contained" sx={{...LoginContainerStyles.button, minWidth:'9rem'}}>Create Room</Button>
             <CModal showModal={open} handleClose={handleClose} handleChanges={handleCreateRoom}>
                 <Typography variant="h5">
                     Create a new room
