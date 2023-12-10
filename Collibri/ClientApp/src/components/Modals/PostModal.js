@@ -1,12 +1,12 @@
 import {
-    Box,
-    Button,
-    IconButton,
-    List,
-    ListItem,
-    Modal,
-    ToggleButton, ToggleButtonGroup,
-    Typography
+  Box,
+  Button, Chip,
+  IconButton,
+  List,
+  ListItem,
+  Modal,
+  ToggleButton, ToggleButtonGroup,
+  Typography
 } from "@mui/material";
 import {
     Close,
@@ -30,40 +30,43 @@ import FileCard from "../Cards/FileCard";
 import ImageCard from "../Cards/ImageCard";
 import AddFileButton from "../Buttons/AddFileButton";
 import UpdatePostModal from "./UpdatePostModal";
+import {fetchTags} from "../../api/TagAPI";
 
 
 const SELECTION = ['notes', 'documents', 'files']
 
 const PostModal = (props) => {
-    const [notes, setNotes] = useState([]);
-    const [documents, setDocuments] = useState([]);
-    const [files, setFiles] = useState([]);
-    const [list, setList] = useState([]);
-    const [selection, setSelection] = useState(SELECTION[0]);
+  const [notes, setNotes] = useState([]);
+  const [documents, setDocuments] = useState([]);
+  const [tags, setTags] = useState([])
+  const [files, setFiles] = useState([]);
+  const [list, setList] = useState([]);
+  const [selection, setSelection] = useState(SELECTION[0]);
     const [createNoteModalOpen, setCreateNoteModalOpen] = useState(false);
     const [update, setUpdate] = useState(false);
+    
+  const handleClose = () => {
+    props.setPostModal(false);
+    setSelection(SELECTION[0]);
+  }
   
-    const handleClose = () => {
-        props.setPostModal(false);
-        setSelection(SELECTION[0]);
-    }
-
-    useEffect(() => {
-        fetchNotes(props.id, setNotes);
-        fetchDocuments(props.id, setDocuments);
-        setList(notes);
-    }, []);
-
-    const formatDateTime = (date) => {
-        const options = {
-            year: 'numeric',
-            month: 'numeric',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-        };
-        return date.toLocaleDateString(undefined, options);
-    }
+  useEffect(() => {
+    fetchNotes(props.id, setNotes);
+    fetchDocuments(props.id, setDocuments);
+    fetchTags(props.id, setTags);
+    setList(notes);
+  }, []);
+  
+  const formatDateTime = (date) => {
+    const options = {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    };
+    return date.toLocaleDateString(undefined, options);
+  }
 
     const handleValueChange = (event, newValue) => {
         if(newValue != null) {
@@ -92,7 +95,6 @@ const PostModal = (props) => {
     //     Text: "Testing text"
     //   }), props.id.toString())
     // }
-
     return (
         <>
             <Modal
@@ -189,6 +191,15 @@ const PostModal = (props) => {
                             <Button onClick={props.handleDislike}>
                                 {props.dislikeCount} {props.disliked ? <ThumbDown sx={PostModalStyles.reactionButton} /> : <ThumbDownOffAltOutlined sx={PostModalStyles.reactionButton} />}
                             </Button>
+                        </Box>
+                        <Box sx={PostModalStyles.tagBox}>
+                            <List sx={PostModalStyles.tagList}>
+                                {tags.map((tag) => (
+                                    <ListItem>
+                                        <Chip sx={PostModalStyles.tagChip} label={tag.name} />
+                                    </ListItem>
+                                ))}
+                            </List>
                         </Box>
                         <Box>
                             <IconButton sx={PostModalStyles.editDeleteButtons} onClick={() => {

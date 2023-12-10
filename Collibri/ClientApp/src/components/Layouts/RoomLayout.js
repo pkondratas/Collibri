@@ -13,6 +13,7 @@ import PostContainer from "../Containers/PostContainer";
 import {getSections} from "../../api/SectionApi";
 import {RoomLayoutStyle} from "../../styles/RoomLayoutStyle";
 import {useSelector} from "react-redux";
+import {getRoomTags} from "../../api/TagAPI";
 import Drawer from '@mui/material/Drawer';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
@@ -85,26 +86,6 @@ const RoomLayout = () => {
                   </Grid>
               </Grid>
             </Grid>
-            {/*<Grid item md={4}>*/}
-            {/*    <AddSection sections={sections} setSections={setSections}></AddSection>*/}
-            {/*    <Paper>*/}
-            {/*      <SectionsContainer sections={sections} setSections={setSections} setSectionId={setSectionId}/>*/}
-            {/*    </Paper>*/}
-            {/*    <UserInfoContainer />*/}
-            {/*</Grid>*/}
-            {/*<Grid  item xs={6}>*/}
-            {/*    <Grid container*/}
-            {/*          direction="row"*/}
-            {/*          sx={{mb:'0.5rem'}}*/}
-            {/*    >*/}
-            {/*        <AddPostButton sectionId={sectionId} setPosts={setPosts}/>*/}
-            {/*        <SearchBar posts={posts} sectionId={sectionId} setPosts={setPosts}/>*/}
-            {/*    </Grid>*/}
-            
-            {/*    <Paper sx={postContainerStyle}>*/}
-            {/*        <PostContainer sectionId={sectionId} posts={posts} setPosts={setPosts}/>*/}
-            {/*    </Paper>*/}
-            {/*</Grid>*/}
         </Grid>
 
     );
