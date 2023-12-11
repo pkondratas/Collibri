@@ -1,10 +1,26 @@
-import {Box, Button, Grid, Modal, TextField, Typography} from "@mui/material";
+import {
+    Box,
+    Button,
+    Chip,
+    Grid,
+    IconButton,
+    List,
+    ListItem,
+    Menu,
+    MenuItem,
+    Modal,
+    TextField,
+    Typography
+} from "@mui/material";
 import {useRef, useState} from "react";
 import {Check, Clear} from "@mui/icons-material";
 import {CreatePostStyle} from "../../styles/CreatePostStyle";
 import {createPost} from "../../api/PostAPI";
 import {useSelector} from "react-redux";
 import {CModalStyle} from "../../styles/CModalStyle";
+import AddBoxIcon from "@mui/icons-material/AddBox";
+import CloseIcon from "@mui/icons-material/Close";
+import {addToPost} from "../../api/TagAPI";
 
 export const CreatePostModal = (props) => {
 
@@ -14,8 +30,17 @@ export const CreatePostModal = (props) => {
     const [isDescEmptyError, setIsDescEmptyError] = useState(false);
     const [isTitleTooLongError, setIsTitleTooLongError] = useState(false);
     const [isDescTooLongError, setIsDescTooLongError] = useState(false);
+    const [selectedTags, setSelectedTags] = useState([]);
+    const [anchorEl, setAnchorEl] = useState(null);
     const userInformation = useSelector((state) => state.user);
-    
+
+    const openMenu = Boolean(anchorEl);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleCloseMenu = () => {
+        setAnchorEl(null);
+    };
     const handleOnChangeTitle = () => {
         setIsTitleEmptyError(false);
         
@@ -38,7 +63,7 @@ export const CreatePostModal = (props) => {
         }
     }
     
-    function handleCreatePost() {
+    async function handleCreatePost() {
         let isOk = true;
         
         if (titleFieldRef.current.value.trim() === '') {
@@ -62,9 +87,24 @@ export const CreatePostModal = (props) => {
                 Description: descFieldRef.current.value.trim(),
                 SectionId: props.sectionId,
                 CreatorUsername: userInformation.username
-            }))
-            props.handleSuccessfulClose();
+            }), props.setPosts).then(post => {
+                selectedTags.forEach(tag => addToPost(tag.id, post.id));
+            })
+            setSelectedTags([]);
+            props.setOpen(false);
+            
         }
+    }
+    
+    const handleAddTag = (tag) => {
+        if(!selectedTags.some(t => t.id === tag.id))
+        {
+            setSelectedTags(prevTags => [...prevTags, tag]);
+        }
+    }
+    
+    const handleRemoveTag = (tag) => {
+        setSelectedTags(prevTags => prevTags.filter(t => t.id !== tag.id));
     }
 
     const handleClose = () => {
@@ -72,6 +112,7 @@ export const CreatePostModal = (props) => {
         setIsTitleTooLongError(false);
         setIsDescEmptyError(false);
         setIsDescTooLongError(false);
+        setSelectedTags([]);
         
         props.setOpen(false);
     }
@@ -114,8 +155,38 @@ export const CreatePostModal = (props) => {
                                }
                                sx={CreatePostStyle.descriptionTextField}/>
                 </Box>
+                <Typography variant='h5' sx={[CModalStyle.text, {marginTop: '2%', marginBottom: '2%'}]}>
+                    Add tags
+                </Typography>
+                <Box sx={CreatePostStyle.addTagsBox}>
+                    <List dense sx={CreatePostStyle.tagList}>
+                        {selectedTags.map((tag) => (
+                            <ListItem sx={CreatePostStyle.tagListItem}>
+                                <Chip label={tag.name}></Chip>
+                                <IconButton onClick={() => handleRemoveTag(tag)}><CloseIcon/></IconButton>
+                            </ListItem>
+                        ))}
+                    </List>
+                    
+                    <Button disableRipple sx={CreatePostStyle.tagMenuButton} onClick={handleClick}>
+                        <AddBoxIcon fontSize="large"></AddBoxIcon>
+                    </Button>
+                    <Menu
+                        id="basic-menu"
+                        anchorEl={anchorEl}
+                        open={openMenu}
+                        onClose={handleCloseMenu}
+                        sx={CreatePostStyle.tagMenu}
+                    >
+                        {props.tags.map((tag) => (
+                            <MenuItem onClick={() => handleAddTag(tag)}>
+                                {tag.name}
+                            </MenuItem>
+                        ))}
+                    </Menu>
+                </Box>
                 <Typography sx={[CreatePostStyle.warningNote, CModalStyle.text]}>
-                    Creating the post will then open it and allow you to add documents, notes and files.
+                    Creating a post will allow you to add documents, notes and files.
                 </Typography>
                 <Box>
                     <Button onClick={handleClose} sx={CreatePostStyle.button}><Clear/></Button>

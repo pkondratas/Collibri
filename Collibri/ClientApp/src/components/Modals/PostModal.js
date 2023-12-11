@@ -193,7 +193,7 @@ const [update, setUpdate] = useState(false);
                                         ))}
                                     </List>
                                 ) : (
-                                    <Typography>No files here :(</Typography>
+                                    <Typography sx={PostModalStyles.emptyListMessage}>"Μηδέν"(zero) files so far. Be the first one!</Typography>
                                 )
                             )
                             }

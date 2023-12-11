@@ -55,7 +55,7 @@ const RoomLayout = () => {
                       direction="row"
                       sx={{mb:'0.5rem'}}
                 >
-                    <AddPostButton sectionId={sectionId} setPosts={setPosts}/>
+                    <AddPostButton sectionId={sectionId} setPosts={setPosts} tags={tags}/>
                     <SearchBar posts={posts} sectionId={sectionId} setPosts={setPosts}/>
                 </Grid>
 

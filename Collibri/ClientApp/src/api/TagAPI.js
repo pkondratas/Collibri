@@ -79,3 +79,23 @@ export const deleteTag = (tagId, setTags) => {
             console.error('Error deleting tag:', error.message);
         });
 }
+
+export const addToPost = (tagId, postId) => {
+    fetch(`/v1/post-tags?tagId=${tagId}&postId=${postId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to add tag');
+            }
+        })
+        .then(() => {
+            console.log('Tag added successfully');
+        })
+        .catch(error => {
+            console.error('Error adding tag:', error.message);
+        });
+}
