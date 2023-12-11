@@ -49,7 +49,7 @@ export const AddSection = ({setSections, sections}) => {
         <Box sx={{ height: '13%', display: 'flex', }}>
             <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '15%', height: '100%'}}>
                 <Tooltip title="Add section">
-                    <IconButton sx={RoomLayoutStyles.addSettingsButtons} color="success" onClick={handleOpen}>
+                    <IconButton sx={{...RoomLayoutStyles.addSettingsButtons, color: '#269160'}} color="success" onClick={handleOpen}>
                         <AddBoxIcon fontSize="large"/>
                     </IconButton>
                 </Tooltip>

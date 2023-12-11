@@ -11,13 +11,15 @@ import {
 } from "@mui/icons-material";
 import {NoteCardStyles} from "../../styles/NoteCardStyles";
 import {deleteNote} from "../../api/NoteAPI";
+import DeleteModal from "../Modals/DeleteModal";
 
 
 const NoteCard = (props) => {
   const [moreButton, setMoreButton] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
   
-  const handleDelete = () => {
-    deleteNote(props.id)
+  const handleDelete = (id) => {
+    deleteNote(id)
       .then(r => props.setNotes((prevNotes) => prevNotes.filter(x => x.id !== r.id)))
     setMoreButton(false);
   }
@@ -47,7 +49,7 @@ const NoteCard = (props) => {
                 <IconButton>
                   <Edit />
                 </IconButton>
-                <IconButton onClick={() => handleDelete()}>
+                <IconButton onClick={() => setDeleteModal(true)}>
                   <Delete />
                 </IconButton>
                 <IconButton onClick={() => setMoreButton(false)}>
@@ -63,6 +65,7 @@ const NoteCard = (props) => {
             )
             }
           </Box>
+          <DeleteModal deleteModal={deleteModal} setDeleteModal={setDeleteModal} handleDelete={handleDelete} id={props.id}/>
         </Box>
       </CardContent>
     </Card>

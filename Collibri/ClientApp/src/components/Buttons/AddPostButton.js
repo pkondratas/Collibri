@@ -27,7 +27,7 @@ export const AddPostButton = (props) => {
                 disableHoverListener={!isDisabled}
             >
               <Tooltip title="Add post">
-                  <IconButton disabled={isDisabled} color="success" onClick={handleOpen}>
+                  <IconButton sx={{marginTop: '0.8rem', color: '#269160' }} disabled={isDisabled} color="success" onClick={handleOpen}>
                       <AddBoxIcon fontSize={"large"} />
                   </IconButton>
               </Tooltip>
