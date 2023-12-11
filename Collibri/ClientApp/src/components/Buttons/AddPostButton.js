@@ -31,7 +31,7 @@ export const AddPostButton = (props) => {
                       <AddBoxIcon fontSize={"large"} />
                   </IconButton>
               </Tooltip>
-              <CreatePostModal sectionId={props.sectionId} showModal={open} setOpen={setOpen} addNewPost={props.addNewPost} postId={postId} handleSuccessfulClose={handleSuccessfulClose}/>
+              <CreatePostModal setPosts={props.setPosts} sectionId={props.sectionId} showModal={open} setOpen={setOpen} addNewPost={props.addNewPost} postId={postId} handleSuccessfulClose={handleSuccessfulClose} tags={props.tags}/>
             </Tooltip>
         </Box>
     );

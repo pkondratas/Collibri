@@ -87,12 +87,12 @@ export const CreatePostModal = (props) => {
                 Description: descFieldRef.current.value.trim(),
                 SectionId: props.sectionId,
                 CreatorUsername: userInformation.username
-            }), props.setPosts).then(post => {
+            }), props.setPosts, props.addNewPost).then(post => {
+                console.log(selectedTags);
                 selectedTags.forEach(tag => addToPost(tag.id, post.id));
             })
             setSelectedTags([]);
             props.setOpen(false);
-            
         }
     }
     
