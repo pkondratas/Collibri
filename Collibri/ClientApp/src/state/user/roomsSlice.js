@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 import {Room} from "@mui/icons-material";
 
 const initialState = {
-  rooms: [],
+  rooms: [''],
   currentRoom: {
     id: 0,
     name: "",
