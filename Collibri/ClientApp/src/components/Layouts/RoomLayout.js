@@ -39,7 +39,7 @@ const RoomLayout = () => {
                 <Paper><Header/></Paper>
             </Grid>
             <Grid item xs={1}>
-                <RoomSettings tags={tags} roomId={currentRoom.id}/>
+                <RoomSettings tags={tags} setTags={setTags}/>
                 <SideRoomTable/>
             </Grid>
             <Grid item md={4}>

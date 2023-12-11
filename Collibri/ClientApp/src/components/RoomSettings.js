@@ -100,7 +100,7 @@ export const RoomSettings = (props) => {
                 <UpdateRoomModal room={rooms.currentRoom} updateModal={updateModal} setUpdateModal={setUpdateModal} updateRoomName={handleUpdateRoom}/>
                 <DeleteRoomModal deleteModal={deleteModal} setDeleteModal={setDeleteModal} />
             </Menu>
-            <ManageTagsModal showModal={tagOpen} setOpen={setTagOpen} tags={props.tags} roomId={props.roomId}/>
+            <ManageTagsModal showModal={tagOpen} setOpen={setTagOpen} tags={props.tags} setTags={props.setTags}/>
         </>
     );
 }
