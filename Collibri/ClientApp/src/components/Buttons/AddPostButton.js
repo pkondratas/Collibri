@@ -14,11 +14,6 @@ export const AddPostButton = (props) => {
         }
     }
     
-    const handleSuccessfulClose = () => {
-        fetchPosts(props.sectionId, props.setPosts);
-        setOpen(false);
-    }
-    
     return (
         <Box>
             <Tooltip
@@ -29,7 +24,7 @@ export const AddPostButton = (props) => {
             <IconButton disabled={isDisabled} color="success" onClick={handleOpen}>
                 <AddBoxIcon fontSize={"large"} />
             </IconButton>
-            <CreatePostModal sectionId={props.sectionId} showModal={open} setOpen={setOpen} postId={postId} handleSuccessfulClose={handleSuccessfulClose}/>
+            <CreatePostModal sectionId={props.sectionId} showModal={open} setOpen={setOpen} postId={postId} setPosts={props.setPosts} tags={props.tags}/>
             </Tooltip>
         </Box>
     );

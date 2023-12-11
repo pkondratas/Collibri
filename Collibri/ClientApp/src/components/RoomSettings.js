@@ -148,7 +148,7 @@ export const RoomSettings = (props) => {
                 showModal={tagOpen}
                 setOpen={setTagOpen}
                 tags={props.tags}
-                roomId={props.roomId}
+                setTags={props.setTags}
             />
         </>
     );

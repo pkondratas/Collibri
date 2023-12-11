@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-export const createPost = (post) => {
+export const createPost = (post, setPosts) => {
 
-    fetch('/v1/posts', {
+    return fetch('/v1/posts', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -17,6 +17,8 @@ export const createPost = (post) => {
         })
         .then(data => {
             console.log('Post created successfully:', data);
+            setPosts(prevPosts => [...prevPosts, data]);
+            return data;
         })
         .catch(error => {
             console.error('Error creating post:', error.message);

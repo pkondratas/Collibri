@@ -37,7 +37,7 @@ const RoomLayout = () => {
               alignItems="strech">
             <Grid item xs={12}>
                 <Paper>
-                    <Header roomSettings={<RoomSettings tags={tags} roomId={currentRoom.id} />} />
+                    <Header roomSettings={<RoomSettings tags={tags} setTags={setTags} />} />
                 </Paper>
             </Grid>
             <Grid item xs={1}>
@@ -55,7 +55,7 @@ const RoomLayout = () => {
                       direction="row"
                       sx={{mb:'0.5rem'}}
                 >
-                    <AddPostButton sectionId={sectionId} setPosts={setPosts}/>
+                    <AddPostButton sectionId={sectionId} setPosts={setPosts} tags={tags}/>
                     <SearchBar posts={posts} sectionId={sectionId} setPosts={setPosts}/>
                 </Grid>
 
