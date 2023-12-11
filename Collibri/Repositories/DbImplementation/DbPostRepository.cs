@@ -29,7 +29,7 @@ namespace Collibri.Repositories.DbImplementation
 
         public IEnumerable<PostDTO> GetAllPosts(int sectionId)
         {
-            return _mapper.Map<List<PostDTO>>(_context.Posts.Where(x => x.SectionId == sectionId)).AsEnumerable();
+            return _mapper.Map<List<PostDTO>>(_context.Posts.ToList().Where(x => x.SectionId == sectionId)).AsEnumerable();
         }
 
         public PostDTO? UpdatePostById(Guid postId, PostDTO post)
@@ -65,20 +65,6 @@ namespace Collibri.Repositories.DbImplementation
             _context.SaveChanges();
 
             return _mapper.Map<PostDTO>(postToDelete);
-        }
-
-        public IEnumerable<PostDTO> DeleteAllPostsInSection(int sectionId)
-        {
-            var postsInSection = _context.Posts.Where(x => x.SectionId == sectionId);
-
-            foreach (var post in postsInSection)
-            {
-                _context.Posts.Remove(post);
-            }
-
-            _context.SaveChanges();
-
-            return _mapper.Map<List<PostDTO>>(postsInSection).AsEnumerable();
         }
     }
 }

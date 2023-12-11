@@ -47,22 +47,26 @@ export const PostStyle = {
     backgroundSize: '700% 100%',
     transition: '0.2s ease',
     '&:hover': {
-      color: '#80CB9E',
-      backgroundImage: 'linear-gradient(45deg, #cc0000, #e60000, #ff0000, #ff1a1a, #ff0000, #e60000, #cc0000)',
+      color: '#e50d0d',
+      // backgroundImage: 'linear-gradient(45deg, #cc0000, #e60000, #ff0000, #ff1a1a, #ff0000, #e60000, #cc0000)',
       boxShadow: 2,
-      animation: 'glowing 20s linear infinite'
+      animation: 'redsw 300ms infinite'
     },
-    "@keyframes glowing": {
-      "0%": {
-        backgroundPosition: '0 0'
+    "@keyframes redsw": {
+      "0%, 100%": {
+        transform: 'rotate(0deg)',
+        color: '#da8011',
+      },
+      "25%": {
+        transform: 'rotate(3deg)'
       },
       "50%": {
-        backgroundPosition: '400% 0'
+        color: '#e50d0d',
       },
-      "100%": {
-        backgroundPosition: '0 0'
-      }
-    }
+      "75%": {
+        transform: 'rotate(-3deg)'
+      },
+    },
   },
   editButton: {
     borderRadius: 3,

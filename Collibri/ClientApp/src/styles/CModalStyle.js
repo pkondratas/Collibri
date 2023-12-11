@@ -8,6 +8,8 @@ export const CModalStyle = {
     p: 2,
     bgcolor: '#DEFEF5',
     borderRadius: 2,
+    border: '2px solid #000',
+    borderColor: '#3f5c4b',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',

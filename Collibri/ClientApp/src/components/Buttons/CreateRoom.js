@@ -25,7 +25,7 @@ export const CreateRoom = () => {
     }
     
     const handleOnChange = () => {
-        if (nameFieldRef.current.value.trim() !== '') {
+        if (nameFieldRef.current.value.trim() !== '' && nameFieldRef.current.value.trim().length <= 15) {
             setError(false);
         } else {
             setError(true);
@@ -50,7 +50,7 @@ export const CreateRoom = () => {
                     Create a new room
                 </Typography>
                 <TextField fullWidth id="roomName" label="Room name" variant="outlined" error={error}
-                           inputRef={nameFieldRef} helperText={error ? "Room name can not be empty" : " "}
+                           inputRef={nameFieldRef} helperText={error ? "Room name can not be empty/larger than 20 characters" : " "}
                            onChange={handleOnChange} margin="normal"/>
                 <Divider/>
             </CModal>

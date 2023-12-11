@@ -24,6 +24,7 @@ import {fetchFiles} from "../../api/FileAPI";
 import FileCard from "../Cards/FileCard";
 import ImageCard from "../Cards/ImageCard";
 import AddFileButton from "../Buttons/AddFileButton";
+import UpdatePostModal from "./UpdatePostModal";
 import {fetchTags} from "../../api/TagAPI";
 import ThumbUpAltOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
@@ -33,16 +34,17 @@ import {CreateDocumentModal} from "./CreateDocumentModal";
 
 
 const SELECTION = ['notes', 'documents', 'files']
+
 const PostModal = (props) => {
-const [notes, setNotes] = useState([]);
-const [documents, setDocuments] = useState([]);
-const [tags, setTags] = useState([])
-const [files, setFiles] = useState([]);
-const [list, setList] = useState([]);
-const [selection, setSelection] = useState(SELECTION[0]);
-const [createNoteModalOpen, setCreateNoteModalOpen] = useState(false);
-const [createDocumentModalOpen, setCreateDocumentModalOpen] = useState(false);
-const [update, setUpdate] = useState(false);
+  const [notes, setNotes] = useState([]);
+  const [documents, setDocuments] = useState([]);
+  const [tags, setTags] = useState([])
+  const [files, setFiles] = useState([]);
+  const [list, setList] = useState([]);
+  const [selection, setSelection] = useState(SELECTION[0]);
+  const [createNoteModalOpen, setCreateNoteModalOpen] = useState(false);
+  const [createDocumentModalOpen, setCreateDocumentModalOpen] = useState(false);
+  const [update, setUpdate] = useState(false);
     
   const handleClose = () => {
     props.setPostModal(false);
@@ -80,25 +82,7 @@ const [update, setUpdate] = useState(false);
     const handleAddDocumentClick = () => {
         setCreateDocumentModalOpen(true);
     }
-
-    // const addTestingData = () => {
-    //   createNote(JSON.stringify({
-    //     Name: Math.random().toString(),
-    //     Text: "Testing text",
-    //     PostId: props.id
-    //   }));
-    //
-    //   createDocument(JSON.stringify({
-    //     Title: Math.random().toString(),
-    //     Text: "Testing text"
-    //   }), props.id.toString())
-    // }
-    //
-    //   createDocument(JSON.stringify({
-    //     Title: Math.random().toString(),
-    //     Text: "Testing text"
-    //   }), props.id.toString())
-    // }
+    
     return (
         <>
             <Modal
@@ -107,9 +91,11 @@ const [update, setUpdate] = useState(false);
             >
                 <Box sx={PostModalStyles.modalStyle}>
                     <Box sx={PostModalStyles.info}>
-                        <Typography sx={PostModalStyles.title} variant="h2">
+                        <Tooltip title={props.title}>
+                          <Typography sx={PostModalStyles.title} variant="h2">
                             {props.title}
-                        </Typography>
+                          </Typography>
+                        </Tooltip>
                         <Box sx={PostModalStyles.descriptionBox}>
                             <Divider textAlign="left">
                                 <b>DESCRIPTION</b>
@@ -142,7 +128,7 @@ const [update, setUpdate] = useState(false);
                     </Box>
                     <Box sx={PostModalStyles.contentBoxContainer}>
                         <Box sx={PostModalStyles.contentBox}>
-                            <Box sx={PostModalStyles.addButtonBox}>
+                            <Box sx={props.preview ? {display: 'none'} : PostModalStyles.addButtonBox}>
                                 <Tooltip arrow placement="right" title="Add note">
                                     <IconButton sx={PostModalStyles.addButton} disableRipple onClick={handleAddNoteClick}>
                                         <AddCardIcon fontSize="large"/>
@@ -193,7 +179,7 @@ const [update, setUpdate] = useState(false);
                                         ))}
                                     </List>
                                 ) : (
-                                    <Typography>No files here :(</Typography>
+                                    <Typography sx={PostModalStyles.emptyListMessage}>"Μηδέν"(zero) files so far. Be the first one!</Typography>
                                 )
                             )
                             }
@@ -201,15 +187,22 @@ const [update, setUpdate] = useState(false);
                         </Box>
                     </Box>
                     <Box sx={PostModalStyles.buttonBox}>
+
+                        { props.preview ? (
+                            <Typography variant="h5">Preview</Typography>
+                        ) : (
+                            <Box sx={PostModalStyles.reactionBox}>
+                                <Button disableRipple sx={PostModalStyles.likeButton} onClick={props.handleLike}>
+                                    {props.likeCount} {props.liked ? <ThumbUpIcon sx={PostModalStyles.likedButtonIcon} fontSize="large"/> : <ThumbUpAltOutlinedIcon sx={PostModalStyles.reactionButtonIcon} fontSize="large" />}
+                                </Button>
+                                <Button disableRipple sx={PostModalStyles.dislikeButton} onClick={props.handleDislike}>
+                                    {props.dislikeCount} {props.disliked ? <ThumbDownIcon sx={PostModalStyles.dislikedButtonIcon} fontSize="large"/> : <ThumbDownAltOutlinedIcon sx={PostModalStyles.reactionButtonIcon} fontSize="large"/>}
+                                </Button>
+                            </Box>
+                        )
+                            
+                        }
                         
-                        <Box sx={PostModalStyles.reactionBox}>
-                            <Button disableRipple sx={PostModalStyles.likeButton} onClick={props.handleLike}>
-                                {props.likeCount} {props.liked ? <ThumbUpIcon sx={PostModalStyles.likedButtonIcon} fontSize="large"/> : <ThumbUpAltOutlinedIcon sx={PostModalStyles.reactionButtonIcon} fontSize="large" />}
-                            </Button>
-                            <Button disableRipple sx={PostModalStyles.dislikeButton} onClick={props.handleDislike}>
-                                {props.dislikeCount} {props.disliked ? <ThumbDownIcon sx={PostModalStyles.dislikedButtonIcon} fontSize="large"/> : <ThumbDownAltOutlinedIcon sx={PostModalStyles.reactionButtonIcon} fontSize="large"/>}
-                            </Button>
-                        </Box>
                         
                         <Box sx={PostModalStyles.tagBox}>
                             <List sx={PostModalStyles.tagList}>
@@ -220,16 +213,16 @@ const [update, setUpdate] = useState(false);
                                 ))}
                             </List>
                         </Box>
-                        <Box>
+                        <Box sx={props.preview ? {width: '7%'} : {}}>
                             <Button disableRipple sx={PostModalStyles.editButton} onClick={() => {
                               setUpdate(true);
                             }}>
-                                <EditIcon fontSize="large" />
+                                <EditIcon sx={props.preview ? {display: 'none'} : {}} fontSize="large" />
                             </Button>
                             <Button disableRipple sx={PostModalStyles.deleteButton} onClick={() => {
                                 props.setDeleteModal(true)
                             }}>
-                                <DeleteIcon fontSize="large" />
+                                <DeleteIcon sx={props.preview ? {display: 'none'} : {}} fontSize="large" />
                             </Button>
                         </Box>
                     </Box>
@@ -252,6 +245,12 @@ const [update, setUpdate] = useState(false);
                     setCreateDocumentModalOpen(false);
                     fetchDocuments(props.id, setDocuments);
                 }}
+            />
+            <UpdatePostModal
+                updateModal={update}
+                setUpdateModal={setUpdate}
+                {...props.post}
+                updatePostContent={props.updatePostContent}
             />
         </>
     )

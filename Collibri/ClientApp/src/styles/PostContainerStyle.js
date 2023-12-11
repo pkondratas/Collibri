@@ -1,10 +1,10 @@
 export const containerStyle = {
   container: {
     backgroundColor: '#DEFEF5',
-    minHeight: "30rem",
-    maxHeight: "30rem",
+    minHeight: "88%",
+    maxHeight: "88%",
     overflowY: "auto",
-    maxWidth: "43rem"
+    width: "98%"
   },
   message: {
     fontFamily: 'Segoe UI semibold',

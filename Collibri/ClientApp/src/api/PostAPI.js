@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-export const createPost = (post) => {
+export const createPost = (post, setPosts, addNewPost) => {
 
-    fetch('/v1/posts', {
+    return fetch('/v1/posts', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -17,29 +17,12 @@ export const createPost = (post) => {
         })
         .then(data => {
             console.log('Post created successfully:', data);
+            setPosts(prevPosts => [...prevPosts, data]);
+            addNewPost(data);
+            return data;
         })
         .catch(error => {
             console.error('Error creating post:', error.message);
-        });
-}
-
-export const deleteAllPostsInSection = (sectionId) => {
-    fetch(`/v1/posts/in-section?sectionId=${sectionId}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to delete all posts');
-            }
-        })
-        .then(() => {
-            console.log('All posts deleted successfully:');
-        })
-        .catch(error => {
-            console.error('Error deleting all posts:', error.message);
         });
 }
 

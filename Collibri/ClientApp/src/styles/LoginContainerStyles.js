@@ -8,7 +8,7 @@ export const LoginContainerStyles = {
         position: 'absolute',
         top: 0,
         left: 0,
-        padding: '20px',
+        padding: '2vh',
         zIndex: 1,
     },
     loadingContainer: {
@@ -29,28 +29,18 @@ export const LoginContainerStyles = {
         fontSize: '0.75rem'
     },
     formContainer: {
-        padding: '20px',
+        padding: '5vh',
         borderRadius: '10px',
         textAlign: 'center',
-        minWidth: '28rem',
-        minHeight: '27rem',
+        minHeight: '30vh',
         // position: 'relative',
         // zIndex: 0,
-    },
-    paper: {
-        padding: 20,
-        minWidth: '25.5rem',
-        minHeight: '24.5rem',
-        marginBottom: 50,
-        borderRadius: 12,
-        width: '100%',
-        backgroundColor: '#d3d3d3',
     },
     fieldContainer: {
         minHeight: '11rem'
     },
     typography: {
-        marginBottom: 50,
+        //marginBottom: 50,
         color: 'rgba(29, 30, 24, 0.7)',
         fontFamily: 'Segoe UI Semibold'
     },
@@ -68,7 +58,7 @@ export const LoginContainerStyles = {
     button: {
         textTransform: 'none',
         backgroundColor: '#316C44',
-        fontSize: '1rem',
+        fontSize: '16px',
         borderRadius: 28,
         width: '8rem',
         color: '#DEFEF5',

@@ -6,7 +6,7 @@ import {fetchPosts} from "../../api/PostAPI";
 
 export const AddPostButton = (props) => {
     const [open, setOpen] = useState(false);
-    const [postId, setPostId] = useState(0)
+    const [postId, setPostId] = useState(0);
     const isDisabled = props.sectionId === 0;
     const handleOpen = () => {
         if (props.sectionId !== 0) {
@@ -26,10 +26,12 @@ export const AddPostButton = (props) => {
                 arrow
                 disableHoverListener={!isDisabled}
             >
-            <IconButton disabled={isDisabled} color="success" onClick={handleOpen}>
-                <AddBoxIcon fontSize={"large"} />
-            </IconButton>
-            <CreatePostModal sectionId={props.sectionId} showModal={open} setOpen={setOpen} postId={postId} handleSuccessfulClose={handleSuccessfulClose}/>
+              <Tooltip title="Add post">
+                  <IconButton sx={{marginTop: '0.8rem', color: '#269160' }} disabled={isDisabled} color="success" onClick={handleOpen}>
+                      <AddBoxIcon fontSize={"large"} />
+                  </IconButton>
+              </Tooltip>
+              <CreatePostModal setPosts={props.setPosts} sectionId={props.sectionId} showModal={open} setOpen={setOpen} addNewPost={props.addNewPost} postId={postId} handleSuccessfulClose={handleSuccessfulClose} tags={props.tags}/>
             </Tooltip>
         </Box>
     );

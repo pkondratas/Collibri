@@ -8,6 +8,7 @@ namespace Collibri.Data
 {
 	public class DataContext : IdentityDbContext<IdentityUser<Guid>, IdentityRole<Guid>, Guid>
 	{
+
 		public virtual DbSet<Document> Documents { get; set; }
 		public virtual DbSet<Note> Notes { get; set; }
 		public virtual DbSet<Post> Posts { get; set; }

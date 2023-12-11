@@ -1,6 +1,7 @@
 export const HeaderStyles = {
     appBar: {
-        background: '#80CB9E',
+        background: '#b0e7c8',
+        height: '100%',
     },
     toolbar: {
        
