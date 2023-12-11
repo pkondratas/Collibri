@@ -41,25 +41,34 @@ public class DbRoomRepositoryTests
                 CreatorUsername = "TestUser",
             };
 
-            if (!context.Database.IsInMemory())
-            {
-                unitOfWork.CreateTransaction();
-            }
-
             // Act
             var createdRoom = repository.CreateRoom(roomDto);
-
-            if (!context.Database.IsInMemory())
-            {
-                unitOfWork.Commit();
-            }
 
             // Assert
             Assert.NotNull(createdRoom);
             Assert.Equal("Test Room", createdRoom.Name);
             Assert.Equal("TestUser", createdRoom.CreatorUsername);
+
+            // Additional verification of the database state
+            using (var verificationContext = new DataContext(_options))
+            {
+                // Verify that the invitation code is unique
+                var anotherRoomDto = new RoomDTO
+                {
+                    Name = "Another Room",
+                    CreatorUsername = "TestUser",
+                };
+                var anotherCreatedRoom = repository.CreateRoom(anotherRoomDto);
+                Assert.NotEqual(createdRoom.InvitationCode, anotherCreatedRoom.InvitationCode);
+
+                // Verify that a RoomMember entry is added
+                var roomMember = verificationContext.RoomMembers.FirstOrDefault(rm => rm.RoomId == createdRoom.Id);
+                Assert.NotNull(roomMember);
+                Assert.Equal("TestUser", roomMember.Username);
+            }
         }
     }
+
 
     [Fact]
     public void GetRoomByCode_ShouldReturnRoom()
