@@ -64,19 +64,6 @@ const NoteCard = (props) => {
             }
           </Box>
         </Box>
-        {moreButton ? (
-          <></>
-        ) : (
-          <>
-            <IconButton size='small'>
-              <ThumbUpAltOutlined fontSize='small' />
-            </IconButton>
-            <IconButton size='medium'>
-              <ThumbDownAltOutlined fontSize='small' />
-            </IconButton>
-          </>
-        )
-        }
       </CardContent>
     </Card>
   );
