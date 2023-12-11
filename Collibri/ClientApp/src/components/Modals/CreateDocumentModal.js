@@ -1,11 +1,11 @@
 import React, { useRef, useState } from "react";
+import {createDocument} from "../../api/DocumentAPI";
 import {Box, Button, Modal, TextField, Typography} from "@mui/material";
-import { Check, Clear } from "@mui/icons-material";
-import { createNote } from "../../api/NoteAPI"; 
-import { CreateNoteStyle } from "../../styles/CreateNoteStyle";
 import {CModalStyle} from "../../styles/CModalStyle";
+import {Check, Clear} from "@mui/icons-material";
+import {CreateDocumentStyle} from "../../styles/CreateDocumentStyle";
 
-export const CreateNoteModal = (props) => {
+export const CreateDocumentModal = (props) => {
     const titleFieldRef = useRef(null);
     const descFieldRef = useRef(null);
     const [isTitleEmptyError, setIsTitleEmptyError] = useState(false);
@@ -17,7 +17,7 @@ export const CreateNoteModal = (props) => {
     const handleOnChangeTitle = () => {
         setIsTitleEmptyError(false);
 
-        if (titleFieldRef.current.value.trim().length > 20) {
+        if (titleFieldRef.current.value.trim().length > 30) {
             setIsTitleTooLongError(true);
         } else {
             setIsTitleTooLongError(false);
@@ -27,36 +27,35 @@ export const CreateNoteModal = (props) => {
     const handleOnChangeDesc = () => {
         setIsDescEmptyError(false);
 
-        if (descFieldRef.current.value.trim().length > 80) {
+        if (descFieldRef.current.value.trim().length > 5000) {
             setIsDescTooLongError(true);
         } else {
             setIsDescTooLongError(false);
         }
     };
 
-    function handleCreateNote() {
+    function handleCreateDocument() {
         const title = titleFieldRef.current.value.trim();
         const desc = descFieldRef.current.value.trim();
 
-        const noteData = {
-            Name: title,
+        const documentData = {
+            Title: title,
             Text: desc,
             PostId: props.postId,
         };
 
-        createNote(JSON.stringify(noteData))
+        createDocument(props.postId, JSON.stringify(documentData))
             .then(() => {
                 props.handleSuccessfulClose();
             })
             .catch((error) => {
-                if (error.message === 'Note already exists') {
-                    setErrorMessage("Note already exists. Please choose a different title.");
+                if (error.message === 'Document already exists') {
+                    setErrorMessage("Document already exists. Please choose a different title.");
                 } else {
-                    setErrorMessage("Error saving note. Please try again.");
+                    setErrorMessage("Error saving document. Please try again.");
                 }
             });
     }
-
 
     const handleClose = () => {
         setIsTitleEmptyError(false);
@@ -64,19 +63,19 @@ export const CreateNoteModal = (props) => {
         setIsDescEmptyError(false);
         setIsDescTooLongError(false);
         setErrorMessage(null);
-        
+
         props.setOpen(false);
     };
 
     return (
         <Modal open={props.showModal} onClose={() => handleClose()}>
-            <Box sx={CreateNoteStyle.modalWindow} align="center">
+            <Box sx={CreateDocumentStyle.modalWindow} align="center">
                 <Typography variant='h4' sx={[CModalStyle.text, {marginBottom: '5%'}]}>
-                    Create a note
+                    Create a document
                 </Typography>
-                <Box sx={CreateNoteStyle.textFieldBox}>
+                <Box sx={CreateDocumentStyle.textFieldBox}>
                     <TextField
-                        label="Note title"
+                        label="Document title"
                         variant="standard"
                         multiline
                         error={isTitleEmptyError || isTitleTooLongError}
@@ -86,37 +85,37 @@ export const CreateNoteModal = (props) => {
                             isTitleEmptyError
                                 ? "Title cannot be empty"
                                 : isTitleTooLongError
-                                    ? "Title cannot be longer than 20 characters"
-                                    : "Max 20 characters"
+                                    ? "Title cannot be longer than 30 characters"
+                                    : "Max 30 characters"
                         }
-                        sx={CreateNoteStyle.nameTextField}
+                        sx={CreateDocumentStyle.nameTextField}
                     />
                 </Box>
-                <Box sx={CreateNoteStyle.textFieldBox}>
+                <Box sx={CreateDocumentStyle.textFieldBox}>
                     <TextField
                         id="outlined-basic"
-                        label="Note description"
+                        label="Document description"
                         variant="outlined"
                         error={isDescEmptyError || isDescTooLongError}
                         inputRef={descFieldRef}
                         onChange={handleOnChangeDesc}
                         multiline
-                        rows={3}
+                        rows={20}
                         helperText={
                             isDescEmptyError
                                 ? "Description cannot be empty"
                                 : isDescTooLongError
-                                    ? "Description cannot be longer than 80 characters"
-                                    : "Max 80 characters"
+                                    ? "Description cannot be longer than 5000 characters"
+                                    : "Max 5000 characters"
                         }
-                        sx={CreateNoteStyle.descriptionTextField}
+                        sx={CreateDocumentStyle.descriptionTextField}
                     />
                 </Box>
-                <Box sx={CreateNoteStyle.buttonBox}>
+                <Box sx={CreateDocumentStyle.buttonBox}>
                     <Button onClick={handleClose} sx={CModalStyle.buttons}>
                         <Clear />
                     </Button>
-                    <Button onClick={handleCreateNote} sx={CModalStyle.buttons}>
+                    <Button onClick={handleCreateDocument} sx={CModalStyle.buttons}>
                         <Check />
                     </Button>
                 </Box>
@@ -128,4 +127,4 @@ export const CreateNoteModal = (props) => {
             </Box>
         </Modal>
     );
-};
+}

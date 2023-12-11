@@ -29,6 +29,7 @@ import ThumbUpAltOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownAltOutlinedIcon from '@mui/icons-material/ThumbDownAltOutlined';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+import {CreateDocumentModal} from "./CreateDocumentModal";
 
 
 const SELECTION = ['notes', 'documents', 'files']
@@ -40,6 +41,7 @@ const [files, setFiles] = useState([]);
 const [list, setList] = useState([]);
 const [selection, setSelection] = useState(SELECTION[0]);
 const [createNoteModalOpen, setCreateNoteModalOpen] = useState(false);
+const [createDocumentModalOpen, setCreateDocumentModalOpen] = useState(false);
 const [update, setUpdate] = useState(false);
     
   const handleClose = () => {
@@ -74,6 +76,10 @@ const [update, setUpdate] = useState(false);
     const handleAddNoteClick = () => {
         setCreateNoteModalOpen(true);
     };
+  
+    const handleAddDocumentClick = () => {
+        setCreateDocumentModalOpen(true);
+    }
 
     // const addTestingData = () => {
     //   createNote(JSON.stringify({
@@ -143,7 +149,7 @@ const [update, setUpdate] = useState(false);
                                     </IconButton>
                                 </Tooltip>
                                 <Tooltip arrow placement="right" title="Add document">
-                                    <IconButton sx={PostModalStyles.addButton} disableRipple>
+                                    <IconButton sx={PostModalStyles.addButton} disableRipple onClick={handleAddDocumentClick}>
                                         <NoteAddIcon fontSize="large"/>
                                     </IconButton>
                                 </Tooltip>
@@ -236,6 +242,15 @@ const [update, setUpdate] = useState(false);
                 handleSuccessfulClose={() => {
                     setCreateNoteModalOpen(false);
                     fetchNotes(props.id, setNotes);
+                }}
+            />
+            <CreateDocumentModal
+                showModal={createDocumentModalOpen}
+                setOpen={setCreateDocumentModalOpen}
+                postId={props.id}
+                handleSuccessfulClose={() => {
+                    setCreateDocumentModalOpen(false);
+                    fetchDocuments(props.id, setDocuments);
                 }}
             />
         </>

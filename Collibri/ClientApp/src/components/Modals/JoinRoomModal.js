@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {createMember} from "../../api/RoomMemberAPI";
 import {addRoomSlice} from "../../state/user/roomsSlice";
 import {getRoomByCode} from "../../api/RoomAPI";
+import {CModalStyle} from "../../styles/CModalStyle";
 
 const JoinRoomModal = (props) => {
   const textFieldRef = useRef(null);
@@ -55,7 +56,7 @@ const JoinRoomModal = (props) => {
   return(
     <>
       <CModal handleChanges={handleChanges} handleClose={handleClose} showModal={props.showModal} >
-        <Typography variant="h5">
+        <Typography variant="h5" sx={CModalStyle.text}>
           Enter the invitation code
         </Typography>
         <TextField
