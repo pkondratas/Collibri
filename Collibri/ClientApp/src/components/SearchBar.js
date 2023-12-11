@@ -62,6 +62,7 @@ export default function SearchBar(props) {
                     {...selectedPost}
                     postModal={true}
                     setPostModal={setSelectedPost}
+                    preview={true}
                 />
             )}
           </Box>  

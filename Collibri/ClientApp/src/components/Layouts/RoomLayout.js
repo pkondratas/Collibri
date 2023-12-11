@@ -17,15 +17,13 @@ import Drawer from '@mui/material/Drawer';
 import Toolbar from '@mui/material/Toolbar';
 import Divider from '@mui/material/Divider';
 
-
-const drawerWidth = 240;
-
 const RoomLayout = () => {
     const [sectionId, setSectionId] = useState(0);
     const [sections, setSections] = useState([]);
     const [posts, setPosts] = useState([]);
     const [tags, setTags] = useState([]);
     const currentRoom = useSelector((state) => state.rooms.currentRoom);
+    
 
     useEffect(() => {
         getSections(setSections, currentRoom.id);
@@ -70,7 +68,7 @@ const RoomLayout = () => {
               <Grid sx={{ height: '10%'}}>
                 <Header 
                   roomSettings={
-                    <RoomSettings tags={tags} roomId={currentRoom.id} />
+                    <RoomSettings tags={tags} setTags={setTags} roomId={currentRoom.id} />
                   } 
                 />
               </Grid>
@@ -84,7 +82,7 @@ const RoomLayout = () => {
                   </Grid>
                   <Grid direction="column" sx={{display:'flex',width:'68%'}}>
                     <Box sx={{ height: '15%', display: 'flex', }}>
-                      <AddPostButton sectionId={sectionId} addNewPost={addNewPost} setPosts={setPosts}/>
+                      <AddPostButton sectionId={sectionId} addNewPost={addNewPost} setPosts={setPosts} tags={tags}/>
                       <SearchBar posts={posts} sectionId={sectionId} setPosts={setPosts}/>
                     </Box>
                       <PostContainer sectionId={sectionId} posts={posts} setPosts={setPosts}/>

@@ -20,7 +20,7 @@ export const AddPostButton = (props) => {
     }
     
     return (
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '9%', height: '100%' }}>
+        <Box>
             <Tooltip
                 title={isDisabled ? 'Error: no section present' : ''}
                 arrow

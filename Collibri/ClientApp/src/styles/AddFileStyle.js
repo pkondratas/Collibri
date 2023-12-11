@@ -8,6 +8,7 @@ export const AddFileStyle = {
         p: 2,
         bgcolor: '#DEFEF5',
         borderRadius: 2,
+        borderColor: '#3f5c4b',
     },
     headerText: {
         textAlign: 'center',
