@@ -12,12 +12,15 @@ import {
     TableRow, Tooltip
 } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from "react-router-dom";
 import {deleteRoom, getRooms, updateRoom} from "../../api/RoomAPI";
-import UpdateRoomModal from "../Modals/UpdateRoomModal";
-import DeleteRoomModal from "../Modals/DeleteRoomModal";
-import {buttonStyle, nameCellStyle, tableRowStyle} from "../../styles/tableListStyle";
+import {
+    buttonStyle,
+    deleteButtonStyle,
+    nameCellStyle,
+    SectionsContainerStyles,
+    tableRowStyle
+} from "../../styles/tableListStyle";
 import {useDispatch, useSelector} from "react-redux";
 import {setCurrentRoom, setRoomsSlice, updateRoomsSlice} from "../../state/user/roomsSlice";
 import LeaveRoomModal from "../Modals/LeaveRoomModal";
@@ -37,6 +40,7 @@ export const RoomContainer = () => {
     }
     
     const handleOpenDeleteModal = (currentRoom) => {
+        dispatch(setCurrentRoom(currentRoom));
         setRoom(currentRoom);
         setDeleteModal(true);
     }
@@ -47,10 +51,10 @@ export const RoomContainer = () => {
     );
     const TextOnlyTooltip = styled(({className, ...props}) => (
         <Tooltip {...props} componentsProps={{tooltip: {className: className}}}/>
-    ))(`
-    color: black;
-    background-color: transparent;
-`);
+        ))(`
+        color: black;
+        background-color: transparent;
+    `);
     
     return (
         <Box>
@@ -59,7 +63,6 @@ export const RoomContainer = () => {
                 <TableBody>
                     {rooms.rooms.map((row) => (
                         <TableRow
-                            
                             className="TableRow"
                             key={row.id}
                             sx={{

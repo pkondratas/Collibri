@@ -59,7 +59,7 @@ export const getRooms = (username, setRoomsSlice) => {
             console.log(data);
             setRoomsSlice(data);
         })
-        .catch(error => console.error('Error fetching data', error));
+        .catch(error => console.error('Error fetching data ', error));
 }
 
 export const getRoomByCode = async (code) => {

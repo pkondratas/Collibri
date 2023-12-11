@@ -38,7 +38,7 @@ export const LandingPageLayout = () => {
     useEffect(() => {
         // Check for stored login status on page load
         const storedLoginStatus = localStorage.getItem('loggedIn');
-
+        
         if (storedLoginStatus) {
             dispatch(onLogin(JSON.parse(storedLoginStatus).username));
         }
@@ -76,15 +76,15 @@ export const LandingPageLayout = () => {
         localStorage.removeItem('loggedIn');
 
         // Update the loggedIn state
-
-        dispatch(onLogout());
-
+        
+            dispatch(onLogout());
+        
     };
 
     const isResetPasswordPage = location.pathname.startsWith('/reset-password/');
 
     return (
-        <Grid container style={{width: '100vw', height: '100vh'}}>
+        <Grid container style={{ width: '100vw', height: '100vh' }}>
             {/* Header */}
             <Grid item xs={6} style={{
                 ...headerStyle,
