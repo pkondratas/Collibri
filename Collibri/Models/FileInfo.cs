@@ -12,7 +12,7 @@ namespace Collibri.Models
 
 		public string ContentType { get; set; } = "";
 
-		public string Lenght { get; set; }
+		public long Lenght { get; set; }
 
 		public FileInfo()
 		{ 

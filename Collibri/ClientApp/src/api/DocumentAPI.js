@@ -25,8 +25,6 @@ export const createDocument = async (postId, document) => {
                 'Content-Type': 'application/json',
             },
         });
-
-        console.log('Document created successfully.', response.data);
     } catch (error) {
         if (error.response && error.response.status === 409) {
             console.error('Error creating Document: Document already exists.');

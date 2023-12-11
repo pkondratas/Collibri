@@ -8,15 +8,16 @@ namespace Collibri.Data
 {
 	public class DataContext : IdentityDbContext<IdentityUser<Guid>, IdentityRole<Guid>, Guid>
 	{
-		public DbSet<Document> Documents { get; set; }
-		public DbSet<Note> Notes { get; set; }
+
+		public virtual DbSet<Document> Documents { get; set; }
+		public virtual DbSet<Note> Notes { get; set; }
 		public virtual DbSet<Post> Posts { get; set; }
-		public DbSet<Room> Rooms { get; set; }
-		public DbSet<Section> Sections { get; set; }
-		public DbSet<RoomMember> RoomMembers { get; set; }
-		public DbSet<Tag> Tags { get; set; }
-		public DbSet<PostTags> PostTags { get; set; }
-		public DbSet<FileInfo> FileInfos { get; set; }
+		public virtual DbSet<Room> Rooms { get; set; }
+		public virtual DbSet<Section> Sections { get; set; }
+		public virtual DbSet<RoomMember> RoomMembers { get; set; }
+		public virtual DbSet<Tag> Tags { get; set; }
+		public virtual DbSet<PostTags> PostTags { get; set; }
+		public virtual DbSet<FileInfo> FileInfos { get; set; }
 
 		public DataContext()
 		{

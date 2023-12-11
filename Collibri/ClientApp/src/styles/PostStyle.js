@@ -97,7 +97,8 @@ export const PostStyle = {
   selected: {
     marginRight: "2%",
     boxShadow: 2,
-    backgroundColor: '#80CB9E'
+    backgroundColor: '#80CB9E',
+    borderRadius: 3,
   },
   likeCount: {
     color: '#1D1E18',
