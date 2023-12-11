@@ -63,9 +63,9 @@ const DocumentCard = (props) => {
               <Box sx={{display: 'flex', flexDirection: 'column'}}>
                   {moreButton ? (
                       <>
-                          <IconButton>
-                              <Edit />
-                          </IconButton>
+                          {/*<IconButton>*/}
+                          {/*    <Edit />*/}
+                          {/*</IconButton>*/}
                           <IconButton onClick={() => setDeleteModal(true)}>
                               <Delete />
                           </IconButton>
@@ -78,9 +78,9 @@ const DocumentCard = (props) => {
                           <IconButton onClick={() => setMoreButton(true)}>
                               <MoreVertOutlined />
                           </IconButton>
-                          <IconButton>
-                              <FileDownloadOutlined />
-                          </IconButton>
+                          {/*<IconButton>*/}
+                          {/*    <FileDownloadOutlined />*/}
+                          {/*</IconButton>*/}
                       </>
                   )
                   }
