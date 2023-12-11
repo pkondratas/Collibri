@@ -136,7 +136,7 @@ const [update, setUpdate] = useState(false);
                     </Box>
                     <Box sx={PostModalStyles.contentBoxContainer}>
                         <Box sx={PostModalStyles.contentBox}>
-                            <Box sx={PostModalStyles.addButtonBox}>
+                            <Box sx={props.preview ? {display: 'none'} : PostModalStyles.addButtonBox}>
                                 <Tooltip arrow placement="right" title="Add note">
                                     <IconButton sx={PostModalStyles.addButton} disableRipple onClick={handleAddNoteClick}>
                                         <AddCardIcon fontSize="large"/>
@@ -195,15 +195,22 @@ const [update, setUpdate] = useState(false);
                         </Box>
                     </Box>
                     <Box sx={PostModalStyles.buttonBox}>
+
+                        { props.preview ? (
+                            <Typography variant="h5">Preview</Typography>
+                        ) : (
+                            <Box sx={PostModalStyles.reactionBox}>
+                                <Button disableRipple sx={PostModalStyles.likeButton} onClick={props.handleLike}>
+                                    {props.likeCount} {props.liked ? <ThumbUpIcon sx={PostModalStyles.likedButtonIcon} fontSize="large"/> : <ThumbUpAltOutlinedIcon sx={PostModalStyles.reactionButtonIcon} fontSize="large" />}
+                                </Button>
+                                <Button disableRipple sx={PostModalStyles.dislikeButton} onClick={props.handleDislike}>
+                                    {props.dislikeCount} {props.disliked ? <ThumbDownIcon sx={PostModalStyles.dislikedButtonIcon} fontSize="large"/> : <ThumbDownAltOutlinedIcon sx={PostModalStyles.reactionButtonIcon} fontSize="large"/>}
+                                </Button>
+                            </Box>
+                        )
+                            
+                        }
                         
-                        <Box sx={PostModalStyles.reactionBox}>
-                            <Button disableRipple sx={PostModalStyles.likeButton} onClick={props.handleLike}>
-                                {props.likeCount} {props.liked ? <ThumbUpIcon sx={PostModalStyles.likedButtonIcon} fontSize="large"/> : <ThumbUpAltOutlinedIcon sx={PostModalStyles.reactionButtonIcon} fontSize="large" />}
-                            </Button>
-                            <Button disableRipple sx={PostModalStyles.dislikeButton} onClick={props.handleDislike}>
-                                {props.dislikeCount} {props.disliked ? <ThumbDownIcon sx={PostModalStyles.dislikedButtonIcon} fontSize="large"/> : <ThumbDownAltOutlinedIcon sx={PostModalStyles.reactionButtonIcon} fontSize="large"/>}
-                            </Button>
-                        </Box>
                         
                         <Box sx={PostModalStyles.tagBox}>
                             <List sx={PostModalStyles.tagList}>
@@ -214,16 +221,16 @@ const [update, setUpdate] = useState(false);
                                 ))}
                             </List>
                         </Box>
-                        <Box>
+                        <Box sx={props.preview ? {width: '7%'} : {}}>
                             <Button disableRipple sx={PostModalStyles.editButton} onClick={() => {
                               setUpdate(true);
                             }}>
-                                <EditIcon fontSize="large" />
+                                <EditIcon sx={props.preview ? {display: 'none'} : {}} fontSize="large" />
                             </Button>
                             <Button disableRipple sx={PostModalStyles.deleteButton} onClick={() => {
                                 props.setDeleteModal(true)
                             }}>
-                                <DeleteIcon fontSize="large" />
+                                <DeleteIcon sx={props.preview ? {display: 'none'} : {}} fontSize="large" />
                             </Button>
                         </Box>
                     </Box>

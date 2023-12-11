@@ -172,6 +172,7 @@ const Post = (props) => {
         deleteModal={deleteModal}
         setDeleteModal={setDeleteModal}
         updatePostContent={updatePostContent}
+        preview={false}
       />
     </>
   )
