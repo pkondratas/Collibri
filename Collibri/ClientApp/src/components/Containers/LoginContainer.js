@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {TextField, Button, Typography, Container, Paper, Box, CircularProgress} from '@mui/material';
+import {TextField, Button, Typography, Container, Paper, Box, CircularProgress, Grow} from '@mui/material';
 import { LoginContainerStyles } from '../../styles/LoginContainerStyles.js';
 import ForgotPasswordModal from "../Modals/ForgotPasswordModal";
 import CreateAccountModal from "../Modals/CreateAccountModal";
@@ -9,7 +9,7 @@ import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {onLogin} from "../../state/user/userSlice";
 
-const LoginContainer = ({ onLoginStatusChange }) => {
+const LoginContainer = ({ onLoginStatusChange, handleColor }) => {
     const [forgotPasswordModalOpen, setForgotPasswordModalOpen] = useState(false);
     const [isRegistrationModalOpen , setRegistrationModalOpen] = useState(false);
     const [username, setUsername] = useState('');
@@ -73,11 +73,10 @@ const LoginContainer = ({ onLoginStatusChange }) => {
     }
     
     return (
+        <Grow in={true} {...({timeout: 1500})}>
+            
         <Box sx={LoginContainerStyles.container}>
-            {/*<Box>*/}
-            {/*    <Box sx={{ fontSize: '3rem', position:'absolute', backdropFilter: 'blur(4px)'}}>a</Box>*/}
-            {/*    <Box sx={{ fontSize: '3rem'}}>O</Box>*/}
-            {/*</Box>*/}
+            
             {processing && (
                 <Box sx={LoginContainerStyles.loadingContainer}>
                     <Typography>Logging in...</Typography>
@@ -142,6 +141,7 @@ const LoginContainer = ({ onLoginStatusChange }) => {
                     </Typography>
                     {fieldVisibility && <Button variant="contained" style={LoginContainerStyles.button} onClick={() => {
                         handleSubmit();
+                        handleColor();
                     }}>
                         Log in
                     </Button>}
@@ -162,6 +162,7 @@ const LoginContainer = ({ onLoginStatusChange }) => {
             onClose={closeRegistrationModal}
             />
         </Box>
+        </Grow>
     );
 };
 
