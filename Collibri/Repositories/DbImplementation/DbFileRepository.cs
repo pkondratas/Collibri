@@ -23,10 +23,9 @@ namespace Collibri.Repositories.DbImplementation
 		public FileInfoDTO? CreateFile(IFormFile file, string postId)
 		{
 			var path = _fileSystem.DirectoryInfo.New(
-					_fileSystem.Path.Combine(
-						_fileSystem.Directory.GetParent(Directory.GetCurrentDirectory()).FullName,
-						"Collibri", "Data", "Files", postId))
-				.FullName;
+				_fileSystem.Path.Combine(
+					_fileSystem.Directory.GetParent(Directory.GetCurrentDirectory()).FullName,
+					"Collibri", "Data", "Files", postId)).FullName;
 			var separator = _fileSystem.Path.DirectorySeparatorChar;
 
 			if (!_fileSystem.Directory.Exists(path))
@@ -42,12 +41,13 @@ namespace Collibri.Repositories.DbImplementation
 				return null;
 			}
 
-			var createdFileInfo = new FileInfoDTO(id, Guid.Parse(postId), filePath, file.FileName, file.ContentType, file.Length);
+			var createdFileInfo = new FileInfoDTO(id, Guid.Parse(postId), filePath, file.FileName, file.ContentType,
+				file.Length);
 			_context.FileInfos.Add(_mapper.Map<FileInfo>(createdFileInfo));
 			_context.SaveChanges();
 			using (var fileStream = _fileSystem.File.Create(filePath))
 			{
-				file.CopyTo(fileStream);
+				file.CopyToAsync(fileStream);
 			}
 
 			return (FileInfoDTO?) createdFileInfo;
@@ -69,9 +69,9 @@ namespace Collibri.Repositories.DbImplementation
 			return (FileInfoDTO?) _mapper.Map<FileInfoDTO>(fileToDelete);
 		}
 
-		public IEnumerable<FileInfoDTO>? GetAllFiles(string postId)
+		public IEnumerable<FileInfoDTO> GetAllFiles(string postId)
 		{
-			return _mapper.Map<List<FileInfoDTO>>(_context.FileInfos.Where(x => x.PostId == Guid.Parse(postId)))
+			return _mapper.Map<List<FileInfoDTO>>(_context.FileInfos.ToList().Where(x => x.PostId == Guid.Parse(postId)))
 				.AsEnumerable();
 		}
 
@@ -83,8 +83,8 @@ namespace Collibri.Repositories.DbImplementation
 			{
 				return null;
 			}
-
-			var fileStream = new FileStream(fileToGet.Path, FileMode.Open, FileAccess.Read);
+			
+			var fileStream = _fileSystem.FileStream.New(fileToGet.Path, FileMode.Open, FileAccess.Read);
 			return new FileStreamResult(fileStream, fileToGet.ContentType);
 		}
 
@@ -97,6 +97,10 @@ namespace Collibri.Repositories.DbImplementation
 				return null;
 			}
 			fileToUpdate.Name = updatedName;
+			var oldPath = fileToUpdate.Path;
+			fileToUpdate.Path = oldPath[..oldPath.LastIndexOf(_fileSystem.Path.DirectorySeparatorChar)]
+			                    + _fileSystem.Path.DirectorySeparatorChar + updatedName;
+			_fileSystem.File.Move(oldPath, fileToUpdate.Path);
 			_context.FileInfos.Update(fileToUpdate);
 			_context.SaveChanges();
 

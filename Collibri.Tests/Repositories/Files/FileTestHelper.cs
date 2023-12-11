@@ -1,3 +1,4 @@
+using System.IO.Abstractions;
 using System.IO.Abstractions.TestingHelpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,26 +10,38 @@ namespace Collibri.Tests.Repositories.Files
 		public static FileStreamResult CreateTestFileStreamResult(MockFileSystem fileSystem, string path, string fileName)
 		{
 			var fileStream = fileSystem.FileStream.New(
-				path + Path.DirectorySeparatorChar + fileName, FileMode.Open, FileAccess.Read);
+				path + fileSystem.Path.DirectorySeparatorChar + fileName, FileMode.Open, FileAccess.Read);
 			return new FileStreamResult(fileStream, "application/octet-stream");
 		}
         
-		public static IFormFile CreateTestFormFile(string fileName, string content)
+		public static IFormFile CreateTestFormFile(string fileName, string content, string type)
 		{
-			var stream = new MemoryStream();
-			var writer = new StreamWriter(stream);
+			
+			// var result = new FormFile(stream, 0, stream.Length, "file", fileName)
+			// {
+			// 	ContentType = type
+			// };
+			// return result;
+			var file = new Mock<IFormFile>();
+			var ms = new MemoryStream();
+			var writer = new StreamWriter(ms);
 			writer.Write(content);
 			writer.Flush();
-			stream.Position = 0;
-
-			return new FormFile(stream, 0, stream.Length, "file", fileName);
+			ms.Position = 0;
+			file.Setup(f => f.FileName).Returns(fileName).Verifiable();
+			file.Setup(f => f.ContentType).Returns(type).Verifiable();
+			file.Setup(_ => _.CopyToAsync(It.IsAny<Stream>(), It.IsAny<CancellationToken>()))
+				.Returns((Stream stream, CancellationToken token) => ms.CopyToAsync(stream))
+				.Verifiable();
+			return file.Object;
 		}
 
-		public static string GetPath(string postId)
+		public static string GetPath(string postId, IFileSystem _fileSystem)
 		{
-			return new DirectoryInfo(Path.Combine(
-						Directory.GetParent(Directory.GetCurrentDirectory()).FullName, 
-						"Collibri", "Data", "Files", postId)).FullName;
+			return _fileSystem.DirectoryInfo.New(
+				_fileSystem.Path.Combine(
+					_fileSystem.Directory.GetParent(Directory.GetCurrentDirectory()).FullName,
+					"Collibri", "Data", "Files", postId)).FullName;
 		}
         
 		public static bool StreamEquals(Stream a, Stream b)

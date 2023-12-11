@@ -10,13 +10,13 @@ namespace Collibri.Tests.Controllers
 	{
 		public CreateFileData()
 		{
-			Add(FileTestHelper.CreateTestFormFile("textFile.txt", "Text file test data"),
+			Add(FileTestHelper.CreateTestFormFile("textFile.txt", "Text file test data", "text/plain"),
 				"00000000000000000000000000000000", 200,
 				new FileInfoDTO(Guid.Parse("00000000000000000000000000000000"),
 					Guid.Parse("00000000000000000000000000000001"),
 					@"C:\Files\00000000000000000000000000000000\textFile.txt",
 					"textFile.txt", "text/plain", 1));
-			Add(FileTestHelper.CreateTestFormFile("textFile.txt", "Text file test data"),
+			Add(FileTestHelper.CreateTestFormFile("textFile.txt", "Text file test data", "text/plain"),
 				"00000000000000000000000000000000", 409, null);
 		}
 	}
