@@ -33,7 +33,7 @@ namespace Collibri.Repositories.DbImplementation
 
         public IEnumerable<SectionDTO> GetAllSections(int roomId)
         {
-            return _mapper.Map<List<SectionDTO>>(_context.Sections.Where(section => section.RoomId == roomId)).AsEnumerable();
+            return _mapper.Map<List<SectionDTO>>(_context.Sections.ToList().Where(section => section.RoomId == roomId)).AsEnumerable();
         }
 
         public SectionDTO? UpdateSectionById(SectionDTO section, int sectionId)
