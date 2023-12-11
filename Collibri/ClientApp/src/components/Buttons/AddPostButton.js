@@ -6,7 +6,7 @@ import {fetchPosts} from "../../api/PostAPI";
 
 export const AddPostButton = (props) => {
     const [open, setOpen] = useState(false);
-    const [postId, setPostId] = useState(0)
+    const [postId, setPostId] = useState(0);
     const isDisabled = props.sectionId === 0;
     const handleOpen = () => {
         if (props.sectionId !== 0) {
@@ -20,7 +20,7 @@ export const AddPostButton = (props) => {
     }
     
     return (
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '9%', height: '100%'}}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '9%', height: '100%' }}>
             <Tooltip
                 title={isDisabled ? 'Error: no section present' : ''}
                 arrow
@@ -31,7 +31,7 @@ export const AddPostButton = (props) => {
                       <AddBoxIcon fontSize={"large"} />
                   </IconButton>
               </Tooltip>
-              <CreatePostModal sectionId={props.sectionId} showModal={open} setOpen={setOpen} postId={postId} handleSuccessfulClose={handleSuccessfulClose}/>
+              <CreatePostModal sectionId={props.sectionId} showModal={open} setOpen={setOpen} addNewPost={props.addNewPost} postId={postId} handleSuccessfulClose={handleSuccessfulClose}/>
             </Tooltip>
         </Box>
     );

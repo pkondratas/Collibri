@@ -48,7 +48,7 @@ export const RoomLayoutStyle = {
     fontSize: '28px',
   },
   sectionsContainer: {
-    height: '78.5%', 
+    height: '76.5%', 
     overflowY: 'scroll',
     '&::-webkit-scrollbar': {
       display: 'none'

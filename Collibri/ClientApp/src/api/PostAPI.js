@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const createPost = (post) => {
+export const createPost = (post, addNewPost) => {
 
     fetch('/v1/posts', {
         method: 'POST',
@@ -17,6 +17,7 @@ export const createPost = (post) => {
         })
         .then(data => {
             console.log('Post created successfully:', data);
+            addNewPost(data);
         })
         .catch(error => {
             console.error('Error creating post:', error.message);

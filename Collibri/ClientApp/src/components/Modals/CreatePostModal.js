@@ -62,7 +62,7 @@ export const CreatePostModal = (props) => {
                 Description: descFieldRef.current.value.trim(),
                 SectionId: props.sectionId,
                 CreatorUsername: userInformation.username
-            }))
+            }), props.addNewPost);
             props.handleSuccessfulClose();
         }
     }

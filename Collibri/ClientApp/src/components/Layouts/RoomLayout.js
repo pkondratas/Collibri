@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {Box, Button, Grid, Paper, Typography} from '@mui/material';
-import {useParams} from "react-router-dom";
 import Header from "../Header";
 import {RoomSettings} from "../RoomSettings";
 import {SideRoomTable} from "../SideRooms";
@@ -12,19 +11,11 @@ import SearchBar from "../SearchBar";
 import PostContainer from "../Containers/PostContainer";
 import {getSections} from "../../api/SectionApi";
 import {RoomLayoutStyle} from "../../styles/RoomLayoutStyle";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {getRoomTags} from "../../api/TagAPI";
 import Drawer from '@mui/material/Drawer';
 import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import {HeaderStyles} from "../../styles/HeaderStyles";
 
 
 const drawerWidth = 240;
@@ -40,7 +31,13 @@ const RoomLayout = () => {
         getSections(setSections, currentRoom.id);
         getRoomTags(currentRoom.id, setTags);
     }, [currentRoom.id]);
-
+    
+    const addNewPost = (newPost) => {
+        const updatedList = [...posts, newPost];
+        
+        setPosts(updatedList);
+    }
+    
     return (
 
         <Grid //container
@@ -86,8 +83,8 @@ const RoomLayout = () => {
                     </Box>
                   </Grid>
                   <Grid direction="column" sx={{display:'flex',width:'68%'}}>
-                    <Box sx={{ height: '11%', display: 'flex', }}>
-                      <AddPostButton sectionId={sectionId} setPosts={setPosts}/>
+                    <Box sx={{ height: '15%', display: 'flex', }}>
+                      <AddPostButton sectionId={sectionId} addNewPost={addNewPost} setPosts={setPosts}/>
                       <SearchBar posts={posts} sectionId={sectionId} setPosts={setPosts}/>
                     </Box>
                       <PostContainer sectionId={sectionId} posts={posts} setPosts={setPosts}/>

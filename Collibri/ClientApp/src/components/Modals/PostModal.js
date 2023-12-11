@@ -177,7 +177,7 @@ const PostModal = (props) => {
                                         ))}
                                     </List>
                                 ) : (
-                                    <Typography>No files here :(</Typography>
+                                    <Typography sx={PostModalStyles.emptyListMessage}>"Cero"(zero) fdocuments so far. Be the first one!</Typography>
                                 )
                             )
                             }
@@ -233,6 +233,12 @@ const PostModal = (props) => {
                     setCreateDocumentModalOpen(false);
                     fetchDocuments(props.id, setDocuments);
                 }}
+            />
+            <UpdatePostModal
+                updateModal={update}
+                setUpdateModal={setUpdate}
+                {...props.post}
+                updatePostContent={props.updatePostContent}
             />
         </>
     )

@@ -37,6 +37,7 @@ export const LandingPageLayout = () => {
         const storedLoginStatus = localStorage.getItem('loggedIn');
         
         if (storedLoginStatus) {
+            console.log(storedLoginStatus);
             dispatch(onLogin(JSON.parse(storedLoginStatus).username));
         }
     }, []);

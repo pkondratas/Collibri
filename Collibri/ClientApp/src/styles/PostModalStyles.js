@@ -309,6 +309,9 @@ export const PostModalStyles = {
   },
   
   emptyListMessage: {
+    color: '#4f6952',
+    fontWeight: '700',
+    fontFamily: 'cursive',
     display: 'flex', 
     alignItems: 'center', 
     height: '10rem', 
