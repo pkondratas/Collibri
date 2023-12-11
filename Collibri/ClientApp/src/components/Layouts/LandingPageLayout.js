@@ -23,6 +23,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {onLogin, onLogout} from "../../state/user/userSlice";
 import {LoginContainerStyles} from "../../styles/LoginContainerStyles";
 import {useNavigate} from "react-router-dom";
+import {Logout} from "@mui/icons-material";
 
 export const LandingPageLayout = () => {
     const userInformation = useSelector((state) => state.user);
@@ -117,7 +118,7 @@ export const LandingPageLayout = () => {
                                     <TextOnlyTooltip placement="bottom" title="Sign Out"
                                                      sx={{fontSize: '1.1rem', backgroundColor: 'white'}}>
                                         <IconButton color="success" onClick={handleLogout}>
-                                            <LogoutIcon fontSize="large"/>
+                                            <Logout fontSize="large"/>
                                         </IconButton>
                                     </TextOnlyTooltip>
                                 </Box>

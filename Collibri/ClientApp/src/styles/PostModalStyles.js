@@ -258,23 +258,24 @@ export const PostModalStyles = {
     color: '#3f5c4b',
     backgroundColor: '#80CB9E',
     ':hover': {
-      color: '#dc1a1a',
+      color: '#e50d0d',
       backgroundColor: '#80CB9E',
       "@keyframes delete-hover-anim": {
-        "0%": {
-          transform: 'rotate(0deg)'
+        "0%, 100%": {
+          transform: 'rotate(0deg)',
+          color: '#da8011',
         },
         "25%": {
           transform: 'rotate(3deg)'
         },
+        "50%": {
+          color: '#e50d0d',
+        },
         "75%": {
           transform: 'rotate(-3deg)'
         },
-        "100%": {
-          transform: 'rotate(0deg)'
-        },
       },
-      animation: "delete-hover-anim 0.2s ease infinite",
+      animation: "delete-hover-anim 0.3s ease infinite",
     }
   },
   

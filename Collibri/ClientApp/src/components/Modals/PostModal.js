@@ -85,9 +85,11 @@ const PostModal = (props) => {
             >
                 <Box sx={PostModalStyles.modalStyle}>
                     <Box sx={PostModalStyles.info}>
-                        <Typography sx={PostModalStyles.title} variant="h2">
+                        <Tooltip title={props.title}>
+                          <Typography sx={PostModalStyles.title} variant="h2">
                             {props.title}
-                        </Typography>
+                          </Typography>
+                        </Tooltip>
                         <Box sx={PostModalStyles.descriptionBox}>
                             <Divider textAlign="left">
                                 <b>DESCRIPTION</b>
@@ -176,7 +178,6 @@ const PostModal = (props) => {
                         </Box>
                     </Box>
                     <Box sx={PostModalStyles.buttonBox}>
-                        
                         <Box sx={PostModalStyles.reactionBox}>
                             <Button disableRipple sx={PostModalStyles.likeButton} onClick={props.handleLike}>
                                 {props.likeCount} {props.liked ? <ThumbUpIcon sx={PostModalStyles.likedButtonIcon} fontSize="large"/> : <ThumbUpAltOutlinedIcon sx={PostModalStyles.reactionButtonIcon} fontSize="large" />}
