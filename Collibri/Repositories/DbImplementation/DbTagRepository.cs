@@ -36,7 +36,8 @@ namespace Collibri.Repositories.DbImplementation
         
         public IEnumerable<TagDTO> GetAllTagsInRoom(int roomId)
         {
-            return _mapper.Map<List<TagDTO>>(_context.Tags.Where(x => x.RoomId == roomId)).AsEnumerable();
+            //var tagsInRoom = 
+            return _mapper.Map<List<TagDTO>>(_context.Tags.ToList().Where(x => x.RoomId == roomId)).AsEnumerable();
         }
         
         public TagDTO? UpdateTag(Guid tagId, TagDTO newTag)
