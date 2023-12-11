@@ -12,7 +12,7 @@ namespace Collibri.Data
 		public DbSet<Note> Notes { get; set; }
 		public DbSet<Post> Posts { get; set; }
 		public DbSet<Room> Rooms { get; set; }
-		public DbSet<Section> Sections { get; set; }
+		public virtual DbSet<Section> Sections { get; set; }
 		public DbSet<RoomMember> RoomMembers { get; set; }
 		public DbSet<Tag> Tags { get; set; }
 		public DbSet<PostTags> PostTags { get; set; }
