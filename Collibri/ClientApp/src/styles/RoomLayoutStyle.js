@@ -4,6 +4,6 @@ export const postContainerStyle = {
 
 export const RoomLayoutStyles = {
   addSettingsButtons: {
-    marginBottom: '0.9rem',
+    marginBottom: '0',
   }
 }

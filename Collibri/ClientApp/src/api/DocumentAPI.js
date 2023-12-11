@@ -18,26 +18,25 @@ export const deleteDocument = async (documentId) => {
   }
 }
 
-export const createDocument = (document, postId) => {
-  fetch(`/v1/documents/${postId}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: document
-  })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Failed to create document');
+export const createDocument = async (postId, document) => {
+    try {
+        const response = await axios.post(`/v1/documents/${postId}`, JSON.parse(document), {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        console.log('Document created successfully.', response.data);
+    } catch (error) {
+        if (error.response && error.response.status === 409) {
+            console.error('Error creating Document: Document already exists.');
+            throw new Error('Document already exists');
+        } else {
+            console.error('Error creating Document:', error.message);
+            throw new Error('Failed to create Document');
         }
-      })
-      .then(() => {
-        console.log('Document created successfully.');
-      })
-      .catch(error => {
-        console.error('Error creating document:', error.message);
-      });
-}
+    }
+};
 
 export const deleteAllDocumentsInPost = (postId) => {
   fetch(`/v1/documents/in-post?postId=${postId}`, {

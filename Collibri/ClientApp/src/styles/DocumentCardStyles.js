@@ -1,6 +1,6 @@
 export const DocumentCardStyles = {
   generalText: {
-    lineHeight: '1rem',
+    lineHeight: '1.5rem',
     minWidth: '15rem',
     maxWidth: '15rem',
     wordBreak: 'break-all',

@@ -5,6 +5,7 @@ import {deleteModalWarningStyle} from "../../styles/DeleteModalStyle";
 import {deleteMember} from "../../api/RoomMemberAPI";
 import {useDispatch, useSelector} from "react-redux";
 import {setRoomsSlice} from "../../state/user/roomsSlice";
+import {CModalStyle} from "../../styles/CModalStyle";
 
 
 const LeaveRoomModal = (props) => {
@@ -27,7 +28,7 @@ const LeaveRoomModal = (props) => {
   return(
     <>
       <CModal handleChanges={handleChanges} handleClose={handleClose} showModal={props.deleteModal} >
-        <Typography variant="h5">
+        <Typography variant="h5" sx={CModalStyle.text}>
           Are you sure you want to leave legendary "{props.name}"?
         </Typography>
       </CModal>
