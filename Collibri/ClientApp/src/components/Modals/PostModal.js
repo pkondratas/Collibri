@@ -24,6 +24,7 @@ import {fetchFiles} from "../../api/FileAPI";
 import FileCard from "../Cards/FileCard";
 import ImageCard from "../Cards/ImageCard";
 import AddFileButton from "../Buttons/AddFileButton";
+import UpdatePostModal from "./UpdatePostModal";
 import {fetchTags} from "../../api/TagAPI";
 import ThumbUpAltOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
@@ -33,16 +34,17 @@ import {CreateDocumentModal} from "./CreateDocumentModal";
 
 
 const SELECTION = ['notes', 'documents', 'files']
+
 const PostModal = (props) => {
-const [notes, setNotes] = useState([]);
-const [documents, setDocuments] = useState([]);
-const [tags, setTags] = useState([])
-const [files, setFiles] = useState([]);
-const [list, setList] = useState([]);
-const [selection, setSelection] = useState(SELECTION[0]);
-const [createNoteModalOpen, setCreateNoteModalOpen] = useState(false);
-const [createDocumentModalOpen, setCreateDocumentModalOpen] = useState(false);
-const [update, setUpdate] = useState(false);
+  const [notes, setNotes] = useState([]);
+  const [documents, setDocuments] = useState([]);
+  const [tags, setTags] = useState([])
+  const [files, setFiles] = useState([]);
+  const [list, setList] = useState([]);
+  const [selection, setSelection] = useState(SELECTION[0]);
+  const [createNoteModalOpen, setCreateNoteModalOpen] = useState(false);
+  const [createDocumentModalOpen, setCreateDocumentModalOpen] = useState(false);
+  const [update, setUpdate] = useState(false);
     
   const handleClose = () => {
     props.setPostModal(false);
@@ -80,25 +82,7 @@ const [update, setUpdate] = useState(false);
     const handleAddDocumentClick = () => {
         setCreateDocumentModalOpen(true);
     }
-
-    // const addTestingData = () => {
-    //   createNote(JSON.stringify({
-    //     Name: Math.random().toString(),
-    //     Text: "Testing text",
-    //     PostId: props.id
-    //   }));
-    //
-    //   createDocument(JSON.stringify({
-    //     Title: Math.random().toString(),
-    //     Text: "Testing text"
-    //   }), props.id.toString())
-    // }
-    //
-    //   createDocument(JSON.stringify({
-    //     Title: Math.random().toString(),
-    //     Text: "Testing text"
-    //   }), props.id.toString())
-    // }
+    
     return (
         <>
             <Modal
@@ -107,9 +91,11 @@ const [update, setUpdate] = useState(false);
             >
                 <Box sx={PostModalStyles.modalStyle}>
                     <Box sx={PostModalStyles.info}>
-                        <Typography sx={PostModalStyles.title} variant="h2">
+                        <Tooltip title={props.title}>
+                          <Typography sx={PostModalStyles.title} variant="h2">
                             {props.title}
-                        </Typography>
+                          </Typography>
+                        </Tooltip>
                         <Box sx={PostModalStyles.descriptionBox}>
                             <Divider textAlign="left">
                                 <b>DESCRIPTION</b>
@@ -259,6 +245,12 @@ const [update, setUpdate] = useState(false);
                     setCreateDocumentModalOpen(false);
                     fetchDocuments(props.id, setDocuments);
                 }}
+            />
+            <UpdatePostModal
+                updateModal={update}
+                setUpdateModal={setUpdate}
+                {...props.post}
+                updatePostContent={props.updatePostContent}
             />
         </>
     )

@@ -33,6 +33,7 @@ export default function SearchBar(props) {
 
     return (
         <>
+          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
             <Autocomplete
                 filterOptions={filterOptions}
                 disablePortal
@@ -58,12 +59,13 @@ export default function SearchBar(props) {
             {selectedPost && (
                 <PostModal
                     post={selectedPost}
-                    {...selectedPost} 
+                    {...selectedPost}
                     postModal={true}
                     setPostModal={setSelectedPost}
                     preview={true}
                 />
             )}
+          </Box>  
         </>
     );
 }

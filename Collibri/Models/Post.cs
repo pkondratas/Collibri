@@ -24,6 +24,28 @@ namespace Collibri.Models
         {
             
         }
+        
+        public Post(
+            Guid postId, 
+            string creatorUsername, 
+            string title, 
+            int sectionId,
+            int likeCount, 
+            int dislikeCount, 
+            string description, 
+            DateTime creationDate, 
+            DateTime lastUpdatedDate)
+        {
+            Id = postId;
+            CreatorUsername = creatorUsername;
+            Title = title;
+            SectionId = sectionId;
+            LikeCount = likeCount;
+            DislikeCount = dislikeCount;
+            Description = description;
+            CreationDate = creationDate;
+            LastUpdatedDate = lastUpdatedDate;
+        }
     }
 }
 
