@@ -28,6 +28,22 @@ const tabStyles = {
     },
     reviews:{
         overflowX: 'auto',
+        '&::-webkit-scrollbar': {
+            height: '12px'
+        },
+        '&::-webkit-scrollbar-track': {
+            borderRadius: '20px',
+        },
+        '&::-webkit-scrollbar-thumb': {
+            backgroundColor: '#269160',
+            border: 2,
+            borderColor: '#d3ede1',
+            borderRadius: '20px',
+            boxShadow: 0,
+        },
+        '&::-webkit-scrollbar-thumb:hover': {
+            backgroundColor: '#21b873'
+        },
         whiteSpace: 'nowrap',
     },
     comments:{
