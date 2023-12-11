@@ -1,23 +1,18 @@
 import {
-  Box,
-  Button, Chip,
-  IconButton,
-  List,
-  ListItem,
-  Modal,
-  ToggleButton, ToggleButtonGroup,
-  Typography
+    Box,
+    Button, Chip, Divider,
+    IconButton,
+    List,
+    ListItem,
+    Modal,
+    ToggleButton, ToggleButtonGroup, Tooltip,
+    Typography
 } from "@mui/material";
-import {
-    Close,
-    ThumbUp,
-    ThumbUpOffAltOutlined,
-    ThumbDown,
-    ThumbDownOffAltOutlined,
-    Delete,
-    Edit,
-    AddBox
-} from '@mui/icons-material';
+import AddCardIcon from '@mui/icons-material/AddCard';
+import NoteAddIcon from '@mui/icons-material/NoteAdd';
+import DeleteIcon from '@mui/icons-material/Delete';
+import CloseIcon from '@mui/icons-material/Close';
+import EditIcon from '@mui/icons-material/Edit';
 import {useEffect, useState} from "react";
 import {fetchNotes} from "../../api/NoteAPI";
 import NoteCard from "../Cards/NoteCard";
@@ -29,21 +24,23 @@ import {fetchFiles} from "../../api/FileAPI";
 import FileCard from "../Cards/FileCard";
 import ImageCard from "../Cards/ImageCard";
 import AddFileButton from "../Buttons/AddFileButton";
-import UpdatePostModal from "./UpdatePostModal";
 import {fetchTags} from "../../api/TagAPI";
+import ThumbUpAltOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbDownAltOutlinedIcon from '@mui/icons-material/ThumbDownAltOutlined';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 
 
 const SELECTION = ['notes', 'documents', 'files']
-
 const PostModal = (props) => {
-  const [notes, setNotes] = useState([]);
-  const [documents, setDocuments] = useState([]);
-  const [tags, setTags] = useState([])
-  const [files, setFiles] = useState([]);
-  const [list, setList] = useState([]);
-  const [selection, setSelection] = useState(SELECTION[0]);
-    const [createNoteModalOpen, setCreateNoteModalOpen] = useState(false);
-    const [update, setUpdate] = useState(false);
+const [notes, setNotes] = useState([]);
+const [documents, setDocuments] = useState([]);
+const [tags, setTags] = useState([])
+const [files, setFiles] = useState([]);
+const [list, setList] = useState([]);
+const [selection, setSelection] = useState(SELECTION[0]);
+const [createNoteModalOpen, setCreateNoteModalOpen] = useState(false);
+const [update, setUpdate] = useState(false);
     
   const handleClose = () => {
     props.setPostModal(false);
@@ -54,6 +51,7 @@ const PostModal = (props) => {
     fetchNotes(props.id, setNotes);
     fetchDocuments(props.id, setDocuments);
     fetchTags(props.id, setTags);
+    fetchFiles(props.id, setFiles);
     setList(notes);
   }, []);
   
@@ -107,20 +105,20 @@ const PostModal = (props) => {
                             {props.title}
                         </Typography>
                         <Box sx={PostModalStyles.descriptionBox}>
-                            <Typography>
-                                Description:
-                            </Typography>
+                            <Divider textAlign="left">
+                                <b>DESCRIPTION</b>
+                            </Divider>
                             <Typography sx={PostModalStyles.description} variant="body1">
                                 {props.description}
                             </Typography>
                             <Box sx={PostModalStyles.userAndDateBox}>
-                                <Typography variant="body1">By: </Typography>
-                                <Typography variant="body1">{formatDateTime(new Date(props.lastUpdatedDate))}</Typography>
+                                <Typography variant="body1"><b>By: {props.creatorUsername}</b></Typography>
+                                <Typography variant="body1"><b>{formatDateTime(new Date(props.lastUpdatedDate))}</b></Typography>
                             </Box>
                         </Box>
                         <Box>
                             <Button sx={PostModalStyles.closeButton} onClick={handleClose}>
-                                <Close />
+                                <CloseIcon fontSize="large" />
                             </Button>
                         </Box>
                     </Box>
@@ -130,17 +128,28 @@ const PostModal = (props) => {
                             value={selection}
                             onChange={handleValueChange}
                         >
-                            <ToggleButton value="notes" sx={PostModalStyles.optionButtons} >Notes</ToggleButton>
-                            <ToggleButton value="documents" sx={PostModalStyles.optionButtons} >Documents</ToggleButton>
-                            <ToggleButton value="files" sx={PostModalStyles.optionButtons} >Files</ToggleButton>
+                            <ToggleButton disableRipple value="notes" sx={PostModalStyles.optionButtons} >Notes</ToggleButton>
+                            <ToggleButton disableRipple value="documents" sx={PostModalStyles.optionButtons} >Documents</ToggleButton>
+                            <ToggleButton disableRipple value="files" sx={PostModalStyles.optionButtons} >Files</ToggleButton>
                         </ToggleButtonGroup>
+                        
                     </Box>
                     <Box sx={PostModalStyles.contentBoxContainer}>
                         <Box sx={PostModalStyles.contentBox}>
-                            <AddFileButton postId={props.post.id} setFiles={setFiles}/>
-                            <IconButton sx={PostModalStyles.addButton} onClick={handleAddNoteClick}>
-                                <AddBox sx={PostModalStyles.addIcon}/>
-                            </IconButton>
+                            <Box sx={PostModalStyles.addButtonBox}>
+                                <Tooltip arrow placement="right" title="Add note">
+                                    <IconButton sx={PostModalStyles.addButton} disableRipple onClick={handleAddNoteClick}>
+                                        <AddCardIcon fontSize="large"/>
+                                    </IconButton>
+                                </Tooltip>
+                                <Tooltip arrow placement="right" title="Add document">
+                                    <IconButton sx={PostModalStyles.addButton} disableRipple>
+                                        <NoteAddIcon fontSize="large"/>
+                                    </IconButton>
+                                </Tooltip>
+                                <AddFileButton buttonStyle={PostModalStyles.addButton} postId={props.post.id} setFiles={setFiles}/>
+                            </Box>
+                            
                             {selection === 'notes' ? (
                                 notes.length !== 0 ? (
                                     <List sx={PostModalStyles.list}>
@@ -174,6 +183,7 @@ const PostModal = (props) => {
                                                     ? <ImageCard {...file} files={files} setFiles={setFiles}/>
                                                     : <FileCard {...file} files={files} setFiles={setFiles} />}
                                             </ListItem>
+                                            
                                         ))}
                                     </List>
                                 ) : (
@@ -181,37 +191,40 @@ const PostModal = (props) => {
                                 )
                             )
                             }
+                            
                         </Box>
                     </Box>
                     <Box sx={PostModalStyles.buttonBox}>
-                        <Box>
-                            <Button onClick={props.handleLike}>
-                                {props.likeCount} {props.liked ? <ThumbUp sx={PostModalStyles.reactionButton} /> : <ThumbUpOffAltOutlined sx={PostModalStyles.reactionButton} />}
+                        
+                        <Box sx={PostModalStyles.reactionBox}>
+                            <Button disableRipple sx={PostModalStyles.likeButton} onClick={props.handleLike}>
+                                {props.likeCount} {props.liked ? <ThumbUpIcon sx={PostModalStyles.likedButtonIcon} fontSize="large"/> : <ThumbUpAltOutlinedIcon sx={PostModalStyles.reactionButtonIcon} fontSize="large" />}
                             </Button>
-                            <Button onClick={props.handleDislike}>
-                                {props.dislikeCount} {props.disliked ? <ThumbDown sx={PostModalStyles.reactionButton} /> : <ThumbDownOffAltOutlined sx={PostModalStyles.reactionButton} />}
+                            <Button disableRipple sx={PostModalStyles.dislikeButton} onClick={props.handleDislike}>
+                                {props.dislikeCount} {props.disliked ? <ThumbDownIcon sx={PostModalStyles.dislikedButtonIcon} fontSize="large"/> : <ThumbDownAltOutlinedIcon sx={PostModalStyles.reactionButtonIcon} fontSize="large"/>}
                             </Button>
                         </Box>
+                        
                         <Box sx={PostModalStyles.tagBox}>
                             <List sx={PostModalStyles.tagList}>
                                 {tags.map((tag) => (
-                                    <ListItem>
+                                    <ListItem sx={PostModalStyles.tagListItem}>
                                         <Chip sx={PostModalStyles.tagChip} label={tag.name} />
                                     </ListItem>
                                 ))}
                             </List>
                         </Box>
                         <Box>
-                            <IconButton sx={PostModalStyles.editDeleteButtons} onClick={() => {
+                            <Button disableRipple sx={PostModalStyles.editButton} onClick={() => {
                               setUpdate(true);
                             }}>
-                                <Edit />
-                            </IconButton>
-                            <IconButton sx={PostModalStyles.editDeleteButtons} onClick={() => {
+                                <EditIcon fontSize="large" />
+                            </Button>
+                            <Button disableRipple sx={PostModalStyles.deleteButton} onClick={() => {
                                 props.setDeleteModal(true)
                             }}>
-                                <Delete />
-                            </IconButton>
+                                <DeleteIcon fontSize="large" />
+                            </Button>
                         </Box>
                     </Box>
                 </Box>
