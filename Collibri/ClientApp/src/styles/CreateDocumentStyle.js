@@ -1,4 +1,4 @@
-export const CreatePostStyle = {
+export const CreateDocumentStyle = {
     modalWindow: {
         backgroundColor: '#eee',
         position: 'absolute',
@@ -10,35 +10,35 @@ export const CreatePostStyle = {
         bgcolor: '#DEFEF5',
         borderRadius: 2,
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
-    
+
     textFieldBox: {
         ml: 'auto',
         mr: 'auto',
-        display: 'flex'
+        display: 'flex',
     },
-    
+
     nameTextField: {
-        width: 500,
-        mb: 2
+        width: 750,
+        mb: 2,
     },
-    
+
     warningNote: {
         ml: 'auto',
         mr: 'auto',
         mt: 2,
-        mb: 2
+        mb: 2,
     },
-    
+
     descriptionTextField: {
-        width: 600
+        width: 750
     },
-    
-    button: {
-        color: '#316C44',
-        backgroundColor: '#B9F5D9',
-        margin: '2%',
-        borderRadius: 3,
-    }
+
+    buttonBox: {
+        display: 'flex',
+        flexDirection: 'row'
+    },
 }

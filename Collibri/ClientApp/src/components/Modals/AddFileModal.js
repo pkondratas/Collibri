@@ -5,6 +5,7 @@ import FileUploadIcon from '@mui/icons-material/FileUpload';
 import {uploadFile} from "../../api/FileAPI";
 import {AddFileStyle} from "../../styles/AddFileStyle";
 import imageCompression from 'browser-image-compression';
+import {CModalStyle} from "../../styles/CModalStyle";
 
 const AddFileModal = (props) => {
     const [file, setFile] = useState(null);
@@ -72,15 +73,15 @@ const AddFileModal = (props) => {
     return(
         <Modal open={props.open} onClose={handleClose}>
             <Box sx={AddFileStyle.modal}>
-                <Typography sx={AddFileStyle.headerText}>
+                <Typography sx={[AddFileStyle.headerText, CModalStyle.text]}>
                     Select a file to add to this post:
                 </Typography>
                 <Grid sx={AddFileStyle.uploadBox}>
                     <TextField error={sizeError}
                                helperText={sizeError === true ? "Files must be under 5 MB" : (error === true ? "File not selected" : "")}
-                               type="file" onChange={handleOnChange}
+                               type="file" onChange={handleOnChange} sx={{borderRadius: 3, color: '#B9F5D9'}}
                     />
-                    <IconButton disabled={error || sizeError || progress !== 100} onClick={handleUpload}>
+                    <IconButton disabled={error || sizeError || progress !== 100} onClick={handleUpload} sx={CModalStyle.buttons}>
                         <FileUploadIcon fontSize="large" />
                     </IconButton>
                 </Grid>
