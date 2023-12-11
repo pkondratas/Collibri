@@ -20,8 +20,10 @@ import {JoinRoom} from '../Buttons/JoinRoom';
 import {RoomContainer} from '../Containers/RoomContainer';
 import {AboutUsButton} from '../Buttons/AboutUsButton';
 import LoginContainer from '../Containers/LoginContainer';
-import {useDispatch, useSelector} from "react-redux";
+import ResetPasswordContainer from '../Containers/ResetPasswordContainer';
 import {onLogin, onLogout} from "../../state/user/userSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {useLocation} from "react-router-dom";
 import {LoginContainerStyles} from "../../styles/LoginContainerStyles";
 import {useNavigate} from "react-router-dom";
 
@@ -29,6 +31,7 @@ export const LandingPageLayout = () => {
     const userInformation = useSelector((state) => state.user);
     const [rooms, setRooms] = useState([]);
     const dispatch = useDispatch();
+    const location = useLocation();
     const navigate = useNavigate();
     const [isGreen, setIsGreen] = useState(false);
 
@@ -73,10 +76,12 @@ export const LandingPageLayout = () => {
         localStorage.removeItem('loggedIn');
 
         // Update the loggedIn state
-        
-            dispatch(onLogout());
-        
+
+        dispatch(onLogout());
+
     };
+
+    const isResetPasswordPage = location.pathname.startsWith('/reset-password/');
 
     return (
         <Grid container style={{width: '100vw', height: '100vh'}}>
@@ -102,10 +107,9 @@ export const LandingPageLayout = () => {
             <Grid item xs={6} container direction="column" justifyContent="center" alignItems="center"
                   style={{minHeight: '100vh', backgroundColor: '#DEFEF5'}}>
                 <Box>
-                    <img src="/logo.png" alt="Collibri Logo"
-                         style={{height: '20%', width: 'auto', marginBottom: '3rem'}}/>
+                    <img src="/logo.png" alt="Collibri Logo" style={{ height: '15vh', width: 'auto', marginBottom: '50vh' }} />
                 </Box>
-                <Box sx={{marginTop: '-25rem', marginBottom: '5rem', minHeight: '30rem'}}>
+                <Box sx={{marginTop: '-45vh', marginBottom: '3vh', minHeight: '50vh'}}>
                     {userInformation.loggedIn ? (
                         <Fade in={true} {...({timeout: 1500})}>
                             <Box>
@@ -150,16 +154,16 @@ export const LandingPageLayout = () => {
                             </Box>
                         </Fade>
                     ) : (
+                        isResetPasswordPage ? (
+                            <ResetPasswordContainer />
+                        ) : (
                             <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
                                 <LoginContainer onLoginStatusChange={handleLoginStatus} handleColor={handleColor}/>
                             </Box>
-                       
-                    )}
-                </Box>
-
-                {/* About Us button placed in the footer */}
-
-            </Grid>
+                )
+                )}
+            </Box>
         </Grid>
-    );
+</Grid>
+);
 };
