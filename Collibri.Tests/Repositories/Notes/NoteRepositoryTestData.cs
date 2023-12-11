@@ -1,4 +1,5 @@
 using Collibri.Dtos;
+using Collibri.Models;
 
 namespace Collibri.Tests.Repositories.Notes
 {
@@ -9,23 +10,23 @@ namespace Collibri.Tests.Repositories.Notes
             Add(new NoteDTO(Guid.NewGuid(), "testNote1", "testText1", "author1"), null,
                 new List<NoteDTO>
                 {
-                    new NoteDTO(Guid.NewGuid(),"existingNote", "text", "existingAuthor"),
-                    new NoteDTO(Guid.NewGuid(),"existingNote2", "text", "existingAuthor2")
+                    new NoteDTO { PostId = Guid.NewGuid(), Name = "existingNote", Text = "text", Author = "existingAuthor" },
+                    new NoteDTO { PostId = Guid.NewGuid(),Name = "existingNote2", Text = "text", Author = "existingAuthor2" }
                 }
             );
             
             Add(new NoteDTO(Guid.NewGuid(),"testNote1", "testText1", "author1"), null,
                 new List<NoteDTO>
                 {
-                    new NoteDTO(Guid.NewGuid(),"testNote1", "text", "existingAuthor"),
-                    new NoteDTO(Guid.NewGuid(),"existingNote2", "text", "existingAuthor2")
+                    new NoteDTO { PostId = Guid.NewGuid(), Name = "testNote1", Text = "text", Author = "existingAuthor" },
+                    new NoteDTO { PostId = Guid.NewGuid(), Name = "existingNote2", Text = "text", Author = "existingAuthor2" }
                 }
             );
             Add(new NoteDTO(Guid.NewGuid(),"testNote1", "testText1", "author1"), null,
                 new List<NoteDTO>
                 {
-                    new NoteDTO(Guid.NewGuid(),"existingNote", "text", "existingAuthor"),
-                    new NoteDTO(Guid.NewGuid(),"testNote1", "text", "existingAuthor2")
+                    new NoteDTO{ PostId = Guid.NewGuid(), Name = "existingNote", Text = "text", Author = "existingAuthor" },
+                    new NoteDTO{ PostId = Guid.NewGuid(), Name = "testNote1", Text = "text", Author = "existingAuthor2" }
                 }
             );
         }
