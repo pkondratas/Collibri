@@ -5,6 +5,7 @@ import {deleteModalWarningStyle} from "../../styles/DeleteModalStyle";
 import {useDispatch, useSelector} from "react-redux";
 import {deleteRoom} from "../../api/RoomAPI";
 import {setCurrentRoom, setRoomsSlice} from "../../state/user/roomsSlice";
+import {CModalStyle} from "../../styles/CModalStyle";
 
 const DeleteRoomModal = (props) => {
     const rooms = useSelector((state) => state.rooms);
@@ -39,10 +40,10 @@ const DeleteRoomModal = (props) => {
     return(
         <>
             <CModal handleChanges={handleChanges} handleClose={handleClose} showModal={props.deleteModal} >
-                <Typography variant="h5">
+                <Typography variant="h5" sx={CModalStyle.text}>
                     Are you sure you want to delete this room?
                 </Typography>
-                <Typography variant="h6">
+                <Typography variant="h6" sx={CModalStyle.text}>
                     {rooms.currentRoom.name}
                 </Typography>
                 <Typography variant="p" sx={deleteModalWarningStyle}>

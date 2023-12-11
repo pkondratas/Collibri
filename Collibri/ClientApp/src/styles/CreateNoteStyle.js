@@ -6,10 +6,14 @@ export const CreateNoteStyle = {
         left: '50%',
         transform: 'translate(-50%, -50%)',
         border: '2px solid #000',
-        boxShadow: 24,
-        p: 4,
+        p: 2,
+        bgcolor: '#DEFEF5',
+        borderRadius: 2,
+        borderColor: '#3f5c4b',
         display: 'flex',
         flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
 
     textFieldBox: {
@@ -35,6 +39,7 @@ export const CreateNoteStyle = {
     },
 
     buttonBox: {
-        margin: 'auto',
+        display: 'flex',
+        flexDirection: 'row'
     },
 };

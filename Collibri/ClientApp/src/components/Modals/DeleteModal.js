@@ -2,6 +2,7 @@ import React from 'react';
 import { Typography } from "@mui/material";
 import {deleteModalWarningStyle} from "../../styles/DeleteModalStyle";
 import CModal from "./CModal";
+import {CModalStyle} from "../../styles/CModalStyle";
 
 
 const DeleteModal = (props) => {
@@ -14,7 +15,7 @@ const DeleteModal = (props) => {
   return(
     <>
       <CModal handleChanges={handleChanges} handleClose={handleClose} showModal={props.deleteModal} >
-        <Typography variant="h5">
+        <Typography variant="h5" sx={CModalStyle.text}>
           Are you sure?
         </Typography>
         <Typography variant="body1" sx={deleteModalWarningStyle}>

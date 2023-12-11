@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Button, Grid, Paper} from '@mui/material';
-import {useParams} from "react-router-dom";
+import {Box, Button, Grid, Paper, Typography} from '@mui/material';
 import Header from "../Header";
 import {RoomSettings} from "../RoomSettings";
 import {SideRoomTable} from "../SideRooms";
@@ -11,10 +10,12 @@ import {AddPostButton} from "../Buttons/AddPostButton";
 import SearchBar from "../SearchBar";
 import PostContainer from "../Containers/PostContainer";
 import {getSections} from "../../api/SectionApi";
-import {postContainerStyle} from "../../styles/RoomLayoutStyle";
-import {useSelector} from "react-redux";
+import {RoomLayoutStyle} from "../../styles/RoomLayoutStyle";
+import {useDispatch, useSelector} from "react-redux";
 import {getRoomTags} from "../../api/TagAPI";
-
+import Drawer from '@mui/material/Drawer';
+import Toolbar from '@mui/material/Toolbar';
+import Divider from '@mui/material/Divider';
 
 const RoomLayout = () => {
     const [sectionId, setSectionId] = useState(0);
@@ -28,40 +29,65 @@ const RoomLayout = () => {
         getSections(setSections, currentRoom.id);
         getRoomTags(currentRoom.id, setTags);
     }, [currentRoom.id]);
-
+    
+    const addNewPost = (newPost) => {
+        const updatedList = [...posts, newPost];
+        
+        setPosts(updatedList);
+    }
+    
     return (
 
-        <Grid container spacing={2}
+        <Grid //container
               direction="row"
-              justifyContent="space-evenly"
-              alignItems="strech">
-            <Grid item xs={12}>
-                <Paper>
-                    <Header roomSettings={<RoomSettings tags={tags} roomId={currentRoom.id} />} />
-                </Paper>
-            </Grid>
-            <Grid item xs={1}>
+              sx={RoomLayoutStyle.grid}
+              // justifyContent="space-evenly"
+              // alignItems="strech"
+        >
+            <Grid sx={RoomLayoutStyle.roomGrid}>
+              <Drawer
+                sx={RoomLayoutStyle.roomDrawer}
+                variant="permanent"
+              >
+                <Box sx={RoomLayoutStyle.titleBox}>
+                  <Toolbar>
+                    <Typography variant="h4" style={RoomLayoutStyle.title}>
+                      Collibri
+                    </Typography>
+                  </Toolbar>
+                </Box>
+                <Box sx={RoomLayoutStyle.dividerBox}>
+                  <Divider variant="middle">
+                    <Typography sx={RoomLayoutStyle.roomsDivider}>ROOMS</Typography>
+                  </Divider>
+                </Box>
                 <SideRoomTable/>
+              </Drawer>
             </Grid>
-            <Grid item md={4}>
-                <AddSection sections={sections} setSections={setSections}></AddSection>
-                <Paper><SectionsContainer sections={sections} setSections={setSections}
-                                          setSectionId={setSectionId}/>
-                </Paper>
-                <UserInfoContainer />
-            </Grid>
-            <Grid  item xs={6}>
-                <Grid container
-                      direction="row"
-                      sx={{mb:'0.5rem'}}
-                >
-                    <AddPostButton sectionId={sectionId} setPosts={setPosts}/>
-                    <SearchBar posts={posts} sectionId={sectionId} setPosts={setPosts}/>
-                </Grid>
-
-                <Paper sx={postContainerStyle}>
-                    <PostContainer sectionId={sectionId} posts={posts} setPosts={setPosts}/>
-                </Paper>
+            <Grid direction="column" sx={{width:'83%', height: '100%',}}>
+              <Grid sx={{ height: '10%'}}>
+                <Header 
+                  roomSettings={
+                    <RoomSettings tags={tags} setTags={setTags} roomId={currentRoom.id} />
+                  } 
+                />
+              </Grid>
+              <Grid direction="row" sx={{display: 'flex', height: '90%',}}>
+                  <Grid direction="column" sx={{display:'flex',width:'32%', bgcolor: '#d8f3e2',}}>
+                    <Box sx={{height: '100%'}}>
+                      <AddSection sections={sections} setSections={setSections}></AddSection>
+                      <SectionsContainer sections={sections} setSections={setSections} setSectionId={setSectionId}/>
+                      <UserInfoContainer />
+                    </Box>
+                  </Grid>
+                  <Grid direction="column" sx={{display:'flex',width:'68%'}}>
+                    <Box sx={{ height: '15%', display: 'flex', }}>
+                      <AddPostButton sectionId={sectionId} addNewPost={addNewPost} setPosts={setPosts} tags={tags}/>
+                      <SearchBar posts={posts} sectionId={sectionId} setPosts={setPosts}/>
+                    </Box>
+                      <PostContainer sectionId={sectionId} posts={posts} setPosts={setPosts}/>
+                  </Grid>
+              </Grid>
             </Grid>
         </Grid>
 

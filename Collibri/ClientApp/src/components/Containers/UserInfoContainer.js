@@ -9,15 +9,13 @@ export const UserInfoContainer = () => {
     return(
         <Box sx={UserInfoStyles.mainBox}>
             <Box sx={UserInfoStyles.iconBox}>
-                <UserInfoStyles.StyledBadge
-                    overlap="circular"
-                    anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                    variant="dot"
-                >
-                    <Avatar>TBD</Avatar>
-                </UserInfoStyles.StyledBadge>
+                <Avatar />
             </Box>
-                <Typography sx={UserInfoStyles.nameBox}>{userInformation.username}</Typography>
+            <Box sx={UserInfoStyles.nameBox}>
+                <Typography sx={UserInfoStyles.name}>
+                  {userInformation.username}
+                </Typography>
+            </Box>
         </Box>
     );
 }

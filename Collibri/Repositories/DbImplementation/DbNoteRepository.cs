@@ -52,19 +52,17 @@ namespace Collibri.Repositories.DbImplementation
 
         public NoteDTO? DeleteNote(int id)
         {
-            var noteList = _context.Notes.ToList();
-            
-            foreach (var note in noteList)
-            {
-                if (note.Id != id)
-                    continue;
-                _context.Notes.Remove(note);
-                _context.SaveChanges();
+            var noteToDelete = _context.Notes.SingleOrDefault(x => x.Id == id);
 
-                return _mapper.Map<NoteDTO>(note);
+            if (noteToDelete == null)
+            {
+                return null;
             }
 
-            return null;
+            _context.Notes.Remove(noteToDelete);
+            _context.SaveChanges();
+
+            return _mapper.Map<NoteDTO>(noteToDelete);
         }
         
         public IEnumerable<NoteDTO> DeleteAllNotesInPost(Guid postId)

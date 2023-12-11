@@ -4,6 +4,7 @@ import {createRoom} from "../../api/RoomAPI";
 import CModal from "../Modals/CModal";
 import {useDispatch, useSelector} from "react-redux";
 import {addRoomSlice, setRoomsSlice} from "../../state/user/roomsSlice";
+import {CModalStyle} from "../../styles/CModalStyle";
 import {LoginContainerStyles} from "../../styles/LoginContainerStyles";
 
 
@@ -24,7 +25,7 @@ export const CreateRoom = () => {
     }
     
     const handleOnChange = () => {
-        if (nameFieldRef.current.value.trim() !== '') {
+        if (nameFieldRef.current.value.trim() !== '' && nameFieldRef.current.value.trim().length <= 15) {
             setError(false);
         } else {
             setError(true);
@@ -45,11 +46,11 @@ export const CreateRoom = () => {
         <>
             <Button size="large" onClick={handleOpen} variant="contained" style={{...LoginContainerStyles.button, minWidth:'9rem', maxWidth:'9rem'}}>Create Room</Button>
             <CModal showModal={open} handleClose={handleClose} handleChanges={handleCreateRoom}>
-                <Typography variant="h5">
+                <Typography variant="h5" sx={CModalStyle.text}>
                     Create a new room
                 </Typography>
                 <TextField fullWidth id="roomName" label="Room name" variant="outlined" error={error}
-                           inputRef={nameFieldRef} helperText={error ? "Room name can not be empty" : " "}
+                           inputRef={nameFieldRef} helperText={error ? "Room name can not be empty/larger than 20 characters" : " "}
                            onChange={handleOnChange} margin="normal"/>
                 <Divider/>
             </CModal>

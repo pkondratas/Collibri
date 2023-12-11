@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {Box, Card, CardContent, Typography, Button, CardActionArea} from '@mui/material';
 import {
   ThumbUp,
@@ -8,13 +8,7 @@ import {
   DeleteOutline,
   EditOutlined
 } from '@mui/icons-material';
-import {
-  postCardStyle,
-  postContentBoxStyle,
-  postEditingBox,
-  postEditingButtons,
-  postNoteStyle, postReactionButtons
-} from '../styles/PostStyle';
+import {PostStyle} from '../styles/PostStyle';
 import { deletePost, updatePost } from '../api/PostAPI';
 import '../styles/post.css';
 import UpdatePostModal from "./Modals/UpdatePostModal";
@@ -106,55 +100,71 @@ const Post = (props) => {
     updateReactionCounts(likes, dislikes);
     setDisliked(!disliked);
   }
+  function displayDate(dateString) {
+    const [fullDate, time] = dateString.split('T');
+    const [hour, minute, second] = time.split(':');
+    return fullDate + ', ' + hour + ':' + minute;
+  }
   
   return(
     <>
-      <Card hover className="Card" sx={postCardStyle}>
+      <Card hover className="Card" sx={PostStyle.cardStyle}>
         <CardActionArea disableRipple onClick={() => {
           setPostModal(true);
         }}>
           <CardContent>
-            <Typography gutterBottom variant="h5">
+            <Typography gutterBottom variant="h5" sx={PostStyle.title}>
               {post.title}
             </Typography>
-            <Box sx={postContentBoxStyle}>
+            <Box sx={PostStyle.contentBox}>
               <Typography 
                 variant="body2" 
                 color="text.secondary"
-                sx={postNoteStyle}
+                sx={PostStyle.description}
               >
                 {post.description}
               </Typography>
-              <Box sx={postEditingBox}>
-                {(isRoomOwner() || isPostCreator(post.creatorUsername)) && (
-                  <Button sx={postEditingButtons} className="Button" onClick={(event) => {
-                    event.stopPropagation();
-                    setDeleteModal(true);
-                  }}>
-                    <DeleteOutline fontSize="small" />
-                  </Button>
-                )}
-                {(isPostCreator(post.creatorUsername)) && (
-                  <Button sx={postEditingButtons} className="Button" onClick={(event) => {
-                    event.stopPropagation();
-                    setUpdateModal(true);
-                  }}>
-                    <EditOutlined fontSize="small" />
-                  </Button>
-                )}
+              <Box sx={PostStyle.editingBox}>
+                  {(isRoomOwner() || isPostCreator(post.creatorUsername)) && (
+                      <Button sx={[PostStyle.baseEditButton, PostStyle.deleteButton]} className="Button" onClick={(event) => {
+                          event.stopPropagation();
+                          setDeleteModal(true);
+                      }}>
+                          <DeleteOutline fontSize="small" />
+                      </Button>
+                  )}
+                  {(isPostCreator(post.creatorUsername)) && (
+                      <Button sx={[PostStyle.baseEditButton, PostStyle.editButton]} className="Button" onClick={(event) => {
+                          event.stopPropagation();
+                          setUpdateModal(true);
+                      }}>
+                          <EditOutlined fontSize="small" />
+                      </Button>
+                  )}
               </Box>
             </Box>
-            <Typography>
-              <Button onClick={handleLike}>
-                {post.likeCount} {liked ? <ThumbUp fontSize="small" sx={postReactionButtons} /> : <ThumbUpAltOutlined fontSize="small" sx={postReactionButtons}/>}
-              </Button>
-              <Button onClick={handleDislike}>
-                {post.dislikeCount} {disliked ? <ThumbDown fontSize="small" sx={postReactionButtons} /> : <ThumbDownOffAltOutlined fontSize="small" sx={postReactionButtons} />}
-              </Button>
-              <Typography variant="caption">
-                Last edited: {post.lastUpdatedDate ? post.lastUpdatedDate.toLocaleString() : 'Loading...'}
+            <Box sx={PostStyle.buttonBox}>
+              <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+                <Button onClick={handleLike} sx={liked ? PostStyle.selected : PostStyle.buttonComponent}>
+                  <Typography sx={PostStyle.likeCount}>
+                    {post.likeCount}
+                  </Typography>
+                  {liked ? <ThumbUp fontSize="small" sx={PostStyle.reactionButtons} /> : <ThumbUpAltOutlined fontSize="small" sx={PostStyle.reactionButtons}/>}
+                </Button>
+                <Button onClick={handleDislike} sx={disliked ? PostStyle.selected : PostStyle.buttonComponent}>
+                  <Typography sx={PostStyle.likeCount}>
+                    {post.dislikeCount}
+                  </Typography>
+                  {disliked ? <ThumbDown fontSize="small" sx={PostStyle.reactionButtons} /> : <ThumbDownOffAltOutlined fontSize="small" sx={PostStyle.reactionButtons} />}
+                </Button>
+                <Typography variant="caption" sx={{textWrap: 'nowrap', fontFamily: 'Segoe UI semibold'}}>
+                  {'By: ' + post.creatorUsername}
+                </Typography>
+              </Box>
+              <Typography variant="caption" sx={PostStyle.updated}>
+                {post.lastUpdatedDate ? 'Last edited: ' + displayDate(post.lastUpdatedDate.toLocaleString()) : ''}
               </Typography>
-            </Typography>
+            </Box>
           </CardContent>
         </CardActionArea>
       </Card>
@@ -172,6 +182,7 @@ const Post = (props) => {
         deleteModal={deleteModal}
         setDeleteModal={setDeleteModal}
         updatePostContent={updatePostContent}
+        preview={false}
       />
     </>
   )

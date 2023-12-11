@@ -36,7 +36,7 @@ namespace Collibri.Controllers
         {
             var rooms = _roomRepository.GetRoomsByUsername(username);
             
-            return rooms.Count == 0 ? NoContent() : Ok(rooms);
+            return Ok(rooms);
         }
 
         [HttpPut("{roomId}")]

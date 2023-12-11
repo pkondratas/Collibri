@@ -80,7 +80,7 @@ export const RoomSettings = (props) => {
                 in={showSettings}
                 timeout="auto"
                 style={{
-                    transform: showSettings ? 'translateY(0)' : 'translateY(-100%)',
+                    transform: showSettings ? 'translateX(0)' : 'translateX(-100%)',
                     transition: "transform 0.3s ease-in-out",
                 }}
             >
@@ -148,7 +148,7 @@ export const RoomSettings = (props) => {
                 showModal={tagOpen}
                 setOpen={setTagOpen}
                 tags={props.tags}
-                roomId={props.roomId}
+                setTags={props.setTags}
             />
         </>
     );

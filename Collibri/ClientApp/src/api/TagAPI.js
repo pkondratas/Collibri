@@ -35,7 +35,7 @@ export const getRoomTags = async (roomId, setTags) => {
 //         .catch(error => console.error('Error fetching data', error));
 // }
 
-export const createTag = (tag) => {
+export const createTag = (tag, setTags) => {
     fetch(`/v1/tags`, {
         method: 'POST',
         headers: {
@@ -47,16 +47,18 @@ export const createTag = (tag) => {
             if (!response.ok) {
                 throw new Error('Failed to create tag');
             }
+            return response.json();
         })
-        .then(() => {
-            console.log('Tag created successfully.');
+        .then((data) => {
+            console.log('Tag created successfully: ', data);
+            setTags(prevTags => [...prevTags, data]);
         })
         .catch(error => {
             console.error('Error creating tag:', error.message);
         });
 }
 
-export const deleteTag = (tagId) => {
+export const deleteTag = (tagId, setTags) => {
     fetch(`/v1/tags?tagId=${tagId}`, {
         method: 'DELETE',
         headers: {
@@ -67,11 +69,33 @@ export const deleteTag = (tagId) => {
             if (!response.ok) {
                 throw new Error('Failed to delete tag');
             }
+            return response.json();
         })
-        .then(() => {
-            console.log('Tag deleted successfully.');
+        .then((data) => {
+            console.log('Tag deleted successfully: ', data);
+            setTags(prevTags => prevTags.filter(tag => tag.id !== tagId));
         })
         .catch(error => {
             console.error('Error deleting tag:', error.message);
+        });
+}
+
+export const addToPost = (tagId, postId) => {
+    fetch(`/v1/post-tags?tagId=${tagId}&postId=${postId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to add tag');
+            }
+        })
+        .then(() => {
+            console.log('Tag added successfully');
+        })
+        .catch(error => {
+            console.error('Error adding tag:', error.message);
         });
 }
