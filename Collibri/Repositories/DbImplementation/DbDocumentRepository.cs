@@ -29,7 +29,7 @@ namespace Collibri.Repositories.DbImplementation
 
         public IEnumerable<DocumentDTO> GetDocuments(string postId)
         {
-            return _mapper.Map<List<DocumentDTO>>(_context.Documents.Where(document =>
+            return _mapper.Map<List<DocumentDTO>>(_context.Documents.ToList().Where(document =>
                 document.PostId.Equals(Guid.Parse(postId)))).AsEnumerable();
         }
 
