@@ -29,6 +29,8 @@ export const NoteCardStyles = {
     minWidth: '18rem',
     maxWidth: '18rem',
     minHeight: '10rem',
-    maxHeight: '10rem'
+    maxHeight: '10rem',
+    boxShadow: 3,
+    backgroundColor: '#d3ede1'
   }
 }

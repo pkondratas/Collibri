@@ -6,6 +6,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import CModal from "../Modals/CModal";
 import {createSection} from "../../api/SectionApi";
 import {RoomLayoutStyles} from "../../styles/RoomLayoutStyle";
+import {CModalStyle} from "../../styles/CModalStyle";
 
 
 export const AddSection = ({setSections, sections}) => {
@@ -49,10 +50,10 @@ export const AddSection = ({setSections, sections}) => {
                 <AddBoxIcon fontSize="large"/>
             </IconButton>
             <CModal showModal={open} handleClose={handleClose} handleChanges={handleCreateSection}>
-                <Typography variant="h5">
+                <Typography variant="h5" sx={CModalStyle.text}>
                     Create a new Section
                 </Typography>
-                <TextField fullWidth id="sectionName" label="Section name" variant="outlined"
+                <TextField fullWidth margin="normal" id="sectionName" label="Section name" variant="outlined"
                            error={isEmptyError || isAlreadyUsedError}
                            inputRef={nameFieldRef}
                            helperText={

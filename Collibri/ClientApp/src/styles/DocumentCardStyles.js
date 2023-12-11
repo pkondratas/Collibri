@@ -1,6 +1,6 @@
 export const DocumentCardStyles = {
   generalText: {
-    lineHeight: '1rem',
+    lineHeight: '1.5rem',
     minWidth: '15rem',
     maxWidth: '15rem',
     wordBreak: 'break-all',
@@ -32,6 +32,8 @@ export const DocumentCardStyles = {
     minWidth: '20rem',
     maxWidth: '20rem',
     minHeight: '10rem',
-    maxHeight: '10rem'
+    maxHeight: '10rem',
+    boxShadow: 3,
+    backgroundColor: '#d3ede1'
   }
 }

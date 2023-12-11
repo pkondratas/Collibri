@@ -5,6 +5,8 @@ export const FileCardStyles = {
         justifyContent: 'center',
         height: '10rem',
         width: '20rem',
+        boxShadow: 3,
+        backgroundColor: '#d3ede1'
     },
     imageBox: {
         display: 'block',
@@ -25,7 +27,7 @@ export const FileCardStyles = {
         width: '20rem',
     },
     content: {
-        backgroundColor: "#d5d5d5",
+        backgroundColor: "#93c4a7",
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
