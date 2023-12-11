@@ -11,6 +11,5 @@ namespace Collibri.Repositories
         public PostDTO? UpdatePostById(Guid postId, PostDTO post);
 
         public PostDTO? DeletePostById(Guid postId);
-        public IEnumerable<PostDTO> DeleteAllPostsInSection(int sectionId);
     }
 }
