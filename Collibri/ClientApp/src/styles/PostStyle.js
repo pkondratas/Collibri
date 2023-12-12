@@ -9,7 +9,8 @@ export const PostStyle = {
   },
   contentBox: {
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    minHeight: "3rem",
   },
   title: {
     //color: '#FFFFFF',
@@ -29,8 +30,8 @@ export const PostStyle = {
     display: "-webkit-box",
     WebkitLineClamp: "2",
     WebkitBoxOrient: "vertical",
+    minWidth: "93%",
     height: '5%',
-    minWidth: "90%",
     lineHeight: "1rem"
   },
   editingBox: {

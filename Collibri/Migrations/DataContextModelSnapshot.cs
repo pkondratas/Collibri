@@ -59,9 +59,8 @@ namespace Collibri.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Lenght")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<long>("Lenght")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Name")
                         .IsRequired()
