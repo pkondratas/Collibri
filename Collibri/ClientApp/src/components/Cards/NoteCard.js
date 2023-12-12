@@ -46,9 +46,9 @@ const NoteCard = (props) => {
           <Box>
             {moreButton ? (
               <>
-                <IconButton>
-                  <Edit />
-                </IconButton>
+                {/*<IconButton>*/}
+                {/*  <Edit />*/}
+                {/*</IconButton>*/}
                 <IconButton onClick={() => setDeleteModal(true)}>
                   <Delete />
                 </IconButton>
