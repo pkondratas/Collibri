@@ -1,7 +1,7 @@
 export const containerStyle = {
   container: {
     backgroundColor: '#DEFEF5',
-    minHeight: "95.7%",
+    minHeight: "88%",
     maxHeight: "88%",
     overflowY: "auto",
     width: "98%"

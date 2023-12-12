@@ -7,7 +7,7 @@ export const UserInfoStyles = {
         bgcolor: '#b0e7c8',//a5dcbe
         display:'flex',
         boxShadow: 1,
-        height: '8.5%',
+        height: '10.5%',
         width: '100%',
         // minWidth:'19rem',
         // maxWidth:'15rem'

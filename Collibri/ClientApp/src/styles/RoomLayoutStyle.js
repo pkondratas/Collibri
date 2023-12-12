@@ -37,7 +37,7 @@ export const RoomLayoutStyle = {
     // bgcolor: 'red',
     // width: '90%',
     display: 'flex',
-    height: '6.4%',
+    height: '9.3%',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -47,7 +47,7 @@ export const RoomLayoutStyle = {
     fontSize: '28px',
   },
   sectionsContainer: {
-    height: '81.8%', 
+    height: '76.5%', 
     overflowY: 'scroll',
     '&::-webkit-scrollbar': {
       display: 'none'

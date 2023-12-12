@@ -65,7 +65,7 @@ const RoomLayout = () => {
               </Drawer>
             </Grid>
             <Grid direction="column" sx={{width:'83%', height: '100%',}}>
-              <Grid sx={{ height: '7%'}}>
+              <Grid sx={{ height: '10%'}}>
                 <Header 
                   roomSettings={
                     <RoomSettings tags={tags} setTags={setTags} roomId={currentRoom.id} />
