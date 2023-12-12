@@ -31,13 +31,13 @@ export const RoomLayoutStyle = {
   title: {
     color: '#314231', 
     fontFamily: 'Segoe UI semibold',
-    fontSize: '36px',
+    fontSize: '32px',
   },
   titleBox: {
     // bgcolor: 'red',
     // width: '90%',
     display: 'flex',
-    height: '9.3%',
+    height: '6.4%',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -47,7 +47,7 @@ export const RoomLayoutStyle = {
     fontSize: '28px',
   },
   sectionsContainer: {
-    height: '76.5%', 
+    height: '81.8%', 
     overflowY: 'scroll',
     '&::-webkit-scrollbar': {
       display: 'none'
