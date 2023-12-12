@@ -56,8 +56,7 @@ export const SectionsContainerStyles = {
     },
     noSectionsMessage: {
         color: '#81a989',
-        fontWeight: '700',
-        fontFamily: 'cursive',
+        fontFamily: 'Segoe UI semibold',
     },
     
 }
