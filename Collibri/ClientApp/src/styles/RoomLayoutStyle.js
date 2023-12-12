@@ -30,9 +30,8 @@ export const RoomLayoutStyle = {
   },
   title: {
     color: '#314231', 
-    fontFamily: 'Comic-Sans-MS, cursive',
-    fontWeight: 'bold',
-    fontSize: '24px',
+    fontFamily: 'Segoe UI semibold',
+    fontSize: '36px',
   },
   titleBox: {
     // bgcolor: 'red',
