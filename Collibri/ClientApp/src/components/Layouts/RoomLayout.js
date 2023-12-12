@@ -61,7 +61,7 @@ const RoomLayout = () => {
                     <Typography sx={RoomLayoutStyle.roomsDivider}>ROOMS</Typography>
                   </Divider>
                 </Box>
-                <SideRoomTable/>
+                <SideRoomTable currentRoom={currentRoom} />
               </Drawer>
             </Grid>
             <Grid direction="column" sx={{width:'83%', height: '100%',}}>
