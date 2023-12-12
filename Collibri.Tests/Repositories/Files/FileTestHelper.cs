@@ -30,9 +30,7 @@ namespace Collibri.Tests.Repositories.Files
 			ms.Position = 0;
 			file.Setup(f => f.FileName).Returns(fileName).Verifiable();
 			file.Setup(f => f.ContentType).Returns(type).Verifiable();
-			file.Setup(_ => _.CopyToAsync(It.IsAny<Stream>(), It.IsAny<CancellationToken>()))
-				.Returns((Stream stream, CancellationToken token) => ms.CopyToAsync(stream))
-				.Verifiable();
+			//file.Setup(f => f.CopyTo(It.IsAny<Stream>())).Verifiable();
 			return file.Object;
 		}
 

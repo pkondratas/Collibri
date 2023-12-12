@@ -47,7 +47,7 @@ namespace Collibri.Repositories.DbImplementation
 			_context.SaveChanges();
 			using (var fileStream = _fileSystem.File.Create(filePath))
 			{
-				file.CopyToAsync(fileStream);
+				file.CopyTo(fileStream);
 			}
 
 			return (FileInfoDTO?) createdFileInfo;
